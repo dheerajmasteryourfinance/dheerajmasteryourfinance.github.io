@@ -18,7 +18,10 @@ describe('layout', () => {
       expect(mains).toHaveLength(1);
       const kids = [...mains[0].children];
       expect(kids.length).toBeGreaterThan(0);
-      for (const k of kids) expect(k.tagName).toBe('SECTION');
+      for (const k of kids) {
+        expect(k.tagName).toBe('SECTION');
+        expect((k.getAttribute('data-section') ?? '').trim()).not.toBe('');
+      }
     });
 
     it('sets <html lang="en">', () => {
@@ -42,12 +45,7 @@ describe('layout', () => {
         const url = el.getAttribute('href') ?? el.getAttribute('src');
         if (/^(https?:)?\/\//.test(url)) {
           const host = new URL(url, `https://${SITE}`).host;
-          // canonical/alternate links are not requests
-          if (el.tagName === 'LINK' && ['canonical', 'alternate'].includes(el.getAttribute('rel'))) {
-            expect(host).toBe(SITE);
-          } else {
-            expect(host).toBe(SITE);
-          }
+          expect(host).toBe(SITE);
         }
       }
     });

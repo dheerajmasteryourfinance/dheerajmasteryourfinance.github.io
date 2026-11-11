@@ -12,6 +12,40 @@ describe('findPlaceholders', () => {
   it('ignores array indexes and markdown links', () => {
     expect(findPlaceholders('use array[0] and [link](x)')).toEqual([]);
   });
+  it('ignores mixed-case and unterminated look-alikes', () => {
+    expect(findPlaceholders('see [ABCdef] and [HTMLtag')).toEqual([]);
+  });
+  it('reports the full token up to the closing bracket', () => {
+    expect(findPlaceholders('a [SUPPORT EMAIL] b [CONFIRM: x] c [N] d')).toEqual([
+      '[SUPPORT EMAIL]',
+      '[CONFIRM: x]',
+      '[N]',
+    ]);
+  });
+});
+
+describe('check-placeholders CLI, where the placeholder hides', () => {
+  const runOn = (html) => {
+    const d = mkdtempSync(join(tmpdir(), 'ph-'));
+    writeFileSync(join(d, 'index.html'), html);
+    return spawnSync('node', ['scripts/check-placeholders.mjs', d], { encoding: 'utf8' });
+  };
+  it('fails for a placeholder only in an href', () => {
+    expect(runOn('<a href="mailto:[SUPPORT EMAIL]">x</a>').status).toBe(1);
+  });
+  it('fails for a placeholder only in a meta content attribute', () => {
+    expect(runOn('<meta name="description" content="[CONFIRM: x]"><p>ok</p>').status).toBe(1);
+  });
+  it('fails for a placeholder only in JSON-LD', () => {
+    const html = '<script type="application/ld+json">{"email":"[SUPPORT EMAIL]"}</script><p>ok</p>';
+    expect(runOn(html).status).toBe(1);
+  });
+  it('does not fail for a placeholder only inside a style block', () => {
+    expect(runOn('<style>.a::after{content:"[SUPPORT EMAIL]"}</style><p>ok</p>').status).toBe(0);
+  });
+  it('does not fail for look-alikes', () => {
+    expect(runOn('<p>[ABCdef] [HTMLtag array[0]</p>').status).toBe(0);
+  });
 });
 
 describe('check-placeholders CLI', () => {

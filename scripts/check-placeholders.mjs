@@ -2,18 +2,17 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Detects the brief regex \[[A-Z]+[\] :] and extends the match to the closing bracket for readable reports.
-const PLACEHOLDER = /\[[A-Z]+(?:[\] :][^\]\[]*\]?)?/g;
+// Match condition is the brief pattern \[[A-Z]+[\] :]; the reported token then runs to the closing bracket.
+const PLACEHOLDER = /\[[A-Z]+(?:\]|[ :][^\]\[]*\]?)/g;
 
 /** Return every placeholder-looking token found in text. */
 export function findPlaceholders(text) {
   return text.match(PLACEHOLDER) ?? [];
 }
 
-function stripTags(html) {
-  return html
-    .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ')
-    .replace(/<[^>]*>/g, ' ');
+// Scan raw HTML (attribute values, <script> text and JSON-LD included); only <style> blocks are ignored.
+function stripStyles(html) {
+  return html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ');
 }
 
 function* walk(dir) {
@@ -29,7 +28,7 @@ function main(argv) {
   const dir = argv.find((a) => !a.startsWith('--')) ?? 'dist';
   const hits = [];
   for (const file of walk(dir)) {
-    for (const token of findPlaceholders(stripTags(readFileSync(file, 'utf8')))) {
+    for (const token of findPlaceholders(stripStyles(readFileSync(file, 'utf8')))) {
       hits.push(`${file}: ${token}`);
     }
   }

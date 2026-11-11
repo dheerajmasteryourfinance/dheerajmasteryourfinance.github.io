@@ -12,6 +12,10 @@
   --on-dark: #C8D1E3;
   --on-dark-2: #DCE3EE;
   --danger: #B91C1C;
+  --white: #FFFFFF;
+  --white-glass: rgba(255, 255, 255, .92);
+  --accent-hover: #F5BB22;
+  --on-dark-line: rgba(200, 209, 227, .25);
 
   --font-heading: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-body: 'DM Sans Variable', system-ui, sans-serif;
