@@ -1,0 +1,18 @@
+:root {
+  --ink: #0F1E3D;
+  --accent: #FFC93C;
+  --link: #1D4ED8;
+  --link-hover: #1E3A8A;
+  --muted: #55607A;
+  --body: #1E293B;
+  --line: #E3E8F0;
+  --line-strong: #CBD3E1;
+  --surface: #F4F7FB;
+  --tint: #E8F0FE;
+  --on-dark: #C8D1E3;
+  --on-dark-2: #DCE3EE;
+  --danger: #B91C1C;
+
+  --font-heading: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-body: 'DM Sans Variable', system-ui, sans-serif;
+}

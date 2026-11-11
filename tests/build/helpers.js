@@ -1,0 +1,29 @@
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { join, relative, sep } from 'node:path';
+import { parseHTML } from 'linkedom';
+
+const DIST = join(process.cwd(), 'dist');
+
+/** Parse dist{route}index.html, e.g. loadPage('/') or loadPage('/features/'). */
+export function loadPage(route) {
+  const file = join(DIST, route, 'index.html');
+  return parseHTML(readFileSync(file, 'utf8')).document;
+}
+
+/** Every route (with leading and trailing slash) that has an index.html under dist. */
+export function allRoutes() {
+  if (!existsSync(DIST)) return [];
+  const routes = [];
+  const walk = (dir) => {
+    for (const name of readdirSync(dir)) {
+      const p = join(dir, name);
+      if (statSync(p).isDirectory()) walk(p);
+      else if (name === 'index.html') {
+        const rel = relative(DIST, dir).split(sep).join('/');
+        routes.push(rel ? `/${rel}/` : '/');
+      }
+    }
+  };
+  walk(DIST);
+  return routes.filter((r) => !r.startsWith('/pagefind/')).sort();
+}

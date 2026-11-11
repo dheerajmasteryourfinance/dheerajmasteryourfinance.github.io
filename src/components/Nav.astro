@@ -1,0 +1,23 @@
+---
+import Logo from './Logo.astro';
+interface Props { current: string }
+const { current } = Astro.props;
+const links = [
+  { href: '/features/', label: 'Product' },
+  { href: '/docs/', label: 'Docs' },
+  { href: '/company/', label: 'Company' },
+];
+const isCurrent = (href: string) => current === href || current.startsWith(href);
+---
+<nav class="site-nav" aria-label="Main">
+  <div class="container">
+    <Logo />
+    <ul class="nav-links">
+      {links.map((l) => (
+        <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
+      ))}
+      <li><a href="https://app.website-generator.nl/login" rel="noopener noreferrer">Sign in</a></li>
+      <li><a class="btn btn-primary" href="https://app.website-generator.nl/register" rel="noopener noreferrer">Build my site</a></li>
+    </ul>
+  </div>
+</nav>
