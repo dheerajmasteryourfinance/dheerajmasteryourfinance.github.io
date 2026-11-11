@@ -1,0 +1,10 @@
+---
+import Legal from '../../layouts/Legal.astro';
+const sections = [
+  { id: 'what', title: 'What cookies are', body: '[LEGAL TEXT]' },
+  { id: 'essential', title: 'Essential cookies', body: '[LEGAL TEXT: list with names and purposes]' },
+  { id: 'analytics', title: 'Analytics cookies', body: '[LEGAL TEXT: only after consent]' },
+  { id: 'choices', title: 'Changing your choices', body: '[LEGAL TEXT: cookie settings link]' },
+];
+---
+<Legal title="Cookie policy" summary="[SUMMARY: which cookies we use, and that analytics only run after you agree.]" sections={sections} />

@@ -1,0 +1,78 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  summary: string;
+  sections: { id: string; title: string; body: string }[];
+}
+const { title, summary, sections } = Astro.props;
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
+const docs = [
+  { href: '/privacy/', label: 'Privacy policy' },
+  { href: '/terms/', label: 'Terms of service' },
+  { href: '/cookies/', label: 'Cookie policy' },
+];
+---
+<Base title={`${title} | WebGen`} description={`WebGen ${title.toLowerCase()}.`} path={path}>
+  <section data-section="header" class="l-head">
+    <div class="container">
+      <p class="eyebrow">Legal</p>
+      <h1>{title}</h1>
+      <p class="muted">Last updated [DATE] · Applies to the WebGen website and app</p>
+      <nav aria-label="Legal documents" class="subnav">
+        {docs.map((d) => (
+          <a href={d.href} aria-current={d.href === path ? 'page' : undefined}>{d.label}</a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  <section data-section="body" class="l-body">
+    <div class="container layout">
+      <nav aria-label="On this page" class="toc">
+        <p class="toc-title">On this page</p>
+        <ul>
+          {sections.map((s) => <li><a href={`#${s.id}`}>{s.title}</a></li>)}
+        </ul>
+      </nav>
+      <article>
+        <div class="summary">
+          <p class="toc-title">The short version</p>
+          <p>{summary}</p>
+        </div>
+        <p class="draft"><strong>Draft:</strong> the headings are a structure only. The legal text must be written or approved by the business and its adviser before launch.</p>
+        {sections.map((s) => (
+          <section id={s.id}>
+            <h2>{s.title}</h2>
+            <p>{s.body}</p>
+          </section>
+        ))}
+        <p class="contact">Questions about this policy? Email <strong>[PRIVACY EMAIL]</strong> or write to [LEGAL ENTITY NAME], [POSTAL ADDRESS].</p>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  main > section.l-head { margin-top: 56px; }
+  main > section.l-body { margin-top: 40px; }
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; display: block; }
+  .muted { color: var(--muted); }
+  .subnav { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line-strong); margin-top: 24px; }
+  .subnav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; margin-bottom: -1px; border-bottom: 2px solid transparent; color: var(--muted); text-decoration: none; font-weight: 500; }
+  .subnav a:hover { color: var(--ink); }
+  .subnav a[aria-current="page"] { color: var(--ink); font-weight: 700; border-bottom-color: var(--ink); }
+  .layout { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); align-items: start; }
+  @media (min-width: 900px) { .layout { grid-template-columns: 240px minmax(0, 1fr); } .toc { position: sticky; top: 80px; } }
+  .toc-title { font: 700 .75rem/1.2 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+  .toc ul { list-style: none; margin: 0; padding: 0; display: grid; }
+  .toc a { display: flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--ink); }
+  .toc a:hover { text-decoration: underline; }
+  .summary { background: var(--tint); border-radius: 16px; padding: 20px 24px; }
+  .summary p:last-child { margin: 0; }
+  .draft { margin: 20px 0 8px; padding: 14px 18px; border: 1px solid var(--danger); border-radius: 12px; color: var(--danger); }
+  article section { margin-top: 32px; scroll-margin-top: 80px; }
+  article h2 { font-size: 1.5rem; }
+  .contact { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); }
+</style>
