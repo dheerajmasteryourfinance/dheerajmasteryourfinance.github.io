@@ -46,3 +46,10 @@ Click **Save** when you are happy with your changes.
 Click **Publish**. Your site goes online at a free address, and you can add your own domain afterwards.
 
 <div class="callout callout-note"><strong>Note:</strong> [CONFIRM: publishing needs an active subscription; check the wording against the billing rules]</div>
+
+## Next steps
+
+<div class="next-grid">
+<a class="next-card" href="/docs/connect-your-domain/"><strong>Connect your domain</strong><span>Use your own web address.</span></a>
+<a class="next-card" href="/docs/set-up-your-sender/"><strong>Set up your sender</strong><span>Email from your own address.</span></a>
+</div>

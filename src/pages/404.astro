@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Page not found | WebGen"
+  description="We could not find that page. Head back to the WebGen home page or browse the docs."
+  path="/404/"
+>
+  <meta slot="head" name="robots" content="noindex" />
+  <section data-section="not-found" class="nf">
+    <div class="container">
+      <p class="eyebrow">Error 404</p>
+      <h1>We could not find that page</h1>
+      <p>The address may have a typo, or the page may have moved. Here is where you can go next.</p>
+      <p class="actions">
+        <a class="btn btn-primary" href="/">Go to the home page</a>
+        <a class="btn btn-ghost" href="/docs/">Browse the docs</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { padding: 96px 0; }
+  .eyebrow { margin: 0; font-weight: 600; color: var(--muted); }
+  .nf h1 { margin-top: 8px; }
+  .nf p { max-width: 52ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+</style>

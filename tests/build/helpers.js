@@ -6,11 +6,11 @@ const DIST = join(process.cwd(), 'dist');
 
 /** Parse dist{route}index.html, e.g. loadPage('/') or loadPage('/features/'). */
 export function loadPage(route) {
-  const file = join(DIST, route, 'index.html');
+  const file = route.endsWith('.html') ? join(DIST, route) : join(DIST, route, 'index.html');
   return parseHTML(readFileSync(file, 'utf8')).document;
 }
 
-/** Every route (with leading and trailing slash) that has an index.html under dist. */
+/** Every route (with leading and trailing slash) that has an index.html under dist, plus /404.html. */
 export function allRoutes() {
   if (!existsSync(DIST)) return [];
   const routes = [];
@@ -25,5 +25,6 @@ export function allRoutes() {
     }
   };
   walk(DIST);
+  if (existsSync(join(DIST, '404.html'))) routes.push('/404.html');
   return routes.filter((r) => !r.startsWith('/pagefind/')).sort();
 }

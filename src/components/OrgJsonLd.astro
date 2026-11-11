@@ -1,0 +1,13 @@
+---
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'WebGen',
+  url: 'https://webgnr.com/',
+  email: '[SUPPORT EMAIL]',
+  address: { '@type': 'PostalAddress', streetAddress: '[ADDRESS]' },
+};
+// Escape "<" so no value can ever close the script element early.
+const json = JSON.stringify(data).replace(/</g, '\u003c');
+---
+<script type="application/ld+json" set:html={json} />

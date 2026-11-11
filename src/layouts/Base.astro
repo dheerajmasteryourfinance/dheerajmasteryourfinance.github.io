@@ -2,6 +2,7 @@
 import '../styles/base.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import OrgJsonLd from '../components/OrgJsonLd.astro';
 
 interface Props { title: string; description: string; path: string }
 const { title, description, path } = Astro.props;
@@ -21,6 +22,7 @@ const canonical = `https://webgnr.com${path}`;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <slot name="head" />
+    {path === '/' && <OrgJsonLd />}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

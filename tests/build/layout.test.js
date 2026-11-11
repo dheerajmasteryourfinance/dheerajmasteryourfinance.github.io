@@ -30,7 +30,8 @@ describe('layout', () => {
 
     it('has canonical = https://webgnr.com + route', () => {
       const c = doc.querySelector('link[rel="canonical"]');
-      expect(c?.getAttribute('href')).toBe(`https://${SITE}${route}`);
+      const path = route === '/404.html' ? '/404/' : route;
+      expect(c?.getAttribute('href')).toBe(`https://${SITE}${path}`);
     });
 
     it('nav has no pricing link or text', () => {
