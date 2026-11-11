@@ -8,15 +8,23 @@
     "build": "astro build && pagefind --site dist && node scripts/check-placeholders.mjs dist",
     "build:preview": "astro build && pagefind --site dist && node scripts/check-placeholders.mjs dist --allow-placeholders",
     "test": "vitest run",
-    "test:build": "npm run build:preview && vitest run tests/build"
+    "test:build": "npm run build:preview && vitest run tests/build",
+    "check": "node scripts/check.mjs",
+    "package": "node scripts/package-zip.mjs"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.8",
     "@astrojs/sitemap": "3.7.4",
     "@fontsource-variable/bricolage-grotesque": "5.3.0",
     "@fontsource-variable/dm-sans": "5.3.0",
-    "astro": "7.4.10"
+    "astro": "7.4.10",
+    "fflate": "0.8.3",
+    "github-slugger": "2.0.0"
   },
   "devDependencies": {
+    "@lhci/cli": "0.16.0",
+    "axe-core": "4.14.0",
+    "html-validate": "11.21.0",
     "jsdom": "31.0.0",
     "linkedom": "0.18.15",
     "pagefind": "1.6.0",
