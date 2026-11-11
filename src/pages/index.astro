@@ -1,11 +1,312 @@
 ---
 import Base from '../layouts/Base.astro';
+const APP = 'https://app.website-generator.nl/register';
+const learn = [
+  { href: '/docs/build-your-first-website/', tag: 'Getting started · 10 min', title: 'Build your first site', text: 'From brief to published, step by step.' },
+  { href: '/docs/connect-your-domain/', tag: 'Domains · 15 min', title: 'Connect your domain', text: 'Point your address at your site.' },
+  { href: '/docs/send-a-campaign/', tag: 'Email · 12 min', title: 'Send your first newsletter', text: 'Set up a sender and reach your audience.' },
+  { href: '/docs/follow-up-emails/', tag: 'Email · 8 min', title: 'Automate a welcome sequence', text: 'Greet every new subscriber on time.' },
+];
 ---
-<Base title="WebGen" description="WebGen builds your website." path="/">
-  <section data-section="stub">
+<Base
+  title="WebGen: your website, built for you"
+  description="Describe your business and WebGen builds a complete site with forms, newsletters and search basics ready to go."
+  path="/"
+>
+  <section data-section="hero" class="hero">
     <div class="container">
-      <h1>WebGen</h1>
-      <p>Stub page, replaced in a later task.</p>
+      <div class="switch" role="group" aria-label="Who are you building for">
+        <button type="button" data-audience-btn="business" aria-pressed="true">For businesses</button>
+        <button type="button" data-audience-btn="agency" aria-pressed="false">For agencies</button>
+      </div>
+      <h1 data-audience="business">Your website, built for you. <span class="mark">Marketing included.</span></h1>
+      <h1 data-audience="agency" hidden>Ship client sites faster. <span class="mark">Send email as the client.</span></h1>
+      <p class="lede" data-audience="business">Describe your business and get a complete site with forms, newsletters and search basics ready to go. No designer, no developer, no extra tools.</p>
+      <p class="lede" data-audience="agency" hidden>Generate, edit and publish for every client from one account. Each client keeps their own domain, sender identity, audience and reports.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href={APP} rel="noopener noreferrer">Build my site</a>
+        <a class="btn btn-ghost" href="#example">See an example</a>
+      </div>
+      <ul class="chips">
+        <li>Double opt-in for subscribers</li>
+        <li>One-click unsubscribe</li>
+        <li>Your own domain</li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-section="product" class="product" aria-label="Product preview">
+    <div class="container">
+      <div class="shot">
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>sunrisebakery.com</span></div>
+        <div class="shot-body">
+          <ul class="shot-side" aria-label="Workspace areas">
+            <li>Site</li><li>Leads</li><li>Audience</li><li>Campaigns</li><li>Follow-up emails</li><li>Stats</li><li>Domain</li>
+          </ul>
+          <div class="shot-site">
+            <p class="shot-name">Sunrise Bakery</p>
+            <p>Fresh bread every morning. Subscribe weekly or order a cake for your next celebration.</p>
+            <p class="shot-btns"><span>Order a cake</span><span>Weekly bread</span></p>
+          </div>
+          <div class="shot-chat">
+            <p class="shot-label">Ask for a change</p>
+            <p class="bubble you">Add a cake order form with a date picker.</p>
+            <p class="bubble bot">Done. Orders will arrive in Leads, and the person gets a confirmation email.</p>
+            <p class="shot-input">Describe a change…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="problem">
+    <div class="container">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2>Getting online shouldn't need a big budget or a tech team.</h2>
+      <div class="grid g3">
+        <div class="card"><h3>"I don't know where to start."</h3><p>Hosting, templates, plugins, email tools. Every choice leads to five more.</p></div>
+        <div class="card"><h3>"I can't afford a designer and a developer."</h3><p>A custom site and a marketing setup can cost more than a small business spends in a year.</p></div>
+        <div class="card"><h3>"I worry it will look amateur."</h3><p>Next to competitors with polished sites, a weak one can cost you the customer.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="guide" class="band">
+    <div class="container two">
+      <div>
+        <h2>We know your time goes to your business, not to learning web tools.</h2>
+        <p>That is why WebGen asks about your customers, not about code. Your answers are turned into a clear message, a site built around it, and the tools to keep in touch.</p>
+      </div>
+      <div class="stack">
+        <div class="card"><h3>Written with a proven story framework</h3><p>[CONFIRM: name StoryBrand publicly]</p></div>
+        <div class="card"><h3>Trusted by real businesses</h3><p>[PROOF: Master Your Business and Mastercrest Games sites, if agreed]</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="value">
+    <div class="container">
+      <p class="eyebrow">Everything in one place</p>
+      <h2>A website is the start. Growing from it is the point.</h2>
+      <div class="bento">
+        <div class="card wide">
+          <h3>Launch without a designer</h3>
+          <p>Pages, copy and layout in minutes. Then change anything by clicking it, or by asking in a sentence.</p>
+          <ul class="pills"><li>Home</li><li>About</li><li>Services</li><li>Contact</li><li>+ New page</li></ul>
+        </div>
+        <div class="card wide">
+          <h3>Stay in touch with every lead</h3>
+          <p>Campaigns and automated sequences sent from your own domain, with consent and unsubscribe handled for you.</p>
+          <ul class="seq">
+            <li><span>Welcome email</span><span>Day 0</span></li>
+            <li><span>Getting started tips</span><span>Day 2</span></li>
+            <li><span>Special offer</span><span>Day 7</span></li>
+          </ul>
+        </div>
+        <div class="card"><h3>Know who is interested</h3><p>Every form feeds one audience, tagged by where people signed up.</p></div>
+        <div class="card"><h3>Get found by customers</h3><p>Sitemap, search tags and structured data, generated and kept current.</p></div>
+        <div class="card"><h3>See what works</h3><p>Visits, sign-ups and email results in one view, with visitor consent respected.</p></div>
+      </div>
+      <p class="more"><a href="/features/">Explore all features →</a></p>
+    </div>
+  </section>
+
+  <section data-section="plan" class="band">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps to a site that works.</h2>
+      <ol class="grid g3 steps">
+        <li class="card"><span class="num">01</span><h3>Tell us about your business</h3><p>Answer a short brief about who you serve and how you help them.</p></li>
+        <li class="card"><span class="num">02</span><h3>Review your site</h3><p>Get a full site with pages and copy. Change anything by clicking it or asking.</p></li>
+        <li class="card"><span class="num">03</span><h3>Publish</h3><p>Go live on your domain with forms and email connected.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section data-section="audience">
+    <div class="container">
+      <div data-audience="business">
+        <h2>For owners who would rather run the business than the website.</h2>
+        <div class="grid g3">
+          <div class="card"><h3>One place for everything</h3><p>Site, leads and email live together, so nothing falls between tools.</p></div>
+          <div class="card"><h3>No jargon</h3><p>Plain-language steps and sensible defaults from the first minute.</p></div>
+          <div class="card"><h3>Grows with you</h3><p>Start with a page. Add a newsletter and follow-ups when you are ready.</p></div>
+        </div>
+      </div>
+      <div data-audience="agency" hidden>
+        <h2>For agencies who manage many clients without many logins.</h2>
+        <div class="grid g3">
+          <div class="card"><h3>Every client kept apart</h3><p>Each client has their own site, audience and reports.</p></div>
+          <div class="card"><h3>Send as the client</h3><p>Emails go out from the client's own domain and name, not yours.</p></div>
+          <div class="card"><h3>Hand over when ready</h3><p>[CONFIRM: site and account hand-over to the client]</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="stakes" class="band">
+    <div class="container">
+      <p class="eyebrow">What is at stake</p>
+      <h2>Every day without a site that works is a day customers choose someone else.</h2>
+      <div class="grid g2">
+        <div class="card">
+          <h3>Without a site that works</h3>
+          <ul class="marks bad">
+            <li>Customers pick a competitor who looks more established</li>
+            <li>Interested people leave with no way to follow up</li>
+            <li>Evenings lost wrestling with tools instead of serving customers</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>With WebGen</h3>
+          <ul class="marks good">
+            <li>A professional site you are proud to share</li>
+            <li>Every sign-up captured and followed up automatically</li>
+            <li>Your site, audience and email in one place</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="responsible" class="dark">
+    <div class="container two">
+      <div>
+        <p class="eyebrow">Responsible email</p>
+        <h2>Built to respect the inbox.</h2>
+        <p>Every email sent through WebGen goes to people who asked for it, from a sender that is verified, with a working way out.</p>
+        <p><a href="/email/">Got an email from us? Here is why →</a></p>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>Double opt-in</h3><p>Subscribers confirm before they get anything.</p></div>
+        <div class="card"><h3>One-click unsubscribe</h3><p>In every email, honoured right away.</p></div>
+        <div class="card"><h3>Verified senders</h3><p>Sending domains are checked before use.</p></div>
+        <div class="card"><h3>Suppression lists</h3><p>Bounces and complaints are never mailed again.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="learn">
+    <div class="container">
+      <div class="head-row">
+        <div><p class="eyebrow">Learn</p><h2>Guides for every step.</h2></div>
+        <a href="/docs/">Browse all docs →</a>
+      </div>
+      <div class="grid g4">
+        {learn.map((l) => (
+          <a class="card link-card" href={l.href}>
+            <span class="eyebrow">{l.tag}</span>
+            <h3>{l.title}</h3>
+            <p>{l.text}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section data-section="faq" class="band">
+    <div class="container narrow">
+      <h2>Questions</h2>
+      <details><summary>Do I need to know how to code or design?</summary><p>No. You describe the business and edit by clicking or asking for changes in plain words.</p></details>
+      <details><summary>Can I use my own domain?</summary><p>Yes. Connect it from your site's Domain settings. The docs walk through each step.</p></details>
+      <details><summary>Who owns my content and contact list?</summary><p>[CONFIRM: ownership and export wording]</p></details>
+      <details><summary>I got an email from a WebGen site. Why?</summary><p>Businesses use WebGen to email people who signed up on their site. <a href="/email/">Read how it works and how to unsubscribe.</a></p></details>
+    </div>
+  </section>
+
+  <section data-section="cta" class="final">
+    <div class="container">
+      <h2>See your site today.</h2>
+      <p>Describe your business. We will build the first version.</p>
+      <a class="btn btn-accent" href={APP} rel="noopener noreferrer">Build my site</a>
     </div>
   </section>
 </Base>
+
+<script>
+  import { initAudienceSwitch } from '../scripts/audience.js';
+  initAudienceSwitch(document.body);
+</script>
+
+<style is:global>
+  main > section { margin-top: 88px; }
+  main > section.hero { margin-top: 56px; text-align: center; }
+  main > section.band { background: var(--surface); padding: 56px 0; }
+  main > section.dark { background: var(--ink); color: var(--on-dark); padding: 56px 0; }
+  main > section.dark h2, main > section.dark h3 { color: var(--white); }
+  main > section.dark .card { background: transparent; border-color: var(--on-dark-line); }
+  main > section.dark .card p { color: var(--on-dark-2); }
+  main > section.dark a { color: var(--accent); }
+  main > section.final { background: var(--ink); color: var(--on-dark-2); padding: 72px 0; text-align: center; }
+  main > section.final h2 { color: var(--white); }
+  [hidden] { display: none !important; }
+
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; display: block; }
+  .dark .eyebrow { color: var(--on-dark-2); }
+  .narrow { max-width: 760px; }
+  .lede { max-width: 680px; margin: 0 auto 28px; font-size: 1.1875rem; color: var(--muted); }
+  .hero h1 { max-width: 920px; margin: 32px auto 20px; letter-spacing: -.03em; }
+  .mark { background: linear-gradient(transparent 60%, var(--accent) 60%); padding: 0 6px; }
+  .switch { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; }
+  .switch button { min-height: 44px; padding: 0 20px; border: 0; border-radius: 999px; background: transparent; color: var(--ink); font: 600 1rem/1 var(--font-body); cursor: pointer; }
+  .switch button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; list-style: none; padding: 0; margin: 24px 0 0; color: var(--muted); font-size: .9375rem; }
+
+  .grid { display: grid; gap: 20px; margin-top: 32px; }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .two { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: center; }
+  .two .grid { margin-top: 0; }
+  .stack { display: grid; gap: 16px; }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; }
+  .link-card { text-decoration: none; color: var(--body); display: block; }
+  .link-card:hover { border-color: var(--link); }
+  .link-card h3 { color: var(--ink); }
+  .steps { list-style: none; padding: 0; }
+  .num { font: 800 1.5rem/1 var(--font-heading); color: var(--link); display: block; margin-bottom: 12px; }
+  .head-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: end; }
+  .head-row a, .more a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+  .more { margin: 24px 0 0; }
+
+  .bento { display: grid; gap: 20px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .bento .wide { grid-column: 1 / -1; }
+  @media (min-width: 900px) {
+    .bento { grid-template-columns: repeat(6, 1fr); }
+    .bento .card { grid-column: span 2; }
+    .bento .wide { grid-column: span 3; }
+  }
+  .pills, .seq { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pills li { padding: 6px 14px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: .9375rem; color: var(--ink); }
+  .seq { flex-direction: column; }
+  .seq li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; background: var(--tint); border-radius: 10px; color: var(--ink); font-size: .9375rem; }
+
+  .marks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .marks li { position: relative; padding-left: 30px; }
+  .marks li::before { position: absolute; left: 0; top: 0; font-weight: 800; }
+  .marks.bad li::before { content: "\2715"; color: var(--danger); }
+  .marks.good li::before { content: "\2713"; color: var(--link); }
+
+  details { border-bottom: 1px solid var(--line-strong); padding: 4px 0; }
+  summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; color: var(--ink); }
+  details p { margin: 0 0 14px; }
+
+  .product .shot { max-width: 960px; margin: 0 auto; border: 1px solid var(--line-strong); border-radius: 16px; overflow: hidden; background: var(--white); }
+  .shot-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .shot-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); }
+  .shot-bar span { margin-left: 12px; font-size: .8125rem; color: var(--muted); }
+  .shot-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+  .shot-body > * { padding: 20px; margin: 0; }
+  .shot-side { list-style: none; background: var(--surface); display: grid; gap: 6px; align-content: start; font-size: .9375rem; }
+  .shot-name { font: 700 1.5rem/1.2 var(--font-heading); color: var(--ink); }
+  .shot-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .shot-btns span { padding: 8px 14px; border-radius: 999px; background: var(--accent); color: var(--ink); font-weight: 600; font-size: .9375rem; }
+  .shot-chat { background: var(--tint); font-size: .9375rem; }
+  .shot-label { font-weight: 700; color: var(--ink); }
+  .bubble { padding: 10px 12px; border-radius: 12px; background: var(--white); }
+  .bubble.you { background: var(--ink); color: var(--white); }
+  .shot-input { padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--white); color: var(--muted); }
+</style>
