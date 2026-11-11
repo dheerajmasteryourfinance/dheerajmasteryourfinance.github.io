@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WebGen Docs: Build your first website</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif}
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A}
+</style>
+</helmet>
+<div style="width:100%;background:#FFFFFF;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D">
+
+<!-- DOCS TOP BAR -->
+<div style="position:sticky;top:0;z-index:5;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);border-bottom:1px solid #E3E8F0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;max-width:1360px;margin:0 auto;padding:12px 24px;box-sizing:border-box">
+<div style="display:flex;align-items:center;gap:14px">
+<a href="Main.dc.html" style="display:flex;align-items:center;gap:10px;color:#0F1E3D">
+<span style="width:30px;height:30px;border-radius:8px;background:#FFC93C;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>
+<span style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</span>
+</a>
+<span style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A;border-left:1px solid #E3E8F0;padding-left:14px">Docs</span>
+</div>
+<label style="flex:0 1 420px;display:flex;align-items:center;gap:10px;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:10px;padding:0 12px;min-height:44px;box-sizing:border-box">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#55607A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search the docs</span>
+<input type="search" placeholder="Search the docs" style="flex:1;border:0;background:transparent;font:15px DM Sans,system-ui,sans-serif;color:#0F1E3D;outline-offset:4px;min-width:0">
+<kbd style="font-family:DM Sans,system-ui,sans-serif;font-size:12px;color:#55607A;border:1px solid #CBD3E1;border-radius:6px;padding:2px 6px;background:#FFFFFF">Ctrl K</kbd>
+</label>
+<div style="display:flex;align-items:center;gap:8px">
+<a href="Company.dc.html" style="color:#334155;font-weight:500;font-size:15px;padding:10px 12px">Support</a>
+<a href="#" style="background:#0F1E3D;color:#FFFFFF;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px">Open the app</a>
+</div>
+</div>
+</div>
+
+<div style="max-width:1360px;margin:0 auto;padding:0 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+
+<!-- SIDEBAR -->
+<nav aria-label="Docs" style="flex:1 1 220px;max-width:260px;padding:32px 0;font-size:14px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Getting started</div>
+<a href="Docs.dc.html" aria-current="page" style="padding:8px 10px;border-radius:8px;background:#E8F0FE;color:#1D4ED8;font-weight:600">Build your first website</a>
+<a href="#" style="padding:8px 10px;color:#334155">Import an existing site</a>
+<a href="#" style="padding:8px 10px;color:#334155">A tour of the editor</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Your website</div>
+<a href="#" style="padding:8px 10px;color:#334155">Pages and editing</a>
+<a href="#" style="padding:8px 10px;color:#334155">Brand colours and fonts</a>
+<a href="#" style="padding:8px 10px;color:#334155">Ask the AI assistant</a>
+<a href="#" style="padding:8px 10px;color:#334155">Search and social tags</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Leads and audience</div>
+<a href="#" style="padding:8px 10px;color:#334155">Forms and leads</a>
+<a href="#" style="padding:8px 10px;color:#334155">Your audience</a>
+<a href="#" style="padding:8px 10px;color:#334155">Segments</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Email</div>
+<a href="#" style="padding:8px 10px;color:#334155">Set up your sender</a>
+<a href="#" style="padding:8px 10px;color:#334155">Send a campaign</a>
+<a href="#" style="padding:8px 10px;color:#334155">Follow-up emails</a>
+<a href="#" style="padding:8px 10px;color:#334155">Stats and sent emails</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Domains and account</div>
+<a href="#" style="padding:8px 10px;color:#334155">Connect your domain</a>
+<a href="#" style="padding:8px 10px;color:#334155">Billing</a>
+<a href="#" style="padding:8px 10px;color:#334155">Account settings</a>
+</div>
+</nav>
+
+<!-- ARTICLE -->
+<main style="flex:999 1 560px;min-width:0;max-width:740px;padding:40px 0 64px">
+<div style="font-size:14px;color:#55607A"><a href="#" style="color:#55607A">Docs</a> / <a href="#" style="color:#55607A">Getting started</a></div>
+<h1 style="font-weight:700;font-size:44px;line-height:1.08;letter-spacing:-0.035em;margin:16px 0 0">Build your first website</h1>
+<p style="font-size:19px;line-height:1.6;color:#55607A;margin:16px 0 0">Go from a blank account to a published site. You answer a few questions about your business, WebGen builds the site, and you polish it in the editor.</p>
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;font-size:14px;color:#55607A"><span>About 10 minutes</span><span aria-hidden="true">·</span><span>Updated [DATE]</span></div>
+
+<div style="margin-top:32px;border:1px solid #E3E8F0;border-radius:14px;padding:18px 20px;background:#F4F7FB;font-size:15px;line-height:1.6">
+<strong>Before you start:</strong> have a short description of your business, your ideal customer and a few photos ready. You can skip the photos and add them later.
+</div>
+
+<h2 id="create" style="font-size:26px;letter-spacing:-0.02em;margin:48px 0 0">1. Start a new website</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Sign in and click <strong>New website</strong> on your dashboard.</p>
+
+<h2 id="brief" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">2. Answer the brief</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">The brief asks about your business the way a copywriter would. The answers become the words on your site, so write them as you would explain to a customer.</p>
+<ul style="font-size:17px;line-height:1.7;color:#1E293B;margin:12px 0 0;padding-left:22px">
+<li>Your business name and your ideal customer</li>
+<li>What your customer wants, and what stands in their way</li>
+<li>Why customers can trust you, and the main action on your site</li>
+<li>Your plan in three steps, your languages and, if you like, a preferred style</li>
+</ul>
+<div style="margin-top:20px;border-radius:14px;padding:18px 20px;background:#E8F0FE;font-size:15px;line-height:1.6;color:#1E293B">
+<strong style="color:#1D4ED8">Tip:</strong> questions marked optional can be left blank. Short, honest answers work better than long ones.
+</div>
+
+<h2 id="photos" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">3. Add photos</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Upload your own photos or describe the ones you want. WebGen places them on the right pages.</p>
+<div style="margin-top:20px;border:1px solid #E3E8F0;border-radius:16px;height:260px;background:#F4F7FB;display:flex;align-items:center;justify-content:center;font-size:14px;color:#55607A">[SCREENSHOT: Add photos step]</div>
+
+<h2 id="edit" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">4. Review and edit</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Your site opens in the editor. From here you can:</p>
+<ul style="font-size:17px;line-height:1.7;color:#1E293B;margin:12px 0 0;padding-left:22px">
+<li>Click any text to change it</li>
+<li>Adjust colours and fonts under <strong>Design</strong></li>
+<li>Ask the <strong>AI assistant</strong> for bigger changes, such as "add a pricing section"</li>
+<li>Go back to an earlier version under <strong>History</strong></li>
+</ul>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Click <strong>Save</strong> when you are happy with your changes.</p>
+
+<h2 id="publish" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">5. Publish</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Click <strong>Publish</strong>. Your site goes online at a free address straight away. You can add your own domain afterwards.</p>
+<div style="margin-top:20px;border:1px solid #F5D6A8;border-radius:14px;padding:18px 20px;background:#FFF8EC;font-size:15px;line-height:1.6;color:#1E293B">
+<strong style="color:#92400E">Note:</strong> publishing needs an active subscription. [CONFIRM wording against billing rules]
+</div>
+
+<h2 id="next" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">Next steps</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px">
+<a href="#" style="display:block;border:1px solid #E3E8F0;border-radius:14px;padding:18px;color:#0F1E3D"><div style="font-weight:600">Connect your domain</div><div style="font-size:14px;color:#55607A;margin-top:4px">Use your own web address.</div></a>
+<a href="#" style="display:block;border:1px solid #E3E8F0;border-radius:14px;padding:18px;color:#0F1E3D"><div style="font-weight:600">Set up your sender</div><div style="font-size:14px;color:#55607A;margin-top:4px">Email from your own address.</div></a>
+</div>
+
+<!-- FEEDBACK -->
+<div style="margin-top:56px;padding-top:24px;border-top:1px solid #E3E8F0;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+<sc-if value="{{notVoted}}" hint-placeholder-val="{{ true }}">
+<span style="font-size:15px;font-weight:500">Was this page helpful?</span>
+<button type="button" onClick="{{voteYes}}" style="border:1px solid #CBD3E1;background:#FFFFFF;border-radius:999px;padding:10px 18px;font:500 14px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">Yes</button>
+<button type="button" onClick="{{voteNo}}" style="border:1px solid #CBD3E1;background:#FFFFFF;border-radius:999px;padding:10px 18px;font:500 14px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">No</button>
+</sc-if>
+<sc-if value="{{voted}}" hint-placeholder-val="{{ false }}">
+<span style="font-size:15px;color:#15803D;font-weight:500">Thanks for the feedback.</span>
+</sc-if>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:32px">
+<span></span>
+<a href="#" style="border:1px solid #E3E8F0;border-radius:14px;padding:16px 20px;text-align:right;color:#0F1E3D"><div style="font-size:13px;color:#55607A">Next</div><div style="font-weight:600;margin-top:2px">Import an existing site →</div></a>
+</div>
+</main>
+
+<!-- ON THIS PAGE -->
+<aside aria-label="On this page" style="flex:1 1 180px;max-width:220px;padding:40px 0;font-size:14px">
+<div style="font-weight:600;margin-bottom:10px">On this page</div>
+<div style="display:flex;flex-direction:column;gap:8px;border-left:1px solid #E3E8F0;padding-left:14px">
+<a href="#create" style="color:#1D4ED8;font-weight:500">Start a new website</a>
+<a href="#brief" style="color:#55607A">Answer the brief</a>
+<a href="#photos" style="color:#55607A">Add photos</a>
+<a href="#edit" style="color:#55607A">Review and edit</a>
+<a href="#publish" style="color:#55607A">Publish</a>
+<a href="#next" style="color:#55607A">Next steps</a>
+</div>
+</aside>
+
+</div>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid #E3E8F0">
+<div style="max-width:1360px;margin:0 auto;padding:32px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#55607A">
+<span>© 2026 [LEGAL ENTITY NAME]</span>
+<span style="display:flex;flex-wrap:wrap;gap:20px"><a href="Main.dc.html" style="color:#55607A">Home</a><a href="Company.dc.html" style="color:#55607A">Contact</a><a href="EmailInfo.dc.html" style="color:#55607A">Email from us?</a><a href="Privacy.dc.html" style="color:#55607A">Privacy</a></span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { voted: false }; }
+  renderVals() {
+    return {
+      voted: this.state.voted,
+      notVoted: !this.state.voted,
+      voteYes: () => this.setState({ voted: true }),
+      voteNo: () => this.setState({ voted: true })
+    };
+  }
+}
+</script>
+</body>
+</html>
