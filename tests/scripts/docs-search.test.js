@@ -42,6 +42,10 @@ describe('renderResults', () => {
     '/\\evil.com',
     'data:text/html,x',
     'https://evil.com/',
+    '/\t/evil.com',
+    '/\n/evil.com',
+    '/\r/evil.com',
+    ' //evil.com',
   ])('rejects url %s', (url) => {
     renderResults(box, 'a', [{ url, title: 'A', excerpt: 'a' }]);
     expect(box.querySelector('a').getAttribute('href')).toBe('#');

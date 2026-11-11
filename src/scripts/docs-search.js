@@ -8,6 +8,8 @@ const decode = (s) => s.replace(/&(?:lt|gt|quot|#39|#x27|amp);/g, (m) => ENTITIE
 
 function safeUrl(url) {
   const u = String(url ?? '');
+  // The URL parser strips tab/LF/CR, so reject any control character or space first.
+  if (/[\u0000- \u007F]/.test(u)) return '#';
   return /^(\/(?![/\\])|#)/.test(u) ? u : '#';
 }
 
