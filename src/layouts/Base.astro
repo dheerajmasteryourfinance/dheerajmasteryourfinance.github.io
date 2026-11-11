@@ -20,6 +20,7 @@ const canonical = `https://webgnr.com${path}`;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

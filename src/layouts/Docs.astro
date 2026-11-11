@@ -1,0 +1,158 @@
+---
+import Base from './Base.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  minutes: number;
+  updated: Date;
+  group: string;
+  headings: { depth: number; slug: string; text: string }[];
+}
+const { title, description, slug, minutes, updated, group, headings } = Astro.props;
+const path = `/docs/${slug}/`;
+
+const GROUPS: Record<string, string> = {
+  'getting-started': 'Getting started',
+  website: 'Your website',
+  leads: 'Leads and audience',
+  email: 'Email',
+  domains: 'Domains and account',
+};
+const entries = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+const grouped = Object.keys(GROUPS)
+  .map((key) => ({ key, label: GROUPS[key], items: entries.filter((e) => e.data.group === key) }))
+  .filter((g) => g.items.length > 0);
+const idx = entries.findIndex((e) => e.id === slug);
+const prev = idx > 0 ? entries[idx - 1] : undefined;
+const next = idx >= 0 && idx < entries.length - 1 ? entries[idx + 1] : undefined;
+const toc = headings.filter((h) => h.depth === 2);
+const dateText = updated.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<Base title={`${title} | WebGen Docs`} description={description} path={path}>
+  <section data-section="docs-bar" class="bar">
+    <div class="container bar-in">
+      <p class="bar-title"><a href="/docs/">Docs</a></p>
+      <div class="search" role="search">
+        <label>
+          <span class="visually-hidden">Search the docs</span>
+          <input type="search" data-docs-search placeholder="Search the docs" autocomplete="off" />
+          <kbd aria-hidden="true">Ctrl K</kbd>
+        </label>
+        <div class="results" data-docs-results hidden aria-live="polite"></div>
+      </div>
+      <div class="bar-links">
+        <a href="/company/#contact">Support</a>
+        <a class="btn btn-primary" href="https://app.website-generator.nl/" rel="noopener noreferrer">Open the app</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="docs-body" class="body">
+    <div class="container shell">
+      <nav aria-label="Docs" class="side">
+        {grouped.map((g) => (
+          <div class="group">
+            <p class="group-title">{g.label}</p>
+            <ul>
+              {g.items.map((e) => (
+                <li><a href={`/docs/${e.id}/`} aria-current={e.id === slug ? 'page' : undefined}>{e.data.title}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+
+      <article class="article" data-pagefind-body>
+        <p class="crumbs"><a href="/docs/">Docs</a> / {GROUPS[group]}</p>
+        <h1>{title}</h1>
+        <p class="lede">{description}</p>
+        <p class="meta">About {minutes} minutes · Updated {dateText}</p>
+        <div class="prose"><slot /></div>
+
+        <div class="feedback">
+          <span>Was this helpful?</span>
+          <a class="btn btn-ghost" href="/company/#contact">Tell us</a>
+        </div>
+        {(prev || next) && (
+          <div class="pager">
+            {prev ? <a href={`/docs/${prev.id}/`}><span>Previous</span>{prev.data.title}</a> : <span></span>}
+            {next ? <a class="pager-next" href={`/docs/${next.id}/`}><span>Next</span>{next.data.title}</a> : <span></span>}
+          </div>
+        )}
+      </article>
+
+      <nav aria-label="On this page" class="toc">
+        <p class="group-title">On this page</p>
+        <ul>
+          {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { initDocsSearch } from '../scripts/docs-search.js';
+  const input = document.querySelector<HTMLInputElement>('[data-docs-search]');
+  const results = document.querySelector<HTMLElement>('[data-docs-results]');
+  if (input && results) initDocsSearch(input, results);
+</script>
+
+<style>
+  .bar { border-bottom: 1px solid var(--line); background: var(--white); }
+  .bar-in { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding-top: 12px; padding-bottom: 12px; }
+  .bar-title { margin: 0; padding-left: 14px; border-left: 1px solid var(--line); font-size: .8125rem; }
+  .bar-title a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: none; }
+  .search { position: relative; flex: 1 1 260px; max-width: 420px; }
+  .search label { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  .search input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: transparent; font: 400 .9375rem var(--font-body); color: var(--ink); }
+  .search kbd { font: .75rem var(--font-body); color: var(--muted); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 6px; background: var(--white); }
+  .results { position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 6px); max-height: 70vh; overflow: auto; background: var(--white); border: 1px solid var(--line-strong); border-radius: 12px; padding: 8px; box-shadow: 0 12px 32px rgba(15, 30, 61, .12); }
+  .results :global(.search-list) { list-style: none; margin: 0; padding: 0; }
+  .results :global(.search-list a) { display: flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: none; padding: 0 8px; }
+  .results :global(.search-excerpt), .results :global(.search-empty) { margin: 0 0 8px; padding: 0 8px; font-size: .875rem; color: var(--muted); }
+  .results :global(mark) { background: var(--accent); color: var(--ink); border-radius: 3px; }
+  .bar-links { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+  .bar-links > a:not(.btn) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: var(--body); font-weight: 500; text-decoration: none; }
+
+  .shell { display: grid; gap: 32px; grid-template-columns: minmax(0, 1fr); padding-top: 32px; padding-bottom: 64px; }
+  @media (min-width: 960px) {
+    .shell { grid-template-columns: 220px minmax(0, 1fr) 200px; gap: 48px; align-items: start; }
+    .side, .toc { position: sticky; top: 80px; }
+  }
+  .group { margin-bottom: 20px; }
+  .group-title { margin: 0 0 6px; padding: 0 10px; font: 700 .875rem/1.4 var(--font-body); color: var(--ink); }
+  .side ul, .toc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .side a { display: flex; align-items: center; min-height: 44px; padding: 0 10px; border-radius: 8px; color: var(--body); text-decoration: none; font-size: .9375rem; }
+  .side a:hover { background: var(--surface); }
+  .side a[aria-current="page"] { background: var(--tint); color: var(--link); font-weight: 600; }
+  .toc ul { border-left: 1px solid var(--line); padding-left: 14px; }
+  .toc a { display: flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: none; font-size: .875rem; }
+  .toc a:hover { color: var(--ink); text-decoration: underline; }
+  .toc .group-title { padding: 0; }
+
+  .article { max-width: 740px; min-width: 0; }
+  .crumbs { color: var(--muted); font-size: .875rem; margin: 0; }
+  .crumbs a { color: var(--muted); }
+  .article h1 { margin-top: 16px; }
+  .lede { font-size: 1.1875rem; color: var(--muted); margin: 0; }
+  .meta { color: var(--muted); font-size: .875rem; margin: 16px 0 0; }
+  .prose { margin-top: 32px; }
+  .prose :global(h2) { font-size: 1.625rem; margin: 40px 0 0; scroll-margin-top: 80px; }
+  .prose :global(p), .prose :global(ul) { margin: 14px 0 0; }
+  .prose :global(ul) { padding-left: 22px; }
+  .prose :global(.callout) { margin-top: 20px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); font-size: .9375rem; }
+  .prose :global(.callout-tip) { background: var(--tint); border-color: var(--tint); }
+  .prose :global(.callout-note) { border-color: var(--line-strong); background: var(--white); }
+  .prose :global(.shot) { margin-top: 20px; min-height: 200px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--muted); font-size: .875rem; text-align: center; padding: 16px; }
+
+  .feedback { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); font-weight: 500; }
+  .pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 32px; }
+  .pager a { display: block; min-height: 44px; border: 1px solid var(--line); border-radius: 14px; padding: 14px 20px; color: var(--ink); font-weight: 600; text-decoration: none; }
+  .pager a:hover { border-color: var(--ink); }
+  .pager a span { display: block; font-size: .8125rem; font-weight: 400; color: var(--muted); }
+  .pager-next { text-align: right; margin-left: auto; }
+</style>
