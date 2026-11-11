@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach } from 'vitest';
-import { renderResults } from '../../src/scripts/docs-search.js';
+import { renderResults, bindShortcut } from '../../src/scripts/docs-search.js';
 
 let box;
 beforeEach(() => {
@@ -36,8 +36,58 @@ describe('renderResults', () => {
     expect(box.querySelector('a').getAttribute('href')).toBe('/b/');
   });
 
-  it('drops javascript: urls', () => {
-    renderResults(box, 'a', [{ url: 'javascript:alert(1)', title: 'A', excerpt: 'a' }]);
-    expect(box.querySelector('a').getAttribute('href')).not.toMatch(/^javascript:/i);
+  it.each([
+    'javascript:alert(1)',
+    '//evil.com',
+    '/\\evil.com',
+    'data:text/html,x',
+    'https://evil.com/',
+  ])('rejects url %s', (url) => {
+    renderResults(box, 'a', [{ url, title: 'A', excerpt: 'a' }]);
+    expect(box.querySelector('a').getAttribute('href')).toBe('#');
+  });
+
+  it('accepts same-site paths and fragments', () => {
+    renderResults(box, 'a', [
+      { url: '/docs/a/', title: 'A', excerpt: 'a' },
+      { url: '#top', title: 'B', excerpt: 'b' },
+    ]);
+    const hrefs = [...box.querySelectorAll('a')].map((a) => a.getAttribute('href'));
+    expect(hrefs).toEqual(['/docs/a/', '#top']);
+  });
+});
+
+describe('bindShortcut', () => {
+  let input;
+  const press = (init, target = document.body) => {
+    const e = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, ...init });
+    target.dispatchEvent(e);
+    return e;
+  };
+  beforeEach(() => {
+    document.body.innerHTML =
+      '<input id="s" type="search"><input id="other"><textarea id="ta"></textarea><div id="ce" contenteditable="true" tabindex="0"></div>';
+    input = document.getElementById('s');
+    bindShortcut(input, document);
+  });
+
+  it.each([{ ctrlKey: true }, { metaKey: true }])('%o + K focuses the search and prevents default', (mod) => {
+    const e = press({ key: 'k', ...mod });
+    expect(document.activeElement).toBe(input);
+    expect(e.defaultPrevented).toBe(true);
+  });
+
+  it.each(['other', 'ta', 'ce'])('does not hijack while #%s is focused', (id) => {
+    const el = document.getElementById(id);
+    el.focus();
+    const e = press({ key: 'k', ctrlKey: true }, el);
+    expect(document.activeElement).toBe(el);
+    expect(e.defaultPrevented).toBe(false);
+  });
+
+  it('a plain k does nothing', () => {
+    const e = press({ key: 'k' });
+    expect(document.activeElement).not.toBe(input);
+    expect(e.defaultPrevented).toBe(false);
   });
 });

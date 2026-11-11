@@ -43,6 +43,6 @@ Click **Save** when you are happy with your changes.
 
 ## 5. Publish
 
-Click **Publish** to put your site online. You can add your own domain afterwards.
+Click **Publish**. Your site goes online at a free address, and you can add your own domain afterwards.
 
 <div class="callout callout-note"><strong>Note:</strong> [CONFIRM: publishing needs an active subscription; check the wording against the billing rules]</div>

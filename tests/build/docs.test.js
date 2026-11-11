@@ -41,6 +41,10 @@ describe('docs article', () => {
     }
   });
 
+  it('says publishing goes to a free address', () => {
+    expect(doc.querySelector('article').textContent).toContain('free address');
+  });
+
   it('keeps the subscription note as a CONFIRM placeholder', () => {
     expect(doc.querySelector('article').textContent).toMatch(/\[CONFIRM: [^\]]*subscription[^\]]*\]/);
   });

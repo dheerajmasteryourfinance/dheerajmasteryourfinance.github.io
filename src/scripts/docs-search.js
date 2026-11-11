@@ -8,7 +8,7 @@ const decode = (s) => s.replace(/&(?:lt|gt|quot|#39|#x27|amp);/g, (m) => ENTITIE
 
 function safeUrl(url) {
   const u = String(url ?? '');
-  return /^(\/(?!\/)|#)/.test(u) ? u : '#';
+  return /^(\/(?![/\\])|#)/.test(u) ? u : '#';
 }
 
 /** Build an excerpt node: <mark> tokens become real mark elements, all other text stays literal. */
@@ -62,7 +62,7 @@ export function bindShortcut(input, doc = document) {
   doc.addEventListener('keydown', (e) => {
     if (!(e.ctrlKey || e.metaKey) || e.altKey || e.shiftKey || e.key.toLowerCase() !== 'k') return;
     const active = doc.activeElement;
-    if (active && (FIELD_TAGS.includes(active.tagName) || active.isContentEditable)) return;
+    if (active && (FIELD_TAGS.includes(active.tagName) || active.isContentEditable || active.closest?.('[contenteditable]:not([contenteditable="false"])'))) return;
     e.preventDefault();
     input.focus();
   });
