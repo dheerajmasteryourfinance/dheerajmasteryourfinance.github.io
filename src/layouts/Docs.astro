@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import { getCollection } from 'astro:content';
+import { APP_HOME, APP_PLACEHOLDER } from '../lib/links.js';
 
 interface Props {
   title: string;
@@ -45,7 +46,7 @@ const dateText = updated.toLocaleDateString('en-GB', { day: 'numeric', month: 'l
       </div>
       <div class="bar-links">
         <a href="/company/#contact">Support</a>
-        <a class="btn btn-primary" href="https://app.website-generator.nl/" rel="noopener noreferrer">Open the app</a>
+        <a class="btn btn-primary" href={APP_HOME} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Open the app</a>
       </div>
     </div>
   </section>

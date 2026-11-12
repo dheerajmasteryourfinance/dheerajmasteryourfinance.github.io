@@ -1,12 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-const APP = 'https://app.website-generator.nl/register';
-const learn = [
-  { href: '/docs/build-your-first-website/', tag: 'Getting started · 10 min', title: 'Build your first site', text: 'From brief to published, step by step.' },
-  { href: '/docs/connect-your-domain/', tag: 'Domains · 15 min', title: 'Connect your domain', text: 'Point your address at your site.' },
-  { href: '/docs/send-a-campaign/', tag: 'Email · 12 min', title: 'Send your first newsletter', text: 'Set up a sender and reach your audience.' },
-  { href: '/docs/follow-up-emails/', tag: 'Email · 8 min', title: 'Automate a welcome sequence', text: 'Greet every new subscriber on time.' },
+import { getEntry } from 'astro:content';
+import { APP_REGISTER, APP_PLACEHOLDER } from '../lib/links.js';
+const cards = [
+  { href: '/docs/build-your-first-website/', tag: 'Getting started', slug: 'build-your-first-website', title: 'Build your first site', text: 'From brief to published, step by step.' },
+  { href: '/docs/connect-your-domain/', tag: 'Domains', slug: 'connect-your-domain', title: 'Connect your domain', text: 'Point your address at your site.' },
+  { href: '/docs/send-a-campaign/', tag: 'Email', slug: 'send-a-campaign', title: 'Send your first newsletter', text: 'Set up a sender and reach your audience.' },
+  { href: '/docs/follow-up-emails/', tag: 'Email', slug: 'follow-up-emails', title: 'Automate a welcome sequence', text: 'Greet every new subscriber on time.' },
 ];
+const learn = await Promise.all(cards.map(async (c) => {
+  const entry = await getEntry('docs', c.slug);
+  return { ...c, tag: `${c.tag} · ${entry.data.minutes} min` };
+}));
 ---
 <Base
   title="WebGen: your website, built for you"
@@ -24,11 +29,11 @@ const learn = [
       <p class="lede" data-audience="business">Describe your business and get a complete site with forms, newsletters and search basics ready to go. No designer, no developer, no extra tools.</p>
       <p class="lede" data-audience="agency" hidden>Generate, edit and publish for every client from one account. Each client keeps their own domain, sender identity, audience and reports.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href={APP} rel="noopener noreferrer">Build my site</a>
-        <a class="btn btn-ghost" href="#example">See an example</a>
+        <a class="btn btn-primary" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
+        <a class="btn btn-ghost" href="#example" data-placeholder="[CONFIRM: example site]">See an example</a>
       </div>
       <ul class="chips">
-        <li>Double opt-in for subscribers</li>
+        <li>Optional double opt-in</li>
         <li>One-click unsubscribe</li>
         <li>Your own domain</li>
       </ul>
@@ -104,7 +109,7 @@ const learn = [
           </ul>
         </div>
         <div class="card"><h3>Know who is interested</h3><p>Every form feeds one audience, tagged by where people signed up.</p></div>
-        <div class="card"><h3>Get found by customers</h3><p>Sitemap, search tags and structured data, generated and kept current.</p></div>
+        <div class="card"><h3>Get found by customers</h3><p>Sitemap, search tags and structured data, generated and kept current. [CONFIRM: ships with the SEO release]</p></div>
         <div class="card"><h3>See what works</h3><p>Visits, sign-ups and email results in one view, with visitor consent respected.</p></div>
       </div>
       <p class="more"><a href="/features/">Explore all features →</a></p>
@@ -178,7 +183,7 @@ const learn = [
         <p><a href="/email/">Got an email from us? Here is why →</a></p>
       </div>
       <div class="grid g2">
-        <div class="card"><h3>Double opt-in</h3><p>Subscribers confirm before they get anything.</p></div>
+        <div class="card"><h3>Optional double opt-in</h3><p>Turn it on so subscribers confirm before they get anything.</p></div>
         <div class="card"><h3>One-click unsubscribe</h3><p>In every email, honoured right away.</p></div>
         <div class="card"><h3>Verified senders</h3><p>Sending domains are checked before use.</p></div>
         <div class="card"><h3>Suppression lists</h3><p>Bounces and complaints are never mailed again.</p></div>
@@ -218,7 +223,7 @@ const learn = [
     <div class="container">
       <h2>See your site today.</h2>
       <p>Describe your business. We will build the first version.</p>
-      <a class="btn btn-accent" href={APP} rel="noopener noreferrer">Build my site</a>
+      <a class="btn btn-accent" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
     </div>
   </section>
 </Base>
@@ -237,6 +242,7 @@ const learn = [
   main > section.dark .card { background: transparent; border-color: var(--on-dark-line); }
   main > section.dark .card p { color: var(--on-dark-2); }
   main > section.dark a { color: var(--accent); }
+  main > section.dark :focus-visible, main > section.final :focus-visible { outline-color: var(--accent); }
   main > section.final { background: var(--ink); color: var(--on-dark-2); padding: 72px 0; text-align: center; }
   main > section.final h2 { color: var(--white); }
   [hidden] { display: none !important; }

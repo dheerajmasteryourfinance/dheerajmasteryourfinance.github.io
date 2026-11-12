@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import { APP_LOGIN, APP_REGISTER, APP_PLACEHOLDER } from '../lib/links.js';
 interface Props { current: string }
 const { current } = Astro.props;
 const links = [
@@ -16,8 +17,8 @@ const isCurrent = (href: string) => current === href || current.startsWith(href)
       {links.map((l) => (
         <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
       ))}
-      <li><a href="https://app.website-generator.nl/login" rel="noopener noreferrer">Sign in</a></li>
-      <li><a class="btn btn-primary" href="https://app.website-generator.nl/register" rel="noopener noreferrer">Build my site</a></li>
+      <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Sign in</a></li>
+      <li><a class="btn btn-primary" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a></li>
     </ul>
   </div>
 </nav>

@@ -81,6 +81,7 @@ a:hover { color: var(--link-hover); }
 .logo-word { font: 800 1.25rem/1 var(--font-heading); color: var(--ink); }
 
 /* Footer */
+.site-footer :focus-visible { outline-color: var(--accent); }
 .site-footer { background: var(--ink); color: var(--on-dark); padding: 56px 0 32px; }
 .site-footer h2 { font: 700 .875rem/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--on-dark-2); margin-bottom: 12px; }
 .footer-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 32px; }

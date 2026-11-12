@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-const APP = 'https://app.website-generator.nl/register';
+import { APP_REGISTER, APP_PLACEHOLDER } from '../../lib/links.js';
 const chips = [
   { id: 'build', label: 'Build' },
   { id: 'leads', label: 'Forms and audience' },
@@ -55,7 +55,7 @@ const chips = [
         <h2>Every sign-up in one list.</h2>
         <p class="copy">Contact, booking and lead-magnet forms all feed one audience. Each person is tagged by where they signed up, so you can group them into segments later.</p>
         <ul class="ticks">
-          <li>Double opt-in, so every subscriber confirmed</li>
+          <li>Optional double opt-in, so subscribers can confirm first</li>
           <li>Segments by tag, source or activity</li>
           <li>Spam protection on every form</li>
         </ul>
@@ -101,8 +101,8 @@ const chips = [
       <p class="eyebrow">04 · Search and analytics</p>
       <h2>Be found, then see what works.</h2>
       <div class="cards">
-        <div class="card"><h3>Sitemap and robots</h3><p>Generated for every site. Your own uploaded files are always kept.</p></div>
-        <div class="card"><h3>Search and social tags</h3><p>Titles, descriptions, link previews and structured data.</p></div>
+        <div class="card"><h3>Sitemap and robots</h3><p>Generated for every site. Your own uploaded files are always kept. [CONFIRM: ships with the SEO release]</p></div>
+        <div class="card"><h3>Search and social tags</h3><p>Titles, descriptions, link previews and structured data. [CONFIRM: ships with the SEO release]</p></div>
         <div class="card"><h3>Analytics</h3><p>Visits, sign-ups and email results, only after visitors consent.</p></div>
       </div>
     </div>
@@ -130,7 +130,7 @@ const chips = [
     <div class="container">
       <h2>Try it on your own business.</h2>
       <div class="cta-row">
-        <a class="btn btn-accent" href={APP} rel="noopener noreferrer">Build my site</a>
+        <a class="btn btn-accent" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
         <a class="btn btn-ondark" href="/docs/">Read the guides</a>
       </div>
     </div>

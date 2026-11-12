@@ -10,7 +10,7 @@
     "test": "vitest run",
     "test:build": "npm run build:preview && vitest run tests/build",
     "check": "node scripts/check.mjs",
-    "package": "node scripts/package-zip.mjs"
+    "package": "npm run build && node scripts/check.mjs && node scripts/package-zip.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "0.4.8",

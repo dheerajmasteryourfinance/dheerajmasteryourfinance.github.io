@@ -6,8 +6,9 @@ import { loadPage, allRoutes } from './helpers.js';
 const DIST = join(process.cwd(), 'dist');
 
 // Known placeholder: the "See an example" CTA on Home points at #example, which
-// has no matching id yet. Allowed here on purpose so the launch step still has
-// to resolve it; any other unresolved href fails.
+// has no matching id yet. Allowed here on purpose: the data-placeholder
+// "[CONFIRM: example site]" on that link is what blocks launch (npm run build
+// fails on it); any other unresolved href fails.
 const ALLOWED_UNRESOLVED = new Set(['/#example']);
 
 function resolveTarget(pageRoute, href) {
