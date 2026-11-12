@@ -18,7 +18,42 @@ const isCurrent = (href: string) => current === href || current.startsWith(href)
         <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
       ))}
       <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Sign in</a></li>
-      <li><a class="btn btn-primary" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a></li>
     </ul>
+    <a class="btn btn-primary nav-cta" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
+    <details class="nav-menu" data-nav-menu>
+      <summary aria-controls="site-menu">
+        <span class="visually-hidden label-closed">Open menu</span>
+        <span class="visually-hidden label-open">Close menu</span>
+        <svg class="icon-closed" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M3 5h14M3 10h14M3 15h14" />
+        </svg>
+        <svg class="icon-open" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M5 5l10 10M15 5L5 15" />
+        </svg>
+      </summary>
+      <ul id="site-menu" class="nav-menu-panel">
+        {links.map((l) => (
+          <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
+        ))}
+        <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Sign in</a></li>
+      </ul>
+    </details>
   </div>
 </nav>
+
+<script>
+  // The menu works without JS (native <details>). This only adds Escape and click-outside to close.
+  const menu = document.querySelector('[data-nav-menu]');
+  if (menu instanceof HTMLDetailsElement) {
+    const summary = menu.querySelector('summary');
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !menu.open) return;
+      const hadFocus = menu.contains(document.activeElement);
+      menu.open = false;
+      if (hadFocus) summary?.focus();
+    });
+    document.addEventListener('click', (e) => {
+      if (menu.open && e.target instanceof Node && !menu.contains(e.target)) menu.open = false;
+    });
+  }
+</script>

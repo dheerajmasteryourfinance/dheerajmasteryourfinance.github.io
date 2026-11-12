@@ -16,6 +16,8 @@
   --white-glass: rgba(255, 255, 255, .92);
   --accent-hover: #F5BB22;
   --on-dark-line: rgba(200, 209, 227, .25);
+  --ink-raised: #1B2B4D;
+  --shadow-lift: 0 12px 32px rgba(15, 30, 61, .12);
 
   --font-heading: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-body: 'DM Sans Variable', system-ui, sans-serif;

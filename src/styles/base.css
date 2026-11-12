@@ -61,17 +61,44 @@ a:hover { color: var(--link-hover); }
   backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
+/* Mobile first: one row of logo, compact CTA and a native <details> menu.
+   The column gap is 8px so that on desktop the CTA sits 8px after "Sign in",
+   exactly as when it was the last item of the link list. */
 .site-nav .container {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; padding-top: 6px; padding-bottom: 6px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding-top: 6px; padding-bottom: 6px;
 }
 .site-nav ul { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; list-style: none; margin: 0; padding: 0; }
-.site-nav .nav-links { margin-left: auto; }
+.site-nav .nav-links { display: none; margin-left: auto; }
+.site-nav .nav-cta { margin-left: auto; padding: 0 16px; font-size: .9375rem; }
 .site-nav a:not(.btn):not(.logo) {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px;
   color: var(--ink); text-decoration: none; font-weight: 500;
 }
 .site-nav a:not(.btn):not(.logo):hover { color: var(--link-hover); text-decoration: underline; }
 .site-nav a[aria-current="page"] { font-weight: 700; box-shadow: inset 0 -3px 0 var(--accent); }
+
+.nav-menu > summary {
+  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  border: 1px solid var(--line-strong); border-radius: 10px; color: var(--ink); cursor: pointer; list-style: none;
+}
+.nav-menu > summary::-webkit-details-marker { display: none; }
+.nav-menu > summary:hover, .nav-menu[open] > summary { border-color: var(--ink); }
+.nav-menu[open] .label-closed, .nav-menu[open] .icon-closed,
+.nav-menu:not([open]) .label-open, .nav-menu:not([open]) .icon-open { display: none; }
+.site-nav .nav-menu-panel {
+  position: absolute; left: 0; right: 0; top: 100%;
+  display: grid; gap: 0; padding: 4px 20px 12px;
+  background: var(--white); border-bottom: 1px solid var(--line); box-shadow: var(--shadow-lift);
+}
+.nav-menu-panel li + li { border-top: 1px solid var(--line); }
+.site-nav .nav-menu-panel a:not(.btn) { display: flex; min-height: 48px; padding: 0 4px; }
+.site-nav .nav-menu-panel a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--accent); padding-left: 14px; }
+
+@media (min-width: 720px) {
+  .site-nav .nav-links { display: flex; }
+  .site-nav .nav-cta { margin-left: 0; padding: 0 22px; font-size: 1rem; }
+  .nav-menu { display: none; }
+}
 
 .logo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--ink); }
 .logo-mark {
