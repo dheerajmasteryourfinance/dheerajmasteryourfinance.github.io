@@ -1,7 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getEntry } from 'astro:content';
-import { APP_REGISTER, APP_PLACEHOLDER } from '../lib/links.js';
+import { Picture } from 'astro:assets';
+import { EARLY_ACCESS } from '../lib/links.js';
+import editorEdit from '../assets/screens/editor-edit.png';
+import editorAi from '../assets/screens/editor-ai.png';
+import siteDesktop from '../assets/screens/site-desktop.png';
+import siteMobile from '../assets/screens/site-mobile.png';
 const cards = [
   { href: '/docs/build-your-first-website/', tag: 'Getting started', slug: 'build-your-first-website', title: 'Build your first site', text: 'From brief to published, step by step.' },
   { href: '/docs/connect-your-domain/', tag: 'Domains', slug: 'connect-your-domain', title: 'Connect your domain', text: 'Point your address at your site.' },
@@ -29,8 +34,8 @@ const learn = await Promise.all(cards.map(async (c) => {
       <p class="lede" data-audience="business">Describe your business and get a complete site with forms, newsletters and search basics ready to go. No designer, no developer, no extra tools.</p>
       <p class="lede" data-audience="agency" hidden>Generate, edit and publish for every client from one account. Each client keeps their own domain, sender identity, audience and reports.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
-        <a class="btn btn-ghost" href="#example" data-placeholder="[CONFIRM: example site]">See an example</a>
+        <a class="btn btn-primary" href={EARLY_ACCESS}>Request early access</a>
+        <a class="btn btn-ghost" href="#examples">See an example</a>
       </div>
       <ul class="chips">
         <li>Optional double opt-in</li>
@@ -43,23 +48,62 @@ const learn = await Promise.all(cards.map(async (c) => {
   <section data-section="product" class="product" aria-label="Product preview">
     <div class="container">
       <div class="shot">
-        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i><span>sunrisebakery.com</span></div>
-        <div class="shot-body">
-          <ul class="shot-side" aria-label="Workspace areas">
-            <li>Site</li><li>Leads</li><li>Audience</li><li>Campaigns</li><li>Follow-up emails</li><li>Stats</li><li>Domain</li>
-          </ul>
-          <div class="shot-site">
-            <p class="shot-name">Sunrise Bakery</p>
-            <p>Fresh bread every morning. Subscribe weekly or order a cake for your next celebration.</p>
-            <p class="shot-btns"><span>Order a cake</span><span>Weekly bread</span></p>
-            <div class="shot-tiles" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <Picture
+          src={editorEdit}
+          formats={['avif']}
+          fallbackFormat="webp"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(min-width: 1120px) 1078px, calc(100vw - 42px)"
+          alt="The WebGen editor in Edit mode, showing the GreenLeaf Bakery homepage with its headline selected and the text toolbar above it"
+          loading="eager"
+          fetchpriority="high"
+          class="shot-img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="examples" data-section="examples">
+    <div class="container">
+      <h2>Built with WebGen</h2>
+      <div class="ex-grid">
+        <div class="ex-card ex-main">
+          <div class="ex-art ex-shots">
+            <Picture
+              src={siteDesktop}
+              formats={['avif']}
+              fallbackFormat="webp"
+              widths={[480, 800, 1200, 1600]}
+              sizes="(min-width: 1120px) 1030px, calc(100vw - 90px)"
+              alt="The GreenLeaf Bakery website on a desktop screen, opening on the problem it solves for its customers"
+              loading="lazy"
+              class="ex-desktop"
+            />
+            <Picture
+              src={siteMobile}
+              formats={['avif']}
+              fallbackFormat="webp"
+              widths={[160, 240, 360, 480]}
+              sizes="(min-width: 1120px) 220px, 22vw"
+              alt="The GreenLeaf Bakery website on a phone, with its headline and order button"
+              loading="lazy"
+              class="ex-phone"
+            />
           </div>
-          <div class="shot-chat">
-            <p class="shot-label">Ask for a change</p>
-            <p class="bubble you">Add a cake order form with a date picker.</p>
-            <p class="bubble bot">Done. Orders will arrive in Leads, and the person gets a confirmation email.</p>
-            <p class="shot-input">Describe a change…</p>
+          <div class="ex-text">
+            <p class="ex-label">Example site</p>
+            <h3>GreenLeaf Bakery</h3>
+            <p>Amsterdam bakery</p>
           </div>
+        </div>
+        <div class="ex-card">
+          <div class="ex-art ex-blank" aria-hidden="true"></div>
+          <div class="ex-text"><h3>[CONFIRM: customer site + permission]</h3></div>
+        </div>
+        <div class="ex-card">
+          <div class="ex-art ex-blank" aria-hidden="true"></div>
+          <div class="ex-text"><h3>[CONFIRM: customer site + permission]</h3></div>
         </div>
       </div>
     </div>
@@ -96,9 +140,21 @@ const learn = await Promise.all(cards.map(async (c) => {
       <h2>A website is the start. Growing from it is the point.</h2>
       <div class="bento">
         <div class="card wide">
-          <h3>Launch without a designer</h3>
-          <p>Pages, copy and layout in minutes. Then change anything by clicking it, or by asking in a sentence.</p>
-          <ul class="pills"><li>Home</li><li>About</li><li>Services</li><li>Contact</li><li>+ New page</li></ul>
+          <div class="wide-text">
+            <h3>Launch without a designer</h3>
+            <p>Pages, copy and layout in minutes. Then change anything by clicking it, or by asking in a sentence.</p>
+            <ul class="pills"><li>Home</li><li>About</li><li>Services</li><li>Contact</li><li>+ New page</li></ul>
+          </div>
+          <Picture
+            src={editorAi}
+            formats={['avif']}
+            fallbackFormat="webp"
+            widths={[480, 800, 1200]}
+            sizes="(min-width: 960px) 620px, 120vw"
+            alt="The AI assistant panel open beside the GreenLeaf Bakery homepage, ready for a request such as a new section"
+            loading="lazy"
+            class="wide-shot"
+          />
         </div>
         <div class="card card-dark">
           <h3>Stay in touch with every lead</h3>
@@ -224,7 +280,7 @@ const learn = await Promise.all(cards.map(async (c) => {
     <div class="container">
       <h2>See your site today.</h2>
       <p>Describe your business. We will build the first version.</p>
-      <a class="btn btn-accent" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
+      <a class="btn btn-accent" href={EARLY_ACCESS}>Request early access</a>
     </div>
   </section>
 </Base>
@@ -305,6 +361,19 @@ const learn = await Promise.all(cards.map(async (c) => {
   }
   .bento .wide h3, .bento .card-dark h3 { font-size: 1.5rem; letter-spacing: -.02em; }
   .bento .wide p { max-width: 440px; }
+  /* Wide card: text, then the AI assistant screenshot. From 960px they sit side by side and the
+     screenshot is cropped from the right so the assistant panel stays in view. */
+  .bento .wide { gap: 24px; }
+  .wide-text { display: flex; flex-direction: column; }
+  .wide-shot {
+    display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 100% 0;
+    border: 1px solid var(--line-strong); border-radius: 12px; background: var(--white); box-shadow: var(--shadow-lift);
+  }
+  @media (min-width: 960px) {
+    .bento .wide { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: stretch; }
+    .wide-text { min-height: 100%; }
+    .wide-shot { height: 100%; min-height: 240px; aspect-ratio: auto; }
+  }
   .card-dark { background: var(--ink); color: var(--on-dark); }
   .card-dark h3 { color: var(--white); }
   .pills, .seq { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -328,34 +397,26 @@ const learn = await Promise.all(cards.map(async (c) => {
   .product .shot { margin: 0 auto; border: 1px solid var(--line-strong); border-radius: 16px; overflow: hidden; background: var(--white); box-shadow: var(--shadow-lift); }
   .shot-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--line); }
   .shot-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); }
-  .shot-bar span { margin-left: 12px; font-size: .8125rem; color: var(--muted); }
-  /* Product shot, mobile first: preview then chat. The app sidebar appears from 720px,
-     and from 960px the site preview is the widest of three columns. */
-  .shot-body { display: grid; grid-template-columns: minmax(0, 1fr); }
-  .shot-body > * { padding: 20px; margin: 0; }
-  .shot-side { list-style: none; background: var(--surface); display: none; gap: 6px; align-content: start; font-size: .9375rem; }
+  /* The real editor screenshot, at its own aspect ratio (width/height attributes reserve the space). */
+  .shot-img { display: block; width: 100%; height: auto; }
+
+  /* Built with WebGen: the example site full width, then the two customer slots side by side. */
+  .ex-grid { display: grid; gap: 20px; margin-top: 32px; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 720px) {
-    .shot-body { grid-template-columns: 160px minmax(0, 1fr); }
-    .shot-side { display: grid; }
-    .shot-chat { grid-column: 1 / -1; border-top: 1px solid var(--line); }
+    .ex-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ex-main { grid-column: 1 / -1; }
   }
-  @media (min-width: 960px) {
-    .shot-body { grid-template-columns: 180px minmax(0, 1fr) 280px; }
-    .shot-site { padding: 32px; min-height: 380px; }
-    .shot-chat { grid-column: auto; border-top: 0; border-left: 1px solid var(--line); }
+  .ex-card { background: var(--surface); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+  .ex-text h3 { margin: 0; }
+  .ex-text p { margin: 4px 0 0; color: var(--muted); }
+  .ex-text .ex-label { margin: 0 0 6px; font: 700 .75rem/1.2 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--link); }
+  .ex-shots { position: relative; padding-bottom: 24px; }
+  .ex-desktop { display: block; width: 100%; height: auto; border: 1px solid var(--line-strong); border-radius: 12px; box-shadow: var(--shadow-lift); }
+  /* The phone overlaps the desktop shot's bottom-right corner, framed like a handset. */
+  .ex-phone {
+    position: absolute; right: 4%; bottom: 0; width: 22%; height: auto;
+    border: 4px solid var(--ink); border-radius: 18px; background: var(--ink); box-shadow: var(--shadow-lift);
   }
-  .shot-name { font: 700 clamp(1.75rem, 4vw, 2.25rem)/1.1 var(--font-heading); letter-spacing: -.03em; color: var(--ink); margin-bottom: 8px; }
-  .shot-site p:not(.shot-name) { max-width: 400px; }
-  .shot-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-  .shot-btns span { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--ink); background: var(--white); color: var(--ink); font-weight: 600; font-size: .9375rem; }
-  .shot-btns span:first-child { background: var(--ink); color: var(--white); }
-  .shot-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 24px; }
-  .shot-tiles span { height: 88px; border-radius: 12px; background: var(--tint); }
-  .shot-tiles span:nth-child(2) { background: var(--accent); }
-  @media (min-width: 960px) { .shot-tiles span { height: 110px; } }
-  .shot-chat { background: var(--tint); font-size: .9375rem; }
-  .shot-label { font-weight: 700; color: var(--ink); }
-  .bubble { padding: 10px 12px; border-radius: 12px; background: var(--white); }
-  .bubble.you { background: var(--ink); color: var(--white); }
-  .shot-input { padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--white); color: var(--muted); }
+  @media (min-width: 720px) { .ex-phone { border-width: 6px; border-radius: 26px; } }
+  .ex-blank { aspect-ratio: 16 / 10; border-radius: 12px; background: var(--tint); border: 1px dashed var(--line-strong); }
 </style>

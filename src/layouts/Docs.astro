@@ -195,6 +195,10 @@ const dateText = updated.toLocaleDateString('en-GB', { day: 'numeric', month: 'l
   .prose :global(.callout-tip) { background: var(--tint); border-color: var(--tint); }
   .prose :global(.callout-note) { border-color: var(--line-strong); background: var(--white); }
   .prose :global(.shot) { margin-top: 20px; min-height: 200px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--muted); font-size: .875rem; text-align: center; padding: 16px; }
+  /* Screenshots: Markdown images, optimised by Astro. The caption is the italic line right after. */
+  .prose :global(p:has(> img)) { margin-top: 20px; }
+  .prose :global(img) { display: block; width: 100%; height: auto; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--white); }
+  .prose :global(p:has(> img) + p) { margin-top: 8px; font-size: .875rem; color: var(--muted); }
   .prose :global(.next-grid) { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 16px; }
   .prose :global(.next-card) { display: block; min-height: 44px; border: 1px solid var(--line); border-radius: 14px; padding: 18px; color: var(--ink); text-decoration: none; }
   .prose :global(.next-card) { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }

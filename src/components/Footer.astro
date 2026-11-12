@@ -1,5 +1,7 @@
 ---
 import { APP_LOGIN, APP_PLACEHOLDER } from '../lib/links.js';
+import { COPY, COMPANY } from '../lib/copy.js';
+const facts = [COMPANY.legalName, COMPANY.kvk, COMPANY.btw, COMPANY.address, COMPANY.phone];
 ---
 <footer class="site-footer">
   <div class="container">
@@ -32,6 +34,11 @@ import { APP_LOGIN, APP_PLACEHOLDER } from '../lib/links.js';
         </ul>
       </div>
     </div>
-    <p class="footer-legal">[LEGAL ENTITY NAME] · [POSTAL ADDRESS] · [SUPPORT EMAIL]</p>
+    <div class="footer-legal">
+      <ul class="footer-facts" aria-label={COPY.footerFactsLabel}>
+        {facts.map((f) => <li>{f}</li>)}
+      </ul>
+      <p class="footer-made">{COPY.madeIn}</p>
+    </div>
   </div>
 </footer>

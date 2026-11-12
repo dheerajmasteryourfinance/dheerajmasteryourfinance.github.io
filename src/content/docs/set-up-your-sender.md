@@ -19,6 +19,10 @@ Open your site, click **Manage**, then the **Sender** tab. It is titled **Sendin
 
 Under **Add a domain you own**, type the part of your email address after the @, for example `yourbusiness.com`, and click **Add domain**. You can add up to 5 domains.
 
+![The Sender tab, titled Sending address, with the Add a domain you own box and the Add domain button](../../assets/screens/sender.png)
+
+*The Sender tab before a domain is added.*
+
 ## 3. Prove the domain is yours
 
 WebGen shows one record to add where you manage your domain's DNS. Add it exactly as shown, then click **Check DNS**.

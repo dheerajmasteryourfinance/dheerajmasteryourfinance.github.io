@@ -42,8 +42,8 @@ describe('mobile header menu', () => {
       expect(inMenu.map((a) => a.getAttribute('href'))).toEqual(desktop.map((a) => a.getAttribute('href')));
     });
 
-    it('keeps one Build my site CTA in the nav, outside the menu', () => {
-      const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === 'Build my site');
+    it('keeps one Request early access CTA in the nav, outside the menu', () => {
+      const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === 'Request early access');
       expect(ctas).toHaveLength(1);
       expect(menu.contains(ctas[0])).toBe(false);
     });
@@ -78,23 +78,16 @@ describe('docs mobile menu', () => {
 
 describe('home product shot', () => {
   const doc = loadPage('/');
-  const body = doc.querySelector('main > section[data-section="product"] .shot-body');
+  const shot = doc.querySelector('main > section[data-section="product"] .shot');
 
-  it('is sidebar, site preview, chat panel in that order', () => {
-    expect([...body.children].map((c) => c.className.split(' ')[0])).toEqual(['shot-side', 'shot-site', 'shot-chat']);
+  it('frames the editor screenshot in the browser-window chrome', () => {
+    expect(shot.querySelector('.shot-bar')?.getAttribute('aria-hidden')).toBe('true');
+    expect(shot.querySelector('picture img')).toBeTruthy();
   });
 
-  it('gives the preview a row of 3 decorative image tiles', () => {
-    const tiles = body.querySelector('.shot-site .shot-tiles');
-    expect(tiles?.getAttribute('aria-hidden')).toBe('true');
-    expect(tiles.children).toHaveLength(3);
-  });
-
-  it('makes the preview the widest column at 960px and hides the sidebar on phones', () => {
+  it('uses the shadow token on the frame', () => {
     const css = pageCss(doc);
-    // The minifier may print the query as (min-width:960px) or (width>=960px).
-    expect(css).toMatch(/@media\((min-width:|width>=)960px\)\{[^@]*\.shot-body\{[^}]*grid-template-columns:180pxminmax\(0,1fr\)280px/);
-    expect(css).toMatch(/\.shot-side\{[^}]*display:none/);
+    expect(css).toMatch(/\.product\.shot\{[^}]*box-shadow:var\(--shadow-lift\)/);
   });
 });
 

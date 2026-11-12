@@ -50,4 +50,20 @@ describe('company page', () => {
     expect(cards.length).toBeGreaterThan(0);
     expect(cards[0].querySelector('a[href="/email/"]')).toBeTruthy();
   });
+
+  it('Operated by shows the legal entity, KvK and BTW placeholders', () => {
+    const facts = [...doc.querySelectorAll('main dl.facts > div')];
+    const op = facts.find((d) => d.querySelector('dt').textContent.trim() === 'Operated by');
+    const t = op.querySelector('dd').textContent;
+    expect(t).toContain('[LEGAL ENTITY NAME]');
+    expect(t).toContain('KvK [KVK NUMBER]');
+    expect(t).toContain('BTW [BTW NUMBER]');
+    expect(t).not.toContain('[COMPANY NUMBER]');
+  });
+
+  it('has a phone contact card', () => {
+    const cards = [...contact.querySelectorAll('.card')].filter((c) => c.querySelector('h3')?.textContent.trim() === 'Phone');
+    expect(cards).toHaveLength(1);
+    expect(cards[0].textContent).toContain('[PHONE]');
+  });
 });

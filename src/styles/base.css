@@ -94,6 +94,16 @@ a:hover { color: var(--link-hover); }
 .site-nav .nav-menu-panel a:not(.btn) { display: flex; min-height: 48px; padding: 0 4px; }
 .site-nav .nav-menu-panel a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--accent); padding-left: 14px; }
 
+/* Under 420px the full CTA label would push the menu button onto a second row:
+   show only "Early access" there. The lead word stays in the accessible name. */
+@media (max-width: 419.98px) {
+  .nav-cta .cta-lead {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .nav-cta .cta-rest { display: inline-block; }
+  .nav-cta .cta-rest::first-letter { text-transform: uppercase; }
+}
 @media (min-width: 720px) {
   .site-nav .nav-links { display: flex; }
   .site-nav .nav-cta { margin-left: 0; padding: 0 22px; font-size: 1rem; }
@@ -115,4 +125,11 @@ a:hover { color: var(--link-hover); }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer a { color: var(--on-dark-2); display: inline-flex; align-items: center; min-height: 44px; }
 .site-footer a:hover { color: var(--white); }
-.footer-legal { border-top: 1px solid var(--on-dark-line); margin-top: 32px; padding-top: 20px; font-size: .9rem; }
+.footer-legal {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  border-top: 1px solid var(--on-dark-line); margin-top: 32px; padding-top: 20px; font-size: .9rem;
+}
+/* The facts wrap as whole items; the dot separator sits before every item but the first. */
+.site-footer .footer-facts { display: flex; flex-wrap: wrap; gap: 4px 0; }
+.footer-facts li + li::before { content: "\00B7"; padding: 0 8px; color: var(--on-dark); }
+.footer-made { margin: 0; color: var(--on-dark-2); }

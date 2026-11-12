@@ -54,6 +54,10 @@ To send campaigns or follow-up emails to the people who fill in a form, they mus
 
 Everyone who fills in a form, or signs up for your newsletter, also appears under **Audience**. You can search by name or email, filter by tag, add people by hand with **Add contact**, and download the list with **Export CSV**. Each person has a page with their details, tags and activity. Use **View in Leads** there to jump to their messages.
 
+![The Audience tab of a new site, with counts for subscribed, pending and unsubscribed contacts, a search box and the message No contacts yet](../../assets/screens/manage-audience.png)
+
+*The Audience tab before anyone has signed up.*
+
 ## 7. Delete a submission
 
 Click **Delete** on a lead to remove it. This cannot be undone.

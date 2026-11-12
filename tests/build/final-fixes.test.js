@@ -4,10 +4,10 @@ import { join } from 'node:path';
 import { loadPage, allRoutes } from './helpers.js';
 
 const DIST = join(process.cwd(), 'dist');
-const APP_LABELS = new Set(['Build my site', 'Sign in', 'Open the app']);
+const APP_LABELS = new Set(['Sign in', 'Open the app']);
 
 describe('app links are gated by a placeholder', () => {
-  it('every Build my site / Sign in / Open the app link carries data-placeholder', () => {
+  it('every Sign in / Open the app link carries data-placeholder', () => {
     const bad = [];
     let seen = 0;
     for (const route of allRoutes()) {
@@ -23,9 +23,32 @@ describe('app links are gated by a placeholder', () => {
     expect(bad).toEqual([]);
   });
 
-  it('See an example is gated', () => {
+  it('See an example points at the examples section and is no longer gated', () => {
     const a = [...loadPage('/').querySelectorAll('a')].find((x) => x.textContent.trim() === 'See an example');
-    expect(a.getAttribute('data-placeholder')).toBe('[CONFIRM: example site]');
+    expect(a.getAttribute('href')).toBe('#examples');
+    expect(a.hasAttribute('data-placeholder')).toBe(false);
+  });
+});
+
+describe('early access is the primary CTA everywhere', () => {
+  it('no page says Build my site', () => {
+    const hits = allRoutes().filter((r) => /Build my site/.test(loadPage(r).body.textContent));
+    expect(hits).toEqual([]);
+  });
+
+  it('every Request early access link is internal, ungated and goes to /early-access/', () => {
+    let seen = 0;
+    for (const route of allRoutes()) {
+      for (const a of loadPage(route).querySelectorAll('a')) {
+        if (a.textContent.trim() !== 'Request early access') continue;
+        seen += 1;
+        expect(a.getAttribute('href'), route).toBe('/early-access/');
+        expect(a.hasAttribute('data-placeholder'), route).toBe(false);
+        expect(a.hasAttribute('rel'), route).toBe(false);
+      }
+    }
+    // One in the nav of every page, plus Home hero, Home closing CTA and Features CTA.
+    expect(seen).toBe(allRoutes().length + 3);
   });
 });
 

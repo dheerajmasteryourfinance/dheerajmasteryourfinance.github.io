@@ -22,6 +22,10 @@ The brief asks about your business the way a copywriter would. The answers becom
 - Why customers can trust you, and the main action on your site
 - Your plan in three steps, your languages and, if you like, a preferred style (optional)
 
+![The New website brief on its first step, About your business, with fields for the business name and the ideal customer](../../assets/screens/new-website-brief.png)
+
+*The brief has four steps, starting with About your business.*
+
 <div class="callout callout-tip"><strong>Tip:</strong> questions marked optional can be left blank. Short, honest answers work better than long ones.</div>
 
 ## 3. Add photos

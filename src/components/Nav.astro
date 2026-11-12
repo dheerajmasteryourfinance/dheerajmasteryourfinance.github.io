@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
-import { APP_LOGIN, APP_REGISTER, APP_PLACEHOLDER } from '../lib/links.js';
+import { APP_LOGIN, APP_PLACEHOLDER, EARLY_ACCESS } from '../lib/links.js';
+import { COPY } from '../lib/copy.js';
 interface Props { current: string }
 const { current } = Astro.props;
 const links = [
@@ -19,7 +20,7 @@ const isCurrent = (href: string) => current === href || current.startsWith(href)
       ))}
       <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Sign in</a></li>
     </ul>
-    <a class="btn btn-primary nav-cta" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
+    <a class="btn btn-primary nav-cta" href={EARLY_ACCESS}><span><span class="cta-lead">{COPY.ctaEarlyAccessLead}</span><span class="cta-rest">{COPY.ctaEarlyAccessRest}</span></span></a>
     <details class="nav-menu" data-nav-menu>
       <summary aria-controls="site-menu">
         <span class="visually-hidden label-closed">Open menu</span>

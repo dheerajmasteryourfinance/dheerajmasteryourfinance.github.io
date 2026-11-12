@@ -1,6 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { APP_REGISTER, APP_PLACEHOLDER } from '../../lib/links.js';
+import { Picture } from 'astro:assets';
+import { EARLY_ACCESS } from '../../lib/links.js';
+import newWebsiteBrief from '../../assets/screens/new-website-brief.png';
+import editorEdit from '../../assets/screens/editor-edit.png';
+import editorMobile from '../../assets/screens/editor-mobile.png';
 const chips = [
   { id: 'build', label: 'Build' },
   { id: 'leads', label: 'Forms and audience' },
@@ -37,14 +41,44 @@ const chips = [
           <li>Import an existing site from a ZIP file</li>
         </ul>
       </div>
-      <div class="mock" aria-hidden="true">
-        <div class="panel">
-          <p class="mock-label">Your brief</p>
-          <p>A family physiotherapy clinic in Leeds. Sports injuries, back pain, online booking.</p>
-          <ul class="pills"><li>Home</li><li>Treatments</li><li>Team</li><li>Book</li></ul>
-        </div>
-        <div class="tiles"><i></i><i></i><i></i></div>
+      <div class="shots">
+        <Picture
+          src={newWebsiteBrief}
+          formats={['avif']}
+          fallbackFormat="webp"
+          widths={[320, 480, 640, 920]}
+          sizes="(min-width: 760px) 330px, 62vw"
+          alt="The New website brief, first step About your business, asking for the business name and the ideal customer"
+          loading="lazy"
+          class="shot shot-a"
+        />
+        <Picture
+          src={editorEdit}
+          formats={['avif']}
+          fallbackFormat="webp"
+          widths={[400, 640, 800, 1200]}
+          sizes="(min-width: 760px) 420px, 80vw"
+          alt="The finished site open in the editor, with its headline selected for editing"
+          loading="lazy"
+          class="shot shot-b"
+        />
       </div>
+    </div>
+    <div class="container split phone-row">
+      <div>
+        <h3>Looks right on every phone</h3>
+        <p class="copy">Switch the editor to the phone view to check every page before you publish.</p>
+      </div>
+      <Picture
+        src={editorMobile}
+        formats={['avif']}
+        fallbackFormat="webp"
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 760px) 820px, 160vw"
+        alt="The editor's phone preview, showing the bakery homepage at phone width"
+        loading="lazy"
+        class="shot shot-phone"
+      />
     </div>
   </section>
 
@@ -130,7 +164,7 @@ const chips = [
     <div class="container">
       <h2>Try it on your own business.</h2>
       <div class="cta-row">
-        <a class="btn btn-accent" href={APP_REGISTER} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Build my site</a>
+        <a class="btn btn-accent" href={EARLY_ACCESS}>Request early access</a>
         <a class="btn btn-ondark" href="/docs/">Read the guides</a>
       </div>
     </div>
@@ -164,11 +198,15 @@ const chips = [
   .dark .mock-label { color: var(--on-dark); }
   .panel { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 20px; font-size: .9375rem; }
   .panel p:last-child { margin-bottom: 0; }
-  .pills { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .pills li { background: var(--tint); color: var(--link); border-radius: 999px; padding: 6px 12px; font-size: .8125rem; font-weight: 600; }
-  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
-  .tiles i { height: 100px; border-radius: 12px; background: var(--tint); border: 1px solid var(--line); }
-  .tiles i:nth-child(2) { background: var(--line); }
+  /* Build: the brief screenshot, overlapped at the lower right by the editor screenshot. */
+  .shots { position: relative; padding-bottom: 22%; }
+  .shot { display: block; height: auto; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--white); box-shadow: var(--shadow-lift); }
+  .shot-a { width: 62%; }
+  .shot-b { position: absolute; right: 0; bottom: 0; width: 80%; }
+  .phone-row { margin-top: 64px; }
+  .phone-row h3 { font-size: 1.5rem; }
+  /* The phone preview is centred in a wide frame; crop to the middle so the phone reads at any width. */
+  .shot-phone { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 0; }
 
   .table { padding: 0; overflow: hidden; }
   .tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }

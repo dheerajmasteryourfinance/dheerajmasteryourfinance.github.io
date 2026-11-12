@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+// The form keeps the field names the app's ZIP import recognises (name, email, message),
+// so on upload it is wired to the platform's form handler without an AI call.
+const types = ['Business', 'Agency', 'Other'];
+const steps = [
+  { title: 'We review your request', text: 'A person reads every request.' },
+  { title: 'We email you an invite', text: 'When there is room, you get a link to create your account.' },
+  { title: 'You build your site', text: 'Answer a short brief and WebGen builds the first version.' },
+];
+---
+<Base
+  title="Request early access to WebGen"
+  description="WebGen is opening to a limited number of businesses. Request early access and we will email you an invite."
+  path="/early-access/"
+>
+  <section data-section="pitch" class="ea-pitch">
+    <div class="container narrow">
+      <p class="eyebrow">Early access</p>
+      <h1>Request early access</h1>
+      <p class="lede">WebGen is opening to a limited number of businesses. We invite them in small groups, so every new site gets our attention. Tell us about yours below.</p>
+    </div>
+  </section>
+
+  <section data-section="form" class="ea-form">
+    <div class="container narrow">
+      <div class="card formcard">
+        <form method="post">
+          <div class="field">
+            <label for="ea-name">Name</label>
+            <input id="ea-name" type="text" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="ea-email">Email</label>
+            <input id="ea-email" type="email" name="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="ea-company">Business name (optional)</label>
+            <input id="ea-company" type="text" name="company" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="ea-type">Type</label>
+            <select id="ea-type" name="type">
+              {types.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="ea-message">What would you like to build?</label>
+            <textarea id="ea-message" name="message" required rows="5"></textarea>
+          </div>
+          <p class="note">We use your details only to handle your request. See our <a href="/privacy/">privacy policy</a>.</p>
+          <button class="btn btn-primary" type="submit">Request access</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="next" class="band">
+    <div class="container narrow">
+      <h2>What happens next</h2>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="card"><span class="num">{String(i + 1).padStart(2, '0')}</span><h3>{s.title}</h3><p>{s.text}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* <main> lives in the Base layout, so it needs :global() for these rules to match. */
+  :global(main) > section { margin-top: 48px; }
+  :global(main) > section.ea-pitch { margin-top: 56px; }
+  :global(main) > section.band { margin-top: 72px; background: var(--surface); padding: 56px 0; }
+  .narrow { max-width: 760px; }
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--link); margin: 0 0 12px; display: block; }
+  .ea-pitch h1 { letter-spacing: -.03em; }
+  .lede { font-size: 1.1875rem; color: var(--muted); margin: 0; }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; }
+  .formcard { padding: 28px; }
+  .field { display: grid; gap: 6px; margin-bottom: 16px; }
+  .field label { font-weight: 600; color: var(--ink); }
+  .field input, .field select, .field textarea {
+    width: 100%; min-height: 44px; padding: 10px 12px;
+    border: 1px solid var(--line-strong); border-radius: 10px;
+    font: 400 1rem/1.4 var(--font-body); color: var(--body); background: var(--white);
+  }
+  .field textarea { resize: vertical; }
+  .note { color: var(--muted); font-size: .9375rem; }
+  .steps { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+  .num { font: 800 1.5rem/1 var(--font-heading); color: var(--link); display: block; margin-bottom: 12px; }
+</style>

@@ -34,7 +34,9 @@ Stuck for words? Click **Write with AI**, describe what the email is about under
 
 <div class="callout callout-note"><strong>Note:</strong> pictures only show in the email once your site is published.</div>
 
-<div class="shot">[SCREENSHOT: New campaign with the email builder]</div>
+![The Campaigns tab with the sending schedule, the confirm-email option and a New campaign with Subject, Add block, Write with AI and Who gets it](../../assets/screens/campaign-settings.png)
+
+*A new campaign: subject, email content and who gets it.*
 
 ## 5. Choose who gets it
 

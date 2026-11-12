@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { COMPANY } from '../../lib/copy.js';
 const topics = [
   'A question about WebGen',
   'Help with my account',
@@ -24,7 +25,7 @@ const topics = [
         <dl class="facts">
           <div><dt>Founded</dt><dd>[YEAR]</dd></div>
           <div><dt>Based in</dt><dd>[CITY]</dd></div>
-          <div><dt>Operated by</dt><dd>[LEGAL ENTITY NAME]<br />[COMPANY NUMBER]</dd></div>
+          <div><dt>Operated by</dt><dd>{COMPANY.legalName}<br />{COMPANY.kvk}<br />{COMPANY.btw}</dd></div>
         </dl>
       </div>
     </div>
@@ -54,6 +55,7 @@ const topics = [
             <p>[ABUSE EMAIL]</p>
             <p><a class="inline" href="/email/">Got an email you did not expect? →</a></p>
           </div>
+          <div class="card"><h3>Phone</h3><p>{COMPANY.phone}</p></div>
           <div class="card"><h3>Postal address</h3><p>[LEGAL ENTITY NAME]<br />[POSTAL ADDRESS]</p></div>
         </div>
       </div>

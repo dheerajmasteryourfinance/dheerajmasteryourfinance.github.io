@@ -37,13 +37,25 @@ Something went wrong? Open **History** to see earlier versions. Click **Restore*
 
 Switch between **Desktop**, **Tablet** and **Phone** to check how your site looks at every size.
 
+![The editor in Phone view, showing the homepage at phone width in the middle of the screen](../../assets/screens/editor-mobile.png)
+
+*Phone view: the page as it looks on a phone.*
+
 ## 7. Ask the AI
 
 Click **Ask the AI** for bigger changes, such as a new section or page, or a different feel for the whole site. Type what you want in plain words, for example "add a frequently asked questions section". If a change does not work, your website is left as it was.
 
+![The AI assistant panel open on the right of the editor, with a box to type a request and a Send button](../../assets/screens/editor-ai.png)
+
+*The AI assistant, opened with Ask the AI.*
+
 ## 8. Save
 
 Changes appear straight away in the preview, but they are only kept when you click **Save**. **Discard changes** throws away what you have not saved.
+
+![The editor toolbar showing Unsaved changes, with the Save button next to Publish](../../assets/screens/editor-unsaved.png)
+
+*Unsaved changes: click Save to keep them.*
 
 ## 9. Publish
 
