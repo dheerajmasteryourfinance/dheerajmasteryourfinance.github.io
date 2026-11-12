@@ -87,3 +87,23 @@ describe('404 page', () => {
     expect(doc.querySelector('meta[name="robots"]').getAttribute('content')).toBe('noindex');
   });
 });
+
+describe('JSON-LD escape is applied', () => {
+  it('component calls safeJson and the built script equals safeJson of its data', async () => {
+    const { safeJson } = await import('../../src/lib/json-ld.mjs');
+    const src = readFileSync(join(process.cwd(), 'src/components/OrgJsonLd.astro'), 'utf8');
+    expect(src).toMatch(/const json = safeJson\(data\)/);
+    const html = readFileSync(join(DIST, 'index.html'), 'utf8');
+    const m = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    expect(m).not.toBeNull();
+    expect(m[1]).not.toContain('<');
+    expect(m[1]).toBe(safeJson(JSON.parse(m[1])));
+  });
+});
+
+describe('no one-click claim', () => {
+  it('no built page says one-click', () => {
+    const hits = allRoutes().filter((r) => /one-click/i.test(readFileSync(join(DIST, r.endsWith('.html') ? r : `${r}index.html`), 'utf8')));
+    expect(hits).toEqual([]);
+  });
+});
