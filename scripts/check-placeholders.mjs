@@ -3,7 +3,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Match condition is the brief pattern \[[A-Z]+[\] :]; the reported token then runs to the closing bracket.
-const PLACEHOLDER = /\[[A-Z]+(?:\]|[ :][^\]\[]*\]?)/g;
+// Hyphenated words count too ([KVK-NUMMER], [E-MAILADRES SUPPORT]); a dangling hyphen does not.
+const PLACEHOLDER = /\[[A-Z]+(?:-[A-Z]+)*(?:\]|[ :][^\]\[]*\]?)/g;
 
 /** Return every placeholder-looking token found in text. */
 export function findPlaceholders(text) {

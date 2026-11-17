@@ -34,13 +34,18 @@ function excerptNode(excerpt) {
   return p;
 }
 
-/** @param {HTMLElement} container @param {string} query @param {{url:string,title:string,excerpt:string}[]} results */
-export function renderResults(container, query, results) {
+const EMPTY_EN = (q) => `No results for “${q}”`;
+
+/**
+ * @param {HTMLElement} container @param {string} query @param {{url:string,title:string,excerpt:string}[]} results
+ * @param {{ empty?: (q: string) => string }} [opts] empty: the no-results line in the page language
+ */
+export function renderResults(container, query, results, opts = {}) {
   container.replaceChildren();
   if (!results || results.length === 0) {
     const p = document.createElement('p');
     p.className = 'search-empty';
-    p.textContent = `No results for “${query}”`;
+    p.textContent = (opts.empty ?? EMPTY_EN)(query);
     container.append(p);
     return;
   }
@@ -70,18 +75,25 @@ export function bindShortcut(input, doc = document) {
   });
 }
 
-export function initDocsSearch(input, container) {
+/**
+ * @param {HTMLInputElement} input @param {HTMLElement} container
+ * @param {{ lang?: string, load?: () => Promise<any>, delay?: number, empty?: (q: string) => string }} [opts]
+ *   lang: only results whose page carries data-pagefind-filter="lang:<lang>"; load: Pagefind loader (tests).
+ * @returns {() => Promise<void>} run the search for the current input value
+ */
+export function initDocsSearch(input, container, opts = {}) {
   let pagefind;
   let latest = 0;
   let timer;
+  const delay = opts.delay ?? 150;
 
-  const load = async () => {
+  const load = opts.load ?? (async () => {
     if (!pagefind) {
       const url = '/pagefind/pagefind.js';
       pagefind = await import(/* @vite-ignore */ url);
     }
     return pagefind;
-  };
+  });
 
   const run = async () => {
     const query = input.value.trim();
@@ -95,19 +107,19 @@ export function initDocsSearch(input, container) {
     let results = [];
     try {
       const pf = await load();
-      const found = await pf.search(query);
+      const found = opts.lang ? await pf.search(query, { filters: { lang: opts.lang } }) : await pf.search(query);
       const top = await Promise.all(found.results.slice(0, 8).map((r) => r.data()));
       results = top.map((d) => ({ url: d.url, title: d.meta?.title ?? d.url, excerpt: d.excerpt }));
     } catch {
       results = [];
     }
     if (ticket !== latest) return;
-    renderResults(container, query, results);
+    renderResults(container, query, results, { empty: opts.empty });
   };
 
   input.addEventListener('input', () => {
     clearTimeout(timer);
-    timer = setTimeout(run, 150);
+    timer = setTimeout(run, delay);
   });
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -116,4 +128,5 @@ export function initDocsSearch(input, container) {
     }
   });
   bindShortcut(input);
+  return run;
 }
