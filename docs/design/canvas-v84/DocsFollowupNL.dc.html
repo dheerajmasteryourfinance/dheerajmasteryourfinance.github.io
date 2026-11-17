@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>WebGen Handleidingen: Vervolgmails</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif}
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A}
+html{scroll-behavior:smooth}
+a,button,summary{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .25s ease,transform .25s ease}
+a[href]:hover{transform:translateY(-1px)}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+a[href]{transition:none}
+a[href]:hover{transform:none}
+}
+
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes drift2{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(12px) rotate(1deg)}}
+@keyframes blobmove{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-30px,24px) scale(.94)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(64,224,245,.55)}70%{box-shadow:0 0 0 16px rgba(64,224,245,0)}100%{box-shadow:0 0 0 0 rgba(64,224,245,0)}}
+.drift{animation:drift 6s ease-in-out infinite}
+.drift2{animation:drift2 7.5s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-1;animation:blobmove 16s ease-in-out infinite}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.pulse{animation:ring 2.4s ease-out infinite}
+.fchip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;padding:10px 14px;box-shadow:0 18px 40px rgba(15,30,61,0.16);font-size:14px;font-weight:600;color:#0F1E3D}
+@media (max-width:900px){.fchip{display:none}.blob{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2,.blob,.marq-track,.pulse{animation:none}.marq{overflow-x:auto}}
+
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:none}
+::view-transition-new(root){animation:vtin .18s ease both}
+@keyframes vtin{from{opacity:.88}}
+html{background:#FFFFFF}
+@keyframes pagein{from{opacity:.9}to{opacity:1}}
+body{animation:pagein .2s ease both}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}body{animation:none}}
+
+h2[id]{scroll-margin-top:96px}
+.toc{scroll-target-group:auto}
+.toc a{transition:color .2s ease,border-color .2s ease}
+.toc a:target-current,.toc a.cur{color:#1D4ED8!important;font-weight:600!important}
+
+/* responsive navigation */
+.burger{display:none;position:relative;width:44px;height:44px;border:1px solid #E3E8F0;border-radius:12px;background:#FFFFFF;cursor:pointer;align-items:center;justify-content:center;flex:none;z-index:60}
+.burger input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.burger i{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#0F1E3D;transition:transform .25s ease,opacity .2s ease,top .25s ease}
+.burger i:nth-of-type(1){top:15px}.burger i:nth-of-type(2){top:21px}.burger i:nth-of-type(3){top:27px}
+.burger:has(input:focus-visible){outline:2px solid #1D4ED8;outline-offset:2px}
+.burger:has(input:checked) i:nth-of-type(1){top:21px;transform:rotate(45deg)}
+.burger:has(input:checked) i:nth-of-type(2){opacity:0}
+.burger:has(input:checked) i:nth-of-type(3){top:21px;transform:rotate(-45deg)}
+.navpanel{display:contents}
+.navhead{display:none}
+.navback{display:none}
+@media (max-width:900px){
+  [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#FFFFFF!important}
+  .burger{display:inline-flex}
+  .navpanel{display:flex;flex-direction:column;gap:0;position:fixed;top:0;right:0;bottom:0;width:min(88vw,360px);box-sizing:border-box;padding:14px 24px 28px;background:linear-gradient(180deg,#F3F7FF 0%,#FFFFFF 220px);border-radius:24px 0 0 24px;box-shadow:-24px 0 60px rgba(15,30,61,.24);z-index:50;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s}
+  :root:has(.navchk:checked) .navpanel{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .navback{display:block;position:fixed;inset:0;background:rgba(15,30,61,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  :root:has(.navchk:checked) .navback{opacity:1;pointer-events:auto}
+  .navhead{display:flex;align-items:center;height:44px;padding-right:56px;margin-bottom:20px}
+  .navhead a{display:flex;align-items:center;gap:10px;color:#0F1E3D;font-weight:700;font-size:19px;letter-spacing:-0.02em}
+  .navpanel nav.navlinks{flex-direction:column!important;flex-wrap:nowrap!important;gap:4px!important;font-size:20px!important;font-weight:600!important}
+  .navpanel nav.navlinks a{display:flex;align-items:center;justify-content:space-between;padding:16px 14px!important;border-radius:14px;color:#0F1E3D!important}
+  .navpanel nav.navlinks a::after{content:"";width:8px;height:8px;border-top:2px solid #9AA6BD;border-right:2px solid #9AA6BD;transform:rotate(45deg);margin-right:4px}
+  .navpanel nav.navlinks a:hover{background:#EAF1FF}
+  .navpanel .navactions{flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin-top:auto;padding-top:24px;border-top:1px solid #E3E8F0}
+  .navpanel .navactions [role="group"]{display:flex!important;width:100%;box-sizing:border-box;margin:0!important}
+  .navpanel .navactions [role="group"]>*{flex:1;text-align:center;padding:10px 12px!important;font-size:15px}
+  .navpanel .navactions>a{text-align:center;padding:14px 18px!important;font-size:16px!important;border-radius:999px}
+  .navpanel .navactions>a:not([href^="Early"]){border:1px solid #CBD3E1;color:#0F1E3D!important}
+  .navpanel .navactions>a[href^="Early"]{box-shadow:0 10px 24px rgba(15,30,61,.22)}
+  .fchip{display:none}
+}
+@media (prefers-reduced-motion:reduce){.navpanel,.navback,.burger i{transition:none!important}}
+
+.panelguides{display:none}
+@media (max-width:1100px){aside[aria-label="On this page"],aside[aria-label="Op deze pagina"]{display:none!important}}
+@media (max-width:900px){
+  nav.docnav{display:none!important}
+  .navpanel label.docsearch{display:none!important}
+  .panelguides{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+  .panelguides .gh{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#55607A;padding:14px 12px 4px}
+  .panelguides a{display:block;padding:10px 12px!important;border-radius:10px;color:#334155;font-size:16px}
+  .panelguides a:hover{background:#EAF1FF}
+  .navpanel .navactions>a[style*="background:#0F1E3D"]{color:#FFFFFF!important;border-color:#0F1E3D}
+  .navpanel .navactions>a.cta{background:#0F1E3D!important;color:#FFFFFF!important;border-color:#0F1E3D!important}
+  main{padding-top:24px!important}
+}
+
+@keyframes tocon{from,to{color:#1D4ED8;transform:translateX(4px)}}
+.toc a,.toclink{display:block;transition:color .2s ease}
+nav.docnav,nav.toc-left{position:sticky;top:88px;align-self:flex-start;max-height:calc(100vh - 104px);overflow-y:auto}
+@media (prefers-reduced-motion:reduce){.toc a,.toclink{animation:none!important}}
+/* resp-fix */
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:100%;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 760px);font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D">
+
+<!-- DOCS TOP BAR -->
+<div style="position:sticky;top:0;z-index:5;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);border-bottom:1px solid #E3E8F0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;max-width:1360px;margin:0 auto;padding:12px 24px;box-sizing:border-box">
+<div style="display:flex;align-items:center;gap:14px">
+<a href="MainNL.dc.html" style="display:flex;align-items:center;gap:10px;color:#0F1E3D">
+<span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>
+<span style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</span>
+</a>
+<a href="DocsHomeNL.dc.html" style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A;border-left:1px solid #E3E8F0;padding-left:14px">Handleidingen</a>
+</div>
+<label class="navback" for="navtoggle" aria-hidden="true"></label><label class="burger"><input type="checkbox" id="navtoggle" class="navchk" aria-label="Menu openen"><i></i><i></i><i></i></label><div class="navpanel"><div class="navhead"><a href="MainNL.dc.html"><span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>WebGen</a></div><div class="panelguides"><a href="DocsHomeNL.dc.html" style="color:#0F1E3D;font-weight:600">Overzicht handleidingen</a>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div class="gh">Aan de slag</div>
+<a href="DocsNL.dc.html" style="padding:8px 10px;color:#334155">Bouw je eerste website</a>
+<a href="DocsImportNL.dc.html" style="padding:8px 10px;color:#334155">Een bestaande site importeren</a>
+<a href="DocsTourNL.dc.html" style="padding:8px 10px;color:#334155">Rondleiding door de editor</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div class="gh">Leads en publiek</div>
+<a href="DocsFormsNL.dc.html" style="padding:8px 10px;color:#334155">Formulieren en leads</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div class="gh">E-mail</div>
+<a href="DocsSenderNL.dc.html" style="padding:8px 10px;color:#334155">Stel je afzender in</a>
+<a href="DocsCampaignNL.dc.html" style="padding:8px 10px;color:#334155">Een campagne versturen</a>
+<a href="DocsFollowupNL.dc.html" aria-current="page" style="padding:8px 10px;border-radius:10px;background:#E8F0FE;color:#1D4ED8;font-weight:600">Vervolgmails</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div class="gh">Domeinen</div>
+<a href="DocsDomainNL.dc.html" style="padding:8px 10px;color:#334155">Koppel je domein</a>
+</div></div>
+<label class="docsearch" style="flex:0 1 420px;display:flex;align-items:center;gap:10px;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:10px;padding:0 12px;min-height:44px;box-sizing:border-box">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#55607A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Zoek in de handleidingen</span>
+<input type="search" placeholder="Zoek in de handleidingen" style="flex:1;border:0;background:transparent;font:15px DM Sans,system-ui,sans-serif;color:#0F1E3D;outline-offset:4px;min-width:0">
+<kbd style="font-family:DM Sans,system-ui,sans-serif;font-size:12px;color:#55607A;border:1px solid #CBD3E1;border-radius:6px;padding:2px 6px;background:#FFFFFF">Ctrl K</kbd>
+</label>
+<div class="navactions" style="display:flex;align-items:center;gap:8px">
+<div role="group" aria-label="Taal" style="display:inline-flex;padding:3px;background:#F4F7FB;border:1px solid #E3E8F0;border-radius:999px;font-size:13px;font-weight:600;margin-right:4px"><a href="DocsFollowup.dc.html" hreflang="en" lang="en" title="English" style="color:#334155;padding:6px 12px;border-radius:999px">EN</a><span aria-current="true" style="background:#0F1E3D;color:#FFFFFF;padding:6px 12px;border-radius:999px">NL</span></div>
+<a href="CompanyNL.dc.html" style="color:#334155;font-weight:500;font-size:15px;padding:10px 12px">Support</a>
+<a class="cta" href="#" style="background:#0F1E3D;color:#FFFFFF;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px">Open de app</a>
+</div>
+</div>
+</div>
+</div>
+
+<div style="max-width:1360px;margin:0 auto;padding:0 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;timeline-scope:--s0,--s1,--s2,--s3,--s4,--s5,--s6,--s7,--s8">
+
+<!-- SIDEBAR -->
+<nav class="docnav" aria-label="Handleidingen" style="flex:1 1 220px;max-width:260px;padding:32px 0;font-size:14px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Aan de slag</div>
+<a href="DocsNL.dc.html" style="padding:8px 10px;color:#334155">Bouw je eerste website</a>
+<a href="DocsImportNL.dc.html" style="padding:8px 10px;color:#334155">Een bestaande site importeren</a>
+<a href="DocsTourNL.dc.html" style="padding:8px 10px;color:#334155">Rondleiding door de editor</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Leads en publiek</div>
+<a href="DocsFormsNL.dc.html" style="padding:8px 10px;color:#334155">Formulieren en leads</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">E-mail</div>
+<a href="DocsSenderNL.dc.html" style="padding:8px 10px;color:#334155">Stel je afzender in</a>
+<a href="DocsCampaignNL.dc.html" style="padding:8px 10px;color:#334155">Een campagne versturen</a>
+<a href="DocsFollowupNL.dc.html" aria-current="page" style="padding:8px 10px;border-radius:8px;background:#E8F0FE;color:#1D4ED8;font-weight:600">Vervolgmails</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="font-weight:600;padding:6px 10px">Domeinen</div>
+<a href="DocsDomainNL.dc.html" style="padding:8px 10px;color:#334155">Koppel je domein</a>
+</div>
+</nav>
+
+<!-- ARTICLE -->
+<main style="flex:999 1 560px;min-width:0;max-width:740px;padding:40px 0 64px;position:relative;isolation:isolate"><div class="blob" style="width:300px;height:300px;background:rgba(64,224,245,.26);top:0;right:-60px"></div><div class="blob" style="width:280px;height:280px;background:rgba(29,78,216,.14);top:340px;left:-80px;animation-delay:-6s"></div>
+<div style="font-size:14px;color:#55607A"><a href="DocsHomeNL.dc.html" style="color:#55607A">Handleidingen</a> / <a href="#" style="color:#55607A">E-mail</a></div>
+<h1 style="font-weight:700;font-size:44px;line-height:1.08;letter-spacing:-0.035em;margin:16px 0 0">Vervolgmails</h1>
+<p style="font-size:19px;line-height:1.6;color:#55607A;margin:16px 0 0">Stuur een korte reeks e-mails, na elkaar, naar mensen die een van je formulieren invullen en akkoord gaan dat je hen mailt.</p>
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;font-size:14px;color:#55607A"><span>Ongeveer 8 minuten</span><span aria-hidden="true">·</span><span>Bijgewerkt [DATUM]</span></div>
+<div style="margin-top:24px;border:1px solid #E3E8F0;border-radius:14px;padding:18px 20px;background:#F4F7FB;font-size:15px;line-height:1.6"><strong>Voor je begint:</strong> je hebt een formulier op je site nodig dat om toestemming voor vervolgmails vraagt. Zonder dat vakje kan niemand in een reeks komen. Zie <a href="DocsFormsNL.dc.html">Formulieren en leads</a>.</div>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Een reeks vervolgmails is een aantal e-mails die na elkaar worden verstuurd naar bezoekers die een formulier invullen en <strong>Ja, stuur mij vervolgmails</strong> aanvinken. Elk formulier kan een eigen reeks hebben.</p>
+<div style="view-timeline-name:--s0;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-1-zet-toestemming-aan-voor-je-formulier" style="font-size:26px;letter-spacing:-0.02em;margin:48px 0 0">1. Zet toestemming aan voor je formulier</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Selecteer in de editor de sectie met je contact-, download- of nieuwsbriefformulier en zet <strong>Toestemming vragen voor vervolgmails</strong> aan. Selecteer bij een popup de sectie met de bijbehorende knop en doe hetzelfde. Sla je dit over, dan waarschuwt het tabblad <strong>Vervolgmails</strong> dat niemand de e-mails zal ontvangen.</p>
+</div><div style="view-timeline-name:--s1;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-2-open-vervolgmails" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">2. Open Vervolgmails</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Klik op <strong>Beheren</strong> en dan op het tabblad <strong>Vervolgmails</strong>. Je formulieren staan daar in een lijst. Heeft je site nog geen formulieren, voeg dan eerst in de editor een contact-, download- of nieuwsbriefformulier toe.</p>
+</div><div style="view-timeline-name:--s2;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-3-stel-een-reeks-in" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">3. Stel een reeks in</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Klik naast je formulier op <strong>Vervolgmails instellen</strong> en dan op <strong>Openen</strong>. Geef de reeks een <strong>Naam (alleen voor jou zichtbaar)</strong>, zoals "Welkomstreeks".</p>
+</div><div style="view-timeline-name:--s3;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-4-voeg-je-eerste-e-mail-toe" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">4. Voeg je eerste e-mail toe</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Klik op <strong>E-mail toevoegen</strong> en vul in:</p>
+<ul style="font-size:17px;line-height:1.7;color:#1E293B;margin:12px 0 0;padding-left:22px"><li><strong>Onderwerp</strong></li><li><strong>Bericht</strong></li><li><strong>Versturen nadat het formulier is verstuurd</strong>: een geheel getal en een <strong>Eenheid</strong> van minuten, uren of dagen, tot 365 dagen. De eerste e-mail kan ook meteen na het versturen van het formulier uitgaan.</li></ul>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Voeg op dezelfde manier meer e-mails toe. Bij elke e-mail na de eerste staat de timing als <strong>Versturen na de vorige e-mail</strong>. Een reeks kan maximaal 20 e-mails hebben en bij elke e-mail staat hoe lang na het formulier of de vorige e-mail hij uitgaat.</p>
+<div style="margin-top:20px;border:1px solid #E3E8F0;border-radius:16px;height:240px;background:#F4F7FB;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;font-size:14px;color:#55607A">[SCREENSHOT: reeks vervolgmails met twee e-mails]</div>
+</div><div style="view-timeline-name:--s4;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-5-bekijk-en-test" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">5. Bekijk en test</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Klik op <strong>Voorbeeld</strong> om te zien hoe een e-mail eruitziet. De uitschrijflink werkt alleen in echte e-mails. Klik op <strong>Stuur mij een test</strong> om zelf een kopie te ontvangen. Gebruik <strong>Bewerken</strong> om een e-mail later te wijzigen, of verwijder er een die je niet meer wilt.</p>
+</div><div style="view-timeline-name:--s5;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-6-kies-de-afzender" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">6. Kies de afzender</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Kies onder <strong>Versturen als</strong> het adres waarvan de e-mails komen. Je ziet het afzenderadres van de site, of het eigen adres van WebGen totdat je er een hebt ingesteld. Antwoorden gaan naar jou. Zie <a href="DocsSenderNL.dc.html">Stel je afzender in</a>.</p>
+</div><div style="view-timeline-name:--s6;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-7-zet-hem-aan" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">7. Zet hem aan</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Een reeks heeft minstens één e-mail nodig voordat je hem kunt aanzetten. Klik op <strong>Aanzetten</strong> en de status verandert in <strong>Aan</strong>. Vanaf dan komt iedereen die het formulier verstuurt en het vakje aanvinkt in de reeks.</p>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Je ziet op dezelfde pagina hoe het gaat, bijvoorbeeld hoeveel mensen bezig zijn, klaar zijn of gestopt zijn (uitgeschreven of onbezorgbaar).</p>
+</div><div style="view-timeline-name:--s7;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-pauzeren-of-stoppen" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">Pauzeren of stoppen</h2>
+<p style="font-size:17px;line-height:1.7;color:#1E293B;margin:14px 0 0">Klik op <strong>Pauzeren</strong> om de reeks vast te houden. Er gaat niets verloren: e-mails die aan de beurt zijn, wachten en gaan uit zodra je hem weer aanzet. Mensen die al in de reeks zitten, blijven hun e-mails ontvangen, tenzij je hem pauzeert of verwijdert. <strong>Vervolgmails verwijderen</strong> verwijdert de reeks en de geschiedenis ervan, maar je formulierinzendingen blijven bewaard.</p>
+<div style="margin-top:20px;border:1px solid #F5D6A8;border-radius:14px;padding:18px 20px;background:#FFF8EC;font-size:15px;line-height:1.6;color:#1E293B"><strong style="color:#92400E">Let op:</strong> elke vervolgmail bevat een uitschrijflink en wie zich uitschrijft, krijgt ze niet meer. Je bedrijfsnaam en postadres van <strong>Campagnes</strong> staan onderaan. [BEVESTIG: exacte voettekst en het uitschrijfgedrag om te beschrijven]</div>
+</div><div style="view-timeline-name:--s8;view-timeline-axis:block;view-timeline-inset:110px 62%"><h2 id="h-volgende-stappen" style="font-size:26px;letter-spacing:-0.02em;margin:40px 0 0">Volgende stappen</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px"><a href="DocsCampaignNL.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:14px;padding:18px;color:#0F1E3D"><div style="font-weight:600">Een campagne versturen</div><div style="font-size:14px;color:#55607A;margin-top:4px">Mail je hele doelgroep.</div></a><a href="DocsDomainNL.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:14px;padding:18px;color:#0F1E3D"><div style="font-weight:600">Koppel je domein</div><div style="font-size:14px;color:#55607A;margin-top:4px">Gebruik je eigen webadres.</div></a></div>
+
+<!-- FEEDBACK -->
+<div style="margin-top:56px;padding-top:24px;border-top:1px solid #E3E8F0;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+<sc-if value="{{notVoted}}" hint-placeholder-val="{{ true }}">
+<span style="font-size:15px;font-weight:500">Was deze pagina nuttig?</span>
+<button type="button" onClick="{{voteYes}}" style="border:1px solid #CBD3E1;background:#FFFFFF;border-radius:999px;padding:10px 18px;font:500 14px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">Ja</button>
+<button type="button" onClick="{{voteNo}}" style="border:1px solid #CBD3E1;background:#FFFFFF;border-radius:999px;padding:10px 18px;font:500 14px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">Nee</button>
+</sc-if>
+<sc-if value="{{voted}}" hint-placeholder-val="{{ false }}">
+<span style="font-size:15px;color:#15803D;font-weight:500">Bedankt voor je feedback.</span>
+</sc-if>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:32px">
+<a href="DocsCampaignNL.dc.html" style="border:1px solid #E3E8F0;border-radius:14px;padding:16px 20px;text-align:left;color:#0F1E3D"><div style="font-size:13px;color:#55607A">Vorige</div><div style="font-weight:600;margin-top:2px">← Een campagne versturen</div></a>
+<a href="DocsDomainNL.dc.html" style="border:1px solid #E3E8F0;border-radius:14px;padding:16px 20px;text-align:right;color:#0F1E3D"><div style="font-size:13px;color:#55607A">Volgende</div><div style="font-weight:600;margin-top:2px">Koppel je domein →</div></a>
+</div>
+</div></main>
+
+<!-- ON THIS PAGE -->
+<aside aria-label="Op deze pagina" style="flex:1 1 180px;max-width:220px;padding:40px 0;font-size:14px;position:sticky;top:88px;align-self:flex-start">
+<div style="font-weight:600;margin-bottom:10px">Op deze pagina</div>
+<div class="toc" style="display:flex;flex-direction:column;gap:8px;border-left:1px solid #E3E8F0;padding-left:14px">
+<a href="#h-1-zet-toestemming-aan-voor-je-formulier" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s0;animation-range:cover">1. Zet toestemming aan voor je formulier</a>
+<a href="#h-2-open-vervolgmails" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s1;animation-range:cover">2. Open Vervolgmails</a>
+<a href="#h-3-stel-een-reeks-in" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s2;animation-range:cover">3. Stel een reeks in</a>
+<a href="#h-4-voeg-je-eerste-e-mail-toe" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s3;animation-range:cover">4. Voeg je eerste e-mail toe</a>
+<a href="#h-5-bekijk-en-test" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s4;animation-range:cover">5. Bekijk en test</a>
+<a href="#h-6-kies-de-afzender" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s5;animation-range:cover">6. Kies de afzender</a>
+<a href="#h-7-zet-hem-aan" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s6;animation-range:cover">7. Zet hem aan</a>
+<a href="#h-pauzeren-of-stoppen" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s7;animation-range:cover">Pauzeren of stoppen</a>
+<a href="#h-volgende-stappen" style="color:#55607Aanimation:tocon 1s linear;animation-timeline:--s8;animation-range:cover">Volgende stappen</a>
+</div>
+</aside>
+
+</div>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true" style="margin:56px 0 0"><div class="marq-track"><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Aan de slag<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Eigen domein<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Formulieren en leads<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Afzender instellen<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Campagnes<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Vervolgmails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Aan de slag<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Eigen domein<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Formulieren en leads<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Afzender instellen<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Campagnes<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Vervolgmails<span aria-hidden="true" style="color:#40E0F5">✦</span></span></div></div>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid #E3E8F0">
+<div style="max-width:1360px;margin:0 auto;padding:32px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#55607A">
+<span>© 2026 Schenk Rekenmeesters · KvK 55633323 · BTW NL001579296B13</span>
+<span style="display:flex;flex-wrap:wrap;gap:20px"><a href="MainNL.dc.html" style="color:#55607A">Home</a><a href="CompanyNL.dc.html" style="color:#55607A">Contact</a><a href="EmailInfoNL.dc.html" style="color:#55607A">E-mail van ons?</a><a href="PrivacyNL.dc.html" style="color:#55607A">Privacy</a></span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { voted: false }; }
+  renderVals() {
+    return {
+      voted: this.state.voted,
+      notVoted: !this.state.voted,
+      voteYes: () => this.setState({ voted: true }),
+      voteNo: () => this.setState({ voted: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>WebGen Voorbeeld: GreenLeaf Bakery</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif}
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A}
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+html{scroll-behavior:smooth}
+a,button,summary{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .25s ease,transform .25s ease}
+a[href]:hover{transform:translateY(-1px)}
+.lift{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease}
+.lift:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(15,30,61,0.14)}
+.zoom img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.zoom:hover img{transform:scale(1.03)}
+@keyframes rise{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+@keyframes floatup{from{transform:translateY(24px)}to{transform:none}}
+@supports (animation-timeline:view()){
+.rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 38%}
+.parallax{animation:floatup linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.rv,.parallax{animation:none}
+.lift,.zoom img,a[href]{transition:none}
+a[href]:hover,.lift:hover,.zoom:hover img{transform:none}
+}
+.stickycta{position:sticky;bottom:16px;z-index:6;width:max-content;max-width:calc(100% - 32px);margin:0 auto 16px;display:flex;align-items:center;gap:14px;background:#0F1E3D;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 22px;box-shadow:0 18px 44px rgba(15,30,61,0.3);font-size:15px;font-weight:500}
+@keyframes barin{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@supports (animation-timeline:scroll()){.stickycta{animation:barin linear both;animation-timeline:scroll(root);animation-range:480px 760px}}
+@media (prefers-reduced-motion:reduce){.stickycta{animation:none}}
+
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes drift2{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(12px) rotate(1deg)}}
+@keyframes blobmove{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-30px,24px) scale(.94)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(64,224,245,.55)}70%{box-shadow:0 0 0 16px rgba(64,224,245,0)}100%{box-shadow:0 0 0 0 rgba(64,224,245,0)}}
+.drift{animation:drift 6s ease-in-out infinite}
+.drift2{animation:drift2 7.5s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-1;animation:blobmove 16s ease-in-out infinite}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.pulse{animation:ring 2.4s ease-out infinite}
+.fchip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;padding:10px 14px;box-shadow:0 18px 40px rgba(15,30,61,0.16);font-size:14px;font-weight:600;color:#0F1E3D}
+@media (max-width:900px){.fchip{display:none}.blob{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2,.blob,.marq-track,.pulse{animation:none}.marq{overflow-x:auto}}
+
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:none}
+::view-transition-new(root){animation:vtin .18s ease both}
+@keyframes vtin{from{opacity:.88}}
+html{background:#FFFFFF}
+@keyframes pagein{from{opacity:.9}to{opacity:1}}
+body{animation:pagein .2s ease both}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}body{animation:none}}
+
+/* responsive navigation */
+.burger{display:none;position:relative;width:44px;height:44px;border:1px solid #E3E8F0;border-radius:12px;background:#FFFFFF;cursor:pointer;align-items:center;justify-content:center;flex:none;z-index:60}
+.burger input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.burger i{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#0F1E3D;transition:transform .25s ease,opacity .2s ease,top .25s ease}
+.burger i:nth-of-type(1){top:15px}.burger i:nth-of-type(2){top:21px}.burger i:nth-of-type(3){top:27px}
+.burger:has(input:focus-visible){outline:2px solid #1D4ED8;outline-offset:2px}
+.burger:has(input:checked) i:nth-of-type(1){top:21px;transform:rotate(45deg)}
+.burger:has(input:checked) i:nth-of-type(2){opacity:0}
+.burger:has(input:checked) i:nth-of-type(3){top:21px;transform:rotate(-45deg)}
+.navpanel{display:contents}
+.navhead{display:none}
+.navback{display:none}
+@media (max-width:900px){
+  [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#FFFFFF!important}
+  .burger{display:inline-flex}
+  .navpanel{display:flex;flex-direction:column;gap:0;position:fixed;top:0;right:0;bottom:0;width:min(88vw,360px);box-sizing:border-box;padding:14px 24px 28px;background:linear-gradient(180deg,#F3F7FF 0%,#FFFFFF 220px);border-radius:24px 0 0 24px;box-shadow:-24px 0 60px rgba(15,30,61,.24);z-index:50;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s}
+  :root:has(.navchk:checked) .navpanel{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .navback{display:block;position:fixed;inset:0;background:rgba(15,30,61,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  :root:has(.navchk:checked) .navback{opacity:1;pointer-events:auto}
+  .navhead{display:flex;align-items:center;height:44px;padding-right:56px;margin-bottom:20px}
+  .navhead a{display:flex;align-items:center;gap:10px;color:#0F1E3D;font-weight:700;font-size:19px;letter-spacing:-0.02em}
+  .navpanel nav.navlinks{flex-direction:column!important;flex-wrap:nowrap!important;gap:4px!important;font-size:20px!important;font-weight:600!important}
+  .navpanel nav.navlinks a{display:flex;align-items:center;justify-content:space-between;padding:16px 14px!important;border-radius:14px;color:#0F1E3D!important}
+  .navpanel nav.navlinks a::after{content:"";width:8px;height:8px;border-top:2px solid #9AA6BD;border-right:2px solid #9AA6BD;transform:rotate(45deg);margin-right:4px}
+  .navpanel nav.navlinks a:hover{background:#EAF1FF}
+  .navpanel .navactions{flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin-top:auto;padding-top:24px;border-top:1px solid #E3E8F0}
+  .navpanel .navactions [role="group"]{display:flex!important;width:100%;box-sizing:border-box;margin:0!important}
+  .navpanel .navactions [role="group"]>*{flex:1;text-align:center;padding:10px 12px!important;font-size:15px}
+  .navpanel .navactions>a{text-align:center;padding:14px 18px!important;font-size:16px!important;border-radius:999px}
+  .navpanel .navactions>a:not([href^="Early"]){border:1px solid #CBD3E1;color:#0F1E3D!important}
+  .navpanel .navactions>a[href^="Early"]{box-shadow:0 10px 24px rgba(15,30,61,.22)}
+  .fchip{display:none}
+}
+@media (prefers-reduced-motion:reduce){.navpanel,.navback,.burger i{transition:none!important}}
+/* resp-fix */
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:100%;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 760px);font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D">
+
+<!-- ANNOUNCEMENT -->
+<div style="background:#0F1E3D;color:#DCE3EE;font-size:14px;text-align:center;padding:10px 16px">Nieuw: automatische follow-upmails voor elke site. <a href="DocsHomeNL.dc.html" style="color:#FFFFFF;font-weight:600;text-decoration:underline">Lees de handleiding</a></div>
+
+<!-- NAV -->
+<div style="position:sticky;top:0;z-index:5;background:rgba(255,255,255,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E3E8F0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;max-width:1200px;margin:0 auto;padding:14px 24px;box-sizing:border-box">
+<a href="MainNL.dc.html" style="display:flex;align-items:center;gap:10px;color:#0F1E3D">
+<span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>
+<span style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</span>
+</a>
+<label class="navback" for="navtoggle" aria-hidden="true"></label><label class="burger"><input type="checkbox" id="navtoggle" class="navchk" aria-label="Menu openen"><i></i><i></i><i></i></label><div class="navpanel"><div class="navhead"><a href="MainNL.dc.html"><span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>WebGen</a></div><nav class="navlinks" aria-label="Main" style="display:flex;flex-wrap:wrap;gap:4px;font-size:15px;font-weight:500">
+<a href="FeaturesNL.dc.html" style="color:#334155;padding:10px 12px">Product</a>
+<a href="ExamplesNL.dc.html" style="color:#334155;padding:10px 12px">Voorbeelden</a>
+<a href="DocsHomeNL.dc.html" style="color:#334155;padding:10px 12px">Handleidingen</a>
+<a href="CompanyNL.dc.html" style="color:#334155;padding:10px 12px">Bedrijf</a>
+</nav>
+<div class="navactions" style="display:flex;align-items:center;gap:8px">
+<div role="group" aria-label="Taal" style="display:inline-flex;padding:3px;background:#F4F7FB;border:1px solid #E3E8F0;border-radius:999px;font-size:13px;font-weight:600;margin-right:4px"><a href="ExampleGreenleaf.dc.html" hreflang="en" lang="en" title="English" style="color:#334155;padding:6px 12px;border-radius:999px">EN</a><span aria-current="true" style="background:#0F1E3D;color:#FFFFFF;padding:6px 12px;border-radius:999px">NL</span></div>
+<a href="#" style="color:#0F1E3D;font-weight:500;font-size:15px;padding:10px 12px">Inloggen</a>
+<a href="EarlyAccessNL.dc.html" style="background:#0F1E3D;color:#FFFFFF;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px">Vraag vroege toegang aan</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- EXAMPLE DETAIL HERO -->
+<div style="max-width:1200px;margin:0 auto;padding:48px 24px 0;box-sizing:border-box;position:relative;isolation:isolate"><div class="blob" style="width:360px;height:360px;background:rgba(64,224,245,.30);top:20px;right:80px"></div><div class="blob" style="width:320px;height:320px;background:rgba(29,78,216,.17);top:180px;right:-40px;animation-delay:-6s"></div><div class="fchip drift" style="right:60px;top:80px"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Formulier ontvangen</div><div class="fchip drift2" style="right:10px;top:160px"><span style="width:28px;height:28px;border-radius:8px;background:#DCE7FF;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9 6 9-6M3 7v10h18V7z"/></svg></span>E-mail verzonden</div><div class="fchip drift" style="right:110px;top:240px"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg></span>Site gepubliceerd</div><a href="ExamplesNL.dc.html" style="font-weight:600;font-size:15px">← Alle voorbeelden</a><div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;align-items:center"><span style="background:#40E0F5;color:#0F1E3D;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px">Voorbeeldsite</span><span style="font-size:14px;color:#55607A">Bakkerij · Amsterdam</span></div><h1 style="font-weight:700;font-size:60px;line-height:1.05;letter-spacing:-0.03em;margin:14px 0 0">GreenLeaf Bakery</h1><p style="font-size:20px;line-height:1.55;color:#55607A;max-width:680px;margin:18px 0 0">Een kleine bakkerij die vers brood verkoopt en een weekmenu mailt. Gebouwd uit één korte briefing.</p><div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:32px;padding:22px 24px;background:#F4F7FB;border-radius:20px"><div style="flex:1 1 180px"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#55607A">Branche</div><div style="font-size:16px;font-weight:600;margin-top:4px">Bakkerij</div></div><div style="flex:1 1 180px"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#55607A">Taal</div><div style="font-size:16px;font-weight:600;margin-top:4px">Nederlands</div></div><div style="flex:1 1 180px"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#55607A">Gebouwd in</div><div style="font-size:16px;font-weight:600;margin-top:4px">[BEVESTIG: minuten]</div></div><div style="flex:1 1 180px"><div style="font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#55607A">Functies</div><div style="font-size:16px;font-weight:600;margin-top:4px">Aanmeldformulier, weekmenu</div></div></div></div>
+
+<!-- SITE PREVIEW -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:40px 24px 0;box-sizing:border-box"><div class="zoom" style="border-radius:16px;overflow:hidden;border:1px solid #E3E8F0;box-shadow:0 24px 60px rgba(15,30,61,0.14)"><img src="/_blob/3b9dfcf9ae06e69caad013d42768bbc9" alt="De GreenLeaf Bakery-site op desktop" style="display:block;width:100%;height:auto"></div></div>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true" style="margin:56px 0 0"><div class="marq-track"><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Formulieren<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Nieuwsbrieven<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Eigen domein<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Vervolgmails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Zoekbasis<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Statistieken<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Formulieren<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Nieuwsbrieven<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Eigen domein<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Vervolgmails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Zoekbasis<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Statistieken<span aria-hidden="true" style="color:#40E0F5">✦</span></span></div></div>
+
+<!-- HOW IT WAS MADE -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">HOE HET ONTSTOND</div><h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Van briefing tot live site.</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:32px"><div class="lift" style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:36px;height:36px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">1</span><div style="font-weight:700;font-size:19px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">De briefing</div><div style="font-size:15px;line-height:1.55;color:#55607A;margin-top:6px">Vier korte vragen over de bakkerij, het publiek en de toon.</div><div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid #E3E8F0"><img src="/_blob/3b4c73cbc6f788efee2696fcb2c0ab75" alt="" style="display:block;width:100%;height:auto"></div></div><div class="lift" style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:36px;height:36px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">2</span><div style="font-weight:700;font-size:19px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">De eerste versie</div><div style="font-size:15px;line-height:1.55;color:#55607A;margin-top:6px">WebGen schrijft de tekst en bouwt alle secties.</div><div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid #E3E8F0"><img src="/_blob/8be774f15e2e1127e799f1a59b4b3123" alt="" style="display:block;width:100%;height:auto"></div></div><div class="lift" style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:36px;height:36px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">3</span><div style="font-weight:700;font-size:19px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Bijwerken en publiceren</div><div style="font-size:15px;line-height:1.55;color:#55607A;margin-top:6px">Pas aan door te klikken of in gewone woorden te vragen.</div><div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid #E3E8F0"><img src="/_blob/08f1a7cdb1e895f5c7ca694e59eb2440" alt="" style="display:block;width:100%;height:auto"></div></div></div></div>
+
+<!-- MOBILE -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:72px 24px 0;box-sizing:border-box"><div style="display:flex;flex-wrap:wrap;gap:40px;align-items:center;background:radial-gradient(60% 80% at 8% 100%,rgba(64,224,245,.20),transparent 62%),radial-gradient(120% 140% at 88% 0%,#1D3F86 0%,#14264F 46%,#0F1E3D 100%);color:#FFFFFF;border-radius:28px;padding:44px;box-sizing:border-box"><div style="flex:1 1 320px"><h2 style="font-weight:700;font-size:36px;letter-spacing:-0.03em;margin:0;color:#FFFFFF">Ook op telefoons</h2><p style="font-size:17px;line-height:1.6;color:#C8D1E3;margin:14px 0 0">Dezelfde site past zich aan op een klein scherm.</p></div><div style="flex:0 1 260px;margin:0 auto;border-radius:24px;overflow:hidden;border:6px solid #1B2B4D"><img src="/_blob/34b3522dc8b83aca3ed77ee8a1caa061" alt="De GreenLeaf Bakery-site op een telefoon" style="display:block;width:100%;height:auto"></div></div></div>
+
+<!-- MORE LANGUAGES -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">MEERDERE TALEN</div><h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Eén site, elke taal.</h2><p style="font-size:17px;line-height:1.6;color:#55607A;max-width:640px;margin:14px 0 0">Dezelfde GreenLeaf-site, vertaald met één klik. Elke taal krijgt zijn eigen pagina met bijpassende tekst.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin-top:32px"><div class="lift" style="border:1px solid #E3E8F0;border-radius:20px;padding:16px;background:#FFFFFF"><div style="border-radius:12px;overflow:hidden;border:1px solid #E3E8F0"><img src="/_blob/3b9dfcf9ae06e69caad013d42768bbc9" alt="De GreenLeaf Bakery-site in het Nederlands" style="display:block;width:100%;height:auto"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px"><span style="font-weight:700;font-size:18px">Nederlands</span><span style="font-size:13px;color:#55607A;background:#F4F7FB;border-radius:999px;padding:4px 12px">Origineel</span></div></div><div class="lift" style="border:1px solid #E3E8F0;border-radius:20px;padding:16px;background:#FFFFFF"><div style="border-radius:12px;overflow:hidden;border:1px solid #E3E8F0"><img src="/_blob/911297b329ba9cbcb4accad0b00f6efb" alt="De GreenLeaf Bakery-site in de editor, vertaald naar het Frans, met de kop 'Retrait frais au cœur d'Amsterdam.'" style="display:block;width:100%;height:auto"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px"><span style="font-weight:700;font-size:18px">Français</span><span style="font-size:13px;color:#55607A;background:#F4F7FB;border-radius:999px;padding:4px 12px">Frans</span></div></div><div class="lift" style="border:1px solid #E3E8F0;border-radius:20px;padding:16px;background:#FFFFFF"><div style="border-radius:12px;overflow:hidden;border:1px solid #E3E8F0"><img src="/_blob/277329fbb5c24179ac34f6c2196d1c55" alt="De GreenLeaf Bakery-site vertaald naar het Duits, met de kop 'Hol dir heute noch etwas Frisches nach Hause.'" style="display:block;width:100%;height:auto"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px"><span style="font-weight:700;font-size:18px">Deutsch</span><span style="font-size:13px;color:#55607A;background:#F4F7FB;border-radius:999px;padding:4px 12px">Duits</span></div></div></div><h3 style="font-size:22px;letter-spacing:-0.02em;margin:48px 0 0">Zo werkt het</h3><div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:20px"><div style="flex:1 1 380px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="width:32px;height:32px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">1</span><span style="font-weight:600;font-size:17px">Kies je talen in het paginamenu.</span></div><img src="/_blob/af969a6ee0138515e5811596347bd1ea" alt="Het taalmenu in de WebGen-editor, met Engels, Nederlands, Frans en Duits aan" style="border-radius:12px;border:1px solid #E3E8F0;box-shadow:0 16px 40px rgba(15,30,61,0.12);display:block;width:100%;height:auto"></div><div style="flex:1 1 380px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="width:32px;height:32px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">2</span><span style="font-weight:600;font-size:17px">Kies 'Vertaal deze pagina'.</span></div><img src="/_blob/84d83bb398faaf68139e5e09f692972e" alt="Het paginamenu met de actie Translate this page" style="border-radius:12px;border:1px solid #E3E8F0;box-shadow:0 16px 40px rgba(15,30,61,0.12);display:block;width:100%;height:auto"></div></div></div>
+
+<!-- RESULT -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:72px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">HET RESULTAAT</div><h2 style="font-weight:700;font-size:36px;letter-spacing:-0.03em;margin:12px 0 0">Wat het opleverde</h2><div style="margin-top:20px;border:2px dashed #CBD3E1;border-radius:20px;padding:28px;font-size:16px;line-height:1.55;color:#55607A">[BEVESTIG: echte resultaten van de eigenaar, of laat dit blok weg]</div></div>
+
+<!-- DETAIL CTA -->
+<div class="rv" style="max-width:1200px;margin:88px auto 0;padding:0 24px;box-sizing:border-box"><div style="background:radial-gradient(60% 80% at 8% 100%,rgba(64,224,245,.20),transparent 62%),radial-gradient(120% 140% at 88% 0%,#1D3F86 0%,#14264F 46%,#0F1E3D 100%);border-radius:28px;padding:72px 32px;text-align:center;color:#FFFFFF"><h2 style="font-weight:700;font-size:48px;line-height:1.05;letter-spacing:-0.04em;margin:0;color:#FFFFFF">Jouw bedrijf is de volgende.</h2><p style="font-size:18px;margin:16px 0 0;color:#C8D1E3">Vertel over je bedrijf. Wij bouwen de eerste versie.</p><a class="pulse" href="EarlyAccessNL.dc.html" style="display:inline-block;margin-top:28px;background:linear-gradient(135deg,#90F0FB 0%,#40E0F5 55%,#1EC0DC 100%);color:#0F1E3D;font-weight:700;font-size:16px;padding:15px 28px;border-radius:999px">Vraag vroege toegang aan</a></div></div>
+
+<!-- FOOTER -->
+<div style="max-width:1200px;margin:0 auto;padding:64px 24px 40px;box-sizing:border-box">
+<div style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between">
+<div style="flex:1 1 260px;max-width:320px">
+<div style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</div>
+<p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#55607A">Schenk Rekenmeesters<br>Steijnstraat 18, 2987 AS Ridderkerk<br>[SUPPORT EMAIL]<br>KvK 55633323 · BTW NL001579296B13</p>
+<!-- TRUST POINTS -->
+<div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:10px"><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#334155;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:999px;padding:7px 14px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Geverifieerde afzenders</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#334155;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:999px;padding:7px 14px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Makkelijk uitschrijven</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#334155;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:999px;padding:7px 14px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Gegevens opgeslagen in [EU-REGIO]</span></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Product</div><a href="FeaturesNL.dc.html" style="color:#55607A">Functies</a><a href="#" style="color:#55607A">Inloggen</a></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Leren</div><a href="DocsHomeNL.dc.html" style="color:#55607A">Handleidingen</a><a href="DocsHomeNL.dc.html" style="color:#55607A">Tutorials</a></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Bedrijf</div><a href="CompanyNL.dc.html" style="color:#55607A">Over ons</a><a href="CompanyNL.dc.html" style="color:#55607A">Contact</a><a href="EmailInfoNL.dc.html" style="color:#55607A">E-mail van ons?</a></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Juridisch</div><a href="PrivacyNL.dc.html" style="color:#55607A">Privacy</a><a href="TermsNL.dc.html" style="color:#55607A">Voorwaarden</a><a href="CookiesNL.dc.html" style="color:#55607A">Cookies</a></div>
+</div>
+</div>
+<div style="margin-top:40px;padding-top:20px;border-top:1px solid #E3E8F0;font-size:13px;color:#55607A">© 2026 Schenk Rekenmeesters. Alle rechten voorbehouden. Gemaakt in Nederland.</div>
+</div>
+
+
+<!-- STICKY EARLY ACCESS BAR -->
+<div class="stickycta"><span>Wees een van de eersten met WebGen</span><a href="EarlyAccessNL.dc.html" style="background:#40E0F5;color:#0F1E3D;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;white-space:nowrap">Vraag vroege toegang aan</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":9000}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { aud: 'biz', hl: 'a', tab: 'build' }; }
+  renderVals() {
+    const f = 'DM Sans,system-ui,sans-serif';
+    const on = 'background:#0F1E3D;color:#FFFFFF;border:0;border-radius:999px;padding:11px 20px;font:600 15px ' + f + ';cursor:pointer;min-height:44px';
+    const off = 'background:transparent;color:#334155;border:0;border-radius:999px;padding:11px 20px;font:500 15px ' + f + ';cursor:pointer;min-height:44px';
+    const tabOn = 'background:#0F1E3D;color:#FFFFFF;border:1px solid #0F1E3D;border-radius:999px;padding:11px 22px;font:600 15px ' + f + ';cursor:pointer;min-height:44px';
+    const tabOff = 'background:#FFFFFF;color:#334155;border:1px solid #CBD3E1;border-radius:999px;padding:11px 22px;font:500 15px ' + f + ';cursor:pointer;min-height:44px';
+    const hOn = 'background:#0F1E3D;color:#FFFFFF;border:1px solid #0F1E3D;border-radius:6px;padding:3px 10px;font:600 12px ' + f + ';cursor:pointer;min-height:28px';
+    const hOff = 'background:transparent;color:#334155;border:1px solid #CBD3E1;border-radius:6px;padding:3px 10px;font:500 12px ' + f + ';cursor:pointer;min-height:28px';
+    const s = this.state;
+    const biz = s.aud === 'biz';
+    const a = s.hl === 'a';
+    const tab = (k) => s.tab === k;
+    return {
+      isBiz: biz, isAgency: !biz,
+      bizA: biz && a, bizB: biz && !a, agA: !biz && a, agB: !biz && !a,
+      bizStyle: biz ? on : off, agencyStyle: biz ? off : on,
+      pickBiz: () => this.setState({ aud: 'biz' }), pickAgency: () => this.setState({ aud: 'agency' }),
+      hlIsA: a, hlIsB: !a, hlAStyle: a ? hOn : hOff, hlBStyle: a ? hOff : hOn,
+      pickHlA: () => this.setState({ hl: 'a' }), pickHlB: () => this.setState({ hl: 'b' }),
+      tabBuild: tab('build'), tabCapture: tab('capture'), tabEmail: tab('email'), tabName: tab('name'),
+      tabStyleBuild: tab('build') ? tabOn : tabOff, tabStyleCapture: tab('capture') ? tabOn : tabOff,
+      tabStyleEmail: tab('email') ? tabOn : tabOff, tabStyleName: tab('name') ? tabOn : tabOff,
+      pickTabBuild: () => this.setState({ tab: 'build' }), pickTabCapture: () => this.setState({ tab: 'capture' }),
+      pickTabEmail: () => this.setState({ tab: 'email' }), pickTabName: () => this.setState({ tab: 'name' })
+    };
+  }
+}
+</script>
+</body>
+</html>

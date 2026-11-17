@@ -64,3 +64,16 @@ describe('check-placeholders CLI', () => {
     expect(run('--allow-placeholders').status).toBe(0);
   });
 });
+
+describe('findPlaceholders, Dutch tokens', () => {
+  it('matches hyphenated uppercase tokens such as [KVK-NUMMER]', () => {
+    expect(findPlaceholders('KvK [KVK-NUMMER] en [E-MAILADRES SUPPORT] en [JURIDISCHE TEKST: x]')).toEqual([
+      '[KVK-NUMMER]',
+      '[E-MAILADRES SUPPORT]',
+      '[JURIDISCHE TEKST: x]',
+    ]);
+  });
+  it('still ignores lower-case and dangling hyphen look-alikes', () => {
+    expect(findPlaceholders('[KVK-nummer] [KVK-] [-KVK]')).toEqual([]);
+  });
+});

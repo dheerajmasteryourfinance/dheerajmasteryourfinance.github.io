@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WebGen Features</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif}
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A}
+html{scroll-behavior:smooth}
+a,button,summary{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .25s ease,transform .25s ease}
+a[href]:hover{transform:translateY(-1px)}
+@keyframes rise{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+@supports (animation-timeline:view()){
+.rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 38%}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.rv{animation:none}
+a[href]{transition:none}
+a[href]:hover{transform:none}
+}
+.stickycta{position:sticky;bottom:16px;z-index:6;width:max-content;max-width:calc(100% - 32px);margin:0 auto 16px;display:flex;align-items:center;gap:14px;background:#0F1E3D;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 22px;box-shadow:0 18px 44px rgba(15,30,61,0.3);font-size:15px;font-weight:500}
+@keyframes barin{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@supports (animation-timeline:scroll()){.stickycta{animation:barin linear both;animation-timeline:scroll(root);animation-range:480px 760px}}
+@media (prefers-reduced-motion:reduce){.stickycta{animation:none}}
+
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes drift2{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(12px) rotate(1deg)}}
+@keyframes blobmove{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-30px,24px) scale(.94)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(64,224,245,.55)}70%{box-shadow:0 0 0 16px rgba(64,224,245,0)}100%{box-shadow:0 0 0 0 rgba(64,224,245,0)}}
+.drift{animation:drift 6s ease-in-out infinite}
+.drift2{animation:drift2 7.5s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-1;animation:blobmove 16s ease-in-out infinite}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.pulse{animation:ring 2.4s ease-out infinite}
+.fchip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;padding:10px 14px;box-shadow:0 18px 40px rgba(15,30,61,0.16);font-size:14px;font-weight:600;color:#0F1E3D}
+@media (max-width:900px){.fchip{display:none}.blob{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2,.blob,.marq-track,.pulse{animation:none}.marq{overflow-x:auto}}
+
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:none}
+::view-transition-new(root){animation:vtin .18s ease both}
+@keyframes vtin{from{opacity:.88}}
+html{background:#FFFFFF}
+@keyframes pagein{from{opacity:.9}to{opacity:1}}
+body{animation:pagein .2s ease both}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}body{animation:none}}
+
+/* responsive navigation */
+.burger{display:none;position:relative;width:44px;height:44px;border:1px solid #E3E8F0;border-radius:12px;background:#FFFFFF;cursor:pointer;align-items:center;justify-content:center;flex:none;z-index:60}
+.burger input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.burger i{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#0F1E3D;transition:transform .25s ease,opacity .2s ease,top .25s ease}
+.burger i:nth-of-type(1){top:15px}.burger i:nth-of-type(2){top:21px}.burger i:nth-of-type(3){top:27px}
+.burger:has(input:focus-visible){outline:2px solid #1D4ED8;outline-offset:2px}
+.burger:has(input:checked) i:nth-of-type(1){top:21px;transform:rotate(45deg)}
+.burger:has(input:checked) i:nth-of-type(2){opacity:0}
+.burger:has(input:checked) i:nth-of-type(3){top:21px;transform:rotate(-45deg)}
+.navpanel{display:contents}
+.navhead{display:none}
+.navback{display:none}
+@media (max-width:900px){
+  [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#FFFFFF!important}
+  .burger{display:inline-flex}
+  .navpanel{display:flex;flex-direction:column;gap:0;position:fixed;top:0;right:0;bottom:0;width:min(88vw,360px);box-sizing:border-box;padding:14px 24px 28px;background:linear-gradient(180deg,#F3F7FF 0%,#FFFFFF 220px);border-radius:24px 0 0 24px;box-shadow:-24px 0 60px rgba(15,30,61,.24);z-index:50;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s}
+  :root:has(.navchk:checked) .navpanel{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .navback{display:block;position:fixed;inset:0;background:rgba(15,30,61,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  :root:has(.navchk:checked) .navback{opacity:1;pointer-events:auto}
+  .navhead{display:flex;align-items:center;height:44px;padding-right:56px;margin-bottom:20px}
+  .navhead a{display:flex;align-items:center;gap:10px;color:#0F1E3D;font-weight:700;font-size:19px;letter-spacing:-0.02em}
+  .navpanel nav.navlinks{flex-direction:column!important;flex-wrap:nowrap!important;gap:4px!important;font-size:20px!important;font-weight:600!important}
+  .navpanel nav.navlinks a{display:flex;align-items:center;justify-content:space-between;padding:16px 14px!important;border-radius:14px;color:#0F1E3D!important}
+  .navpanel nav.navlinks a::after{content:"";width:8px;height:8px;border-top:2px solid #9AA6BD;border-right:2px solid #9AA6BD;transform:rotate(45deg);margin-right:4px}
+  .navpanel nav.navlinks a:hover{background:#EAF1FF}
+  .navpanel .navactions{flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin-top:auto;padding-top:24px;border-top:1px solid #E3E8F0}
+  .navpanel .navactions [role="group"]{display:flex!important;width:100%;box-sizing:border-box;margin:0!important}
+  .navpanel .navactions [role="group"]>*{flex:1;text-align:center;padding:10px 12px!important;font-size:15px}
+  .navpanel .navactions>a{text-align:center;padding:14px 18px!important;font-size:16px!important;border-radius:999px}
+  .navpanel .navactions>a:not([href^="Early"]){border:1px solid #CBD3E1;color:#0F1E3D!important}
+  .navpanel .navactions>a[href^="Early"]{box-shadow:0 10px 24px rgba(15,30,61,.22)}
+  .fchip{display:none}
+}
+@media (prefers-reduced-motion:reduce){.navpanel,.navback,.burger i{transition:none!important}}
+
+.routenav{margin-top:36px}
+.routenav svg{display:block;width:100%;height:auto;overflow:visible}
+.routenav .base{stroke-dasharray:2 9}
+.routenav .draw{stroke-dasharray:1;animation:routedraw 1.8s cubic-bezier(.4,.1,.2,1) both}
+.routenav .stoplink{cursor:pointer}
+.routenav .stoplink circle{transition:fill .2s ease,transform .2s ease;transform-box:fill-box;transform-origin:center}
+.routenav .stoplink:hover circle,.routenav .stoplink:focus-visible circle{fill:#90F0FB;transform:scale(1.12)}
+.routenav .stoplink:focus-visible{outline:2px solid #1D4ED8;outline-offset:4px}
+.chipnav{display:none!important}
+@keyframes routedraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@media (max-width:760px){.routenav{display:none}.chipnav{display:flex!important}}
+@media (prefers-reduced-motion:reduce){.routenav .draw{animation:none;stroke-dashoffset:0}.routenav .stoplink circle{transition:none}}
+/* resp-fix */
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:100%;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 760px);font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D">
+
+<!-- NAV -->
+<div style="position:sticky;top:0;z-index:5;background:rgba(255,255,255,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E3E8F0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;max-width:1200px;margin:0 auto;padding:14px 24px;box-sizing:border-box">
+<a href="Main.dc.html" style="display:flex;align-items:center;gap:10px;color:#0F1E3D">
+<span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>
+<span style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</span>
+</a>
+<label class="navback" for="navtoggle" aria-hidden="true"></label><label class="burger"><input type="checkbox" id="navtoggle" class="navchk" aria-label="Open menu"><i></i><i></i><i></i></label><div class="navpanel"><div class="navhead"><a href="Main.dc.html"><span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>WebGen</a></div><nav class="navlinks" aria-label="Main" style="display:flex;flex-wrap:wrap;gap:4px;font-size:15px;font-weight:500">
+<a href="Features.dc.html" aria-current="page" style="color:#0F1E3D;padding:10px 12px;font-weight:600">Product</a>
+<a href="Examples.dc.html" style="color:#334155;padding:10px 12px">Examples</a>
+<a href="DocsHome.dc.html" style="color:#334155;padding:10px 12px">Docs</a>
+<a href="Company.dc.html" style="color:#334155;padding:10px 12px">Company</a>
+</nav>
+<div class="navactions" style="display:flex;align-items:center;gap:8px">
+<div role="group" aria-label="Language" style="display:inline-flex;padding:3px;background:#F4F7FB;border:1px solid #E3E8F0;border-radius:999px;font-size:13px;font-weight:600;margin-right:4px"><span aria-current="true" style="background:#0F1E3D;color:#FFFFFF;padding:6px 12px;border-radius:999px">EN</span><a href="FeaturesNL.dc.html" hreflang="nl" lang="nl" title="Nederlands" style="color:#334155;padding:6px 12px;border-radius:999px">NL</a></div>
+<a href="#" style="color:#0F1E3D;font-weight:500;font-size:15px;padding:10px 12px">Sign in</a>
+<a href="EarlyAccess.dc.html" style="background:#0F1E3D;color:#FFFFFF;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px">Request early access</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;padding:56px 24px 0;box-sizing:border-box;position:relative;isolation:isolate"><div class="blob" style="width:360px;height:360px;background:rgba(64,224,245,.32);top:20px;right:80px"></div><div class="blob" style="width:320px;height:320px;background:rgba(29,78,216,.18);top:160px;right:-40px;animation-delay:-6s"></div><div class="fchip drift" style="right:60px;top:70px"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>New form entry</div><div class="fchip drift2" style="right:10px;top:150px"><span style="width:28px;height:28px;border-radius:8px;background:#DCE7FF;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9 6 9-6M3 7v10h18V7z"/></svg></span>Email sent</div><div class="fchip drift" style="right:110px;top:230px"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg></span>Site published</div>
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em">PRODUCT</div>
+<h1 style="font-weight:700;font-size:64px;line-height:1.03;letter-spacing:-0.03em;margin:14px 0 0;max-width:860px">One tool to build the site and grow the business behind it.</h1>
+<p style="font-size:20px;line-height:1.55;color:#55607A;max-width:640px;margin:22px 0 0">Here is everything WebGen does, from the first draft of your site to the hundredth email.</p>
+<nav class="routenav" aria-label="Feature sections"><svg viewBox="0 0 1152 150" fill="none"><path class="base" d="M24 98C60 98 66 44 96 44S240 98 288 98 432 44 480 44 624 98 672 98 816 44 864 44 1008 98 1056 98 1104 70 1130 62" stroke="#9AA6BD" stroke-width="3" stroke-linecap="round"/><path class="draw" pathLength="1" d="M24 98C60 98 66 44 96 44S240 98 288 98 432 44 480 44 624 98 672 98 816 44 864 44 1008 98 1056 98 1104 70 1130 62" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="98" r="9" fill="#0F1E3D"/><circle cx="24" cy="98" r="3.5" fill="#40E0F5"/><path d="M1130 62V22" stroke="#0F1E3D" stroke-width="3" stroke-linecap="round"/><path d="M1130 22l22 8-22 8z" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round"/><a class="stoplink" href="#build" aria-label="Build"><circle cx="96" cy="44" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="96" y="50" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">1</text><text x="96" y="14" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="14" font-weight="600" fill="#334155">Build</text></a><a class="stoplink" href="#leads" aria-label="Forms and audience"><circle cx="288" cy="98" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="288" y="104" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">2</text><text x="288" y="138" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="14" font-weight="600" fill="#334155">Forms and audience</text></a><a class="stoplink" href="#email" aria-label="Email"><circle cx="480" cy="44" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="480" y="50" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">3</text><text x="480" y="14" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="14" font-weight="600" fill="#334155">Email</text></a><a class="stoplink" href="#search" aria-label="Search and analytics"><circle cx="672" cy="98" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="672" y="104" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">4</text><text x="672" y="138" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="14" font-weight="600" fill="#334155">Search and analytics</text></a><a class="stoplink" href="#domains" aria-label="Domains and senders"><circle cx="864" cy="44" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="864" y="50" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">5</text><text x="864" y="14" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="14" font-weight="600" fill="#334155">Domains and senders</text></a><a class="stoplink" href="#languages" aria-label="Languages"><circle cx="1056" cy="98" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="1056" y="104" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">6</text><text x="1056" y="138" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="14" font-weight="600" fill="#334155">Languages</text></a></svg></nav><nav class="chipnav" aria-label="Feature sections" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:36px">
+<a href="#build" style="border:1px solid #E3E8F0;border-radius:999px;padding:10px 16px;font-size:14px;color:#0F1E3D">Build</a>
+<a href="#leads" style="border:1px solid #E3E8F0;border-radius:999px;padding:10px 16px;font-size:14px;color:#0F1E3D">Forms and audience</a>
+<a href="#email" style="border:1px solid #E3E8F0;border-radius:999px;padding:10px 16px;font-size:14px;color:#0F1E3D">Email</a>
+<a href="#search" style="border:1px solid #E3E8F0;border-radius:999px;padding:10px 16px;font-size:14px;color:#0F1E3D">Search and analytics</a>
+<a href="#domains" style="border:1px solid #E3E8F0;border-radius:999px;padding:10px 16px;font-size:14px;color:#0F1E3D">Domains and senders</a>
+<a href="#languages" style="border:1px solid #E3E8F0;border-radius:999px;padding:10px 16px;font-size:14px;color:#0F1E3D">Languages</a>
+</nav>
+</div>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true" style="margin:56px 0 0"><div class="marq-track"><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Forms<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Newsletters<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Your own domain<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Follow-up emails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Search basics<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Reports<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Forms<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Newsletters<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Your own domain<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Follow-up emails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Search basics<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Reports<span aria-hidden="true" style="color:#40E0F5">✦</span></span></div></div>
+
+<!-- ROW: BUILD -->
+<div id="build" class="rv" style="max-width:1200px;margin:0 auto;padding:80px 24px 0;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+<div style="flex:1 1 400px">
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A">01 · BUILD</div>
+<h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">From a short brief to a full site.</h2>
+<p style="font-size:17px;line-height:1.6;color:#55607A;margin:18px 0 0">Describe what you do and who you serve. WebGen writes the pages, picks a layout and applies your brand colours and fonts.</p>
+<ul style="margin:22px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:16px">
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Click any text or image to change it</li>
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Ask for bigger changes in a sentence</li>
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Import an existing site from a ZIP file</li>
+</ul>
+</div>
+<div style="flex:1 1 480px;background:linear-gradient(160deg,#F8FAFF 0%,#E9EFFA 100%);border-radius:24px;padding:28px 28px 48px;box-sizing:border-box;position:relative">
+<img src="/_blob/3b4c73cbc6f788efee2696fcb2c0ab75" alt="The New website brief in WebGen, asking for your business name, ideal customer and what they want to achieve" style="display:block;width:88%;height:auto;border-radius:12px;border:1px solid #E3E8F0;box-shadow:0 16px 40px rgba(15,30,61,0.12)">
+<div style="position:absolute;right:20px;bottom:20px;width:34%;border-radius:18px;overflow:hidden;border:6px solid #0F1E3D;box-shadow:0 20px 48px rgba(15,30,61,0.25);background:#0F1E3D">
+<img src="/_blob/f2eeb58e1a546d6cc7d7be1bbb4ca43a" alt="The generated GreenLeaf Bakery site in the editor's phone preview" style="display:block;width:100%;height:auto">
+</div>
+</div>
+</div>
+
+<!-- ROW: LEADS -->
+<div id="leads" class="rv" style="max-width:1200px;margin:0 auto;padding:80px 24px 0;box-sizing:border-box;display:flex;flex-wrap:wrap-reverse;gap:56px;align-items:center">
+<div style="flex:1 1 480px;background:linear-gradient(160deg,#F8FAFF 0%,#E9EFFA 100%);border-radius:24px;padding:28px;box-sizing:border-box">
+<img src="/_blob/d6aab00b551afeb84c9147200a036ca9" alt="The Audience tab in WebGen for GreenLeaf Bakery, with counts for subscribed, pending, not subscribed, unsubscribed and cleaned contacts, plus Segments, Export CSV and Add contact buttons" style="display:block;width:100%;height:auto;border-radius:12px;border:1px solid #E3E8F0;box-shadow:0 16px 40px rgba(15,30,61,0.12)">
+</div>
+<div style="flex:1 1 400px">
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A">02 · FORMS AND AUDIENCE</div>
+<h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Every sign-up in one list.</h2>
+<p style="font-size:17px;line-height:1.6;color:#55607A;margin:18px 0 0">Contact, booking and lead-magnet forms all feed one audience. Each person is tagged by where they signed up, so you can group them into segments later.</p>
+<ul style="margin:22px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:16px">
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Double opt-in, so every subscriber confirmed</li>
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Segments by tag, source or activity</li>
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Spam protection on every form</li>
+</ul>
+</div>
+</div>
+
+<!-- ROW: EMAIL -->
+<div id="email" class="rv" style="max-width:1200px;margin:0 auto;padding:80px 24px 0;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+<div style="flex:1 1 400px">
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A">03 · EMAIL</div>
+<h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Newsletters and sequences, without another tool.</h2>
+<p style="font-size:17px;line-height:1.6;color:#55607A;margin:18px 0 0">Write a campaign with the email builder, or let the AI draft it. Set up sequences that greet and follow up on their own. Every send is paced and retried, and logged so you can see what went out.</p>
+<ul style="margin:22px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:16px">
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Drag-and-drop email builder with AI drafts</li>
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Automated sequences with delays</li>
+<li style="display:flex;gap:10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Sent-email log and campaign stats</li>
+</ul>
+</div>
+<div style="flex:1 1 480px;background:radial-gradient(60% 80% at 8% 100%,rgba(64,224,245,.20),transparent 62%),radial-gradient(120% 140% at 88% 0%,#1D3F86 0%,#14264F 46%,#0F1E3D 100%);border-radius:24px;padding:28px;box-sizing:border-box;color:#FFFFFF">
+<img src="/_blob/88297720a4cf1bf2d555cb867ff09581" alt="The WebGen campaign screen with the sending schedule, the double opt-in setting and a new campaign with Write with AI and Add block" style="display:block;width:100%;height:auto;border-radius:12px;margin-bottom:20px">
+<div style="font-size:12px;font-weight:600;letter-spacing:0.06em;color:#C8D1E3;text-transform:uppercase">Welcome sequence</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;font-size:15px">
+<div style="display:flex;justify-content:space-between;background:#1B2B4D;border-radius:12px;padding:14px 16px"><span>Thanks for joining</span><span style="color:#C8D1E3">Right away</span></div>
+<div style="text-align:center;color:#9AA6BF;font-size:13px">wait 2 days</div>
+<div style="display:flex;justify-content:space-between;background:#1B2B4D;border-radius:12px;padding:14px 16px"><span>Three tips to get started</span><span style="color:#C8D1E3">Day 2</span></div>
+<div style="text-align:center;color:#9AA6BF;font-size:13px">wait 5 days</div>
+<div style="display:flex;justify-content:space-between;background:#1B2B4D;border-radius:12px;padding:14px 16px"><span>Your first-visit offer</span><span style="color:#C8D1E3">Day 7</span></div>
+</div>
+</div>
+</div>
+
+<!-- ROW: SEARCH + ANALYTICS -->
+<div id="search" class="rv" style="max-width:1200px;margin:0 auto;padding:80px 24px 0;box-sizing:border-box">
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A">04 · SEARCH AND ANALYTICS</div>
+<h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0;max-width:680px">Be found, then see what works.</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px">
+<div style="background:#F4F7FB;border-radius:20px;padding:28px"><h3 style="font-size:19px;margin:0 0 8px">Sitemap and robots</h3><p style="margin:0;font-size:15px;line-height:1.55;color:#55607A">Generated for every site. Your own uploaded files are always kept.</p></div>
+<div style="background:#F4F7FB;border-radius:20px;padding:28px"><h3 style="font-size:19px;margin:0 0 8px">Search and social tags</h3><p style="margin:0;font-size:15px;line-height:1.55;color:#55607A">Titles, descriptions, link previews and structured data.</p></div>
+<div style="background:#F4F7FB;border-radius:20px;padding:28px"><h3 style="font-size:19px;margin:0 0 8px">Analytics</h3><p style="margin:0;font-size:15px;line-height:1.55;color:#55607A">Visits, sign-ups and email results, only after visitors consent.</p></div>
+</div>
+</div>
+
+<!-- ROW: DOMAINS -->
+<div id="domains" class="rv" style="max-width:1200px;margin:0 auto;padding:80px 24px 0;box-sizing:border-box;display:flex;flex-wrap:wrap-reverse;gap:56px;align-items:center">
+<div style="flex:1 1 480px;background:linear-gradient(160deg,#F8FAFF 0%,#E9EFFA 100%);border-radius:24px;padding:28px;box-sizing:border-box">
+<img src="/_blob/fce421096f644ed27afcddec1a281379" alt="The Sender tab in WebGen, where you add a domain you own so emails go out from your own address" style="display:block;width:100%;height:auto;border-radius:12px;border:1px solid #E3E8F0;box-shadow:0 16px 40px rgba(15,30,61,0.12)">
+</div>
+<div style="flex:1 1 400px">
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A">05 · DOMAINS AND SENDERS</div>
+<h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Your name on the site and in the inbox.</h2>
+<p style="font-size:17px;line-height:1.6;color:#55607A;margin:18px 0 0">Connect your own domain with automatic HTTPS. Verify a sender so emails come from your address, and we keep checking it stays set up correctly.</p>
+<a href="DocsHome.dc.html" style="display:inline-block;margin-top:20px;font-weight:600;font-size:16px">Read the domain guide →</a>
+</div>
+</div>
+
+<!-- ROW: LANGUAGES -->
+<div id="languages" class="rv" style="max-width:1200px;margin:0 auto;padding:80px 24px 0;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:56px;align-items:center"><div style="flex:1 1 400px"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#55607A">06 · LANGUAGES</div><h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Your site in your customers' language.</h2><p style="font-size:17px;line-height:1.6;color:#55607A;margin:18px 0 0">Pick a default language and switch on more, up to eight in total. Translate a page in one click, and every language gets its own pages and matching emails.</p><a href="DocsHome.dc.html" style="display:inline-block;margin-top:20px;font-weight:600;font-size:16px">Read the guides →</a></div><div style="flex:1 1 480px;background:linear-gradient(160deg,#F8FAFF 0%,#E9EFFA 100%);border-radius:24px;padding:24px;box-sizing:border-box"><img src="/_blob/84d83bb398faaf68139e5e09f692972e" alt="The page menu in the WebGen editor with the language choice and the Translate this page action" style="border-radius:12px;border:1px solid #E3E8F0;box-shadow:0 16px 40px rgba(15,30,61,0.12);display:block;width:100%;height:auto;margin-bottom:16px"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px"><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">EN</span><span><span style="display:block;font-weight:700;font-size:16px">English</span><span style="display:block;font-size:13px;color:#55607A">English</span></span></div><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">NL</span><span><span style="display:block;font-weight:700;font-size:16px">Nederlands</span><span style="display:block;font-size:13px;color:#55607A">Dutch</span></span></div><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">FR</span><span><span style="display:block;font-weight:700;font-size:16px">Français</span><span style="display:block;font-size:13px;color:#55607A">French</span></span></div><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">DE</span><span><span style="display:block;font-weight:700;font-size:16px">Deutsch</span><span style="display:block;font-size:13px;color:#55607A">German</span></span></div><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">ZH</span><span><span style="display:block;font-weight:700;font-size:16px">中文</span><span style="display:block;font-size:13px;color:#55607A">Chinese</span></span></div><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">JA</span><span><span style="display:block;font-weight:700;font-size:16px">日本語</span><span style="display:block;font-size:13px;color:#55607A">Japanese</span></span></div><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">ES</span><span><span style="display:block;font-weight:700;font-size:16px">Español</span><span style="display:block;font-size:13px;color:#55607A">Spanish</span></span></div><div style="border:1px solid #E3E8F0;border-radius:14px;padding:14px 16px;background:#FFFFFF;display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:10px;background:#40E0F5;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none">RU</span><span><span style="display:block;font-weight:700;font-size:16px">Русский</span><span style="display:block;font-size:13px;color:#55607A">Russian</span></span></div></div></div></div>
+
+<!-- CTA -->
+<div class="rv" style="max-width:1200px;margin:88px auto 0;padding:0 24px;box-sizing:border-box">
+<div style="background:radial-gradient(60% 80% at 8% 100%,rgba(64,224,245,.20),transparent 62%),radial-gradient(120% 140% at 88% 0%,#1D3F86 0%,#14264F 46%,#0F1E3D 100%);border-radius:28px;padding:72px 32px;text-align:center;color:#FFFFFF">
+<h2 style="font-weight:700;font-size:48px;line-height:1.05;letter-spacing:-0.04em;margin:0">Try it on your own business.</h2>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:32px">
+<a class="pulse" href="EarlyAccess.dc.html" style="background:linear-gradient(135deg,#90F0FB 0%,#40E0F5 55%,#1EC0DC 100%);color:#0F1E3D;font-weight:700;font-size:16px;padding:15px 28px;border-radius:999px">Request early access</a>
+<a href="DocsHome.dc.html" style="background:transparent;color:#FFFFFF;font-weight:600;font-size:16px;padding:15px 28px;border-radius:999px;border:1px solid #334155">Read the guides</a>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="max-width:1200px;margin:0 auto;padding:32px 24px 40px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#55607A;border-top:1px solid #E3E8F0;margin-top:72px">
+<span>© 2026 Schenk Rekenmeesters</span>
+<span style="display:flex;flex-wrap:wrap;gap:20px"><a href="DocsHome.dc.html" style="color:#55607A">Docs</a><a href="Company.dc.html" style="color:#55607A">Contact</a><a href="EmailInfo.dc.html" style="color:#55607A">Email from us?</a><a href="Privacy.dc.html" style="color:#55607A">Privacy</a><a href="Terms.dc.html" style="color:#55607A">Terms</a></span>
+</div>
+
+
+<!-- STICKY EARLY ACCESS BAR -->
+<div class="stickycta"><span>Be among the first to build with WebGen</span><a href="EarlyAccess.dc.html" style="background:#40E0F5;color:#0F1E3D;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;white-space:nowrap">Request early access</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3000}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

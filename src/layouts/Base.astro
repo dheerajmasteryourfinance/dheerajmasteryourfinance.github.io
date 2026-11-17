@@ -3,31 +3,50 @@ import '../styles/base.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import OrgJsonLd from '../components/OrgJsonLd.astro';
+import { SITE, alternates, getLocale, localize } from '../i18n/index.ts';
+import { UI } from '../i18n/ui.ts';
 
-interface Props { title: string; description: string; path: string; noCanonical?: boolean }
-const { title, description, path, noCanonical = false } = Astro.props;
-const canonical = `https://webgnr.com${path}`;
+interface Props {
+  title: string;
+  description: string;
+  /** The page's locale-neutral path, e.g. '/features/'. The locale prefix is added here. */
+  path: string;
+  /** Pages without a canonical (the 404) also get no hreflang alternates. */
+  noCanonical?: boolean;
+  /** Where the language switch points; defaults to this page in the other language. */
+  switchPath?: string;
+  orgJsonLd?: boolean;
+}
+const { title, description, path, noCanonical = false, switchPath = path, orgJsonLd = false } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = UI[locale];
+const self = localize(path, locale);
+const canonical = `${SITE}${self}`;
+const alts = alternates(path);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {!noCanonical && <link rel="canonical" href={canonical} />}
+    {!noCanonical && alts.map((a) => <link rel="alternate" hreflang={a.locale} href={`${SITE}${a.href}`} />)}
+    {!noCanonical && <link rel="alternate" hreflang="x-default" href={`${SITE}${localize(path, 'en')}`} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="WebGen" />
+    <meta property="og:locale" content={t.ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <slot name="head" />
-    {path === '/' && <OrgJsonLd />}
+    {orgJsonLd && <OrgJsonLd />}
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <Nav current={path} />
+    <a class="skip-link" href="#main">{t.skip}</a>
+    <Nav current={self} switchPath={switchPath} />
     <main id="main"><slot /></main>
-    <Footer />
+    <Footer switchPath={switchPath} />
   </body>
 </html>

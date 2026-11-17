@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { loadPage, allRoutes } from './helpers.js';
 
 const DIST = join(process.cwd(), 'dist');
-const APP_LABELS = new Set(['Sign in', 'Open the app']);
+const APP_LABELS = new Set(['Sign in', 'Open the app', 'Inloggen', 'Open de app']);
 
 describe('app links are gated by a placeholder', () => {
   it('every Sign in / Open the app link carries data-placeholder', () => {
@@ -19,7 +19,7 @@ describe('app links are gated by a placeholder', () => {
         }
       }
     }
-    expect(seen).toBeGreaterThan(5);
+    expect(seen).toBeGreaterThan(allRoutes().length);
     expect(bad).toEqual([]);
   });
 
@@ -36,19 +36,23 @@ describe('early access is the primary CTA everywhere', () => {
     expect(hits).toEqual([]);
   });
 
-  it('every Request early access link is internal, ungated and goes to /early-access/', () => {
+  it.each([
+    ['en', 'Request early access', '/early-access/'],
+    ['nl', 'Vraag vroege toegang aan', '/nl/early-access/'],
+  ])('%s: every "%s" link is internal, ungated and goes to %s', (lang, label, target) => {
+    const routes = allRoutes().filter((r) => r.startsWith('/nl/') === (lang === 'nl'));
     let seen = 0;
-    for (const route of allRoutes()) {
+    for (const route of routes) {
       for (const a of loadPage(route).querySelectorAll('a')) {
-        if (a.textContent.trim() !== 'Request early access') continue;
+        if (a.textContent.replace(/\s+/g, ' ').trim() !== label) continue;
         seen += 1;
-        expect(a.getAttribute('href'), route).toBe('/early-access/');
+        expect(a.getAttribute('href'), route).toBe(target);
         expect(a.hasAttribute('data-placeholder'), route).toBe(false);
         expect(a.hasAttribute('rel'), route).toBe(false);
       }
     }
     // One in the nav of every page, plus Home hero, Home closing CTA and Features CTA.
-    expect(seen).toBe(allRoutes().length + 3);
+    expect(seen).toBe(routes.length + 3);
   });
 });
 

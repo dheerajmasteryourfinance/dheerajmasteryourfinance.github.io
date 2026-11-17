@@ -1,28 +1,28 @@
 ---
 import Base from './Base.astro';
+import { getLocale, localize } from '../i18n/index.ts';
+import { UI } from '../i18n/ui.ts';
+import { LEGAL, type LegalPage } from '../i18n/legal.ts';
 
-interface Props {
-  title: string;
-  summary: string;
-  sections: { id: string; title: string; body: string }[];
-}
-const { title, summary, sections } = Astro.props;
-const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
-const docs = [
-  { href: '/privacy/', label: 'Privacy policy' },
-  { href: '/terms/', label: 'Terms of service' },
-  { href: '/cookies/', label: 'Cookie policy' },
-];
+interface Props { page: LegalPage }
+const { page } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = UI[locale].legal;
+const docSet = LEGAL[locale];
+const { title, description, summary, sections } = docSet[page];
+const path = `/${page}/`;
+const self = localize(path, locale);
+const docs = (['privacy', 'terms', 'cookies'] as const).map((p) => ({ href: localize(`/${p}/`, locale), label: t[p] }));
 ---
-<Base title={`${title} | WebGen`} description={`WebGen ${title.toLowerCase()}.`} path={path}>
+<Base title={`${title} | WebGen`} description={description} path={path}>
   <section data-section="header" class="l-head">
     <div class="container">
-      <p class="eyebrow">Legal</p>
+      <p class="eyebrow">{t.eyebrow}</p>
       <h1>{title}</h1>
-      <p class="muted">Last updated [DATE] · Applies to the WebGen website and app</p>
-      <nav aria-label="Legal documents" class="subnav">
+      <p class="muted">{t.updated}</p>
+      <nav aria-label={t.docsLabel} class="subnav">
         {docs.map((d) => (
-          <a href={d.href} aria-current={d.href === path ? 'page' : undefined}>{d.label}</a>
+          <a href={d.href} aria-current={d.href === self ? 'page' : undefined}>{d.label}</a>
         ))}
       </nav>
     </div>
@@ -30,33 +30,35 @@ const docs = [
 
   <section data-section="body" class="l-body">
     <div class="container layout">
-      <nav aria-label="On this page" class="toc">
-        <p class="toc-title">On this page</p>
+      <nav aria-label={t.onThisPage} class="toc">
+        <p class="toc-title">{t.onThisPage}</p>
         <ul>
           {sections.map((s) => <li><a href={`#${s.id}`}>{s.title}</a></li>)}
         </ul>
       </nav>
       <article>
         <div class="summary">
-          <p class="toc-title">The short version</p>
+          <p class="toc-title">{t.short}</p>
           <p>{summary}</p>
         </div>
-        <p class="draft"><strong>Draft:</strong> the headings are a structure only. The legal text must be written or approved by the business and its adviser before launch.</p>
+        <p class="draft"><strong>{t.draftLead}</strong> {t.draft}</p>
         {sections.map((s) => (
           <section id={s.id}>
             <h2>{s.title}</h2>
             <p>{s.body}</p>
           </section>
         ))}
-        <p class="contact">Questions about this policy? Email <strong>[PRIVACY EMAIL]</strong> or write to [LEGAL ENTITY NAME], [POSTAL ADDRESS].</p>
+        <!-- Static dictionary string with one <strong>; no user input reaches it. -->
+        <p class="contact" set:html={t.contact} />
       </article>
     </div>
   </section>
 </Base>
 
 <style>
-  main > section.l-head { margin-top: 56px; }
-  main > section.l-body { margin-top: 40px; }
+  /* <main> lives in the Base layout, so it needs :global() for these rules to match. */
+  :global(main) > section.l-head { margin-top: 56px; }
+  :global(main) > section.l-body { margin-top: 40px; }
   .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; display: block; }
   .muted { color: var(--muted); }
   .subnav { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line-strong); margin-top: 24px; }

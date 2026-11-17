@@ -1,30 +1,35 @@
 ---
 import Logo from './Logo.astro';
+import LangSwitch from './LangSwitch.astro';
 import { APP_LOGIN, APP_PLACEHOLDER, EARLY_ACCESS } from '../lib/links.js';
-import { COPY } from '../lib/copy.js';
-interface Props { current: string }
-const { current } = Astro.props;
+import { getLocale, localize } from '../i18n/index.ts';
+import { UI } from '../i18n/ui.ts';
+interface Props { current: string; switchPath: string }
+const { current, switchPath } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = UI[locale];
 const links = [
-  { href: '/features/', label: 'Product' },
-  { href: '/docs/', label: 'Docs' },
-  { href: '/company/', label: 'Company' },
+  { href: localize('/features/', locale), label: t.nav.product },
+  { href: localize('/docs/', locale), label: t.nav.docs },
+  { href: localize('/company/', locale), label: t.nav.company },
 ];
 const isCurrent = (href: string) => current === href || current.startsWith(href);
 ---
-<nav class="site-nav" aria-label="Main">
+<nav class="site-nav" aria-label={t.nav.label}>
   <div class="container">
     <Logo />
     <ul class="nav-links">
       {links.map((l) => (
         <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
       ))}
-      <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Sign in</a></li>
+      <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a></li>
+      <li><LangSwitch path={switchPath} /></li>
     </ul>
-    <a class="btn btn-primary nav-cta" href={EARLY_ACCESS}><span><span class="cta-lead">{COPY.ctaEarlyAccessLead}</span><span class="cta-rest">{COPY.ctaEarlyAccessRest}</span></span></a>
+    <a class="btn btn-primary nav-cta" href={localize(EARLY_ACCESS, locale)}><span><span class="cta-lead">{t.cta.lead}</span><span class="cta-rest">{t.cta.rest}</span>{t.cta.tail && <span class="cta-tail">{t.cta.tail}</span>}</span></a>
     <details class="nav-menu" data-nav-menu>
       <summary aria-controls="site-menu">
-        <span class="visually-hidden label-closed">Open menu</span>
-        <span class="visually-hidden label-open">Close menu</span>
+        <span class="visually-hidden label-closed">{t.nav.openMenu}</span>
+        <span class="visually-hidden label-open">{t.nav.closeMenu}</span>
         <svg class="icon-closed" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <path d="M3 5h14M3 10h14M3 15h14" />
         </svg>
@@ -36,7 +41,8 @@ const isCurrent = (href: string) => current === href || current.startsWith(href)
         {links.map((l) => (
           <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
         ))}
-        <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Sign in</a></li>
+        <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a></li>
+        <li class="menu-lang"><LangSwitch path={switchPath} /></li>
       </ul>
     </details>
   </div>

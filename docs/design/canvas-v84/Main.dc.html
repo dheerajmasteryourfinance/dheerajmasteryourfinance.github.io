@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WebGen Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;display=swap" rel="stylesheet">
+<style>
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif}
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A}
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+html{scroll-behavior:smooth}
+a,button,summary{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .25s ease,transform .25s ease}
+a[href]:hover{transform:translateY(-1px)}
+.lift{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease}
+.lift:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(15,30,61,0.14)}
+.zoom img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.zoom:hover img{transform:scale(1.03)}
+@keyframes rise{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+@keyframes floatup{from{transform:translateY(24px)}to{transform:none}}
+@supports (animation-timeline:view()){
+.rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 38%}
+.parallax{animation:floatup linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.rv,.parallax{animation:none}
+.lift,.zoom img,a[href]{transition:none}
+a[href]:hover,.lift:hover,.zoom:hover img{transform:none}
+}
+.stickycta{position:sticky;bottom:16px;z-index:6;width:max-content;max-width:calc(100% - 32px);margin:0 auto 16px;display:flex;align-items:center;gap:14px;background:#0F1E3D;color:#FFFFFF;border-radius:999px;padding:8px 8px 8px 22px;box-shadow:0 18px 44px rgba(15,30,61,0.3);font-size:15px;font-weight:500}
+@keyframes barin{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@supports (animation-timeline:scroll()){.stickycta{animation:barin linear both;animation-timeline:scroll(root);animation-range:480px 760px}}
+@media (prefers-reduced-motion:reduce){.stickycta{animation:none}}
+
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes drift2{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(12px) rotate(1deg)}}
+@keyframes blobmove{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-30px,24px) scale(.94)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(64,224,245,.55)}70%{box-shadow:0 0 0 16px rgba(64,224,245,0)}100%{box-shadow:0 0 0 0 rgba(64,224,245,0)}}
+.drift{animation:drift 6s ease-in-out infinite}
+.drift2{animation:drift2 7.5s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-1;animation:blobmove 16s ease-in-out infinite}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.pulse{animation:ring 2.4s ease-out infinite}
+.fchip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;padding:10px 14px;box-shadow:0 18px 40px rgba(15,30,61,0.16);font-size:14px;font-weight:600;color:#0F1E3D}
+@media (max-width:900px){.fchip{display:none}.blob{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2,.blob,.marq-track,.pulse{animation:none}.marq{overflow-x:auto}}
+
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:none}
+::view-transition-new(root){animation:vtin .18s ease both}
+@keyframes vtin{from{opacity:.88}}
+html{background:#FFFFFF}
+@keyframes pagein{from{opacity:.9}to{opacity:1}}
+body{animation:pagein .2s ease both}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}body{animation:none}}
+
+/* responsive navigation */
+.burger{display:none;position:relative;width:44px;height:44px;border:1px solid #E3E8F0;border-radius:12px;background:#FFFFFF;cursor:pointer;align-items:center;justify-content:center;flex:none;z-index:60}
+.burger input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.burger i{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#0F1E3D;transition:transform .25s ease,opacity .2s ease,top .25s ease}
+.burger i:nth-of-type(1){top:15px}.burger i:nth-of-type(2){top:21px}.burger i:nth-of-type(3){top:27px}
+.burger:has(input:focus-visible){outline:2px solid #1D4ED8;outline-offset:2px}
+.burger:has(input:checked) i:nth-of-type(1){top:21px;transform:rotate(45deg)}
+.burger:has(input:checked) i:nth-of-type(2){opacity:0}
+.burger:has(input:checked) i:nth-of-type(3){top:21px;transform:rotate(-45deg)}
+.navpanel{display:contents}
+.navhead{display:none}
+.navback{display:none}
+@media (max-width:900px){
+  [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#FFFFFF!important}
+  .burger{display:inline-flex}
+  .navpanel{display:flex;flex-direction:column;gap:0;position:fixed;top:0;right:0;bottom:0;width:min(88vw,360px);box-sizing:border-box;padding:14px 24px 28px;background:linear-gradient(180deg,#F3F7FF 0%,#FFFFFF 220px);border-radius:24px 0 0 24px;box-shadow:-24px 0 60px rgba(15,30,61,.24);z-index:50;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s}
+  :root:has(.navchk:checked) .navpanel{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .navback{display:block;position:fixed;inset:0;background:rgba(15,30,61,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  :root:has(.navchk:checked) .navback{opacity:1;pointer-events:auto}
+  .navhead{display:flex;align-items:center;height:44px;padding-right:56px;margin-bottom:20px}
+  .navhead a{display:flex;align-items:center;gap:10px;color:#0F1E3D;font-weight:700;font-size:19px;letter-spacing:-0.02em}
+  .navpanel nav.navlinks{flex-direction:column!important;flex-wrap:nowrap!important;gap:4px!important;font-size:20px!important;font-weight:600!important}
+  .navpanel nav.navlinks a{display:flex;align-items:center;justify-content:space-between;padding:16px 14px!important;border-radius:14px;color:#0F1E3D!important}
+  .navpanel nav.navlinks a::after{content:"";width:8px;height:8px;border-top:2px solid #9AA6BD;border-right:2px solid #9AA6BD;transform:rotate(45deg);margin-right:4px}
+  .navpanel nav.navlinks a:hover{background:#EAF1FF}
+  .navpanel .navactions{flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin-top:auto;padding-top:24px;border-top:1px solid #E3E8F0}
+  .navpanel .navactions [role="group"]{display:flex!important;width:100%;box-sizing:border-box;margin:0!important}
+  .navpanel .navactions [role="group"]>*{flex:1;text-align:center;padding:10px 12px!important;font-size:15px}
+  .navpanel .navactions>a{text-align:center;padding:14px 18px!important;font-size:16px!important;border-radius:999px}
+  .navpanel .navactions>a:not([href^="Early"]){border:1px solid #CBD3E1;color:#0F1E3D!important}
+  .navpanel .navactions>a[href^="Early"]{box-shadow:0 10px 24px rgba(15,30,61,.22)}
+  .fchip{display:none}
+}
+@media (prefers-reduced-motion:reduce){.navpanel,.navback,.burger i{transition:none!important}}
+
+.route{display:block;width:100%;height:auto;margin-top:40px}
+.route .base{stroke-dasharray:2 9}
+.route .draw{stroke-dasharray:1;stroke-dashoffset:0}
+.stopcard{border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF;box-sizing:border-box}
+@keyframes routedraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes stoppop{from{transform:scale(.6);opacity:.4}to{transform:none;opacity:1}}
+@supports (animation-timeline:view()){
+  .route .draw{stroke-dashoffset:1;animation:routedraw linear both;animation-timeline:view();animation-range:entry 20% cover 52%}
+  .route .pin{transform-box:fill-box;transform-origin:center;animation:stoppop linear both;animation-timeline:view();animation-range:entry 25% cover 45%}
+}
+@media (max-width:760px){.route{display:none}}
+@media (prefers-reduced-motion:reduce){.route .draw{animation:none;stroke-dashoffset:0}.route .pin{animation:none}}
+
+/* resp-fix */
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:100%;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 760px);font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D">
+
+<!-- ANNOUNCEMENT -->
+<div style="background:#0F1E3D;color:#DCE3EE;font-size:14px;text-align:center;padding:10px 16px">New: automated email sequences for every site. <a href="DocsHome.dc.html" style="color:#FFFFFF;font-weight:600;text-decoration:underline">Read the guide</a></div>
+
+<!-- NAV -->
+<div style="position:sticky;top:0;z-index:5;background:rgba(255,255,255,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E3E8F0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;max-width:1200px;margin:0 auto;padding:14px 24px;box-sizing:border-box">
+<a href="Main.dc.html" style="display:flex;align-items:center;gap:10px;color:#0F1E3D">
+<span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"></path></svg></span>
+<span style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</span>
+</a>
+<label class="navback" for="navtoggle" aria-hidden="true"></label><label class="burger"><input type="checkbox" id="navtoggle" class="navchk" aria-label="Open menu"><i></i><i></i><i></i></label><div class="navpanel"><div class="navhead"><a href="Main.dc.html"><span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"></path></svg></span>WebGen</a></div><nav class="navlinks" aria-label="Main" style="display:flex;flex-wrap:wrap;gap:4px;font-size:15px;font-weight:500">
+<a href="Features.dc.html" style="color:#334155;padding:10px 12px">Product</a>
+<a href="Examples.dc.html" style="color:#334155;padding:10px 12px">Examples</a>
+<a href="DocsHome.dc.html" style="color:#334155;padding:10px 12px">Docs</a>
+<a href="Company.dc.html" style="color:#334155;padding:10px 12px">Company</a>
+</nav>
+<div class="navactions" style="display:flex;align-items:center;gap:8px">
+<div role="group" aria-label="Language" style="display:inline-flex;padding:3px;background:#F4F7FB;border:1px solid #E3E8F0;border-radius:999px;font-size:13px;font-weight:600;margin-right:4px"><span aria-current="true" style="background:#0F1E3D;color:#FFFFFF;padding:6px 12px;border-radius:999px">EN</span><a href="MainNL.dc.html" hreflang="nl" lang="nl" title="Nederlands" style="color:#334155;padding:6px 12px;border-radius:999px">NL</a></div>
+<a href="#" style="color:#0F1E3D;font-weight:500;font-size:15px;padding:10px 12px">Sign in</a>
+<a href="EarlyAccess.dc.html" style="background:#0F1E3D;color:#FFFFFF;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px">Request early access</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;padding:56px 24px 0;box-sizing:border-box;text-align:center;position:relative;isolation:isolate"><div class="blob" style="width:380px;height:380px;background:rgba(64,224,245,.35);top:40px;left:-60px"></div><div class="blob" style="width:340px;height:340px;background:rgba(29,78,216,.2);top:120px;right:-40px;animation-delay:-6s"></div>
+<div style="display:inline-flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:4px;background:#F4F7FB;border:1px solid #E3E8F0;border-radius:999px" role="group" aria-label="Who are you building for">
+<button type="button" onClick="{{pickBiz}}" aria-pressed="{{isBiz}}" style="{{bizStyle}}">For businesses</button>
+<button type="button" onClick="{{pickAgency}}" aria-pressed="{{isAgency}}" style="{{agencyStyle}}">For agencies</button>
+</div>
+<sc-if value="{{bizA}}" hint-placeholder-val="{{ true }}">
+<h1 style="font-weight:700;font-size:72px;line-height:1.02;letter-spacing:-0.03em;margin:32px auto 0;max-width:920px">Get found. Get signed up. <span style="background:linear-gradient(transparent 60%,#40E0F5 60%);padding:0 6px">Follow up.</span></h1>
+<p style="font-size:20px;line-height:1.55;color:#55607A;max-width:640px;margin:24px auto 0">Describe your business and get a site with forms and email ready to go. No designer, no developer, no extra tools.</p>
+</sc-if>
+<sc-if value="{{agA}}" hint-placeholder-val="{{ false }}">
+<h1 style="font-weight:700;font-size:72px;line-height:1.02;letter-spacing:-0.03em;margin:32px auto 0;max-width:920px">Ship client sites faster. <span style="background:linear-gradient(transparent 60%,#40E0F5 60%);padding:0 6px">Send email as the client.</span></h1>
+<p style="font-size:20px;line-height:1.55;color:#55607A;max-width:640px;margin:24px auto 0">Generate, edit and publish for every client from one account. Each client keeps their own domain, sender identity, audience and reports.</p>
+</sc-if>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px">
+<a class="pulse" href="EarlyAccess.dc.html" style="background:linear-gradient(135deg,#90F0FB 0%,#40E0F5 55%,#1EC0DC 100%);color:#0F1E3D;font-weight:700;font-size:16px;padding:15px 26px;border-radius:999px">Request early access</a>
+<a href="#" style="background:#FFFFFF;color:#0F1E3D;font-weight:600;font-size:16px;padding:15px 26px;border-radius:999px;border:1px solid #CBD3E1">See an example</a>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 24px;margin-top:24px;font-size:14px;color:#55607A">
+<span>Double opt-in for subscribers</span><span aria-hidden="true">·</span><span>One-click unsubscribe</span><span aria-hidden="true">·</span><span>Your own domain</span>
+</div>
+</div>
+
+<!-- PRODUCT SHOT -->
+<div style="max-width:1200px;margin:48px auto 0;padding:0 24px;box-sizing:border-box;position:relative">
+<div class="fchip drift" style="left:-8px;top:18%"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span>New form entry</div><div class="fchip drift2" style="right:-8px;top:34%"><span style="width:28px;height:28px;border-radius:8px;background:#DCE7FF;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9 6 9-6M3 7v10h18V7z"></path></svg></span>Email sent</div><div class="fchip drift" style="left:6%;bottom:12%"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"></path></svg></span>Site published</div>
+<div style="border-radius:22px;padding:10px;background:#F4F7FB;border:1px solid #E3E8F0">
+<div style="background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(15,30,61,0.14)">
+<img src="/_blob/8be774f15e2e1127e799f1a59b4b3123" alt="The WebGen editor in Edit mode, with the headline of the GreenLeaf Bakery website selected and the text toolbar open" style="display:block;width:100%;height:auto">
+</div>
+</div>
+<p style="margin:14px 0 0;text-align:center;font-size:14px;color:#55607A">The real WebGen editor: click any text on your site to change it.</p>
+</div>
+
+<!-- PROBLEM -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box">
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">SOUND FAMILIAR?</div>
+<h2 style="font-weight:700;font-size:48px;line-height:1.08;letter-spacing:-0.035em;margin:12px 0 0;max-width:760px">Getting online shouldn't need a big budget or a tech team.</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:40px">
+<div style="background:#F4F7FB;border-radius:20px;padding:28px"><p style="margin:0;font-size:20px;line-height:1.4;font-weight:600">"I don't know where to start."</p><p style="margin:12px 0 0;font-size:15px;line-height:1.55;color:#55607A">Hosting, templates, plugins, email tools. Every choice leads to five more.</p></div>
+<div style="background:#F4F7FB;border-radius:20px;padding:28px"><p style="margin:0;font-size:20px;line-height:1.4;font-weight:600">"I can't afford a designer and a developer."</p><p style="margin:12px 0 0;font-size:15px;line-height:1.55;color:#55607A">A custom site and a marketing setup can cost more than a small business spends in a year.</p></div>
+<div style="background:#F4F7FB;border-radius:20px;padding:28px"><p style="margin:0;font-size:20px;line-height:1.4;font-weight:600">"I worry it will look amateur."</p><p style="margin:12px 0 0;font-size:15px;line-height:1.55;color:#55607A">Next to competitors with polished sites, a weak one can cost you the customer.</p></div>
+</div>
+</div>
+
+<!-- GUIDE -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:56px 24px 0;box-sizing:border-box">
+<div style="display:flex;flex-wrap:wrap;gap:40px;align-items:center;border:1px solid #E3E8F0;border-radius:28px;padding:40px;box-sizing:border-box">
+<div style="flex:1 1 420px">
+<h2 style="font-weight:700;font-size:36px;line-height:1.12;letter-spacing:-0.03em;margin:0">We know your time goes to your business, not to learning web tools.</h2>
+<p style="font-size:17px;line-height:1.6;color:#55607A;margin:16px 0 0">That is why WebGen asks about your customers, not about code. Your answers are turned into a clear message, a site built around it, and the tools to keep in touch.</p>
+</div>
+<div style="flex:1 1 320px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:14px;align-items:flex-start;background:#F4F7FB;border-radius:16px;padding:18px 20px">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="M4 19V5a2 2 0 0 1 2-2h12v14H6a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12"></path></svg>
+<div><div style="font-weight:600">Written with a proven story framework</div><div style="font-size:15px;color:#55607A;margin-top:4px;line-height:1.5">[CONFIRM with Joel: name the StoryBrand framework publicly]</div></div>
+</div>
+<div style="display:flex;gap:14px;align-items:flex-start;background:#F4F7FB;border-radius:16px;padding:18px 20px">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7Z"></path></svg>
+<div><div style="font-weight:600">Trusted by real businesses</div><div style="font-size:15px;color:#55607A;margin-top:4px;line-height:1.5">[PROOF: Master Your Business and Mastercrest Games sites, if Joel agrees]</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em">HOW IT WORKS</div><h2 style="font-weight:700;font-size:48px;line-height:1.08;letter-spacing:-0.035em;margin:12px 0 0">Three stops to a site that works.</h2><svg class="route" aria-hidden="true" viewBox="0 0 1152 130" fill="none"><path class="base" d="M30 100C90 100 120 46 192 46S400 100 576 100 860 46 960 46 1060 74 1120 74" stroke="#9AA6BD" stroke-width="3" stroke-linecap="round"></path><path class="draw" pathLength="1" d="M30 100C90 100 120 46 192 46S400 100 576 100 860 46 960 46 1060 74 1120 74" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round"></path><circle cx="30" cy="100" r="9" fill="#0F1E3D"></circle><circle cx="30" cy="100" r="3.5" fill="#40E0F5"></circle><g class="pin"><circle cx="192" cy="46" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"></circle><text x="192" y="52" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">1</text></g><g class="pin"><circle cx="576" cy="100" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"></circle><text x="576" y="106" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">2</text></g><g class="pin"><circle cx="960" cy="46" r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"></circle><text x="960" y="52" text-anchor="middle" font-family="DM Sans,system-ui,sans-serif" font-size="16" font-weight="700" fill="#0F1E3D">3</text></g><path d="M1120 74V32" stroke="#0F1E3D" stroke-width="3" stroke-linecap="round"></path><path d="M1120 32l24 9-24 9z" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round"></path></svg><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:12px"><div class="stopcard"><div style="display:flex;align-items:center;gap:10px"><span style="width:30px;height:30px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">1</span><span style="font-size:12px;font-weight:700;letter-spacing:0.06em;color:#1D4ED8">STOP 1 · CHECK</span></div><h3 style="font-size:20px;margin:14px 0 8px">Tell us about your business</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">Answer a short brief about who you serve and how you help them.</p></div><div class="stopcard"><div style="display:flex;align-items:center;gap:10px"><span style="width:30px;height:30px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">2</span><span style="font-size:12px;font-weight:700;letter-spacing:0.06em;color:#1D4ED8">STOP 2 · ROUTE</span></div><h3 style="font-size:20px;margin:14px 0 8px">Review your site</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">Get a full site with pages and copy. Change anything by clicking it or asking.</p></div><div class="stopcard"><div style="display:flex;align-items:center;gap:10px"><span style="width:30px;height:30px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">3</span><span style="font-size:12px;font-weight:700;letter-spacing:0.06em;color:#1D4ED8">STOP 3 · LAUNCH</span></div><h3 style="font-size:20px;margin:14px 0 8px">Publish</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">Go live on your domain with forms and email connected.</p></div></div></div>
+
+<!-- WHAT YOU GET -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">WHAT YOU GET</div><h2 style="font-weight:700;font-size:44px;line-height:1.08;letter-spacing:-0.035em;margin:12px 0 0;max-width:760px">Everything you need, in the order you need it.</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:36px"><div class="lift" style="border:1px solid #E3E8F0;border-radius:24px;padding:28px;background:#FFFFFF;box-sizing:border-box"><span style="width:36px;height:36px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">1</span><h3 style="font-size:24px;letter-spacing:-0.02em;margin:16px 0 0">Get found</h3><ul style="margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:16px;line-height:1.5;color:#334155"><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>A complete site, written from your brief</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Search tags, sitemap and structured data [CONFIRM: SEO release]</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Your own domain</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>A complete site, written from your brief</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Search tags, sitemap and structured data [CONFIRM: SEO release]</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Your site in up to 8 languages</li></ul></div><div class="lift" style="border:1px solid #E3E8F0;border-radius:24px;padding:28px;background:#FFFFFF;box-sizing:border-box"><span style="width:36px;height:36px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">2</span><h3 style="font-size:24px;letter-spacing:-0.02em;margin:16px 0 0">Get signed up</h3><ul style="margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:16px;line-height:1.5;color:#334155"><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Forms on every page</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>One audience, tagged by where people signed up</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Consent and unsubscribe handled for you</li></ul></div><div class="lift" style="border:1px solid #E3E8F0;border-radius:24px;padding:28px;background:#FFFFFF;box-sizing:border-box"><span style="width:36px;height:36px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center">3</span><h3 style="font-size:24px;letter-spacing:-0.02em;margin:16px 0 0">Follow up</h3><ul style="margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:16px;line-height:1.5;color:#334155"><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Newsletters from your own domain</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Welcome emails and automated sequences</li><li style="display:flex;gap:12px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"></path></svg>Visits, sign-ups and email results in one view</li></ul></div></div><div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;background:#F4F7FB;border-radius:20px;padding:20px 24px"><p style="margin:0;font-size:16px;line-height:1.5;color:#334155;max-width:760px">Instead of five separate tools (a site builder, a form plugin, a newsletter tool, an SEO plugin and analytics) you get one account.</p><a href="Features.dc.html" style="font-weight:600;font-size:16px;white-space:nowrap">Explore all features →</a></div></div>
+
+<!-- PROOF -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px"><div><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">PROOF</div><h2 style="font-weight:700;font-size:44px;line-height:1.08;letter-spacing:-0.035em;margin:12px 0 0">Built with WebGen.</h2><p style="font-size:18px;line-height:1.55;color:#55607A;max-width:620px;margin:14px 0 0">Real websites, written from a short brief and edited in the same editor you just saw.</p></div><a href="Examples.dc.html" style="font-weight:600;font-size:16px;padding:10px 0">See all examples →</a></div><div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:36px"><div class="lift" style="flex:2 1 560px;background:linear-gradient(160deg,#F8FAFF 0%,#E9EFFA 100%);border-radius:24px;padding:28px;box-sizing:border-box;display:flex;flex-direction:column">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center">
+<div><div style="font-weight:700;font-size:22px;letter-spacing:-0.02em">GreenLeaf Bakery</div><div style="font-size:14px;color:#55607A;margin-top:2px">Bakery · Amsterdam</div></div>
+<span style="background:#40E0F5;color:#0F1E3D;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px">Example site</span>
+</div>
+<div class="zoom" style="position:relative;margin-top:22px;padding-bottom:36px">
+<div style="border-radius:14px;overflow:hidden;border:1px solid #E3E8F0;box-shadow:0 20px 50px rgba(15,30,61,0.14);background:#FFFFFF">
+<img src="/_blob/3b9dfcf9ae06e69caad013d42768bbc9" alt="The GreenLeaf Bakery website on desktop, with a headline about fresh bread and a section about what is missing in local bakeries" style="display:block;width:100%;height:auto">
+</div>
+<div class="parallax" style="position:absolute;right:20px;bottom:0;width:30%;border-radius:20px;overflow:hidden;border:6px solid #0F1E3D;box-shadow:0 22px 52px rgba(15,30,61,0.3);background:#0F1E3D">
+<img src="/_blob/34b3522dc8b83aca3ed77ee8a1caa061" alt="The GreenLeaf Bakery website on a phone" style="display:block;width:100%;height:auto">
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;font-size:14px">
+<span style="background:#FFFFFF;border:1px solid #E3E8F0;border-radius:999px;padding:7px 14px">Generated in minutes</span><span style="background:#FFFFFF;border:1px solid #E3E8F0;border-radius:999px;padding:7px 14px">Dutch copy</span><span style="background:#FFFFFF;border:1px solid #E3E8F0;border-radius:999px;padding:7px 14px">Works on phones</span>
+</div>
+</div>
+</div><div style="margin-top:28px"><div style="font-weight:600;font-size:15px;color:#334155;margin-bottom:12px">Examples from small businesses, made in WebGen</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px"><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/2fd2cb5ccf5a605c91ea6119dadcd000" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Blad &amp; Bloesem</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Tea shop</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Elke dag thee die écht smaakt”</div></a><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/f6f27542a9ac785f55e19ab882cd736c" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">De Groene Hand</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Garden care</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Je hoeft het niet alleen uit te zoeken.”</div></a><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/70afddb197aab16939b36c7e05bd6c3d" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Warmtewijs</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Installer</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Warm huis, lage energierekening, zonder gedoe”</div></a><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/50fc784d0dfc0cd9466574e3483ef3fd" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Beweegpunt</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Physiotherapy</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Snel weer pijnvrij en zelfstandig bewegen”</div></a></div></div><div style="margin-top:20px;border:1px solid #E3E8F0;border-radius:24px;padding:28px;display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between"><div style="flex:1 1 300px"><h3 style="font-size:22px;letter-spacing:-0.02em;margin:0">Built to respect the inbox.</h3><a href="EmailInfo.dc.html" style="display:inline-block;margin-top:8px;font-weight:600;font-size:15px">Got an email from us? Here is why →</a></div><div style="flex:2 1 420px;display:flex;flex-wrap:wrap;gap:10px"><span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#0F1E3D;border:1px solid #E3E8F0;background:#FFFFFF;border-radius:999px;padding:9px 16px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:0"><path d="m5 12 5 5 9-10"></path></svg>Double opt-in (optional)</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#0F1E3D;border:1px solid #E3E8F0;background:#FFFFFF;border-radius:999px;padding:9px 16px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:0"><path d="m5 12 5 5 9-10"></path></svg>One-click unsubscribe</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#0F1E3D;border:1px solid #E3E8F0;background:#FFFFFF;border-radius:999px;padding:9px 16px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:0"><path d="m5 12 5 5 9-10"></path></svg>Verified senders</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#0F1E3D;border:1px solid #E3E8F0;background:#FFFFFF;border-radius:999px;padding:9px 16px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:0"><path d="m5 12 5 5 9-10"></path></svg>Suppression lists</span></div></div></div>
+
+<!-- DUTCH TRUST -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">WHY WEBGEN</div><h2 style="font-weight:700;font-size:44px;line-height:1.08;letter-spacing:-0.035em;margin:12px 0 0;max-width:760px">No fuss, and you know where you stand.</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:32px"><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Made in the Netherlands</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">By a Dutch team, for small businesses. [CONFIRM: wording]</div></div><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Your data in [EU REGION]</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">Clear about where your site and contact list live. [CONFIRM: region and provider]</div></div><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Help in Dutch and English</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">A real person who helps when you get stuck. [CONFIRM: reply time]</div></div></div></div>
+
+<!-- FAQ -->
+<div class="rv" style="max-width:800px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box">
+<h2 style="font-weight:700;font-size:44px;letter-spacing:-0.035em;margin:0;text-align:center">Questions</h2>
+<div style="margin-top:40px;border-top:1px solid #E3E8F0">
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Do I need to know how to code or design?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">No. You describe the business and edit by clicking or asking for changes in plain words.</p></details>
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Can I use my own domain?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">Yes. Connect it from your site's Domain settings. The docs walk through each step.</p></details>
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Who owns my content and contact list?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">[CONFIRM: ownership and export wording]</p></details>
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Is it safe to send email through WebGen?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">Every email goes to people who signed up, from a sender that is verified, with an unsubscribe link in every message.</p></details>
+</div>
+</div>
+
+<!-- CTA -->
+<div class="rv" style="max-width:1200px;margin:88px auto 0;padding:0 24px;box-sizing:border-box">
+<div style="background:radial-gradient(60% 80% at 8% 100%,rgba(64,224,245,.20),transparent 62%),radial-gradient(120% 140% at 88% 0%,#1D3F86 0%,#14264F 46%,#0F1E3D 100%);border-radius:28px;padding:80px 32px;text-align:center;color:#FFFFFF">
+<h2 style="font-weight:700;font-size:52px;line-height:1.05;letter-spacing:-0.04em;margin:0">See your site today.</h2>
+<p style="font-size:18px;margin:16px 0 0;color:#C8D1E3">Every day without a site that works is a day customers choose someone else. Describe your business and we will build the first version.</p>
+<a href="EarlyAccess.dc.html" style="display:inline-block;margin-top:32px;background:linear-gradient(135deg,#90F0FB 0%,#40E0F5 55%,#1EC0DC 100%);color:#0F1E3D;font-weight:700;font-size:16px;padding:15px 28px;border-radius:999px">Request early access</a>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="max-width:1200px;margin:0 auto;padding:64px 24px 40px;box-sizing:border-box">
+<div style="display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between">
+<div style="flex:1 1 260px;max-width:320px">
+<div style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</div>
+<p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#55607A">Schenk Rekenmeesters<br>Steijnstraat 18, 2987 AS Ridderkerk<br>[SUPPORT EMAIL]</p>
+<!-- TRUST POINTS -->
+<div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:10px"><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#334155;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:999px;padding:7px 14px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg>Verified senders</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#334155;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:999px;padding:7px 14px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg>One-click unsubscribe</span><span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#334155;border:1px solid #E3E8F0;background:#F4F7FB;border-radius:999px;padding:7px 14px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg>Data stored in [EU REGION]</span></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Product</div><a href="Features.dc.html" style="color:#55607A">Features</a><a href="#" style="color:#55607A">Sign in</a></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Learn</div><a href="DocsHome.dc.html" style="color:#55607A">Docs</a><a href="DocsHome.dc.html" style="color:#55607A">Tutorials</a></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Company</div><a href="Company.dc.html" style="color:#55607A">About</a><a href="Company.dc.html" style="color:#55607A">Contact</a><a href="EmailInfo.dc.html" style="color:#55607A">Email from us?</a></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-weight:600">Legal</div><a href="Privacy.dc.html" style="color:#55607A">Privacy</a><a href="Terms.dc.html" style="color:#55607A">Terms</a><a href="Cookies.dc.html" style="color:#55607A">Cookies</a></div>
+</div>
+</div>
+<div style="margin-top:40px;padding-top:20px;border-top:1px solid #E3E8F0;font-size:13px;color:#55607A">© 2026 Schenk Rekenmeesters. All rights reserved.</div>
+</div>
+
+
+<!-- STICKY EARLY ACCESS BAR -->
+<div class="stickycta"><span>Be among the first to build with WebGen</span><a href="EarlyAccess.dc.html" style="background:#40E0F5;color:#0F1E3D;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;white-space:nowrap">Request early access</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":9000}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { aud: 'biz', hl: 'a', tab: 'build' }; }
+  renderVals() {
+    const f = 'DM Sans,system-ui,sans-serif';
+    const on = 'background:#0F1E3D;color:#FFFFFF;border:0;border-radius:999px;padding:11px 20px;font:600 15px ' + f + ';cursor:pointer;min-height:44px';
+    const off = 'background:transparent;color:#334155;border:0;border-radius:999px;padding:11px 20px;font:500 15px ' + f + ';cursor:pointer;min-height:44px';
+    const tabOn = 'background:#0F1E3D;color:#FFFFFF;border:1px solid #0F1E3D;border-radius:999px;padding:11px 22px;font:600 15px ' + f + ';cursor:pointer;min-height:44px';
+    const tabOff = 'background:#FFFFFF;color:#334155;border:1px solid #CBD3E1;border-radius:999px;padding:11px 22px;font:500 15px ' + f + ';cursor:pointer;min-height:44px';
+    const hOn = 'background:#0F1E3D;color:#FFFFFF;border:1px solid #0F1E3D;border-radius:6px;padding:3px 10px;font:600 12px ' + f + ';cursor:pointer;min-height:28px';
+    const hOff = 'background:transparent;color:#334155;border:1px solid #CBD3E1;border-radius:6px;padding:3px 10px;font:500 12px ' + f + ';cursor:pointer;min-height:28px';
+    const s = this.state;
+    const biz = s.aud === 'biz';
+    const a = s.hl === 'a';
+    const tab = (k) => s.tab === k;
+    return {
+      isBiz: biz, isAgency: !biz,
+      bizA: biz && a, bizB: biz && !a, agA: !biz && a, agB: !biz && !a,
+      bizStyle: biz ? on : off, agencyStyle: biz ? off : on,
+      pickBiz: () => this.setState({ aud: 'biz' }), pickAgency: () => this.setState({ aud: 'agency' }),
+      hlIsA: a, hlIsB: !a, hlAStyle: a ? hOn : hOff, hlBStyle: a ? hOff : hOn,
+      pickHlA: () => this.setState({ hl: 'a' }), pickHlB: () => this.setState({ hl: 'b' }),
+      tabBuild: tab('build'), tabCapture: tab('capture'), tabEmail: tab('email'), tabName: tab('name'),
+      tabStyleBuild: tab('build') ? tabOn : tabOff, tabStyleCapture: tab('capture') ? tabOn : tabOff,
+      tabStyleEmail: tab('email') ? tabOn : tabOff, tabStyleName: tab('name') ? tabOn : tabOff,
+      pickTabBuild: () => this.setState({ tab: 'build' }), pickTabCapture: () => this.setState({ tab: 'capture' }),
+      pickTabEmail: () => this.setState({ tab: 'email' }), pickTabName: () => this.setState({ tab: 'name' })
+    };
+  }
+}
+</script>
+</body>
+</html>

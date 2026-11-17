@@ -1,44 +1,56 @@
 ---
+import LangSwitch from './LangSwitch.astro';
 import { APP_LOGIN, APP_PLACEHOLDER } from '../lib/links.js';
-import { COPY, COMPANY } from '../lib/copy.js';
-const facts = [COMPANY.legalName, COMPANY.kvk, COMPANY.btw, COMPANY.address, COMPANY.phone];
+import { COMPANY } from '../lib/copy.js';
+import { getLocale, localize } from '../i18n/index.ts';
+import { UI } from '../i18n/ui.ts';
+interface Props { switchPath: string }
+const { switchPath } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = UI[locale].footer;
+const signIn = UI[locale].nav.signIn;
+const l = (p: string) => localize(p, locale);
+const facts = [COMPANY.legalName, COMPANY.kvk, COMPANY.btw, COMPANY.address, COMPANY.phone, COMPANY.supportEmail];
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="footer-cols">
       <div>
-        <h2>Product</h2>
+        <h2>{t.product}</h2>
         <ul>
-          <li><a href="/features/">Features</a></li>
-          <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">Sign in</a></li>
+          <li><a href={l('/features/')}>{t.features}</a></li>
+          <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{signIn}</a></li>
         </ul>
       </div>
       <div>
-        <h2>Learn</h2>
-        <ul><li><a href="/docs/">Docs</a></li></ul>
+        <h2>{t.learn}</h2>
+        <ul><li><a href={l('/docs/')}>{t.docs}</a></li></ul>
       </div>
       <div>
-        <h2>Company</h2>
+        <h2>{t.company}</h2>
         <ul>
-          <li><a href="/company/">About</a></li>
-          <li><a href="/company/#contact">Contact</a></li>
-          <li><a href="/email/">Email from us?</a></li>
+          <li><a href={l('/company/')}>{t.about}</a></li>
+          <li><a href={l('/company/#contact')}>{t.contact}</a></li>
+          <li><a href={l('/email/')}>{t.emailFromUs}</a></li>
         </ul>
       </div>
       <div>
-        <h2>Legal</h2>
+        <h2>{t.legal}</h2>
         <ul>
-          <li><a href="/privacy/">Privacy</a></li>
-          <li><a href="/terms/">Terms</a></li>
-          <li><a href="/cookies/">Cookies</a></li>
+          <li><a href={l('/privacy/')}>{t.privacy}</a></li>
+          <li><a href={l('/terms/')}>{t.terms}</a></li>
+          <li><a href={l('/cookies/')}>{t.cookies}</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-legal">
-      <ul class="footer-facts" aria-label={COPY.footerFactsLabel}>
+      <ul class="footer-facts" aria-label={t.factsLabel}>
         {facts.map((f) => <li>{f}</li>)}
       </ul>
-      <p class="footer-made">{COPY.madeIn}</p>
+      <div class="footer-end">
+        <LangSwitch path={switchPath} variant="long" />
+        <p class="footer-made">{t.madeIn}</p>
+      </div>
     </div>
   </div>
 </footer>

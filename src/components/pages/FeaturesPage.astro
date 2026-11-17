@@ -1,0 +1,216 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import { EARLY_ACCESS } from '../../lib/links.js';
+import { getLocale, localize } from '../../i18n/index.ts';
+import { FEATURES } from '../../i18n/features.ts';
+import newWebsiteBrief from '../../assets/screens/new-website-brief.png';
+import editorEdit from '../../assets/screens/editor-edit.png';
+import editorMobile from '../../assets/screens/editor-mobile.png';
+
+const locale = getLocale(Astro.currentLocale);
+const t = FEATURES[locale];
+const l = (p: string) => localize(p, locale);
+const chips = (['build', 'leads', 'email', 'search', 'domains'] as const).map((id) => ({ id, label: t.chips[id] }));
+---
+<Base title={t.title} description={t.description} path="/features/">
+  <section data-section="hero" class="f-hero">
+    <div class="container">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1>{t.h1}</h1>
+      <p class="lede">{t.lede}</p>
+      <nav aria-label={t.chipsLabel} class="chip-nav">
+        {chips.map((c) => <a href={`#${c.id}`}>{c.label}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <section id="build" data-section="build" class="row">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">{t.build.eyebrow}</p>
+        <h2>{t.build.title}</h2>
+        <p class="copy">{t.build.copy}</p>
+        <ul class="ticks">{t.build.ticks.map((x) => <li>{x}</li>)}</ul>
+      </div>
+      <div class="shots">
+        <Picture
+          src={newWebsiteBrief}
+          formats={['avif']}
+          fallbackFormat="webp"
+          widths={[320, 480, 640, 920]}
+          sizes="(min-width: 760px) 330px, 62vw"
+          alt={t.build.altBrief}
+          loading="lazy"
+          class="shot shot-a"
+        />
+        <Picture
+          src={editorEdit}
+          formats={['avif']}
+          fallbackFormat="webp"
+          widths={[400, 640, 800, 1200]}
+          sizes="(min-width: 760px) 420px, 80vw"
+          alt={t.build.altEditor}
+          loading="lazy"
+          class="shot shot-b"
+        />
+      </div>
+    </div>
+    <div class="container split phone-row">
+      <div>
+        <h3>{t.build.phoneTitle}</h3>
+        <p class="copy">{t.build.phoneCopy}</p>
+      </div>
+      <Picture
+        src={editorMobile}
+        formats={['avif']}
+        fallbackFormat="webp"
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 760px) 820px, 160vw"
+        alt={t.build.altPhone}
+        loading="lazy"
+        class="shot shot-phone"
+      />
+    </div>
+  </section>
+
+  <section id="leads" data-section="leads" class="row">
+    <div class="container split flip">
+      <div>
+        <p class="eyebrow">{t.leads.eyebrow}</p>
+        <h2>{t.leads.title}</h2>
+        <p class="copy">{t.leads.copy}</p>
+        <ul class="ticks">{t.leads.ticks.map((x) => <li>{x}</li>)}</ul>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="panel table">
+          <div class="tr th">{t.leads.head.map((h) => <span>{h}</span>)}</div>
+          {t.leads.rows.map(([name, source, status, kind]) => (
+            <div class="tr"><span>{name}</span><span>{source}</span><span class={kind}>{status}</span></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="email" data-section="email" class="row">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">{t.email.eyebrow}</p>
+        <h2>{t.email.title}</h2>
+        <p class="copy">{t.email.copy}</p>
+        <ul class="ticks">{t.email.ticks.map((x) => <li>{x}</li>)}</ul>
+      </div>
+      <div class="mock dark" aria-hidden="true">
+        <p class="mock-label">{t.email.mockLabel}</p>
+        <ul class="steps">
+          {t.email.steps.map(([name, when], i) => (
+            <>
+              {i > 0 && <li class="wait-note">{t.email.waits[i - 1]}</li>}
+              <li class="step"><span>{name}</span><span>{when}</span></li>
+            </>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="search" data-section="search" class="row">
+    <div class="container">
+      <p class="eyebrow">{t.search.eyebrow}</p>
+      <h2>{t.search.title}</h2>
+      <div class="cards">
+        {t.search.cards.map((c) => <div class="card"><h3>{c.t}</h3><p>{c.p}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section id="domains" data-section="domains" class="row">
+    <div class="container split flip">
+      <div>
+        <p class="eyebrow">{t.domains.eyebrow}</p>
+        <h2>{t.domains.title}</h2>
+        <p class="copy">{t.domains.copy}</p>
+        <p><a class="more" href={l('/docs/connect-your-domain/')}>{t.domains.more}</a></p>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="panel status">
+          {t.domains.status.map(([k, v]) => <p><span>{k}</span><span class="ok">{v}</span></p>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="cta" class="final">
+    <div class="container">
+      <h2>{t.cta.title}</h2>
+      <div class="cta-row">
+        <a class="btn btn-accent" href={l(EARLY_ACCESS)}>{t.cta.primary}</a>
+        <a class="btn btn-ondark" href={l('/docs/')}>{t.cta.guides}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* <main> lives in the Base layout, so it needs :global() for these rules to match. */
+  :global(main) > section { margin-top: 88px; }
+  :global(main) > section.f-hero { margin-top: 56px; }
+  :global(main) > section.final { background: var(--ink); color: var(--on-dark-2); padding: 72px 0; text-align: center; }
+  :global(main) > section.final h2 { color: var(--white); }
+  .final :focus-visible { outline-color: var(--accent); }
+  [hidden] { display: none !important; }
+
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; display: block; }
+  .f-hero h1 { max-width: 860px; letter-spacing: -.03em; }
+  .lede { max-width: 640px; font-size: 1.1875rem; color: var(--muted); }
+  .chip-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .chip-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: .9375rem; }
+  .chip-nav a:hover { border-color: var(--ink); }
+
+  .split { display: grid; gap: 48px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: center; }
+  .copy { color: var(--muted); font-size: 1.0625rem; }
+  .ticks { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; }
+  .ticks li { position: relative; padding-left: 30px; }
+  .ticks li::before { content: "\2713"; position: absolute; left: 0; top: 0; font-weight: 800; color: var(--link); }
+  .more { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+
+  .mock { background: var(--surface); border-radius: 24px; padding: 24px; }
+  .mock.dark { background: var(--ink); color: var(--white); }
+  .mock-label { font: 700 .75rem/1.2 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+  .dark .mock-label { color: var(--on-dark); }
+  .panel { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 20px; font-size: .9375rem; }
+  .panel p:last-child { margin-bottom: 0; }
+  /* Build: the brief screenshot, overlapped at the lower right by the editor screenshot. */
+  .shots { position: relative; padding-bottom: 22%; }
+  .shot { display: block; height: auto; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--white); box-shadow: var(--shadow-lift); }
+  .shot-a { width: 62%; }
+  .shot-b { position: absolute; right: 0; bottom: 0; width: 80%; }
+  .phone-row { margin-top: 64px; }
+  .phone-row h3 { font-size: 1.5rem; }
+  /* The phone preview is centred in a wide frame; crop to the middle so the phone reads at any width. */
+  .shot-phone { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 0; }
+
+  .table { padding: 0; overflow: hidden; }
+  .tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
+  .tr.th { background: var(--surface); border-top: 0; font-weight: 700; color: var(--ink); }
+  .tr span:nth-child(2) { color: var(--muted); }
+  .ok { color: var(--link); font-weight: 600; }
+  .wait { color: var(--muted); font-weight: 600; }
+
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: .9375rem; }
+  .step { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 1px solid var(--on-dark-line); border-radius: 12px; }
+  .step span:last-child { color: var(--on-dark); }
+  .wait-note { text-align: center; color: var(--on-dark); font-size: .8125rem; }
+
+  .cards { display: grid; gap: 16px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+  .card { background: var(--surface); border-radius: 20px; padding: 28px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p { margin: 0; color: var(--muted); font-size: .9375rem; }
+
+  .status p { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+  .btn-ondark { background: transparent; color: var(--white); border-color: var(--on-dark); }
+  .btn-ondark:hover { border-color: var(--white); color: var(--white); }
+</style>

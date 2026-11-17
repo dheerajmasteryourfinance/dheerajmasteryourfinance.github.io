@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach } from 'vitest';
-import { renderResults, bindShortcut } from '../../src/scripts/docs-search.js';
+import { renderResults, bindShortcut, initDocsSearch } from '../../src/scripts/docs-search.js';
 
 let box;
 beforeEach(() => {
@@ -93,5 +93,31 @@ describe('bindShortcut', () => {
     const e = press({ key: 'k' });
     expect(document.activeElement).not.toBe(input);
     expect(e.defaultPrevented).toBe(false);
+  });
+});
+
+describe('per-language search', () => {
+  it('shows the empty message in the page language', () => {
+    renderResults(box, '<b>', [], { empty: (q) => `Geen resultaten voor “${q}”` });
+    expect(box.textContent).toBe('Geen resultaten voor “<b>”');
+    expect(box.querySelector('b')).toBeNull();
+  });
+
+  it('only searches the current language, via a Pagefind filter', async () => {
+    document.body.innerHTML = '<input id="q"><div id="r" hidden></div>';
+    const input = document.getElementById('q');
+    const results = document.getElementById('r');
+    const calls = [];
+    const fake = {
+      search: async (query, opts) => {
+        calls.push([query, opts]);
+        return { results: [{ data: async () => ({ url: '/nl/docs/a/', meta: { title: 'A' }, excerpt: 'x' }) }] };
+      },
+    };
+    const run = initDocsSearch(input, results, { lang: 'nl', load: async () => fake, delay: 0 });
+    input.value = 'domein';
+    await run();
+    expect(calls).toEqual([['domein', { filters: { lang: 'nl' } }]]);
+    expect(results.querySelector('a').getAttribute('href')).toBe('/nl/docs/a/');
   });
 });

@@ -1,0 +1,23 @@
+---
+// Links to the same page in each language. Plain links: no cookie, no script and
+// no redirect by browser language.
+import { alternates, getLocale } from '../i18n/index.ts';
+import { UI } from '../i18n/ui.ts';
+
+interface Props { path: string; variant?: 'short' | 'long' }
+const { path, variant = 'short' } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const links = alternates(path);
+---
+<div class={`lang-switch lang-${variant}`} role="group" aria-label={UI[locale].nav.language}>
+  {links.map((l, i) => (
+    <>
+      {i > 0 && <span class="lang-sep" aria-hidden="true">{variant === 'short' ? '|' : '/'}</span>}
+      <a href={l.href} hreflang={l.locale} lang={l.locale} aria-current={l.locale === locale ? 'true' : undefined}>
+        {variant === 'short'
+          ? <><span aria-hidden="true">{l.locale.toUpperCase()}</span><span class="visually-hidden">{UI[l.locale].langName}</span></>
+          : UI[l.locale].langName}
+      </a>
+    </>
+  ))}
+</div>

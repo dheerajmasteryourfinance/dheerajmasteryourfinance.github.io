@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Vraag vroege toegang aan voor WebGen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif}
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A}
+html{scroll-behavior:smooth}
+a,button,summary,input,select,textarea{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .25s ease,transform .25s ease}
+a[href]:hover{transform:translateY(-1px)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#1D4ED8;box-shadow:0 0 0 3px rgba(29,78,216,0.18)}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@supports (animation-timeline:view()){
+.rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.rv{animation:none}
+a[href],input,select,textarea,button{transition:none}
+a[href]:hover{transform:none}
+}
+
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes drift2{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(12px) rotate(1deg)}}
+@keyframes blobmove{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-30px,24px) scale(.94)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(64,224,245,.55)}70%{box-shadow:0 0 0 16px rgba(64,224,245,0)}100%{box-shadow:0 0 0 0 rgba(64,224,245,0)}}
+.drift{animation:drift 6s ease-in-out infinite}
+.drift2{animation:drift2 7.5s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-1;animation:blobmove 16s ease-in-out infinite}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.pulse{animation:ring 2.4s ease-out infinite}
+.fchip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;padding:10px 14px;box-shadow:0 18px 40px rgba(15,30,61,0.16);font-size:14px;font-weight:600;color:#0F1E3D}
+@media (max-width:900px){.fchip{display:none}.blob{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2,.blob,.marq-track,.pulse{animation:none}.marq{overflow-x:auto}}
+
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:none}
+::view-transition-new(root){animation:vtin .18s ease both}
+@keyframes vtin{from{opacity:.88}}
+html{background:#FFFFFF}
+@keyframes pagein{from{opacity:.9}to{opacity:1}}
+body{animation:pagein .2s ease both}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}body{animation:none}}
+
+/* responsive navigation */
+.burger{display:none;position:relative;width:44px;height:44px;border:1px solid #E3E8F0;border-radius:12px;background:#FFFFFF;cursor:pointer;align-items:center;justify-content:center;flex:none;z-index:60}
+.burger input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.burger i{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#0F1E3D;transition:transform .25s ease,opacity .2s ease,top .25s ease}
+.burger i:nth-of-type(1){top:15px}.burger i:nth-of-type(2){top:21px}.burger i:nth-of-type(3){top:27px}
+.burger:has(input:focus-visible){outline:2px solid #1D4ED8;outline-offset:2px}
+.burger:has(input:checked) i:nth-of-type(1){top:21px;transform:rotate(45deg)}
+.burger:has(input:checked) i:nth-of-type(2){opacity:0}
+.burger:has(input:checked) i:nth-of-type(3){top:21px;transform:rotate(-45deg)}
+.navpanel{display:contents}
+.navhead{display:none}
+.navback{display:none}
+@media (max-width:900px){
+  [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#FFFFFF!important}
+  .burger{display:inline-flex}
+  .navpanel{display:flex;flex-direction:column;gap:0;position:fixed;top:0;right:0;bottom:0;width:min(88vw,360px);box-sizing:border-box;padding:14px 24px 28px;background:linear-gradient(180deg,#F3F7FF 0%,#FFFFFF 220px);border-radius:24px 0 0 24px;box-shadow:-24px 0 60px rgba(15,30,61,.24);z-index:50;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s}
+  :root:has(.navchk:checked) .navpanel{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .navback{display:block;position:fixed;inset:0;background:rgba(15,30,61,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  :root:has(.navchk:checked) .navback{opacity:1;pointer-events:auto}
+  .navhead{display:flex;align-items:center;height:44px;padding-right:56px;margin-bottom:20px}
+  .navhead a{display:flex;align-items:center;gap:10px;color:#0F1E3D;font-weight:700;font-size:19px;letter-spacing:-0.02em}
+  .navpanel nav.navlinks{flex-direction:column!important;flex-wrap:nowrap!important;gap:4px!important;font-size:20px!important;font-weight:600!important}
+  .navpanel nav.navlinks a{display:flex;align-items:center;justify-content:space-between;padding:16px 14px!important;border-radius:14px;color:#0F1E3D!important}
+  .navpanel nav.navlinks a::after{content:"";width:8px;height:8px;border-top:2px solid #9AA6BD;border-right:2px solid #9AA6BD;transform:rotate(45deg);margin-right:4px}
+  .navpanel nav.navlinks a:hover{background:#EAF1FF}
+  .navpanel .navactions{flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin-top:auto;padding-top:24px;border-top:1px solid #E3E8F0}
+  .navpanel .navactions [role="group"]{display:flex!important;width:100%;box-sizing:border-box;margin:0!important}
+  .navpanel .navactions [role="group"]>*{flex:1;text-align:center;padding:10px 12px!important;font-size:15px}
+  .navpanel .navactions>a{text-align:center;padding:14px 18px!important;font-size:16px!important;border-radius:999px}
+  .navpanel .navactions>a:not([href^="Early"]){border:1px solid #CBD3E1;color:#0F1E3D!important}
+  .navpanel .navactions>a[href^="Early"]{box-shadow:0 10px 24px rgba(15,30,61,.22)}
+  .fchip{display:none}
+}
+@media (prefers-reduced-motion:reduce){.navpanel,.navback,.burger i{transition:none!important}}
+/* resp-fix */
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:100%;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 760px);font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D">
+
+<!-- NAV -->
+<div style="position:sticky;top:0;z-index:5;background:rgba(255,255,255,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E3E8F0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;max-width:1200px;margin:0 auto;padding:14px 24px;box-sizing:border-box">
+<a href="MainNL.dc.html" style="display:flex;align-items:center;gap:10px;color:#0F1E3D">
+<span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>
+<span style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</span>
+</a>
+<label class="navback" for="navtoggle" aria-hidden="true"></label><label class="burger"><input type="checkbox" id="navtoggle" class="navchk" aria-label="Menu openen"><i></i><i></i><i></i></label><div class="navpanel"><div class="navhead"><a href="MainNL.dc.html"><span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>WebGen</a></div><nav class="navlinks" aria-label="Main" style="display:flex;flex-wrap:wrap;gap:4px;font-size:15px;font-weight:500">
+<a href="FeaturesNL.dc.html" style="color:#334155;padding:10px 12px">Product</a>
+<a href="ExamplesNL.dc.html" style="color:#334155;padding:10px 12px">Voorbeelden</a>
+<a href="DocsHomeNL.dc.html" style="color:#334155;padding:10px 12px">Handleidingen</a>
+<a href="CompanyNL.dc.html" style="color:#334155;padding:10px 12px">Bedrijf</a>
+</nav>
+<div class="navactions" style="display:flex;align-items:center;gap:8px">
+<div role="group" aria-label="Taal" style="display:inline-flex;padding:3px;background:#F4F7FB;border:1px solid #E3E8F0;border-radius:999px;font-size:13px;font-weight:600;margin-right:4px"><a href="EarlyAccess.dc.html" hreflang="en" lang="en" title="English" style="color:#334155;padding:6px 12px;border-radius:999px">EN</a><span aria-current="true" style="background:#0F1E3D;color:#FFFFFF;padding:6px 12px;border-radius:999px">NL</span></div>
+<a href="#" style="color:#0F1E3D;font-weight:500;font-size:15px;padding:10px 12px">Inloggen</a>
+<a href="EarlyAccessNL.dc.html" aria-current="page" style="background:#0F1E3D;color:#FFFFFF;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px">Vraag vroege toegang aan</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- INTRO + FORM -->
+<div style="max-width:1200px;margin:0 auto;padding:56px 24px 0;box-sizing:border-box;position:relative;isolation:isolate"><div class="blob" style="width:360px;height:360px;background:rgba(64,224,245,.32);top:20px;right:80px"></div><div class="blob" style="width:320px;height:320px;background:rgba(29,78,216,.18);top:200px;right:-40px;animation-delay:-6s"></div>
+<div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+
+<div style="flex:1 1 400px">
+<div style="font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">VROEGE TOEGANG</div>
+<h1 style="font-weight:700;font-size:56px;line-height:1.04;letter-spacing:-0.03em;margin:14px 0 0">Wees een van de eersten die met WebGen bouwt.</h1>
+<p style="font-size:19px;line-height:1.6;color:#55607A;margin:20px 0 0">We openen WebGen voor een beperkt aantal bedrijven, in kleine groepen, zodat elke nieuwe site onze aandacht krijgt. Vertel over jouw bedrijf en we sturen je een uitnodiging.</p>
+
+<ul style="margin:28px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:17px">
+<li style="display:flex;gap:12px;align-items:flex-start"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"/></svg>Een complete website vanuit een korte briefing</li>
+<li style="display:flex;gap:12px;align-items:flex-start"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"/></svg>Formulieren, nieuwsbrieven en follow-upmails ingebouwd</li>
+<li style="display:flex;gap:12px;align-items:flex-start"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="m5 12 5 5 9-10"/></svg>Persoonlijke hulp om je eerste site live te krijgen</li>
+</ul>
+
+<div style="margin-top:36px;border-radius:20px;overflow:hidden;border:1px solid #E3E8F0;box-shadow:0 20px 50px rgba(15,30,61,0.12)">
+<img src="/_blob/8be774f15e2e1127e799f1a59b4b3123" alt="De WebGen-editor met de website van GreenLeaf Bakery geopend" style="display:block;width:100%;height:auto">
+</div>
+</div>
+
+<div style="flex:1 1 460px;background:linear-gradient(160deg,#F8FAFF 0%,#E9EFFA 100%);border-radius:28px;padding:36px;box-sizing:border-box">
+<sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+<h2 style="font-size:26px;letter-spacing:-0.02em;margin:0">Vraag vroege toegang aan</h2>
+<p style="margin:8px 0 0;font-size:15px;line-height:1.5;color:#55607A">Het kost ongeveer een minuut. We antwoorden per e-mail.</p>
+<form onSubmit="{{submit}}" style="display:flex;flex-direction:column;gap:18px;margin-top:24px">
+<div style="display:flex;flex-wrap:wrap;gap:16px">
+<label style="flex:1 1 200px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Naam<input type="text" name="name" required autocomplete="name" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;min-height:44px;box-sizing:border-box"></label>
+<label style="flex:1 1 200px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">E-mail<input type="email" name="email" required autocomplete="email" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;min-height:44px;box-sizing:border-box"></label>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:16px">
+<label style="flex:1 1 200px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Bedrijfsnaam <span style="font-weight:400;color:#55607A">(optioneel)</span><input type="text" name="company" autocomplete="organization" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;min-height:44px;box-sizing:border-box"></label>
+<label style="flex:1 1 200px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Ik ben een
+<select name="type" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;min-height:44px">
+<option>Bedrijf</option>
+<option>Bureau</option>
+<option>Anders</option>
+</select>
+</label>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Wat wil je bouwen?<textarea name="message" required rows="5" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;resize:vertical"></textarea></label>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#55607A">We gebruiken je gegevens alleen om te reageren op je aanvraag. Zie ons <a href="PrivacyNL.dc.html">privacybeleid</a>.</p>
+<button class="pulse" type="submit" style="align-self:flex-start;background:linear-gradient(135deg,#90F0FB 0%,#40E0F5 55%,#1EC0DC 100%);color:#0F1E3D;border:0;border-radius:999px;padding:15px 28px;font:700 16px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">Aanvraag versturen</button>
+</form>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div style="padding:48px 8px;text-align:center">
+<svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+<h2 style="font-size:26px;margin:18px 0 8px">Bedankt, we hebben je aanvraag</h2>
+<p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">We mailen je binnen [REACTIETIJD] met de volgende stap.</p>
+<button type="button" onClick="{{reset}}" style="margin-top:22px;background:#FFFFFF;border:1px solid #CBD3E1;border-radius:999px;padding:12px 20px;font:500 14px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">Nog een aanvraag versturen</button>
+</div>
+</sc-if>
+</div>
+
+</div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true" style="margin:56px 0 0"><div class="marq-track"><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Formulieren<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Nieuwsbrieven<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Eigen domein<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Vervolgmails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Zoekbasis<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Statistieken<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Formulieren<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Nieuwsbrieven<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Eigen domein<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Vervolgmails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Zoekbasis<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Statistieken<span aria-hidden="true" style="color:#40E0F5">✦</span></span></div></div>
+
+<!-- EXAMPLES -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:72px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">VOORBEELDEN</div><h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Dit bouwen andere ondernemers.</h2><p style="font-size:17px;line-height:1.55;color:#55607A;max-width:620px;margin:12px 0 0">Voorbeeldsites uit het mkb, gemaakt in WebGen vanuit een korte briefing.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin-top:28px"><a class="lift" href="ExamplesNL.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/2fd2cb5ccf5a605c91ea6119dadcd000" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Blad & Bloesem</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Theewinkel</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Elke dag thee die écht smaakt”</div></a><a class="lift" href="ExamplesNL.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/f6f27542a9ac785f55e19ab882cd736c" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">De Groene Hand</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Hovenier</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Je hoeft het niet alleen uit te zoeken.”</div></a><a class="lift" href="ExamplesNL.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/70afddb197aab16939b36c7e05bd6c3d" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Warmtewijs</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Installateur</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Warm huis, lage energierekening, zonder gedoe”</div></a><a class="lift" href="ExamplesNL.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/50fc784d0dfc0cd9466574e3483ef3fd" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Beweegpunt</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Fysiotherapie</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Snel weer pijnvrij en zelfstandig bewegen”</div></a></div></div>
+
+<!-- WAT ER DAARNA GEBEURT -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box">
+<div style="font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">WAT ER DAARNA GEBEURT</div>
+<h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">Drie stappen naar je eerste site.</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:36px">
+<div style="border-top:2px solid #0F1E3D;padding-top:20px"><div style="font-size:13px;color:#55607A">01</div><h3 style="font-size:20px;margin:8px 0">We lezen je aanvraag</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">Een mens bekijkt elke aanvraag, dus vertel ons iets over je bedrijf.</p></div>
+<div style="border-top:2px solid #E3E8F0;padding-top:20px"><div style="font-size:13px;color:#55607A">02</div><h3 style="font-size:20px;margin:8px 0">Je krijgt een uitnodiging</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">We mailen je een persoonlijke link om je account aan te maken.</p></div>
+<div style="border-top:2px solid #E3E8F0;padding-top:20px"><div style="font-size:13px;color:#55607A">03</div><h3 style="font-size:20px;margin:8px 0">Jij bouwt je site</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">Beantwoord de briefing, bekijk het resultaat en publiceer als je tevreden bent.</p></div>
+</div>
+</div>
+
+<!-- DUTCH TRUST -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:72px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">WAAROM WEBGEN</div><h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0;max-width:760px">Zonder gedoe, en je weet waar je aan toe bent.</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:28px"><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Gemaakt in Nederland</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">Door een Nederlands team, voor Nederlandse ondernemers. [BEVESTIG: formulering]</div></div><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Je gegevens in [EU-REGIO]</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">Duidelijk waar je site en je contactlijst staan. [BEVESTIG: regio en aanbieder]</div></div><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Hulp in het Nederlands</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">Een mens die meedenkt als je vastloopt. [BEVESTIG: reactietijd]</div></div></div></div>
+
+<!-- FAQ -->
+<div class="rv" style="max-width:800px;margin:0 auto;padding:88px 24px 0;box-sizing:border-box">
+<h2 style="font-weight:700;font-size:36px;letter-spacing:-0.03em;margin:0;text-align:center">Vragen over vroege toegang</h2>
+<div style="margin-top:32px;border-top:1px solid #E3E8F0">
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Hoe lang duurt het voor ik iets hoor?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">[BEVESTIG: verwachte reactietijd en uitnodigingsritme]</p></details>
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Wat kost het?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">[BEVESTIG: voorwaarden vroege toegang]</p></details>
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Ik ben een bureau. Kan ik meedoen?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">Ja. Kies "Bureau" in het formulier en vertel voor hoeveel klanten je bouwt.</p></details>
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Werkt WebGen in het Nederlands?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">Ja. De app is in het Nederlands en het Engels, en je site kan in maximaal acht talen staan.</p></details>
+<details style="border-bottom:1px solid #E3E8F0;padding:22px 4px"><summary style="font-weight:600;font-size:17px">Waar worden mijn gegevens opgeslagen?</summary><p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#55607A">[BEVESTIG: hostingregio en aanbieder]</p></details>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="margin-top:88px;border-top:1px solid #E3E8F0">
+<div style="max-width:1200px;margin:0 auto;padding:40px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#55607A">
+<span>© 2026 Schenk Rekenmeesters · KvK 55633323 · BTW NL001579296B13</span>
+<span style="display:flex;flex-wrap:wrap;gap:20px"><a href="DocsHomeNL.dc.html" style="color:#55607A">Handleidingen</a><a href="CompanyNL.dc.html" style="color:#55607A">Contact</a><a href="EmailInfoNL.dc.html" style="color:#55607A">E-mail van ons?</a><a href="PrivacyNL.dc.html" style="color:#55607A">Privacy</a></span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sent: false }; }
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      reset: () => this.setState({ sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+// Features page copy.
+
+const en = {
+  title: 'WebGen features: build, grow and send',
+  description: 'Everything WebGen does, from the first draft of your site to the hundredth email.',
+  eyebrow: 'Product',
+  h1: 'One tool to build the site and grow the business behind it.',
+  lede: 'Here is everything WebGen does, from the first draft of your site to the hundredth email.',
+  chipsLabel: 'Feature sections',
+  chips: { build: 'Build', leads: 'Forms and audience', email: 'Email', search: 'Search and analytics', domains: 'Domains and senders' },
+  build: {
+    eyebrow: '01 · Build',
+    title: 'From a short brief to a full site.',
+    copy: 'Describe what you do and who you serve. WebGen writes the pages, picks a layout and applies your brand colours and fonts.',
+    ticks: ['Click any text or image to change it', 'Ask for bigger changes in a sentence', 'Import an existing site from a ZIP file'],
+    altBrief: 'The New website brief, first step About your business, asking for the business name and the ideal customer',
+    altEditor: 'The finished site open in the editor, with its headline selected for editing',
+    phoneTitle: 'Looks right on every phone',
+    phoneCopy: 'Switch the editor to the phone view to check every page before you publish.',
+    altPhone: 'The editor\'s phone preview, showing the bakery homepage at phone width',
+  },
+  leads: {
+    eyebrow: '02 · Forms and audience',
+    title: 'Every sign-up in one list.',
+    copy: 'Contact, booking and lead-magnet forms all feed one audience. Each person is tagged by where they signed up, so you can group them into segments later.',
+    ticks: ['Optional double opt-in, so subscribers can confirm first', 'Segments by tag, source or activity', 'Spam protection on every form'],
+    head: ['Contact', 'Source', 'Status'],
+    rows: [
+      ['Priya S.', 'Booking form', 'Subscribed', 'ok'],
+      ['Tom W.', 'Free guide', 'Awaiting confirm', 'wait'],
+      ['Ana R.', 'Contact form', 'Subscribed', 'ok'],
+    ],
+  },
+  email: {
+    eyebrow: '03 · Email',
+    title: 'Newsletters and sequences, without another tool.',
+    copy: 'Write a campaign with the email builder, or let the AI draft it. Set up sequences that greet and follow up on their own. Every send is paced and retried, and logged so you can see what went out.',
+    ticks: ['Drag-and-drop email builder with AI drafts', 'Automated sequences with delays', 'Sent-email log and campaign stats'],
+    mockLabel: 'Welcome sequence',
+    steps: [['Thanks for joining', 'Right away'], ['Three tips to get started', 'Day 2'], ['Your first-visit offer', 'Day 7']],
+    waits: ['wait 2 days', 'wait 5 days'],
+  },
+  search: {
+    eyebrow: '04 · Search and analytics',
+    title: 'Be found, then see what works.',
+    cards: [
+      { t: 'Sitemap and robots', p: 'Generated for every site. Your own uploaded files are always kept. [CONFIRM: ships with the SEO release]' },
+      { t: 'Search and social tags', p: 'Titles, descriptions, link previews and structured data. [CONFIRM: ships with the SEO release]' },
+      { t: 'Analytics', p: 'Visits, sign-ups and email results, only after visitors consent.' },
+    ],
+  },
+  domains: {
+    eyebrow: '05 · Domains and senders',
+    title: 'Your name on the site and in the inbox.',
+    copy: 'Connect your own domain with automatic HTTPS. Verify a sender so emails come from your address, and we keep checking it stays set up correctly.',
+    more: 'Read the domain guide →',
+    status: [['clinic.co.uk', 'Connected'], ['Sender: your own address', 'Verified'], ['HTTPS certificate', 'Active']],
+  },
+  cta: { title: 'Try it on your own business.', primary: 'Request early access', guides: 'Read the guides' },
+};
+
+const nl: typeof en = {
+  title: 'Functies van WebGen: bouwen, groeien en mailen',
+  description: 'Alles wat WebGen doet, van de eerste versie van je website tot de honderdste e-mail.',
+  eyebrow: 'Product',
+  h1: 'Eén tool om je website te bouwen én het bedrijf erachter te laten groeien.',
+  lede: 'Dit is alles wat WebGen doet, van de eerste versie van je website tot de honderdste e-mail.',
+  chipsLabel: 'Onderdelen',
+  chips: { build: 'Bouwen', leads: 'Formulieren en doelgroep', email: 'E-mail', search: 'Vindbaarheid en statistieken', domains: 'Domeinen en afzenders' },
+  build: {
+    eyebrow: '01 · Bouwen',
+    title: 'Van een korte briefing naar een complete website.',
+    copy: 'Vertel wat je doet en voor wie. WebGen schrijft de pagina’s, kiest een opmaak en gebruikt de kleuren en lettertypes van je huisstijl.',
+    ticks: ['Klik op een tekst of afbeelding om die aan te passen', 'Vraag grotere wijzigingen in één zin', 'Importeer een bestaande site uit een ZIP-bestand'],
+    altBrief: 'De briefing voor een nieuwe website, eerste stap Over je bedrijf, met vragen naar de bedrijfsnaam en de ideale klant (Engelse weergave)',
+    altEditor: 'De kant-en-klare site geopend in de editor, met de kop geselecteerd om te bewerken (Engelse weergave)',
+    phoneTitle: 'Ziet er op elke telefoon goed uit',
+    phoneCopy: 'Zet de editor op telefoonweergave en check elke pagina voordat je publiceert.',
+    altPhone: 'De telefoonweergave in de editor, met de homepage van de bakkerij op telefoonbreedte (Engelse weergave)',
+  },
+  leads: {
+    eyebrow: '02 · Formulieren en doelgroep',
+    title: 'Elke aanmelding in één lijst.',
+    copy: 'Contact-, boekings- en leadmagnetformulieren komen allemaal uit in één doelgroep. Iedereen krijgt een tag voor de plek waar hij zich aanmeldde, zodat je later segmenten kunt maken.',
+    ticks: ['Dubbele opt-in als je wilt, zodat inschrijvers eerst kunnen bevestigen', 'Segmenten op tag, bron of activiteit', 'Spambescherming op elk formulier'],
+    head: ['Contact', 'Bron', 'Status'],
+    rows: [
+      ['Priya S.', 'Boekingsformulier', 'Ingeschreven', 'ok'],
+      ['Tom W.', 'Gratis gids', 'Wacht op bevestiging', 'wait'],
+      ['Ana R.', 'Contactformulier', 'Ingeschreven', 'ok'],
+    ],
+  },
+  email: {
+    eyebrow: '03 · E-mail',
+    title: 'Nieuwsbrieven en e-mailreeksen, zonder extra tool.',
+    copy: 'Schrijf een campagne met de e-mailbouwer, of laat de AI een eerste versie maken. Stel reeksen in die nieuwe contacten vanzelf verwelkomen en opvolgen. Elke verzending gaat in een rustig tempo, wordt bij een fout opnieuw geprobeerd en wordt vastgelegd, zodat je ziet wat er is verstuurd.',
+    ticks: ['E-mailbouwer met slepen en neerzetten, plus concepten van de AI', 'Automatische reeksen met wachttijden', 'Overzicht van verzonden e-mails en campagnestatistieken'],
+    mockLabel: 'Welkomstreeks',
+    steps: [['Bedankt voor je aanmelding', 'Direct'], ['Drie tips om te beginnen', 'Dag 2'], ['Je aanbieding voor een eerste bezoek', 'Dag 7']],
+    waits: ['wacht 2 dagen', 'wacht 5 dagen'],
+  },
+  search: {
+    eyebrow: '04 · Vindbaarheid en statistieken',
+    title: 'Word gevonden en zie wat werkt.',
+    cards: [
+      { t: 'Sitemap en robots.txt', p: 'Automatisch voor elke site. Bestanden die je zelf uploadt, blijven altijd staan. [CONFIRM: ships with the SEO release]' },
+      { t: 'Tags voor zoekmachines en social media', p: 'Titels, beschrijvingen, linkvoorbeelden en gestructureerde data. [CONFIRM: ships with the SEO release]' },
+      { t: 'Statistieken', p: 'Bezoeken, aanmeldingen en e-mailresultaten, pas nadat bezoekers toestemming geven.' },
+    ],
+  },
+  domains: {
+    eyebrow: '05 · Domeinen en afzenders',
+    title: 'Jouw naam op je site en in de inbox.',
+    copy: 'Koppel je eigen domein, met automatisch HTTPS. Verifieer een afzender zodat e-mails van jouw adres komen. Wij blijven controleren of alles goed ingesteld staat.',
+    more: 'Lees de handleiding over domeinen →',
+    status: [['jouwpraktijk.nl', 'Gekoppeld'], ['Afzender: je eigen adres', 'Geverifieerd'], ['HTTPS-certificaat', 'Actief']],
+  },
+  cta: { title: 'Probeer het met je eigen bedrijf.', primary: 'Vraag vroege toegang aan', guides: 'Lees de handleidingen' },
+};
+
+export const FEATURES = { en, nl };

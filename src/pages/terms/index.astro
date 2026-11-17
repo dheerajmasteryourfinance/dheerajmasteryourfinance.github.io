@@ -1,14 +1,4 @@
 ---
 import Legal from '../../layouts/Legal.astro';
-const sections = [
-  { id: 'account', title: 'Your account', body: '[LEGAL TEXT]' },
-  { id: 'acceptable', title: 'Acceptable use and email rules', body: '[LEGAL TEXT: permission-based email only, no bought lists, no spam]' },
-  { id: 'content', title: 'Your content', body: '[LEGAL TEXT: ownership and licence to host it]' },
-  { id: 'billing', title: 'Billing and cancellation', body: '[LEGAL TEXT]' },
-  { id: 'availability', title: 'Service availability', body: '[LEGAL TEXT]' },
-  { id: 'liability', title: 'Liability', body: '[LEGAL TEXT]' },
-  { id: 'ending', title: 'Ending the agreement', body: '[LEGAL TEXT]' },
-  { id: 'law', title: 'Governing law', body: '[LEGAL TEXT]' },
-];
 ---
-<Legal title="Terms of service" summary="[SUMMARY: who can use WebGen, what you agree to, and what we promise in return.]" sections={sections} />
+<Legal page="terms" />

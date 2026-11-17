@@ -4,7 +4,11 @@ import { join } from 'node:path';
 import { loadPage, allRoutes } from './helpers.js';
 
 const DIST = join(process.cwd(), 'dist');
-const NAV_LABELS = ['Product', 'Docs', 'Company', 'Sign in'];
+const NAV_LABELS = { en: ['Product', 'Docs', 'Company', 'Sign in'], nl: ['Product', 'Handleidingen', 'Over ons', 'Inloggen'] };
+const CTA = { en: 'Request early access', nl: 'Vraag vroege toegang aan' };
+const MENU = { en: ['Open menu', 'Close menu'], nl: ['Menu openen', 'Menu sluiten'] };
+// Page links only: the EN | NL language switch is checked in i18n.test.js.
+const pageLinks = (scope) => [...scope.querySelectorAll('a')].filter((a) => !a.closest('.lang-switch'));
 const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 
 /** All CSS a built page ships: linked /_astro sheets plus inline <style> blocks, whitespace removed. */
@@ -19,7 +23,8 @@ function pageCss(doc) {
 describe('mobile header menu', () => {
   describe.each(allRoutes())('%s', (route) => {
     const doc = loadPage(route);
-    const nav = doc.querySelector('nav[aria-label="Main"]');
+    const lang = route.startsWith('/nl/') ? 'nl' : 'en';
+    const nav = doc.querySelector('body > nav.site-nav');
     const menu = nav?.querySelector('details.nav-menu');
 
     it('has a closed <details> menu whose summary has an accessible name', () => {
@@ -27,23 +32,23 @@ describe('mobile header menu', () => {
       expect(menu.hasAttribute('open')).toBe(false);
       const summary = menu.querySelector(':scope > summary');
       expect(summary).toBeTruthy();
-      expect(text(summary)).toContain('Open menu');
-      expect(text(summary)).toContain('Close menu');
+      expect(text(summary)).toContain(MENU[lang][0]);
+      expect(text(summary)).toContain(MENU[lang][1]);
       const panel = doc.getElementById(summary.getAttribute('aria-controls'));
       expect(panel).toBeTruthy();
       expect(menu.contains(panel)).toBe(true);
     });
 
     it('puts Product, Docs, Company and Sign in inside the menu, with the desktop hrefs', () => {
-      const inMenu = [...menu.querySelectorAll('a')];
-      expect(inMenu.map(text)).toEqual(NAV_LABELS);
-      const desktop = [...nav.querySelectorAll('.nav-links a')];
-      expect(desktop.map(text)).toEqual(NAV_LABELS);
+      const inMenu = pageLinks(menu);
+      expect(inMenu.map(text)).toEqual(NAV_LABELS[lang]);
+      const desktop = pageLinks(nav.querySelector('.nav-links'));
+      expect(desktop.map(text)).toEqual(NAV_LABELS[lang]);
       expect(inMenu.map((a) => a.getAttribute('href'))).toEqual(desktop.map((a) => a.getAttribute('href')));
     });
 
-    it('keeps one Request early access CTA in the nav, outside the menu', () => {
-      const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === 'Request early access');
+    it('keeps one early access CTA in the nav, outside the menu', () => {
+      const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === CTA[lang]);
       expect(ctas).toHaveLength(1);
       expect(menu.contains(ctas[0])).toBe(false);
     });

@@ -69,38 +69,39 @@ describe('robots.txt', () => {
     const t = read('robots.txt');
     expect(t).toMatch(/User-agent:\s*\*/);
     expect(t).toMatch(/Allow:\s*\//);
-    expect(t).toContain('Sitemap: https://webgnr.com/sitemap-index.xml');
+    expect(t).toContain('Sitemap: https://website-generator.nl/sitemap-index.xml');
   });
 });
 
 describe('sitemap', () => {
-  it('lists every route except /404/ and the /docs/ redirect page', () => {
+  it('lists every route except /404/ and the /docs/ and /nl/docs/ redirect pages', () => {
     expect(existsSync(join(DIST, 'sitemap-index.xml'))).toBe(true);
-    expect(read('sitemap-index.xml')).toContain('https://webgnr.com/sitemap-0.xml');
+    expect(read('sitemap-index.xml')).toContain('https://website-generator.nl/sitemap-0.xml');
     const locs = [...read('sitemap-0.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const expected = allRoutes()
-      .filter((r) => r !== '/404.html' && r !== '/docs/')
-      .map((r) => `https://webgnr.com${r}`);
+      .filter((r) => r !== '/404.html' && r !== '/docs/' && r !== '/nl/docs/')
+      .map((r) => `https://website-generator.nl${r}`);
     expect([...locs].sort()).toEqual([...expected].sort());
     expect(locs.some((l) => l.includes('/404'))).toBe(false);
-    expect(locs).not.toContain('https://webgnr.com/docs/');
+    expect(locs).not.toContain('https://website-generator.nl/docs/');
+    expect(locs).not.toContain('https://website-generator.nl/nl/docs/');
   });
 });
 
 describe('Organization JSON-LD', () => {
-  it('home has exactly one ld+json block, an Organization named WebGen', () => {
-    const doc = loadPage('/');
+  it.each(['/', '/nl/'])('%s has exactly one ld+json block, an Organization named WebGen', (home) => {
+    const doc = loadPage(home);
     const blocks = doc.querySelectorAll('script[type="application/ld+json"]');
     expect(blocks).toHaveLength(1);
     const data = JSON.parse(blocks[0].textContent);
     expect(data['@type']).toBe('Organization');
     expect(data.name).toBe('WebGen');
-    expect(data.url).toBe('https://webgnr.com/');
+    expect(data.url).toBe('https://website-generator.nl/');
     expect(data.email).toBe('[SUPPORT EMAIL]');
   });
 
   it('no other route has ld+json', () => {
-    for (const r of allRoutes().filter((r) => r !== '/')) {
+    for (const r of allRoutes().filter((r) => r !== '/' && r !== '/nl/')) {
       expect(loadPage(r).querySelectorAll('script[type="application/ld+json"]'), r).toHaveLength(0);
     }
   });

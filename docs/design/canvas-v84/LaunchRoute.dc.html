@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WebGen Launch Route</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;margin:0}
+.stop{border:1px solid #E3E8F0;border-radius:20px;background:#FFFFFF;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px}
+.num{width:34px;height:34px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.who{font-size:12px;font-weight:700;letter-spacing:0.06em;color:#55607A}
+.you{border-left:3px solid #1D4ED8;padding-left:12px;font-size:15px;line-height:1.5;color:#334155}
+.wg{border-left:3px solid #40E0F5;padding-left:12px;font-size:15px;line-height:1.5;color:#334155}
+.nl{font-size:14px;line-height:1.4;color:#1D4ED8;font-weight:600}
+.lbl{font-size:13px;font-weight:600;letter-spacing:0.04em;color:#1D4ED8}
+/* resp-fix */
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:1440px;height:1180px;box-sizing:border-box;padding:56px 48px;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 520px);display:flex;flex-direction:column;gap:28px">
+
+<div>
+<div class="lbl">STORYBOARD · THE ROUTE IN DETAIL</div>
+<h1 style="font-weight:700;font-size:52px;line-height:1.05;letter-spacing:-0.03em;margin-top:10px">Five stops from first answer to first follow-up.</h1>
+<p style="font-size:18px;line-height:1.55;color:#55607A;margin:12px 0 0;max-width:820px">The long version of block 6 on the Home page, like MYF's five stops. Each stop says what you do and what WebGen does. On the Home page it shrinks to three: Check, Route, Launch.</p>
+</div>
+
+<div style="background:#F4F7FB;border-radius:20px;padding:8px 0">
+<svg aria-hidden="true" viewBox="0 0 1344 150" width="100%" height="150" fill="none"><path d="M70 100C200 100 220 40 340 40S480 100 610 100 740 40 870 40 1010 100 1140 100 1230 60 1274 50" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/><g stroke="#0F1E3D" stroke-width="2.5"><circle cx="70" cy="100" r="13" fill="#0F1E3D"/><circle cx="340" cy="40" r="13" fill="#40E0F5"/><circle cx="610" cy="100" r="13" fill="#40E0F5"/><circle cx="870" cy="40" r="13" fill="#40E0F5"/><circle cx="1140" cy="100" r="13" fill="#40E0F5"/></g><path d="M1274 50V16" stroke="#0F1E3D" stroke-width="3" stroke-linecap="round"/><path d="M1274 16l26 9-26 9z" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round"/><g font-family="DM Sans,system-ui,sans-serif" font-size="14" font-weight="700" fill="#334155" text-anchor="middle"><text x="70" y="136">Start</text><text x="340" y="76">Brief</text><text x="610" y="136">Draft</text><text x="870" y="76">Edit</text><text x="1140" y="136">Launch</text></g></svg>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px">
+
+<div class="stop">
+<span class="num">1</span>
+<h3 style="font-size:22px;letter-spacing:-0.02em">Brief</h3>
+<div class="nl">Briefing</div>
+<div><div class="who">YOU DO</div><div class="you">Answer a few short questions about your business, your customers and your tone.</div></div>
+<div><div class="who">WEBGEN DOES</div><div class="wg">Turns your answers into a clear message and a plan for the site.</div></div>
+</div>
+
+<div class="stop">
+<span class="num">2</span>
+<h3 style="font-size:22px;letter-spacing:-0.02em">Draft</h3>
+<div class="nl">Eerste versie</div>
+<div><div class="who">YOU DO</div><div class="you">Read the first version and see your business on screen.</div></div>
+<div><div class="who">WEBGEN DOES</div><div class="wg">Writes the copy, builds the sections and sets up the forms.</div></div>
+</div>
+
+<div class="stop">
+<span class="num">3</span>
+<h3 style="font-size:22px;letter-spacing:-0.02em">Edit</h3>
+<div class="nl">Aanpassen</div>
+<div><div class="who">YOU DO</div><div class="you">Click any text to change it, or ask for a change in plain words.</div></div>
+<div><div class="who">WEBGEN DOES</div><div class="wg">Applies the change, keeps the design consistent, and can translate a page into up to eight languages.</div></div>
+</div>
+
+<div class="stop">
+<span class="num">4</span>
+<h3 style="font-size:22px;letter-spacing:-0.02em">Launch</h3>
+<div class="nl">Live zetten</div>
+<div><div class="who">YOU DO</div><div class="you">Connect your own domain and press publish.</div></div>
+<div><div class="who">WEBGEN DOES</div><div class="wg">Checks the setup, serves the site securely and keeps checking that it stays set up.</div></div>
+</div>
+
+<div class="stop">
+<span class="num">5</span>
+<h3 style="font-size:22px;letter-spacing:-0.02em">Follow up</h3>
+<div class="nl">Opvolgen</div>
+<div><div class="who">YOU DO</div><div class="you">Choose who gets which email and when.</div></div>
+<div><div class="who">WEBGEN DOES</div><div class="wg">Sends from your own address with consent and unsubscribe handled, and shows the results.</div></div>
+</div>
+
+</div>
+
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:auto">
+<div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#F4F7FB">
+<div class="lbl">WHERE IT LIVES</div>
+<p style="font-size:16px;line-height:1.55;color:#334155;margin:8px 0 0">Docs landing page, "Start in 3 steps" (stops 1, 4, 5), and the Home page's block 6. A shorter version in the sticky bar: "Stop 1 of 5."</p>
+</div>
+<div style="border-radius:20px;padding:22px;background:#0F1E3D">
+<div class="lbl" style="color:#40E0F5">OPEN QUESTIONS</div>
+<p style="font-size:16px;line-height:1.55;color:#DCE3EE;margin:8px 0 0">Is five stops too many for the Home page? Check the wording of stops 3 and 4 against the real product before it is shown outside.</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

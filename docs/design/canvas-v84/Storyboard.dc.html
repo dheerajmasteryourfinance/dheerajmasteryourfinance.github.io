@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WebGen storyboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;margin:0}
+.fr{border:1px solid #E3E8F0;border-radius:20px;background:#FFFFFF;padding:20px;display:flex;flex-direction:column;gap:10px;box-sizing:border-box}
+.num{width:30px;height:30px;border-radius:50%;background:#40E0F5;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.tg{font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:4px 10px}
+.il{border-radius:12px;background:#F4F7FB;overflow:hidden}
+.fr h3{font-size:21px;line-height:1.15;letter-spacing:-0.02em}
+.fr p{margin:0;font-size:15px;line-height:1.5;color:#334155}
+.nl{font-size:14px;line-height:1.4;color:#1D4ED8;font-weight:600}
+.meta{font-size:13px;line-height:1.45;color:#55607A;border-top:1px solid #E3E8F0;padding-top:10px;margin-top:auto}
+.meta b{color:#0F1E3D}
+.card{border:1px solid #E3E8F0;border-radius:20px;background:#FFFFFF;padding:22px;box-sizing:border-box}
+.lbl{font-size:13px;font-weight:600;letter-spacing:0.04em;color:#1D4ED8}
+/* resp-fix */
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:1440px;height:2150px;box-sizing:border-box;padding:56px 48px;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 520px);display:flex;flex-direction:column;gap:32px">
+
+<div>
+<div class="lbl">STORYBOARD · DRAFT FOR REVIEW</div>
+<h1 style="font-weight:700;font-size:56px;line-height:1.04;letter-spacing:-0.03em;margin-top:10px">WebGen: the Launch Route.</h1>
+<p style="font-size:18px;line-height:1.55;color:#55607A;margin:12px 0 0;max-width:820px">The same story method as MYB and MYF. MYB flies a Business Flight Plan, MYF follows a Financial GPS. WebGen follows a <b style="color:#0F1E3D">Launch Route</b>: a route on a map with stops, from your first answer to your first follow-up email.</p>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+<div class="card" style="background:#F4F7FB">
+<div class="lbl">TAKEN FROM MYB (READ FROM THE LIVE SITE)</div>
+<p style="font-size:15px;line-height:1.6;color:#334155;margin:10px 0 0">A promise with three checkmarks. "Does this sound familiar?" list. Three steps named Check, Route, Plan. A free low-commitment entry (the Flight Check). A "this is your business, 90 days from now" block and an "and if nothing changes?" block.</p>
+</div>
+<div class="card" style="background:#F4F7FB">
+<div class="lbl">TAKEN FROM MYF (READ FROM THE LIVE SITE)</div>
+<p style="font-size:15px;line-height:1.6;color:#334155;margin:10px 0 0">One travel object used throughout (Financial GPS). Numbered stops with "You do / We do" under each. A before and after block. Industries, FAQ and a free health check before the call.</p>
+</div>
+<div class="card" style="background:#0F1E3D;border-color:#0F1E3D">
+<div class="lbl" style="color:#40E0F5">WHAT WE DO DIFFERENTLY</div>
+<p style="font-size:15px;line-height:1.6;color:#DCE3EE;margin:10px 0 0">WebGen is a tool, not a service, so the route is the product itself: brief, draft, edit, launch, follow up. The story stays the same, the promise is "Get found. Get signed up. Follow up."</p>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px">
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">1</span><span class="tg">Hero · Promise</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><path d="M30 84C80 84 90 36 140 40S210 76 250 34" stroke="#1D4ED8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 7"/><circle cx="30" cy="84" r="9" fill="#0F1E3D"/><circle cx="30" cy="84" r="3.5" fill="#40E0F5"/><circle cx="140" cy="40" r="7" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2"/><circle cx="250" cy="34" r="9" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2"/></svg></div>
+<h3>Get found. Get signed up. Follow up.</h3>
+<div class="nl">Word gevonden. Krijg aanmeldingen. Volg op.</div>
+<p>Describe your business and get a site with forms and email ready to go. Three checks: a complete site, every sign-up captured, follow-up on autopilot.</p>
+<div class="meta"><b>Section:</b> hero, one button. <b>Motion:</b> the route draws from pin to stops.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">2</span><span class="tg">Logo strip · Proof early</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><rect x="16" y="30" width="72" height="60" rx="8" fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"/><rect x="104" y="30" width="72" height="60" rx="8" fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"/><rect x="192" y="30" width="72" height="60" rx="8" fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"/><g stroke="#9AA6BD" stroke-width="2" stroke-linecap="round"><path d="M26 44h52M26 54h34M114 44h52M114 54h34M202 44h52M202 54h34"/></g><g fill="#40E0F5"><rect x="26" y="68" width="24" height="12" rx="4"/><rect x="114" y="68" width="24" height="12" rx="4"/><rect x="202" y="68" width="24" height="12" rx="4"/></g></svg></div>
+<h3>Built with WebGen.</h3>
+<div class="nl">Gemaakt met WebGen.</div>
+<p>A looping strip of real example sites under the hero: bakery, tea shop, garden care, heat pumps, physiotherapy. [CONFIRM: permission for any real client site]</p>
+<div class="meta"><b>Section:</b> example strip, links to the Examples page. <b>Motion:</b> slow loop.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">3</span><span class="tg">Problem</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><path d="M20 90C60 20 90 110 130 50S190 100 200 40" stroke="#9AA6BD" stroke-width="2.5" stroke-linecap="round"/><path d="M30 40C80 110 120 10 170 80S230 30 262 70" stroke="#CBD3E1" stroke-width="2.5" stroke-linecap="round"/><path d="M236 18l16 16M252 18l-16 16" stroke="#B91C1C" stroke-width="3" stroke-linecap="round"/></svg></div>
+<h3>Getting online shouldn't need a big budget or a tech team.</h3>
+<div class="nl">Online komen hoeft geen groot budget of techteam te kosten.</div>
+<p>"Does this sound familiar?" "I don't know where to start." "I can't afford a designer and a developer." "I worry it will look amateur."</p>
+<div class="meta"><b>Section:</b> three pains as a short list. <b>Motion:</b> lines tangle, then fade.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">4</span><span class="tg">Guide · Empathy and authority</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><circle cx="100" cy="60" r="26" fill="#0F1E3D"/><circle cx="100" cy="60" r="4" fill="#40E0F5"/><circle cx="180" cy="60" r="26" fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"/><path d="M126 60h28" stroke="#1D4ED8" stroke-width="2.5" stroke-dasharray="2 5" stroke-linecap="round"/></svg></div>
+<h3>You do not have to do this alone.</h3>
+<div class="nl">Je hoeft het niet alleen te doen.</div>
+<p>WebGen asks about your customers, not about code, and turns the answers into a message and a site. A real person helps when you get stuck. [CONFIRM: support languages and reply time]</p>
+<div class="meta"><b>Section:</b> empathy line, authority line, proof. <b>Open:</b> whether to name StoryBrand publicly.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">5</span><span class="tg">Customer stories</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><g fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"><rect x="18" y="20" width="110" height="64" rx="10"/><rect x="152" y="36" width="110" height="64" rx="10"/></g><g stroke="#9AA6BD" stroke-width="2" stroke-linecap="round"><path d="M30 38h70M30 50h54M30 62h62M164 54h70M164 66h54M164 78h62"/></g><g fill="#0F1E3D"><circle cx="40" cy="98" r="6"/><circle cx="236" cy="22" r="6"/></g></svg></div>
+<h3>Owners who got online.</h3>
+<div class="nl">Ondernemers die online kwamen.</div>
+<p>Two short quotes with a name, role and business. [QUOTE] [NAME], [ROLE], [BUSINESS]. Only with written permission.</p>
+<div class="meta"><b>Section:</b> two quote cards. <b>Needs:</b> real quotes. None invented.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">6</span><span class="tg">Process · Three stops</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><path d="M30 80C80 80 100 40 140 40S210 80 250 80" stroke="#1D4ED8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="2 7"/><circle cx="30" cy="80" r="8" fill="#0F1E3D"/><circle cx="140" cy="40" r="8" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2"/><circle cx="250" cy="80" r="8" fill="#0F1E3D"/><g font-family="DM Sans,system-ui,sans-serif" font-size="11" font-weight="700" fill="#334155"><text x="30" y="108" text-anchor="middle">Check</text><text x="140" y="22" text-anchor="middle">Route</text><text x="250" y="108" text-anchor="middle">Launch</text></g></svg></div>
+<h3>Three stops to a site that works.</h3>
+<div class="nl">Drie stops naar een site die werkt.</div>
+<p><b>Check:</b> describe your business. <b>Route:</b> review the draft, change anything by clicking. <b>Launch:</b> publish on your domain with forms and email connected.</p>
+<div class="meta"><b>Section:</b> three cards. The five-stop detail is on the next board. <b>Motion:</b> a pin travels the route.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">7</span><span class="tg">Future state</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><rect x="30" y="16" width="220" height="88" rx="10" fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"/><path d="M30 38h220" stroke="#0F1E3D" stroke-width="2"/><circle cx="44" cy="27" r="3" fill="#9AA6BD"/><circle cx="56" cy="27" r="3" fill="#9AA6BD"/><circle cx="212" cy="74" r="16" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2"/><path d="M205 74l5 5 9-11" stroke="#0F1E3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g stroke="#9AA6BD" stroke-width="2" stroke-linecap="round"><path d="M46 56h90M46 68h70M46 80h82"/></g></svg></div>
+<h3>Your business online, [TIMEFRAME] from now.</h3>
+<div class="nl">Jouw bedrijf online, over [TERMIJN].</div>
+<p>Found by customers, every sign-up captured, follow-up going out on time, and hours back in your week. "Your site runs. You steer."</p>
+<div class="meta"><b>Section:</b> outcome list and a closing line. <b>Needs:</b> an honest timeframe.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">8</span><span class="tg">Stakes</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><path d="M20 84C80 84 100 44 160 48S230 34 262 24" stroke="#1D4ED8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="14 6 8 7 4 8 2 9"/><circle cx="20" cy="84" r="8" fill="#0F1E3D"/><path d="M262 8v28" stroke="#9AA6BD" stroke-width="2" stroke-dasharray="3 4"/></svg></div>
+<h3>And if nothing changes?</h3>
+<div class="nl">En als je niets verandert?</div>
+<p>Customers pick a competitor who looks more established. Interested people leave with no way to follow up. The good news: it does not have to stay that way.</p>
+<div class="meta"><b>Section:</b> short list, then a turn toward the call to action. <b>Motion:</b> the route fades.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">9</span><span class="tg">Free first step</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><g fill="#E3E8F0"><rect x="30" y="18" width="220" height="14" rx="7"/><rect x="30" y="42" width="220" height="14" rx="7"/><rect x="30" y="66" width="220" height="14" rx="7"/><rect x="30" y="90" width="220" height="14" rx="7"/></g><g fill="#40E0F5"><rect x="30" y="18" width="170" height="14" rx="7"/><rect x="30" y="42" width="120" height="14" rx="7"/><rect x="30" y="66" width="80" height="14" rx="7"/><rect x="30" y="90" width="140" height="14" rx="7"/></g></svg></div>
+<h3>Not ready yet? Start with a free Site Check.</h3>
+<div class="nl">Nog niet zover? Begin met een gratis Sitecheck.</div>
+<p>[CONFIRM: does this exist?] A short form and a score for Found, Signed up and Followed up, with one concrete starting point. Like MYB's Flight Check, for sites.</p>
+<div class="meta"><b>Section:</b> lead magnet with a score preview. <b>Status:</b> an idea, not a feature.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">10</span><span class="tg">Positioning</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><rect x="22" y="22" width="110" height="76" rx="12" fill="#0F1E3D"/><rect x="148" y="22" width="110" height="76" rx="12" fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"/><g stroke="#40E0F5" stroke-width="2.5" stroke-linecap="round"><path d="M38 46h50M38 60h38"/></g><g stroke="#9AA6BD" stroke-width="2.5" stroke-linecap="round"><path d="M164 46h50M164 60h38"/></g></svg></div>
+<h3>For owners who would rather run the business than the website.</h3>
+<div class="nl">Voor ondernemers die liever hun bedrijf runnen dan hun website.</div>
+<p>Two paths: one for businesses, one for agencies with many clients. The audience switch in the hero opens the matching version.</p>
+<div class="meta"><b>Section:</b> two cards, one per audience. <b>Open:</b> agency hand-over wording.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">11</span><span class="tg">Closing call to action</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><rect x="24" y="24" width="232" height="72" rx="16" fill="#0F1E3D"/><rect x="62" y="56" width="156" height="26" rx="13" fill="#40E0F5"/><path d="M70 40h100" stroke="#DCE3EE" stroke-width="3" stroke-linecap="round"/></svg></div>
+<h3>Ready for your first version?</h3>
+<div class="nl">Klaar voor je eerste versie?</div>
+<p>One button: "Request early access." The cost of waiting goes into one sentence here, not its own section.</p>
+<div class="meta"><b>Section:</b> closing banner plus a sticky bar. <b>Motion:</b> the button pulses.</div>
+</div>
+
+<div class="fr">
+<div style="display:flex;justify-content:space-between;align-items:center"><span class="num">12</span><span class="tg">Trust and footer</span></div>
+<div class="il"><svg aria-hidden="true" viewBox="0 0 280 120" width="100%" height="120" fill="none"><rect x="70" y="30" width="140" height="62" rx="8" fill="#FFFFFF" stroke="#0F1E3D" stroke-width="2"/><path d="M70 36l70 30 70-30" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round"/><circle cx="206" cy="86" r="14" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2"/><path d="M200 86l4 4 8-9" stroke="#0F1E3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<h3>Mail you can trust.</h3>
+<div class="nl">Mail waar je op kunt vertrouwen.</div>
+<p>Verified senders, one-click unsubscribe, optional double opt-in, and a page for anyone who got an email from a WebGen site. [CONFIRM: hosting region]</p>
+<div class="meta"><b>Section:</b> trust row, links, legal details. <b>Needs:</b> legal name, KvK, BTW.</div>
+</div>
+
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:auto">
+<div class="card" style="background:#F4F7FB">
+<div class="lbl">NEXT BOARD</div>
+<p style="font-size:16px;line-height:1.55;color:#334155;margin:8px 0 0">The Launch Route in five stops, with "You do / WebGen does" under each, like MYF's route.</p>
+</div>
+<div class="card" style="background:#0F1E3D;border-color:#0F1E3D">
+<div class="lbl" style="color:#40E0F5">OPEN QUESTIONS</div>
+<p style="font-size:16px;line-height:1.55;color:#DCE3EE;margin:8px 0 0">Keep the name "Launch Route"? A free Site Check: yes or no? An honest timeframe for block 7. Real proof and permission.</p>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2150}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

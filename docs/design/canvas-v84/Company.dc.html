@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WebGen Company: about and contact</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+h1,h2,h3{font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif}
+body{margin:0;font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D;background:#FFFFFF}
+a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A}
+html{scroll-behavior:smooth}
+a,button,summary{transition:color .2s ease,background-color .2s ease,border-color .2s ease,box-shadow .25s ease,transform .25s ease}
+a[href]:hover{transform:translateY(-1px)}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+a[href]{transition:none}
+a[href]:hover{transform:none}
+}
+
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes drift2{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(12px) rotate(1deg)}}
+@keyframes blobmove{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-30px,24px) scale(.94)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(64,224,245,.55)}70%{box-shadow:0 0 0 16px rgba(64,224,245,0)}100%{box-shadow:0 0 0 0 rgba(64,224,245,0)}}
+.drift{animation:drift 6s ease-in-out infinite}
+.drift2{animation:drift2 7.5s ease-in-out infinite}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:-1;animation:blobmove 16s ease-in-out infinite}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.pulse{animation:ring 2.4s ease-out infinite}
+.fchip{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E3E8F0;border-radius:14px;padding:10px 14px;box-shadow:0 18px 40px rgba(15,30,61,0.16);font-size:14px;font-weight:600;color:#0F1E3D}
+@media (max-width:900px){.fchip{display:none}.blob{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2,.blob,.marq-track,.pulse{animation:none}.marq{overflow-x:auto}}
+
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:none}
+::view-transition-new(root){animation:vtin .18s ease both}
+@keyframes vtin{from{opacity:.88}}
+html{background:#FFFFFF}
+@keyframes pagein{from{opacity:.9}to{opacity:1}}
+body{animation:pagein .2s ease both}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}body{animation:none}}
+
+/* responsive navigation */
+.burger{display:none;position:relative;width:44px;height:44px;border:1px solid #E3E8F0;border-radius:12px;background:#FFFFFF;cursor:pointer;align-items:center;justify-content:center;flex:none;z-index:60}
+.burger input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.burger i{position:absolute;left:12px;right:12px;height:2px;border-radius:2px;background:#0F1E3D;transition:transform .25s ease,opacity .2s ease,top .25s ease}
+.burger i:nth-of-type(1){top:15px}.burger i:nth-of-type(2){top:21px}.burger i:nth-of-type(3){top:27px}
+.burger:has(input:focus-visible){outline:2px solid #1D4ED8;outline-offset:2px}
+.burger:has(input:checked) i:nth-of-type(1){top:21px;transform:rotate(45deg)}
+.burger:has(input:checked) i:nth-of-type(2){opacity:0}
+.burger:has(input:checked) i:nth-of-type(3){top:21px;transform:rotate(-45deg)}
+.navpanel{display:contents}
+.navhead{display:none}
+.navback{display:none}
+@media (max-width:900px){
+  [style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#FFFFFF!important}
+  .burger{display:inline-flex}
+  .navpanel{display:flex;flex-direction:column;gap:0;position:fixed;top:0;right:0;bottom:0;width:min(88vw,360px);box-sizing:border-box;padding:14px 24px 28px;background:linear-gradient(180deg,#F3F7FF 0%,#FFFFFF 220px);border-radius:24px 0 0 24px;box-shadow:-24px 0 60px rgba(15,30,61,.24);z-index:50;overflow-y:auto;transform:translateX(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s linear .3s}
+  :root:has(.navchk:checked) .navpanel{transform:none;visibility:visible;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  .navback{display:block;position:fixed;inset:0;background:rgba(15,30,61,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s ease}
+  :root:has(.navchk:checked) .navback{opacity:1;pointer-events:auto}
+  .navhead{display:flex;align-items:center;height:44px;padding-right:56px;margin-bottom:20px}
+  .navhead a{display:flex;align-items:center;gap:10px;color:#0F1E3D;font-weight:700;font-size:19px;letter-spacing:-0.02em}
+  .navpanel nav.navlinks{flex-direction:column!important;flex-wrap:nowrap!important;gap:4px!important;font-size:20px!important;font-weight:600!important}
+  .navpanel nav.navlinks a{display:flex;align-items:center;justify-content:space-between;padding:16px 14px!important;border-radius:14px;color:#0F1E3D!important}
+  .navpanel nav.navlinks a::after{content:"";width:8px;height:8px;border-top:2px solid #9AA6BD;border-right:2px solid #9AA6BD;transform:rotate(45deg);margin-right:4px}
+  .navpanel nav.navlinks a:hover{background:#EAF1FF}
+  .navpanel .navactions{flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin-top:auto;padding-top:24px;border-top:1px solid #E3E8F0}
+  .navpanel .navactions [role="group"]{display:flex!important;width:100%;box-sizing:border-box;margin:0!important}
+  .navpanel .navactions [role="group"]>*{flex:1;text-align:center;padding:10px 12px!important;font-size:15px}
+  .navpanel .navactions>a{text-align:center;padding:14px 18px!important;font-size:16px!important;border-radius:999px}
+  .navpanel .navactions>a:not([href^="Early"]){border:1px solid #CBD3E1;color:#0F1E3D!important}
+  .navpanel .navactions>a[href^="Early"]{box-shadow:0 10px 24px rgba(15,30,61,.22)}
+  .fchip{display:none}
+}
+@media (prefers-reduced-motion:reduce){.navpanel,.navback,.burger i{transition:none!important}}
+/* resp-fix */
+@media (max-width:640px){.factval{font-size:18px!important;overflow-wrap:anywhere}}
+html,body{overflow-x:clip}
+img,video,svg{max-width:100%}
+@media (max-width:640px){
+h1{font-size:clamp(34px,10.5vw,46px)!important;line-height:1.08!important;overflow-wrap:break-word}
+h2{font-size:clamp(26px,7.5vw,34px)!important;line-height:1.12!important;overflow-wrap:break-word}
+h3{overflow-wrap:break-word}
+.stickycta{font-size:14px;gap:10px;padding:6px 6px 6px 16px}
+}
+/* reveal */
+@keyframes rvin{from{opacity:0;translate:0 28px;filter:blur(3px)}to{opacity:1;translate:0 0;filter:none}}
+@keyframes rvcard{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@supports (animation-timeline:view()){
+.rv{animation:rvin cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:rvcard cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 20%}
+}
+@media (prefers-reduced-motion:reduce){.rv,.lift,.stopcard,.fr,.stop,details,figure,.tsec,main section{animation:none!important}}
+</style>
+</helmet>
+<div style="width:100%;background:linear-gradient(180deg,#EAF1FF 0,#FFFFFF 760px);font-family:DM Sans,system-ui,sans-serif;color:#0F1E3D">
+
+<!-- NAV -->
+<div style="position:sticky;top:0;z-index:5;background:rgba(255,255,255,0.86);backdrop-filter:blur(12px);border-bottom:1px solid #E3E8F0">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;max-width:1200px;margin:0 auto;padding:14px 24px;box-sizing:border-box">
+<a href="Main.dc.html" style="display:flex;align-items:center;gap:10px;color:#0F1E3D">
+<span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>
+<span style="font-weight:700;font-size:19px;letter-spacing:-0.02em">WebGen</span>
+</a>
+<label class="navback" for="navtoggle" aria-hidden="true"></label><label class="burger"><input type="checkbox" id="navtoggle" class="navchk" aria-label="Open menu"><i></i><i></i><i></i></label><div class="navpanel"><div class="navhead"><a href="Main.dc.html"><span style="width:30px;height:30px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h16"/></svg></span>WebGen</a></div><nav class="navlinks" aria-label="Main" style="display:flex;flex-wrap:wrap;gap:4px;font-size:15px;font-weight:500">
+<a href="Features.dc.html" style="color:#334155;padding:10px 12px">Product</a>
+<a href="Examples.dc.html" style="color:#334155;padding:10px 12px">Examples</a>
+<a href="DocsHome.dc.html" style="color:#334155;padding:10px 12px">Docs</a>
+<a href="Company.dc.html" aria-current="page" style="color:#0F1E3D;padding:10px 12px;font-weight:600">Company</a>
+</nav>
+<div class="navactions" style="display:flex;align-items:center;gap:8px">
+<div role="group" aria-label="Language" style="display:inline-flex;padding:3px;background:#F4F7FB;border:1px solid #E3E8F0;border-radius:999px;font-size:13px;font-weight:600;margin-right:4px"><span aria-current="true" style="background:#0F1E3D;color:#FFFFFF;padding:6px 12px;border-radius:999px">EN</span><a href="CompanyNL.dc.html" hreflang="nl" lang="nl" title="Nederlands" style="color:#334155;padding:6px 12px;border-radius:999px">NL</a></div>
+<a href="#" style="color:#0F1E3D;font-weight:500;font-size:15px;padding:10px 12px">Sign in</a>
+<a href="EarlyAccess.dc.html" style="background:#0F1E3D;color:#FFFFFF;font-weight:600;font-size:15px;padding:11px 18px;border-radius:999px">Request early access</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div style="max-width:1200px;margin:0 auto;padding:56px 24px 0;box-sizing:border-box;position:relative;isolation:isolate"><div class="blob" style="width:360px;height:360px;background:rgba(64,224,245,.32);top:20px;right:80px"></div><div class="blob" style="width:320px;height:320px;background:rgba(29,78,216,.18);top:200px;right:-40px;animation-delay:-6s"></div><div class="fchip drift" style="right:60px;top:70px"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>New form entry</div><div class="fchip drift2" style="right:10px;top:150px"><span style="width:28px;height:28px;border-radius:8px;background:#DCE7FF;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9 6 9-6M3 7v10h18V7z"/></svg></span>Email sent</div><div class="fchip drift" style="right:110px;top:230px"><span style="width:28px;height:28px;border-radius:8px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg></span>Site published</div>
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em">ABOUT US</div>
+<h1 style="font-weight:700;font-size:60px;line-height:1.04;letter-spacing:-0.03em;margin:14px 0 0;max-width:880px">We think every small business deserves a website that works for it.</h1>
+<div style="display:flex;flex-wrap:wrap;gap:48px;margin-top:48px">
+<div style="flex:1 1 420px;font-size:18px;line-height:1.7;color:#1E293B">
+<p style="margin:0">Getting online used to mean hiring a designer, a developer and a marketing tool, then making them talk to each other. Most small businesses never got past the first step.</p>
+<p style="margin:18px 0 0">WebGen puts the website, the sign-up forms and the email in one place, and writes the first version for you. [CONFIRM: founding story and who is behind WebGen, e.g. built by the Master Your Business team]</p>
+</div>
+<div style="flex:1 1 360px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start">
+<div style="background:#F4F7FB;border-radius:16px;padding:22px"><div style="font-size:13px;color:#55607A">Founded</div><div class="factval" style="font-weight:700;font-size:24px;margin-top:6px">[YEAR]</div></div>
+<div style="background:#F4F7FB;border-radius:16px;padding:22px"><div style="font-size:13px;color:#55607A">Based in</div><div class="factval" style="font-weight:700;font-size:24px;margin-top:6px">Ridderkerk</div></div>
+<div style="background:#F4F7FB;border-radius:16px;padding:22px;grid-column:span 2"><div style="font-size:13px;color:#55607A">Operated by</div><div style="font-weight:700;font-size:20px;margin-top:6px">Schenk Rekenmeesters</div><div style="font-size:14px;color:#55607A;margin-top:4px">KvK 55633323 · VAT NL001579296B13</div></div>
+</div>
+</div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true" style="margin:56px 0 0"><div class="marq-track"><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Forms<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Newsletters<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Your own domain<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Follow-up emails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Search basics<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Reports<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Website<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Forms<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Newsletters<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Your own domain<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Follow-up emails<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Search basics<span aria-hidden="true" style="color:#40E0F5">✦</span></span><span style="display:inline-flex;align-items:center;gap:28px;padding-right:28px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif;font-weight:700;font-size:28px;letter-spacing:-0.02em;color:#0F1E3D;white-space:nowrap">Reports<span aria-hidden="true" style="color:#40E0F5">✦</span></span></div></div>
+
+<!-- VALUES -->
+<div style="max-width:1200px;margin:0 auto;padding:72px 24px 0;box-sizing:border-box">
+<h2 style="font-weight:700;font-size:36px;letter-spacing:-0.03em;margin:0">What we stand for</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:32px">
+<div style="border:1px solid #E3E8F0;border-radius:20px;padding:28px"><h3 style="font-size:19px;margin:0 0 8px">Plain language</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">No jargon in the product or in our support replies.</p></div>
+<div style="border:1px solid #E3E8F0;border-radius:20px;padding:28px"><h3 style="font-size:19px;margin:0 0 8px">Consent first</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">People only get email they asked for, and can leave in one click.</p></div>
+<div style="border:1px solid #E3E8F0;border-radius:20px;padding:28px"><h3 style="font-size:19px;margin:0 0 8px">Your business, your data</h3><p style="margin:0;font-size:16px;line-height:1.55;color:#55607A">[CONFIRM: ownership and export promise]</p></div>
+</div>
+</div>
+
+<!-- EXAMPLES -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:72px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">EXAMPLES</div><h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0">What other owners build.</h2><p style="font-size:17px;line-height:1.55;color:#55607A;max-width:620px;margin:12px 0 0">Example sites for small businesses, made in WebGen from a short brief.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin-top:28px"><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/2fd2cb5ccf5a605c91ea6119dadcd000" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Blad & Bloesem</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Tea shop</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Elke dag thee die écht smaakt”</div></a><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/f6f27542a9ac785f55e19ab882cd736c" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">De Groene Hand</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Garden care</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Je hoeft het niet alleen uit te zoeken.”</div></a><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/70afddb197aab16939b36c7e05bd6c3d" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Warmtewijs</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Installer</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Warm huis, lage energierekening, zonder gedoe”</div></a><a class="lift" href="Examples.dc.html" style="display:block;border:1px solid #E3E8F0;border-radius:18px;padding:12px;background:#FFFFFF;color:#0F1E3D"><div style="border-radius:10px;overflow:hidden;border:1px solid #E3E8F0;aspect-ratio:16/10;background:#F4F7FB"><img src="/_blob/50fc784d0dfc0cd9466574e3483ef3fd" alt="" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px"><span style="font-weight:700;font-size:16px">Beweegpunt</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;background:#EEF3FF;border-radius:999px;padding:3px 10px">Physiotherapy</span></div><div style="font-size:13px;line-height:1.45;color:#55607A;margin-top:4px">“Snel weer pijnvrij en zelfstandig bewegen”</div></a></div></div>
+
+<!-- DUTCH TRUST -->
+<div class="rv" style="max-width:1200px;margin:0 auto;padding:72px 24px 0;box-sizing:border-box"><div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em;font-weight:600">WHY WEBGEN</div><h2 style="font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-0.03em;margin:12px 0 0;max-width:760px">No fuss, and you know where you stand.</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:28px"><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Made in the Netherlands</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">By a Dutch team, for small businesses. [CONFIRM: wording]</div></div><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Your data in [EU REGION]</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">Clear about where your site and contact list live. [CONFIRM: region and provider]</div></div><div style="border:1px solid #E3E8F0;border-radius:20px;padding:22px;background:#FFFFFF"><span style="width:40px;height:40px;border-radius:12px;background:#40E0F5;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div style="font-weight:700;font-size:18px;margin-top:14px;font-family:Bricolage Grotesque,DM Sans,system-ui,sans-serif">Help in Dutch and English</div><div style="font-size:14px;line-height:1.5;color:#55607A;margin-top:6px">A real person who helps when you get stuck. [CONFIRM: reply time]</div></div></div></div>
+
+<!-- CONTACT -->
+<div id="contact" style="max-width:1200px;margin:0 auto;padding:80px 24px 72px;box-sizing:border-box">
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+<div style="flex:1 1 360px">
+<div style="font-family:DM Sans,system-ui,sans-serif;font-size:13px;color:#1D4ED8;letter-spacing:0.04em">CONTACT</div>
+<h2 style="font-weight:700;font-size:44px;line-height:1.08;letter-spacing:-0.035em;margin:12px 0 0">Talk to a person.</h2>
+<p style="font-size:18px;line-height:1.6;color:#55607A;margin:16px 0 0">We reply within [RESPONSE TIME] on working days.</p>
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:32px">
+<div style="border:1px solid #E3E8F0;border-radius:16px;padding:20px"><div style="font-weight:600">Support</div><div style="font-size:15px;color:#55607A;margin-top:4px">[support@your-domain]</div></div>
+<div style="border:1px solid #E3E8F0;border-radius:16px;padding:20px"><div style="font-weight:600">Report spam or abuse</div><div style="font-size:15px;color:#55607A;margin-top:4px">[abuse@your-domain]</div><a href="EmailInfo.dc.html" style="display:inline-block;margin-top:8px;font-size:14px;font-weight:600">Got an email you did not expect? →</a></div>
+<div style="border:1px solid #E3E8F0;border-radius:16px;padding:20px"><div style="font-weight:600">Postal address</div><div style="font-size:15px;color:#55607A;margin-top:4px;line-height:1.5">Schenk Rekenmeesters<br>Steijnstraat 18, 2987 AS Ridderkerk, the Netherlands</div></div>
+</div>
+</div>
+
+<div style="flex:1 1 460px;background:linear-gradient(160deg,#F8FAFF 0%,#E9EFFA 100%);border-radius:24px;padding:32px;box-sizing:border-box">
+<sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{submit}}" style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-wrap:wrap;gap:16px">
+<label style="flex:1 1 200px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Name<input type="text" required autocomplete="name" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;min-height:44px;box-sizing:border-box"></label>
+<label style="flex:1 1 200px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Email<input type="email" required autocomplete="email" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;min-height:44px;box-sizing:border-box"></label>
+</div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Topic
+<select style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;min-height:44px">
+<option>A question about WebGen</option>
+<option>Help with my account</option>
+<option>Agency or partnership</option>
+<option>An email I received</option>
+</select>
+</label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Message<textarea required rows="5" style="border:1px solid #CBD3E1;border-radius:10px;padding:12px 14px;font:15px DM Sans,system-ui,sans-serif;background:#FFFFFF;resize:vertical"></textarea></label>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#55607A">We use your details only to reply. See our <a href="Privacy.dc.html">privacy policy</a>.</p>
+<button type="submit" style="align-self:flex-start;background:#0F1E3D;color:#FFFFFF;border:0;border-radius:999px;padding:14px 26px;font:600 15px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">Send message</button>
+</form>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div style="padding:40px 8px;text-align:center">
+<svg aria-hidden="true" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+<h3 style="font-size:22px;margin:16px 0 8px">Message sent</h3>
+<p style="margin:0;font-size:16px;color:#55607A">Thanks. We will reply by email within [RESPONSE TIME].</p>
+<button type="button" onClick="{{reset}}" style="margin-top:20px;background:#FFFFFF;border:1px solid #CBD3E1;border-radius:999px;padding:12px 20px;font:500 14px DM Sans,system-ui,sans-serif;min-height:44px;cursor:pointer">Send another</button>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid #E3E8F0">
+<div style="max-width:1200px;margin:0 auto;padding:40px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#55607A">
+<span>© 2026 Schenk Rekenmeesters</span>
+<span style="display:flex;flex-wrap:wrap;gap:20px"><a href="DocsHome.dc.html" style="color:#55607A">Docs</a><a href="EmailInfo.dc.html" style="color:#55607A">Email from us?</a><a href="Privacy.dc.html" style="color:#55607A">Privacy</a><a href="Terms.dc.html" style="color:#55607A">Terms</a></span>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1850}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sent: false }; }
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      submit: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ sent: true }); },
+      reset: () => this.setState({ sent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
