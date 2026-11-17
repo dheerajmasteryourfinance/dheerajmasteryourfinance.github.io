@@ -37,7 +37,7 @@ describe('home page', () => {
   });
 
   it('has Request early access in nav, hero and closing CTA, all to /early-access/, and one See an example', () => {
-    const nav = linksNamed(doc.querySelector('nav'), 'Request early access');
+    const nav = linksNamed(doc.querySelector('header.site-nav'), 'Request early access');
     const hero = linksNamed(sec('hero'), 'Request early access');
     const cta = linksNamed(sec('cta'), 'Request early access');
     expect(nav).toHaveLength(1);

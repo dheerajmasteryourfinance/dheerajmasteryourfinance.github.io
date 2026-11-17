@@ -1,4 +1,7 @@
 ---
+// Header. Desktop: one row. Under 900px the links and actions move into a panel that slides in
+// from the right. Open state is a checkbox (#navtoggle) so the menu works without JavaScript;
+// the backdrop is a <label> for the same checkbox, so tapping it closes the menu.
 import Logo from './Logo.astro';
 import LangSwitch from './LangSwitch.astro';
 import { APP_LOGIN, APP_PLACEHOLDER, EARLY_ACCESS } from '../lib/links.js';
@@ -15,52 +18,35 @@ const links = [
 ];
 const isCurrent = (href: string) => current === href || current.startsWith(href);
 ---
-<nav class="site-nav" aria-label={t.nav.label}>
-  <div class="container">
+<header class="site-nav">
+  <div class="container nav-row">
     <Logo />
-    <ul class="nav-links">
-      {links.map((l) => (
-        <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
-      ))}
-      <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a></li>
-      <li><LangSwitch path={switchPath} /></li>
-    </ul>
-    <a class="btn btn-primary nav-cta" href={localize(EARLY_ACCESS, locale)}><span><span class="cta-lead">{t.cta.lead}</span><span class="cta-rest">{t.cta.rest}</span>{t.cta.tail && <span class="cta-tail">{t.cta.tail}</span>}</span></a>
-    <details class="nav-menu" data-nav-menu>
-      <summary aria-controls="site-menu">
-        <span class="visually-hidden label-closed">{t.nav.openMenu}</span>
-        <span class="visually-hidden label-open">{t.nav.closeMenu}</span>
-        <svg class="icon-closed" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M3 5h14M3 10h14M3 15h14" />
-        </svg>
-        <svg class="icon-open" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M5 5l10 10M15 5L5 15" />
-        </svg>
-      </summary>
-      <ul id="site-menu" class="nav-menu-panel">
-        {links.map((l) => (
-          <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
-        ))}
-        <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a></li>
-        <li class="menu-lang"><LangSwitch path={switchPath} /></li>
-      </ul>
-    </details>
+    <label class="navback" for="navtoggle" aria-hidden="true"></label>
+    <label class="burger">
+      <input type="checkbox" id="navtoggle" class="navchk" aria-label={t.nav.openMenu} />
+      <i></i><i></i><i></i>
+    </label>
+    <div class="navpanel">
+      <div class="navhead"><Logo /></div>
+      <nav class="navlinks" aria-label={t.nav.label}>
+        {links.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
+      </nav>
+      <div class="navactions">
+        <LangSwitch path={switchPath} />
+        <a class="nav-signin" href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a>
+        <a class="btn btn-primary nav-cta" href={localize(EARLY_ACCESS, locale)}>{t.cta.lead}{t.cta.rest}{t.cta.tail}</a>
+      </div>
+    </div>
   </div>
-</nav>
+</header>
 
 <script>
-  // The menu works without JS (native <details>). This only adds Escape and click-outside to close.
-  const menu = document.querySelector('[data-nav-menu]');
-  if (menu instanceof HTMLDetailsElement) {
-    const summary = menu.querySelector('summary');
+  // Progressive enhancement only: Escape closes the menu, and a link tap closes it before navigating.
+  const toggle = document.getElementById('navtoggle');
+  if (toggle instanceof HTMLInputElement) {
     document.addEventListener('keydown', (e) => {
-      if (e.key !== 'Escape' || !menu.open) return;
-      const hadFocus = menu.contains(document.activeElement);
-      menu.open = false;
-      if (hadFocus) summary?.focus();
+      if (e.key === 'Escape' && toggle.checked) { toggle.checked = false; toggle.focus(); }
     });
-    document.addEventListener('click', (e) => {
-      if (menu.open && e.target instanceof Node && !menu.contains(e.target)) menu.open = false;
-    });
+    document.querySelectorAll('.navpanel a').forEach((a) => a.addEventListener('click', () => { toggle.checked = false; }));
   }
 </script>

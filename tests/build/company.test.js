@@ -51,13 +51,13 @@ describe('company page', () => {
     expect(cards[0].querySelector('a[href="/email/"]')).toBeTruthy();
   });
 
-  it('Operated by shows the legal entity, KvK and BTW placeholders', () => {
+  it('Operated by shows the legal entity, KvK and VAT number', () => {
     const facts = [...doc.querySelectorAll('main dl.facts > div')];
     const op = facts.find((d) => d.querySelector('dt').textContent.trim() === 'Operated by');
     const t = op.querySelector('dd').textContent;
-    expect(t).toContain('[LEGAL ENTITY NAME]');
-    expect(t).toContain('KvK [KVK NUMBER]');
-    expect(t).toContain('BTW [BTW NUMBER]');
+    expect(t).toContain('Schenk Rekenmeesters');
+    expect(t).toContain('KvK 55633323');
+    expect(t).toContain('VAT NL001579296B13');
     expect(t).not.toContain('[COMPANY NUMBER]');
   });
 

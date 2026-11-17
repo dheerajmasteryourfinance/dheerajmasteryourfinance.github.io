@@ -20,40 +20,7 @@ function pageCss(doc) {
   return [...sheets, ...inline].join('\n').replace(/\s+/g, '');
 }
 
-describe('mobile header menu', () => {
-  describe.each(allRoutes())('%s', (route) => {
-    const doc = loadPage(route);
-    const lang = route.startsWith('/nl/') ? 'nl' : 'en';
-    const nav = doc.querySelector('body > nav.site-nav');
-    const menu = nav?.querySelector('details.nav-menu');
-
-    it('has a closed <details> menu whose summary has an accessible name', () => {
-      expect(menu).toBeTruthy();
-      expect(menu.hasAttribute('open')).toBe(false);
-      const summary = menu.querySelector(':scope > summary');
-      expect(summary).toBeTruthy();
-      expect(text(summary)).toContain(MENU[lang][0]);
-      expect(text(summary)).toContain(MENU[lang][1]);
-      const panel = doc.getElementById(summary.getAttribute('aria-controls'));
-      expect(panel).toBeTruthy();
-      expect(menu.contains(panel)).toBe(true);
-    });
-
-    it('puts Product, Docs, Company and Sign in inside the menu, with the desktop hrefs', () => {
-      const inMenu = pageLinks(menu);
-      expect(inMenu.map(text)).toEqual(NAV_LABELS[lang]);
-      const desktop = pageLinks(nav.querySelector('.nav-links'));
-      expect(desktop.map(text)).toEqual(NAV_LABELS[lang]);
-      expect(inMenu.map((a) => a.getAttribute('href'))).toEqual(desktop.map((a) => a.getAttribute('href')));
-    });
-
-    it('keeps one early access CTA in the nav, outside the menu', () => {
-      const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === CTA[lang]);
-      expect(ctas).toHaveLength(1);
-      expect(menu.contains(ctas[0])).toBe(false);
-    });
-  });
-});
+// The mobile header menu is covered by tests/build/header-footer.test.js (slide-in panel, canvas v84).
 
 describe('docs mobile menu', () => {
   const ROUTE = '/docs/build-your-first-website/';

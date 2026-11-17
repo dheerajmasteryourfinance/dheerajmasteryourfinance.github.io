@@ -1,7 +1,7 @@
 ---
 import LangSwitch from './LangSwitch.astro';
 import { APP_LOGIN, APP_PLACEHOLDER } from '../lib/links.js';
-import { COMPANY } from '../lib/copy.js';
+import { COMPANY, kvkLine, vatLine, addressLine } from '../lib/company.ts';
 import { getLocale, localize } from '../i18n/index.ts';
 import { UI } from '../i18n/ui.ts';
 interface Props { switchPath: string }
@@ -10,7 +10,7 @@ const locale = getLocale(Astro.currentLocale);
 const t = UI[locale].footer;
 const signIn = UI[locale].nav.signIn;
 const l = (p: string) => localize(p, locale);
-const facts = [COMPANY.legalName, COMPANY.kvk, COMPANY.btw, COMPANY.address, COMPANY.phone, COMPANY.supportEmail];
+const facts = [COMPANY.legalName, kvkLine(), vatLine(locale), addressLine(), COMPANY.phone, COMPANY.supportEmail];
 ---
 <footer class="site-footer">
   <div class="container">
@@ -43,6 +43,11 @@ const facts = [COMPANY.legalName, COMPANY.kvk, COMPANY.btw, COMPANY.address, COM
         </ul>
       </div>
     </div>
+    <ul class="footer-trust" aria-label={t.trustLabel}>
+      {t.trust.map((item) => (
+        <li><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10" /></svg>{item}</li>
+      ))}
+    </ul>
     <div class="footer-legal">
       <ul class="footer-facts" aria-label={t.factsLabel}>
         {facts.map((f) => <li>{f}</li>)}

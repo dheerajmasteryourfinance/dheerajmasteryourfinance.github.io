@@ -58,61 +58,66 @@ a:hover { color: var(--link-hover); }
 }
 .skip-link:focus { top: 12px; }
 
-/* Nav */
+/* Header. Desktop: one row. Under 900px: logo + menu button; links and actions slide in from the right.
+   The open state is the #navtoggle checkbox (works without JS); the backdrop is a label for it. */
 .site-nav {
   position: sticky; top: 0; z-index: 50;
   background: var(--white-glass);
   backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
-/* Mobile first: one row of logo, compact CTA and a native <details> menu.
-   The column gap is 8px so that on desktop the CTA sits 8px after "Sign in",
-   exactly as when it was the last item of the link list. */
-.site-nav .container {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding-top: 6px; padding-bottom: 6px;
-}
-.site-nav ul { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; list-style: none; margin: 0; padding: 0; }
-.site-nav .nav-links { display: none; margin-left: auto; }
-.site-nav .nav-cta { margin-left: auto; padding: 0 16px; font-size: .9375rem; }
-.site-nav a:not(.btn):not(.logo) {
+.nav-row { display: flex; align-items: center; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
+.navpanel { display: contents; }
+.navhead, .navback { display: none; }
+.navlinks { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.navlinks a, .nav-signin {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px;
   color: var(--ink); text-decoration: none; font-weight: 500;
 }
-.site-nav a:not(.btn):not(.logo):hover { color: var(--link-hover); text-decoration: underline; }
-.site-nav a[aria-current="page"] { font-weight: 700; box-shadow: inset 0 -3px 0 var(--accent); }
-
-.nav-menu > summary {
-  display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
-  border: 1px solid var(--line-strong); border-radius: 10px; color: var(--ink); cursor: pointer; list-style: none;
+.navlinks a:hover, .nav-signin:hover { color: var(--link-hover); text-decoration: underline; }
+.navlinks a[aria-current="page"] { font-weight: 700; box-shadow: inset 0 -3px 0 var(--accent); }
+.navactions { display: flex; align-items: center; gap: 8px; }
+.burger {
+  display: none; position: relative; width: 44px; height: 44px; margin-left: auto; flex: none; z-index: 60;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--white); cursor: pointer;
 }
-.nav-menu > summary::-webkit-details-marker { display: none; }
-.nav-menu > summary:hover, .nav-menu[open] > summary { border-color: var(--ink); }
-.nav-menu[open] .label-closed, .nav-menu[open] .icon-closed,
-.nav-menu:not([open]) .label-open, .nav-menu:not([open]) .icon-open { display: none; }
-.site-nav .nav-menu-panel {
-  position: absolute; left: 0; right: 0; top: 100%;
-  display: grid; gap: 0; padding: 4px 20px 12px;
-  background: var(--white); border-bottom: 1px solid var(--line); box-shadow: var(--shadow-lift);
-}
-.nav-menu-panel li + li { border-top: 1px solid var(--line); }
-.site-nav .nav-menu-panel a:not(.btn) { display: flex; min-height: 48px; padding: 0 4px; }
-.site-nav .nav-menu-panel a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--accent); padding-left: 14px; }
+.burger input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.burger i { position: absolute; left: 12px; right: 12px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .25s ease, opacity .2s ease, top .25s ease; }
+.burger i:nth-of-type(1) { top: 15px; } .burger i:nth-of-type(2) { top: 21px; } .burger i:nth-of-type(3) { top: 27px; }
+.burger:has(input:focus-visible) { outline: 3px solid var(--link); outline-offset: 2px; }
+.burger:has(input:checked) i:nth-of-type(1) { top: 21px; transform: rotate(45deg); }
+.burger:has(input:checked) i:nth-of-type(2) { opacity: 0; }
+.burger:has(input:checked) i:nth-of-type(3) { top: 21px; transform: rotate(-45deg); }
 
-/* Under 420px the full CTA label would push the menu button onto a second row:
-   show only "Early access" there. The lead word stays in the accessible name. */
-@media (max-width: 419.98px) {
-  .nav-cta .cta-lead {
-    position: absolute; width: 1px; height: 1px; overflow: hidden;
-    clip: rect(0 0 0 0); white-space: nowrap;
+@media (max-width: 900px) {
+  .site-nav { backdrop-filter: none; background: var(--white); }
+  .burger { display: inline-flex; }
+  .navpanel {
+    display: flex; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; z-index: 50;
+    width: min(88vw, 360px); padding: 10px 24px 28px; overflow-y: auto;
+    background: linear-gradient(180deg, #F3F7FF 0%, var(--white) 220px);
+    border-radius: 24px 0 0 24px; box-shadow: -24px 0 60px rgba(15, 30, 61, .24);
+    transform: translateX(105%); visibility: hidden;
+    transition: transform .3s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .3s;
   }
-  .nav-cta .cta-rest { display: inline-block; }
-  .nav-cta .cta-rest::first-letter { text-transform: uppercase; }
+  :root:has(.navchk:checked) .navpanel { transform: none; visibility: visible; transition: transform .3s cubic-bezier(.2, .7, .2, 1), visibility 0s; }
+  .navback {
+    display: block; position: fixed; inset: 0; z-index: 40; background: rgba(15, 30, 61, .45);
+    opacity: 0; pointer-events: none; transition: opacity .25s ease;
+  }
+  :root:has(.navchk:checked) .navback { opacity: 1; pointer-events: auto; }
+  .navhead { display: flex; align-items: center; height: 44px; padding-right: 56px; margin-bottom: 20px; }
+  .navlinks { flex-direction: column; flex-wrap: nowrap; gap: 4px; margin: 0; font-size: 1.25rem; font-weight: 600; }
+  .navlinks a { justify-content: space-between; padding: 16px 14px; border-radius: 14px; font-weight: 600; }
+  .navlinks a::after { content: ""; width: 8px; height: 8px; border-top: 2px solid #9AA6BD; border-right: 2px solid #9AA6BD; transform: rotate(45deg); }
+  .navlinks a:hover { background: #EAF1FF; text-decoration: none; }
+  .navlinks a[aria-current="page"] { box-shadow: none; background: var(--tint); }
+  .navactions { flex-direction: column; align-items: stretch; gap: 12px; margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line); }
+  .navactions .lang-switch { align-self: stretch; }
+  .nav-signin { justify-content: center; border: 1px solid var(--line-strong); border-radius: 999px; }
+  .navactions .nav-cta { min-height: 52px; }
 }
-@media (min-width: 720px) {
-  .site-nav .nav-links { display: flex; }
-  .site-nav .nav-cta { margin-left: 0; padding: 0 22px; font-size: 1rem; }
-  .nav-menu { display: none; }
-}
+@media (prefers-reduced-motion: reduce) { .navpanel, .navback, .burger i { transition: none !important; } }
 
 .logo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--ink); }
 .logo-mark {
@@ -121,22 +126,25 @@ a:hover { color: var(--link-hover); }
 }
 .logo-word { font: 800 1.25rem/1 var(--font-heading); color: var(--ink); }
 
-/* Footer */
-.site-footer :focus-visible { outline-color: var(--accent); }
-.site-footer { background: var(--ink); color: var(--on-dark); padding: 56px 0 32px; }
-.site-footer h2 { font: 700 .875rem/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--on-dark-2); margin-bottom: 12px; }
+/* Footer (light, as in the canvas) */
+.site-footer :focus-visible { outline-color: var(--link); }
+.site-footer { background: var(--white); color: var(--muted); border-top: 1px solid var(--line); padding: 56px 0 32px; }
+.site-footer h2 { font: 600 .9375rem/1 var(--font-body); color: var(--ink); margin-bottom: 12px; }
 .footer-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 32px; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
-.site-footer a { color: var(--on-dark-2); display: inline-flex; align-items: center; min-height: 44px; }
-.site-footer a:hover { color: var(--white); }
+.site-footer a { color: var(--muted); display: inline-flex; align-items: center; min-height: 44px; }
+.site-footer a:hover { color: var(--ink); }
+.site-footer .footer-trust { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.footer-trust li { display: inline-flex; align-items: center; gap: 8px; font-size: .8125rem; color: #334155; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 7px 14px; }
+.footer-trust svg { color: var(--link); }
 .footer-legal {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
-  border-top: 1px solid var(--on-dark-line); margin-top: 32px; padding-top: 20px; font-size: .9rem;
+  border-top: 1px solid var(--line); margin-top: 32px; padding-top: 20px; font-size: .9rem;
 }
 /* The facts wrap as whole items; the dot separator sits before every item but the first. */
 .site-footer .footer-facts { display: flex; flex-wrap: wrap; gap: 4px 0; }
-.footer-facts li + li::before { content: "\00B7"; padding: 0 8px; color: var(--on-dark); }
-.footer-made { margin: 0; color: var(--on-dark-2); }
+.footer-facts li + li::before { content: "·"; padding: 0 8px; color: var(--muted); }
+.footer-made { margin: 0; color: var(--muted); }
 
 /* Phones: big headings scale down so long Dutch words fit (canvas resp-fix). */
 @media (max-width: 640px) {

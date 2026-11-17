@@ -60,10 +60,9 @@ describe.each(pages)('%s', (route) => {
     expect(doc.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${SITE}${route}`);
   });
 
-  it('nav switch (desktop and menu) and footer switch link to both versions, current one marked', () => {
+  it('header switch and footer switch link to both versions, current one marked', () => {
     const groups = [
-      doc.querySelector('nav[aria-label] .nav-links .lang-switch'),
-      doc.querySelector('nav[aria-label] .nav-menu .lang-switch'),
+      doc.querySelector('header.site-nav .navpanel .lang-switch'),
       doc.querySelector('footer .lang-switch'),
     ];
     for (const g of groups) {
@@ -77,8 +76,8 @@ describe.each(pages)('%s', (route) => {
       expect(byLang[lang].getAttribute('aria-current')).toBe('true');
       expect(byLang[lang === 'en' ? 'nl' : 'en'].hasAttribute('aria-current')).toBe(false);
     }
-    expect(text(groups[2])).toContain('English');
-    expect(text(groups[2])).toContain('Nederlands');
+    expect(text(groups[1])).toContain('English');
+    expect(text(groups[1])).toContain('Nederlands');
   });
 
   it('every internal link stays in its own language (except the language switch)', () => {

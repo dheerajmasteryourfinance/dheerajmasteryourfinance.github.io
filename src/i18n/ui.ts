@@ -34,6 +34,8 @@ const en = {
     cookies: 'Cookies',
     factsLabel: 'Company details',
     madeIn: 'Made in the Netherlands',
+    trustLabel: 'Why you can trust WebGen email',
+    trust: ['Verified senders', 'Easy unsubscribe', 'Data stored in [EU REGION]'],
   },
   docs: {
     title: 'Docs',
@@ -108,6 +110,8 @@ const nl: Ui = {
     cookies: 'Cookies',
     factsLabel: 'Bedrijfsgegevens',
     madeIn: 'Gemaakt in Nederland',
+    trustLabel: 'Waarom je WebGen-e-mail kunt vertrouwen',
+    trust: ['Geverifieerde afzenders', 'Makkelijk uitschrijven', 'Gegevens opgeslagen in [EU-REGIO]'],
   },
   docs: {
     title: 'Handleidingen',

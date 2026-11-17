@@ -87,8 +87,9 @@ describe('feature claims', () => {
 describe('focus ring on dark backgrounds', () => {
   it('uses the accent outline inside ink areas', () => {
     const css = readFileSync(join(process.cwd(), 'src/styles/base.css'), 'utf8');
-    expect(css).toMatch(/\.site-footer :focus-visible[\s\S]*?outline-color:\s*var\(--accent\)/);
-    const home = readFileSync(join(process.cwd(), 'src/pages/index.astro'), 'utf8');
+    // The footer is light since canvas v84, so its focus ring uses the link blue.
+    expect(css).toMatch(/\.site-footer :focus-visible[\s\S]*?outline-color:\s*var\(--link\)/);
+    const home = readFileSync(join(process.cwd(), 'src/components/pages/HomePage.astro'), 'utf8');
     expect(home).toMatch(/section\.dark :focus-visible[\s\S]*?var\(--accent\)/);
     expect(home).toMatch(/section\.final :focus-visible[\s\S]*?var\(--accent\)/);
   });

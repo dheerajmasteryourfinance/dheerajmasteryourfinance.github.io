@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { COMPANY } from '../../lib/copy.js';
+import { COMPANY, kvkLine, vatLine } from '../../lib/company.ts';
 const topics = [
   'A question about WebGen',
   'Help with my account',
@@ -24,8 +24,8 @@ const topics = [
         </div>
         <dl class="facts">
           <div><dt>Founded</dt><dd>[YEAR]</dd></div>
-          <div><dt>Based in</dt><dd>[CITY]</dd></div>
-          <div><dt>Operated by</dt><dd>{COMPANY.legalName}<br />{COMPANY.kvk}<br />{COMPANY.btw}</dd></div>
+          <div><dt>Based in</dt><dd>{COMPANY.city}</dd></div>
+          <div><dt>Operated by</dt><dd>{COMPANY.legalName}<br />{kvkLine()}<br />{vatLine('en')}</dd></div>
         </dl>
       </div>
     </div>
