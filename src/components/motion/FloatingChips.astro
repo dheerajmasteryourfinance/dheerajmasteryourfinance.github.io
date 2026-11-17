@@ -1,0 +1,21 @@
+---
+// Three small cards that bob around a hero or screenshot. Hidden under 900px (motion.css).
+import type { Locale } from '../../i18n/index.ts';
+import { MOTION } from '../../i18n/motion.ts';
+interface Props { locale: Locale; placement?: 'right' | 'around-shot' }
+const { locale, placement = 'right' } = Astro.props;
+const [a, b, c] = MOTION[locale].chips;
+const POS = {
+  right: ['right:60px;top:70px', 'right:10px;top:150px', 'right:110px;top:230px'],
+  'around-shot': ['left:-8px;top:18%', 'right:-8px;top:34%', 'left:6%;bottom:12%'],
+}[placement];
+---
+<div class="fchip drift" style={POS[0]} aria-hidden="true">
+  <span class="fchip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>{a}
+</div>
+<div class="fchip drift2" style={POS[1]} aria-hidden="true">
+  <span class="fchip-icon alt"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9 6 9-6M3 7v10h18V7z"/></svg></span>{b}
+</div>
+<div class="fchip drift" style={POS[2]} aria-hidden="true">
+  <span class="fchip-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg></span>{c}
+</div>

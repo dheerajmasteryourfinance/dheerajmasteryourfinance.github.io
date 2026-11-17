@@ -1,0 +1,77 @@
+/* Motion, from the design canvas (docs/design/canvas-v84). Every effect is off under reduced motion,
+   and nothing is hidden unless an animation is guaranteed to show it again. */
+
+/* ---- Scroll reveal ----
+   Sections (.rv) fade in, rise and un-blur; cards and other targets reveal on their own as each
+   enters, which staggers grids naturally. Reveal moves with `translate`, never `transform`,
+   so hover lifts (which use transform) keep working. */
+@keyframes rvin { from { opacity: 0; translate: 0 28px; filter: blur(3px); } to { opacity: 1; translate: 0 0; filter: none; } }
+@keyframes rvcard { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
+
+@supports (animation-timeline: view()) {
+  .rv { animation: rvin cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 0% cover 26%; }
+  .lift, .stopcard, .reveal-item, details, figure, .tsec {
+    animation: rvcard cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 0% cover 20%;
+  }
+}
+
+/* Fallback for browsers without scroll-driven animation: src/scripts/reveal.ts adds .js-reveal
+   to <html> and .is-visible to each target as it comes into view. Without JS nothing is hidden. */
+.js-reveal .rv, .js-reveal .lift, .js-reveal .stopcard, .js-reveal .reveal-item {
+  opacity: 0; translate: 0 24px;
+  transition: opacity .7s cubic-bezier(.2, .7, .2, 1), translate .7s cubic-bezier(.2, .7, .2, 1);
+}
+.js-reveal .rv.is-visible, .js-reveal .lift.is-visible, .js-reveal .stopcard.is-visible, .js-reveal .reveal-item.is-visible {
+  opacity: 1; translate: 0 0;
+}
+
+/* ---- Hover lift and image zoom ---- */
+.lift { transition: transform .3s cubic-bezier(.2, .7, .2, 1), box-shadow .3s ease; }
+.lift:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(15, 30, 61, .14); }
+.zoom img { transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.zoom:hover img { transform: scale(1.03); }
+
+/* ---- Decorations ---- */
+@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes drift2 { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(12px) rotate(1deg); } }
+@keyframes blobmove { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(40px, -30px) scale(1.08); } 66% { transform: translate(-30px, 24px) scale(.94); } }
+@keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes ring { 0% { box-shadow: 0 0 0 0 rgba(64, 224, 245, .55); } 70% { box-shadow: 0 0 0 16px rgba(64, 224, 245, 0); } 100% { box-shadow: 0 0 0 0 rgba(64, 224, 245, 0); } }
+
+.drift { animation: drift 6s ease-in-out infinite; }
+.drift2 { animation: drift2 7.5s ease-in-out infinite; }
+.blob { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; z-index: -1; animation: blobmove 16s ease-in-out infinite; }
+.has-blobs { position: relative; isolation: isolate; }
+.marq { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marq-track { display: flex; width: max-content; animation: marq 38s linear infinite; }
+.marq:hover .marq-track { animation-play-state: paused; }
+.marq-item { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font: 700 1.75rem/1.2 var(--font-heading); letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+.marq-item span { color: var(--accent-deep); }
+.pulse { animation: ring 2.4s ease-out infinite; }
+.fchip {
+  position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px;
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px;
+  box-shadow: 0 18px 40px rgba(15, 30, 61, .16); font-size: .875rem; font-weight: 600; color: var(--ink);
+}
+.fchip-icon { width: 28px; height: 28px; border-radius: 8px; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; }
+.fchip-icon.alt { background: #DCE7FF; }
+@media (max-width: 900px) { .fchip { display: none; } .blob { opacity: .6; } }
+
+/* ---- Sticky early-access bar ---- */
+.stickycta {
+  position: sticky; bottom: 16px; z-index: 6; width: max-content; max-width: calc(100% - 32px); margin: 0 auto 16px;
+  display: flex; align-items: center; gap: 14px; background: var(--ink); color: var(--white);
+  border-radius: 999px; padding: 8px 8px 8px 22px; box-shadow: 0 18px 44px rgba(15, 30, 61, .3); font-size: .9375rem; font-weight: 500;
+}
+@keyframes barin { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+@supports (animation-timeline: scroll()) {
+  .stickycta { animation: barin linear both; animation-timeline: scroll(root); animation-range: 480px 760px; }
+}
+@media (max-width: 640px) { .stickycta { font-size: .875rem; gap: 10px; padding: 6px 6px 6px 16px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv, .lift, .stopcard, .reveal-item, details, figure, .tsec, .blob, .marq-track, .pulse, .drift, .drift2, .stickycta { animation: none !important; }
+  .js-reveal .rv, .js-reveal .lift, .js-reveal .stopcard, .js-reveal .reveal-item { opacity: 1; translate: 0 0; transition: none; }
+  .lift, .zoom img { transition: none; }
+  .lift:hover, .zoom:hover img { transform: none; }
+}

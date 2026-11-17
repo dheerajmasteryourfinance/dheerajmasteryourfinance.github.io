@@ -1,6 +1,6 @@
 :root {
   --ink: #0F1E3D;
-  --accent: #FFC93C;
+  --accent: #40E0F5;
   --link: #1D4ED8;
   --link-hover: #1E3A8A;
   --muted: #55607A;
@@ -14,7 +14,8 @@
   --danger: #B91C1C;
   --white: #FFFFFF;
   --white-glass: rgba(255, 255, 255, .92);
-  --accent-hover: #F5BB22;
+  --accent-hover: #90F0FB;
+  --accent-deep: #1EC0DC;
   --on-dark-line: rgba(200, 209, 227, .25);
   --ink-raised: #1B2B4D;
   --shadow-lift: 0 12px 32px rgba(15, 30, 61, .12);

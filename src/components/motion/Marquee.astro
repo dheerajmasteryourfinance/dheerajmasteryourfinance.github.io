@@ -1,0 +1,11 @@
+---
+// A slow, endless strip of words. Decorative: hidden from screen readers.
+interface Props { items: string[] }
+const { items } = Astro.props;
+const run = [...items, ...items];
+---
+<div class="marq" aria-hidden="true">
+  <div class="marq-track">
+    {run.map((item) => <span class="marq-item">{item}<span>✦</span></span>)}
+  </div>
+</div>

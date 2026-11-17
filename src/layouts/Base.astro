@@ -48,5 +48,9 @@ const alts = alternates(path);
     <Nav current={self} switchPath={switchPath} />
     <main id="main"><slot /></main>
     <Footer switchPath={switchPath} />
+    <script>
+      import { initReveal } from '../scripts/reveal.ts';
+      initReveal();
+    </script>
   </body>
 </html>

@@ -1,0 +1,20 @@
+---
+// Two soft, drifting colour shapes behind a section. The parent needs class="has-blobs".
+interface Props { variant?: 'hero' | 'card' | 'article' }
+const { variant = 'hero' } = Astro.props;
+const SPOTS = {
+  hero: [
+    'width:360px;height:360px;background:rgba(64,224,245,.32);top:20px;right:80px',
+    'width:320px;height:320px;background:rgba(29,78,216,.18);top:160px;right:-40px;animation-delay:-6s',
+  ],
+  card: [
+    'width:300px;height:300px;background:rgba(64,224,245,.34);top:-60px;left:-60px',
+    'width:300px;height:300px;background:rgba(29,78,216,.18);bottom:-80px;right:-40px;animation-delay:-6s',
+  ],
+  article: [
+    'width:300px;height:300px;background:rgba(64,224,245,.26);top:0;right:-60px',
+    'width:280px;height:280px;background:rgba(29,78,216,.14);top:340px;left:-80px;animation-delay:-6s',
+  ],
+}[variant];
+---
+{SPOTS.map((style) => <div class="blob" style={style} aria-hidden="true"></div>)}
