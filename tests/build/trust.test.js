@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { loadPage } from './helpers.js';
 
 describe('/email/', () => {
@@ -60,5 +62,43 @@ describe.each(LEGAL)('legal $route', ({ route, title, count, ids, titles }) => {
     const current = nav.querySelectorAll('a[aria-current="page"]');
     expect(current).toHaveLength(1);
     expect(current[0].getAttribute('href')).toBe(route);
+  });
+});
+
+describe('Dutch email page', () => {
+  const doc = loadPage('/nl/email/');
+  const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
+
+  it('has the same six sections and four rule cards, no form', () => {
+    const names = [...doc.querySelectorAll('main > section')].map((s) => s.getAttribute('data-section'));
+    expect(names).toEqual(['quick', 'who', 'why', 'rules', 'spam', 'help']);
+    expect(doc.querySelectorAll('main > section[data-section="rules"] .card')).toHaveLength(4);
+    expect(doc.querySelectorAll('main form')).toHaveLength(0);
+  });
+
+  it('keeps the abuse placeholder and links help to the Dutch contact section', () => {
+    expect(doc.querySelector('main').textContent).toContain('[ABUSE EMAIL]');
+    expect(doc.querySelector('main a[href="/nl/company/#contact"]')).toBeTruthy();
+    expect(text(doc.querySelector('h1'))).toContain('WebGen');
+  });
+});
+
+describe.each(['/privacy/', '/nl/privacy/', '/terms/', '/nl/terms/', '/cookies/', '/nl/cookies/', '/email/', '/nl/email/'])('motion on %s', (route) => {
+  const doc = loadPage(route);
+
+  it('has blobs inside a header section that is positioned (so they stay inside it)', () => {
+    const head = doc.querySelector('main > section:first-child');
+    expect(head.querySelector('.blob')).toBeTruthy();
+    expect(head.classList.contains('has-blobs')).toBe(true);
+  });
+});
+
+describe.each(['/privacy/', '/nl/privacy/'])('legal sections list on %s', (route) => {
+  it('is sticky in the built CSS', () => {
+    const doc = loadPage(route);
+    expect(doc.querySelector('main nav.toc')).toBeTruthy();
+    const dir = join(process.cwd(), 'dist', '_astro');
+    const css = readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => readFileSync(join(dir, f), 'utf8')).join('\n').replace(/\s+/g, '');
+    expect(css).toMatch(/\.toc\[[^\]]+\]\{[^}]*position:sticky|\.toc\{[^}]*position:sticky/);
   });
 });

@@ -1,0 +1,129 @@
+---
+import '../../styles/forms.css';
+import Base from '../../layouts/Base.astro';
+import { getLocale, localize } from '../../i18n/index.ts';
+import { EARLY } from '../../i18n/early.ts';
+import { EXAMPLES } from '../../lib/examples.ts';
+import Blobs from '../motion/Blobs.astro';
+import Marquee from '../motion/Marquee.astro';
+import ExampleCard from '../ExampleCard.astro';
+import TrustCards from '../TrustCards.astro';
+
+// The form keeps the field names the app's ZIP import recognises (name, email, message),
+// so on upload it is wired to the platform's form handler without an AI call.
+const locale = getLocale(Astro.currentLocale);
+const t = EARLY[locale];
+const f = t.form;
+const l = (p: string) => localize(p, locale);
+const strip = EXAMPLES.filter((e) => e.id !== 'greenleaf');
+const check = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>';
+---
+<Base title={t.title} description={t.description} path="/early-access/">
+  <section data-section="pitch" class="ea-pitch has-blobs">
+    <Blobs variant="hero" />
+    <div class="container">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1>{t.h1}</h1>
+      <p class="lede">{t.lede}</p>
+      <ul class="points">
+        {t.points.map((p) => <li><span set:html={check} />{p}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section data-section="form" class="ea-form">
+    <div class="container narrow">
+      <div class="formcard">
+        <h2>{f.title}</h2>
+        <p class="sub">{f.sub}</p>
+        <form method="post">
+          <div class="field">
+            <label for="ea-name">{f.name}</label>
+            <input id="ea-name" type="text" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="ea-email">{f.email}</label>
+            <input id="ea-email" type="email" name="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="ea-company">{f.company}</label>
+            <input id="ea-company" type="text" name="company" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="ea-type">{f.type}</label>
+            <select id="ea-type" name="type">
+              {f.types.map((o) => <option value={o}>{o}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="ea-message">{f.message}</label>
+            <textarea id="ea-message" name="message" required rows="5"></textarea>
+          </div>
+          <p class="note">{f.consentLead}<a href={l('/privacy/')}>{f.consentLink}</a>{f.consentTail}</p>
+          <button class="btn btn-accent pulse" type="submit">{f.submit}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="marquee" class="marq-sec" aria-hidden="true"><Marquee items={t.marquee} /></section>
+
+  <section data-section="examples">
+    <div class="container">
+      <p class="eyebrow">{t.examples.eyebrow}</p>
+      <h2>{t.examples.title}</h2>
+      <p class="sub">{t.examples.text}</p>
+      <div class="strip">
+        {strip.map((site) => <ExampleCard site={site} locale={locale} size="strip" href={l('/examples/')} />)}
+      </div>
+    </div>
+  </section>
+
+  <section data-section="next" class="band">
+    <div class="container">
+      <p class="eyebrow">{t.next.eyebrow}</p>
+      <h2>{t.next.title}</h2>
+      <ol class="steps">
+        {t.next.steps.map((s, i) => (
+          <li class="card lift"><span class="num">{String(i + 1).padStart(2, '0')}</span><h3>{s.t}</h3><p>{s.p}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <TrustCards locale={locale} />
+
+  <section data-section="faq" class="band">
+    <div class="container narrow">
+      <h2>{t.faq.title}</h2>
+      {t.faq.items.map((x) => <details><summary>{x.q}</summary><p>{x.a}</p></details>)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* <main> lives in the Base layout, so it needs :global() for these rules to match. */
+  :global(main) > section { margin-top: 72px; }
+  :global(main) > section.ea-pitch { margin-top: 48px; position: relative; }
+  :global(main) > section.ea-form { margin-top: 32px; }
+  :global(main) > section.marq-sec { margin-top: 56px; }
+  :global(main) > section.band { background: var(--surface); padding: 64px 0; }
+  .narrow { max-width: 760px; }
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--link); margin: 0 0 12px; display: block; }
+  .ea-pitch h1 { max-width: 820px; letter-spacing: -.035em; }
+  .lede { font-size: 1.1875rem; color: var(--muted); max-width: 680px; margin: 0; }
+  .points { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 10px; }
+  .points li { display: flex; align-items: flex-start; gap: 10px; font-weight: 500; color: var(--ink); }
+  .points svg { flex: none; margin-top: 5px; color: var(--link); }
+  .formcard h2 { font-size: 1.5rem; margin: 0; }
+  .sub { color: var(--muted); margin: 6px 0 20px; }
+  .strip { display: grid; gap: 12px; margin-top: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .steps { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; color: var(--muted); }
+  .num { font: 800 1.5rem/1 var(--font-heading); color: var(--link); display: block; margin-bottom: 12px; }
+  [data-section="faq"] details { border-bottom: 1px solid var(--line-strong); padding: 4px 0; }
+  [data-section="faq"] summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; color: var(--ink); }
+  [data-section="faq"] details p { margin: 0 0 14px; }
+</style>

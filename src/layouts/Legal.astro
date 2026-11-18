@@ -1,5 +1,6 @@
 ---
 import Base from './Base.astro';
+import Blobs from '../components/motion/Blobs.astro';
 import { getLocale, localize } from '../i18n/index.ts';
 import { UI } from '../i18n/ui.ts';
 import { LEGAL, type LegalPage } from '../i18n/legal.ts';
@@ -15,7 +16,8 @@ const self = localize(path, locale);
 const docs = (['privacy', 'terms', 'cookies'] as const).map((p) => ({ href: localize(`/${p}/`, locale), label: t[p] }));
 ---
 <Base title={`${title} | WebGen`} description={description} path={path}>
-  <section data-section="header" class="l-head">
+  <section data-section="header" class="l-head has-blobs">
+    <Blobs variant="article" />
     <div class="container">
       <p class="eyebrow">{t.eyebrow}</p>
       <h1>{title}</h1>
@@ -57,7 +59,7 @@ const docs = (['privacy', 'terms', 'cookies'] as const).map((p) => ({ href: loca
 
 <style>
   /* <main> lives in the Base layout, so it needs :global() for these rules to match. */
-  :global(main) > section.l-head { margin-top: 56px; }
+  :global(main) > section.l-head { margin-top: 56px; position: relative; }
   :global(main) > section.l-body { margin-top: 40px; }
   .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; display: block; }
   .muted { color: var(--muted); }

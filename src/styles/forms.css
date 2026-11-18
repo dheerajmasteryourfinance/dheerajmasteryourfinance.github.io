@@ -1,0 +1,11 @@
+/* Shared form styles for the early-access and contact forms. */
+.formcard { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow-lift); }
+.field { display: grid; gap: 6px; margin-bottom: 16px; }
+.field label { font-weight: 600; color: var(--ink); }
+.field input, .field select, .field textarea {
+  width: 100%; min-height: 44px; padding: 10px 12px;
+  border: 1px solid var(--line-strong); border-radius: 10px;
+  font: 400 1rem/1.4 var(--font-body); color: var(--body); background: var(--white);
+}
+.field textarea { resize: vertical; }
+.formcard .note { color: var(--muted); font-size: .9375rem; }

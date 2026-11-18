@@ -111,11 +111,11 @@ describe('Dutch copy', () => {
 
   it('every Dutch page has the Dutch CTA in the nav, linking to /nl/early-access/', () => {
     for (const r of nl) {
-      const nav = loadPage(r).querySelector('nav[aria-label]');
+      const nav = loadPage(r).querySelector('header.site-nav');
       const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === 'Vraag vroege toegang aan');
       expect(ctas, r).toHaveLength(1);
       expect(ctas[0].getAttribute('href')).toBe('/nl/early-access/');
-      // Under 420px only this part shows, capitalised by CSS: "Vroege toegang".
+      // The CTA text is split in lead / rest / tail spans (the panel shows all three).
       expect(ctas[0].querySelector('.cta-rest')?.textContent.trim()).toBe('vroege toegang');
     }
   });
@@ -304,7 +304,7 @@ describe('sitemap and JSON-LD', () => {
     expect(xml).toContain(`<loc>${SITE}/nl/</loc>`);
     expect(xml).toContain(`<loc>${SITE}/nl/docs/connect-your-domain/</loc>`);
     expect(xml).toMatch(/hreflang="nl" href="https:\/\/website-generator\.nl\/nl\/features\/"/);
-    expect(xml).not.toContain(`${SITE}/nl/docs/<`);
+    expect(xml).toContain(`<loc>${SITE}/nl/docs/</loc>`);
   });
 
   it('both home pages carry the Organization block', () => {

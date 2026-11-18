@@ -1,5 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import Blobs from '../components/motion/Blobs.astro';
+import Marquee from '../components/motion/Marquee.astro';
+
+const cards = [
+  { href: '/', t: 'Home', p: 'Back to the start.' },
+  { href: '/docs/', t: 'Docs', p: 'Guides for every step.' },
+  { href: '/features/', t: 'Features', p: 'See what WebGen does.' },
+  { href: '/company/#contact', t: 'Contact', p: 'Talk to a person.' },
+];
 ---
 <Base
   title="Page not found | WebGen"
@@ -9,23 +18,42 @@ import Base from '../layouts/Base.astro';
   noCanonical
 >
   <meta slot="head" name="robots" content="noindex" />
-  <section data-section="not-found" class="nf">
+  <section data-section="not-found" class="nf has-blobs">
+    <Blobs variant="hero" />
     <div class="container">
+      <div class="big404" aria-hidden="true">404</div>
       <p class="eyebrow">Error 404</p>
       <h1>We could not find that page</h1>
-      <p>The address may have a typo, or the page may have moved. Here is where you can go next.</p>
-      <p class="actions">
-        <a class="btn btn-primary" href="/">Go to the home page</a>
-        <a class="btn btn-ghost" href="/docs/">Browse the docs</a>
-      </p>
+      <p class="lede">The link may be old, or the address may have a typo. Here are the places most people are looking for.</p>
+      <div class="cards">
+        {cards.map((c) => (
+          <a class="card lift" href={c.href}><strong>{c.t}</strong><span>{c.p}</span></a>
+        ))}
+      </div>
+      <p class="still nl" lang="nl">Deze pagina bestaat niet. <a href="/nl/">Naar de Nederlandse homepage →</a></p>
+      <p class="still">Still stuck? Tell us which link was broken: <a href="/company/#contact">Contact us</a></p>
     </div>
+  </section>
+
+  <section data-section="marquee" class="marq-sec" aria-hidden="true">
+    <Marquee items={['Website', 'Forms', 'Newsletters', 'Your own domain', 'Follow-up emails', 'Search basics', 'Reports']} />
   </section>
 </Base>
 
 <style>
-  .nf { padding: 96px 0; }
-  .eyebrow { margin: 0; font-weight: 600; color: var(--muted); }
-  .nf h1 { margin-top: 8px; }
-  .nf p { max-width: 52ch; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  :global(main) > section.nf { margin-top: 40px; padding: 24px 0 8px; position: relative; }
+  :global(main) > section.marq-sec { margin: 40px 0 88px; }
+  .big404 { font: 700 200px/1 var(--font-heading); letter-spacing: -0.05em; color: var(--ink); }
+  .eyebrow { margin: 8px 0 0; font: 600 .8125rem/1.2 var(--font-body); letter-spacing: .04em; text-transform: uppercase; color: var(--link); }
+  .nf h1 { margin-top: 8px; letter-spacing: -.03em; }
+  .lede { max-width: 560px; font-size: 1.1875rem; color: var(--muted); }
+  .cards { display: grid; gap: 12px; margin-top: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); max-width: 960px; }
+  .card { display: block; border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; background: var(--white); color: var(--ink); text-decoration: none; }
+  .card:hover { color: var(--ink); border-color: var(--line-strong); }
+  .card strong { display: block; font: 700 1.125rem/1.2 var(--font-heading); }
+  .card span { display: block; margin-top: 4px; font-size: .9375rem; color: var(--muted); }
+  .still { margin: 24px 0 0; color: var(--muted); }
+  .still.nl { margin-top: 20px; }
+  .still a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+  @media (max-width: 640px) { .big404 { font-size: 32vw; } }
 </style>

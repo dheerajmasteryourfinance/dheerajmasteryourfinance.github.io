@@ -1,0 +1,134 @@
+---
+import '../../styles/forms.css';
+import Base from '../../layouts/Base.astro';
+import { getLocale, localize } from '../../i18n/index.ts';
+import { COMPANY_COPY } from '../../i18n/early.ts';
+import { COMPANY, kvkLine, vatLine, addressLine } from '../../lib/company.ts';
+import { EXAMPLES } from '../../lib/examples.ts';
+import Blobs from '../motion/Blobs.astro';
+import FloatingChips from '../motion/FloatingChips.astro';
+import Marquee from '../motion/Marquee.astro';
+import ExampleCard from '../ExampleCard.astro';
+import TrustCards from '../TrustCards.astro';
+
+const locale = getLocale(Astro.currentLocale);
+const t = COMPANY_COPY[locale];
+const c = t.contact;
+const f = c.form;
+const l = (p: string) => localize(p, locale);
+const strip = EXAMPLES.filter((e) => e.id !== 'greenleaf');
+---
+<Base title={t.title} description={t.description} path="/company/">
+  <section data-section="about" class="c-about has-blobs">
+    <Blobs variant="hero" />
+    <FloatingChips locale={locale} placement="right" />
+    <div class="container">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1>{t.h1}</h1>
+      <div class="two">
+        <div>
+          <p>{t.p1}</p>
+          <p>{t.p2}</p>
+        </div>
+        <dl class="facts">
+          <div><dt>{t.facts.founded}</dt><dd>{t.facts.year}</dd></div>
+          <div><dt>{t.facts.based}</dt><dd>{COMPANY.city}</dd></div>
+          <div><dt>{t.facts.operated}</dt><dd>{COMPANY.legalName}<br />{kvkLine()} · {vatLine(locale)}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="marquee" class="marq-sec" aria-hidden="true"><Marquee items={t.marquee} /></section>
+
+  <section data-section="values" class="band">
+    <div class="container">
+      <h2>{t.values.title}</h2>
+      <div class="grid">
+        {t.values.cards.map((x) => <div class="card lift"><h3>{x.t}</h3><p>{x.p}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section data-section="examples">
+    <div class="container">
+      <p class="eyebrow">{t.examples.eyebrow}</p>
+      <h2>{t.examples.title}</h2>
+      <p class="sub">{t.examples.text}</p>
+      <div class="strip">
+        {strip.map((site) => <ExampleCard site={site} locale={locale} size="strip" href={l('/examples/')} />)}
+      </div>
+    </div>
+  </section>
+
+  <TrustCards locale={locale} />
+
+  <section id="contact" data-section="contact">
+    <div class="container two top">
+      <div>
+        <p class="eyebrow">{c.eyebrow}</p>
+        <h2>{c.title}</h2>
+        <p>{c.reply}</p>
+        <div class="stack">
+          <div class="card"><h3>{c.support}</h3><p>{c.supportValue}</p></div>
+          <div class="card">
+            <h3>{c.abuse}</h3>
+            <p>{c.abuseValue}</p>
+            <p><a class="inline" href={l('/email/')}>{c.abuseLink}</a></p>
+          </div>
+          <div class="card"><h3>{c.phone}</h3><p>{c.phoneValue}</p></div>
+          <div class="card"><h3>{c.postal}</h3><p>{COMPANY.legalName}<br />{addressLine()}, {COMPANY.country[locale]}</p></div>
+        </div>
+      </div>
+      <div class="formcard">
+        <form method="post">
+          <div class="field">
+            <label for="c-name">{f.name}</label>
+            <input id="c-name" type="text" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="c-email">{f.email}</label>
+            <input id="c-email" type="email" name="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="c-topic">{f.topic}</label>
+            <select id="c-topic" name="topic">
+              {f.topics.map((o) => <option value={o}>{o}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-message">{f.message}</label>
+            <textarea id="c-message" name="message" required rows="5"></textarea>
+          </div>
+          <p class="note">{f.consentLead}<a href={l('/privacy/')}>{f.consentLink}</a>{f.consentTail}</p>
+          <button class="btn btn-accent pulse" type="submit">{f.submit}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  :global(main) > section { margin-top: 72px; }
+  :global(main) > section.c-about { margin-top: 48px; position: relative; }
+  :global(main) > section.marq-sec { margin-top: 48px; }
+  :global(main) > section.band { background: var(--surface); padding: 64px 0; }
+  :global(main) > section#contact { margin-bottom: 88px; }
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--link); margin: 0 0 12px; display: block; }
+  .c-about h1 { max-width: 860px; letter-spacing: -.035em; }
+  .sub { color: var(--muted); max-width: 620px; margin: 8px 0 0; }
+  .two { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); margin-top: 32px; }
+  .two.top { margin-top: 0; align-items: start; }
+  .facts { display: grid; gap: 12px; margin: 0; }
+  .facts > div { background: var(--surface); border-radius: 16px; padding: 16px 20px; }
+  .facts dt { font: 700 .75rem/1.2 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .facts dd { margin: 0; color: var(--ink); font-weight: 600; overflow-wrap: anywhere; }
+  .grid { display: grid; gap: 20px; margin-top: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card p { overflow-wrap: anywhere; }
+  .stack { display: grid; gap: 16px; margin-top: 24px; }
+  .inline { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+  .strip { display: grid; gap: 12px; margin-top: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+</style>
