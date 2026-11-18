@@ -16,8 +16,11 @@ interface Props {
   /** Where the language switch points; defaults to this page in the other language. */
   switchPath?: string;
   orgJsonLd?: boolean;
+  /** Docs pages: the guide list shown in the phone menu panel, with the current guide marked. */
+  guides?: { label: string; items: { title: string; href: string; current: boolean }[] }[];
+  guidesLabel?: string;
 }
-const { title, description, path, noCanonical = false, switchPath = path, orgJsonLd = false } = Astro.props;
+const { title, description, path, noCanonical = false, switchPath = path, orgJsonLd = false, guides, guidesLabel } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = UI[locale];
 const self = localize(path, locale);
@@ -46,7 +49,7 @@ const alts = alternates(path);
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>
     <slot name="top" />
-    <Nav current={self} switchPath={switchPath} />
+    <Nav current={self} switchPath={switchPath} guides={guides} guidesLabel={guidesLabel} />
     <main id="main"><slot /></main>
     <Footer switchPath={switchPath} />
     <slot name="after" />

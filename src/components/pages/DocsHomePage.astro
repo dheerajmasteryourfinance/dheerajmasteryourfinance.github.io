@@ -1,0 +1,140 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { getLocale, localize } from '../../i18n/index.ts';
+import { DOCS_UI } from '../../i18n/docs.ts';
+import { docsFor } from '../../lib/docs.ts';
+import Blobs from '../motion/Blobs.astro';
+import Marquee from '../motion/Marquee.astro';
+import DocsSearch from '../DocsSearch.astro';
+
+const locale = getLocale(Astro.currentLocale);
+const t = DOCS_UI[locale];
+const h = t.home;
+const l = (p: string) => localize(p, locale);
+const entries = docsFor(await getCollection('docs'), locale);
+const bySlug = new Map(entries.map((e) => [e.slug, e]));
+const topics = Object.keys(t.groups)
+  .map((key) => ({ key, label: t.groups[key], intro: h.topics[key], items: entries.filter((e) => e.data.group === key) }))
+  .filter((g) => g.items.length > 0);
+const steps = h.steps.map((s) => ({ ...s, minutes: bySlug.get(s.slug)?.data.minutes ?? 0 }));
+const first = bySlug.get('build-your-first-website')!;
+---
+<Base title={h.title} description={h.description} path="/docs/">
+  <section data-section="hero" class="dh-hero has-blobs">
+    <Blobs variant="hero" />
+    <div class="container">
+      <p class="eyebrow">{h.eyebrow}</p>
+      <h1>{h.h1}</h1>
+      <p class="lede">{h.lede}</p>
+      <div class="dh-search"><DocsSearch locale={locale} /></div>
+      <p class="try">
+        <span>{h.try}</span>
+        {h.chips.map((c) => <a href={l(c.to)}>{c.label}</a>)}
+      </p>
+    </div>
+  </section>
+
+  <section data-section="start" class="dh-start">
+    <div class="container">
+      <div class="newhere lift">
+        <div>
+          <p class="eyebrow">{h.newHere.eyebrow}</p>
+          <h2>{h.newHere.title}</h2>
+          <p>{h.newHere.text}</p>
+        </div>
+        <a class="btn btn-primary" href={l(`/docs/${first.slug}/`)}>{h.newHere.cta}</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="marquee" class="marq-sec" aria-hidden="true"><Marquee items={h.marquee} /></section>
+
+  <section data-section="steps" class="dh-steps">
+    <div class="container">
+      <h2>{h.stepsTitle}</h2>
+      <ol class="step-grid">
+        {steps.map((s, i) => (
+          <li>
+            <a class="lift step" href={l(`/docs/${s.slug}/`)}>
+              <span class="step-top"><span class="step-num">{i + 1}</span><span class="step-min">{h.min(s.minutes)}</span></span>
+              <strong>{s.t}</strong>
+              <span class="step-p">{s.p}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section data-section="topics" class="dh-topics">
+    <div class="container">
+      <h2>{h.topicsTitle}</h2>
+      <div class="topic-grid">
+        {topics.map((g) => (
+          <div class="topic lift">
+            <h3>{g.label}</h3>
+            <p>{g.intro}</p>
+            <ul>
+              {g.items.map((e) => (
+                <li><a href={l(`/docs/${e.slug}/`)}><span>{e.data.title}</span><span class="min">{h.min(e.data.minutes)}</span></a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section data-section="help" class="dh-help">
+    <div class="container help-grid">
+      <div class="help lift"><h3>{h.stuck.t}</h3><p>{h.stuck.p}</p><a href={l('/company/#contact')}>{h.stuck.link} →</a></div>
+      <div class="help lift"><h3>{h.email.t}</h3><p>{h.email.p}</p><a href={l('/email/')}>{h.email.link} →</a></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  :global(main) > section { margin-top: 64px; }
+  :global(main) > section.dh-hero { margin-top: 40px; position: relative; }
+  :global(main) > section.marq-sec { margin-top: 40px; }
+  :global(main) > section.dh-help { margin-bottom: 80px; }
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--link); margin: 0 0 12px; display: block; }
+  .dh-hero h1 { max-width: 760px; letter-spacing: -.035em; }
+  .lede { max-width: 620px; font-size: 1.1875rem; color: var(--muted); }
+  .dh-search { max-width: 520px; margin-top: 28px; }
+  .dh-search :global(.search) { max-width: none; }
+  .try { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0 0; font-size: .9375rem; color: var(--muted); }
+  .try a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--white); color: var(--ink); text-decoration: none; font-size: .875rem; }
+  .try a:hover { border-color: var(--ink); }
+
+  .newhere { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; border-radius: 24px; padding: 32px; background: linear-gradient(160deg, #F8FAFF 0%, #E9EFFA 100%); border: 1px solid var(--line); }
+  .newhere h2 { margin: 0 0 8px; font-size: 1.75rem; letter-spacing: -.02em; }
+  .newhere p:last-child { margin: 0; max-width: 560px; color: var(--muted); }
+
+  .dh-steps h2, .dh-topics h2 { letter-spacing: -.03em; }
+  .step-grid { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+  .step { display: flex; flex-direction: column; gap: 8px; height: 100%; border: 1px solid var(--line); border-radius: 20px; padding: 22px; background: var(--white); color: var(--ink); text-decoration: none; }
+  .step:hover { color: var(--ink); border-color: var(--line-strong); }
+  .step-top { display: flex; align-items: center; justify-content: space-between; }
+  .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--ink); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+  .step-min { font-size: .8125rem; color: var(--muted); }
+  .step strong { font: 700 1.25rem/1.2 var(--font-heading); }
+  .step-p { color: var(--muted); font-size: .9375rem; }
+
+  .topic-grid { display: grid; gap: 16px; margin-top: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .topic { border: 1px solid var(--line); border-radius: 20px; padding: 24px; background: var(--white); }
+  .topic h3 { margin: 0 0 6px; }
+  .topic > p { margin: 0 0 12px; color: var(--muted); font-size: .9375rem; }
+  .topic ul { list-style: none; padding: 0; margin: 0; }
+  .topic li a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; border-top: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; }
+  .topic li a span:first-child { min-width: 0; overflow-wrap: anywhere; }
+  .topic li a:hover span:first-child { text-decoration: underline; }
+  .min { flex: none; font-size: .8125rem; font-weight: 400; color: var(--muted); }
+
+  .help-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .help { border: 1px solid var(--line); border-radius: 20px; padding: 24px; background: var(--surface); }
+  .help h3 { margin: 0 0 6px; }
+  .help p { margin: 0 0 8px; color: var(--muted); }
+  .help a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+</style>

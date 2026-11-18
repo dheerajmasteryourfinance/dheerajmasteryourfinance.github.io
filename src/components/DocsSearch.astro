@@ -1,0 +1,48 @@
+---
+// Docs search field + results (Pagefind, per language). Used in the docs bar and on the docs landing page.
+import type { Locale } from '../i18n/index.ts';
+import { DOCS_UI } from '../i18n/docs.ts';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = DOCS_UI[locale];
+---
+<div class="search" role="search" data-docs-search-root>
+  <label class="docsearch">
+    <span class="visually-hidden">{t.searchLabel}</span>
+    <input type="search" data-docs-search data-lang={locale} placeholder={t.searchPlaceholder} autocomplete="off" />
+    <kbd aria-hidden="true">Ctrl K</kbd>
+  </label>
+  <div class="results" data-docs-results hidden aria-live="polite"></div>
+</div>
+
+<script>
+  import { initDocsSearch } from '../scripts/docs-search.js';
+  const EMPTY: Record<string, (q: string) => string> = {
+    en: (q) => `No results for “${q}”`,
+    nl: (q) => `Geen resultaten voor “${q}”`,
+  };
+  for (const root of document.querySelectorAll<HTMLElement>('[data-docs-search-root]')) {
+    const input = root.querySelector<HTMLInputElement>('[data-docs-search]');
+    const results = root.querySelector<HTMLElement>('[data-docs-results]');
+    if (!input || !results) continue;
+    const lang = input.dataset.lang ?? 'en';
+    initDocsSearch(input, results, { lang, empty: EMPTY[lang] ?? EMPTY.en });
+  }
+</script>
+
+<style is:global>
+  .search { position: relative; flex: 1 1 100%; }
+  .search kbd { display: none; }
+  @media (min-width: 720px) {
+    .search { flex: 1 1 260px; max-width: 420px; }
+    .search kbd { display: inline; }
+  }
+  .search label { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  .search input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: transparent; font: 400 .9375rem var(--font-body); color: var(--ink); }
+  .search kbd { font: .75rem var(--font-body); color: var(--muted); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 6px; background: var(--white); }
+  .results { position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 6px); max-height: 70vh; overflow: auto; background: var(--white); border: 1px solid var(--line-strong); border-radius: 12px; padding: 8px; box-shadow: var(--shadow-lift); }
+  .results .search-list { list-style: none; margin: 0; padding: 0; }
+  .results .search-list a { display: flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: none; padding: 0 8px; }
+  .results .search-excerpt, .results .search-empty { margin: 0 0 8px; padding: 0 8px; font-size: .875rem; color: var(--muted); }
+  .results mark { background: var(--accent); color: var(--ink); border-radius: 3px; }
+</style>

@@ -1,20 +1,4 @@
 ---
-import Base from '../../layouts/Base.astro';
-import { getCollection } from 'astro:content';
-
-const first = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order)[0];
-const target = `/docs/${first.id}/`;
+import DocsHomePage from '../../components/pages/DocsHomePage.astro';
 ---
-<Base title="WebGen Docs" description="Guides for building, editing and publishing your website with WebGen." path="/docs/">
-  <meta slot="head" http-equiv="refresh" content={`0; url=${target}`} />
-  <section data-section="docs-start">
-    <div class="container">
-      <h1>WebGen Docs</h1>
-      <p>Start with <a href={target}>{first.data.title}</a>.</p>
-    </div>
-  </section>
-</Base>
-
-<style>
-  section { padding: 64px 0; }
-</style>
+<DocsHomePage />

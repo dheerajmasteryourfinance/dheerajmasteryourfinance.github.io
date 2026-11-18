@@ -197,6 +197,10 @@ const APP_NL = join(process.cwd(), '..', 'WebGeneratorV2', 'frontend', 'src', 'i
 // separately against the linked article's title.
 const NOT_UI = new Set([
   'Voordat je begint:',
+  'Voor je begint:',
+  // Verbatim excerpts of longer app strings (checkbox text, status sentence).
+  'Ja, stuur mij vervolgmails',
+  'Klaar: we hebben bevestigd dat dit domein van jou is.',
   'Tip:',
   'Let op:',
   '?',
@@ -233,7 +237,8 @@ describe.runIf(existsSync(APP_NL))('Dutch docs use the app labels from nl.json',
     const bad = [];
     let checked = 0;
     for (const s of doc.querySelectorAll('article .prose strong')) {
-      const t = text(s);
+      // The Markdown processor turns ' into a curly apostrophe; the app's labels use the straight one.
+      const t = text(s).replace(/’/g, "'");
       const card = s.closest('a.next-card');
       if (card) {
         expect(t).toBe(text(loadPage(card.getAttribute('href')).querySelector('article h1')));
@@ -267,9 +272,11 @@ describe('Dutch docs', () => {
     expect(hrefs).toEqual(new Set(nl.filter((r) => /^\/nl\/docs\/[^/]+\/$/.test(r))));
   });
 
-  it('/nl/docs/ redirects to the first Dutch article', () => {
+  it('/nl/docs/ is a Dutch landing page, not a redirect', () => {
     const doc = loadPage('/nl/docs/');
-    expect(doc.querySelector('meta[http-equiv="refresh"]').getAttribute('content')).toContain('/nl/docs/build-your-first-website/');
+    expect(doc.querySelector('meta[http-equiv="refresh"]')).toBeNull();
+    expect(doc.documentElement.getAttribute('lang')).toBe('nl');
+    expect(doc.querySelector('a[href="/nl/docs/build-your-first-website/"]')).toBeTruthy();
   });
 });
 
@@ -296,7 +303,7 @@ describe('sitemap and JSON-LD', () => {
   it('lists Dutch pages with hreflang alternates', () => {
     expect(xml).toContain(`<loc>${SITE}/nl/</loc>`);
     expect(xml).toContain(`<loc>${SITE}/nl/docs/connect-your-domain/</loc>`);
-    expect(xml).toMatch(/hreflang="nl" href="https:\/\/webgnr\.com\/nl\/features\/"/);
+    expect(xml).toMatch(/hreflang="nl" href="https:\/\/website-generator\.nl\/nl\/features\/"/);
     expect(xml).not.toContain(`${SITE}/nl/docs/<`);
   });
 

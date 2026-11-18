@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadPage, allRoutes } from './helpers.js';
 
@@ -54,10 +54,51 @@ describe('docs article', () => {
     expect(doc.querySelector('input[type="search"]')).toBeTruthy();
   });
 
-  it('/docs/ links to the first article', () => {
+  it('/docs/ is a landing page that links to the first article', () => {
     const idx = loadPage('/docs/');
     expect(idx.querySelector(`a[href="${ROUTE}"]`)).toBeTruthy();
-    expect(idx.querySelector('meta[http-equiv="refresh"]')).toBeTruthy();
+    expect(idx.querySelector('meta[http-equiv="refresh"]')).toBeNull();
+  });
+});
+
+const SLUGS = ['build-your-first-website', 'import-an-existing-site', 'a-tour-of-the-editor', 'forms-and-leads', 'set-up-your-sender', 'send-a-campaign', 'follow-up-emails', 'connect-your-domain'];
+const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
+const builtCss = () => {
+  const dir = join(process.cwd(), 'dist', '_astro');
+  return readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => readFileSync(join(dir, f), 'utf8')).join('\n').replace(/\s+/g, '');
+};
+
+describe.each([['en', ''], ['nl', '/nl']])('docs tutorials (%s)', (lang, prefix) => {
+  it.each(SLUGS)('%s: contents, guide list, search and language filter', (slug) => {
+    const route = `${prefix}/docs/${slug}/`;
+    const d = loadPage(route);
+    // every "On this page" link points at an h2 id in the article (Review Focus 2: works without JS)
+    const ids = new Set([...d.querySelectorAll('main h2[id]')].map((h) => h.id));
+    const links = [...d.querySelectorAll('.toc a')];
+    expect(links.length).toBeGreaterThan(0);
+    for (const a of links) expect(ids.has(a.getAttribute('href').slice(1)), a.outerHTML).toBe(true);
+    // the menu panel carries the guide list and marks the current tutorial
+    const current = [...d.querySelectorAll('header.site-nav .navguides a[aria-current="page"]')];
+    expect(current).toHaveLength(1);
+    expect(current[0].getAttribute('href')).toBe(route);
+    expect(d.querySelectorAll('header.site-nav .navguides a')).toHaveLength(SLUGS.length);
+    // search: labelled, in the page language, and the article is tagged for the same language
+    expect(d.querySelector('label.docsearch input[data-docs-search]').getAttribute('data-lang')).toBe(lang);
+    expect(d.querySelector('article[data-pagefind-body]').getAttribute('data-pagefind-filter')).toBe(`lang:${lang}`);
+  });
+
+  it('sidebar and contents are sticky in the built CSS', () => {
+    expect(builtCss()).toMatch(/\.side[^{}]*\.toc[^{}]*\{[^}]*position:sticky/);
+  });
+
+  it('the landing page chips and the three starter steps link to the right tutorials', () => {
+    const d = loadPage(`${prefix}/docs/`);
+    const hrefs = (sel) => [...d.querySelectorAll(sel)].map((a) => a.getAttribute('href'));
+    expect(hrefs('main .try a')).toEqual([`${prefix}/docs/connect-your-domain/`, `${prefix}/docs/send-a-campaign/`, `${prefix}/email/`, `${prefix}/docs/forms-and-leads/`]);
+    expect(hrefs('main [data-section="steps"] a')).toEqual([`${prefix}/docs/build-your-first-website/`, `${prefix}/docs/connect-your-domain/`, `${prefix}/docs/send-a-campaign/`]);
+    expect(d.querySelectorAll('main [data-section="topics"] .topic li a')).toHaveLength(SLUGS.length);
+    expect(d.querySelector('label.docsearch input').getAttribute('data-lang')).toBe(lang);
+    expect(text(d.querySelector('h1')).length).toBeGreaterThan(10);
   });
 });
 

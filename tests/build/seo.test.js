@@ -74,17 +74,17 @@ describe('robots.txt', () => {
 });
 
 describe('sitemap', () => {
-  it('lists every route except /404/ and the /docs/ and /nl/docs/ redirect pages', () => {
+  it('lists every route except /404/', () => {
     expect(existsSync(join(DIST, 'sitemap-index.xml'))).toBe(true);
     expect(read('sitemap-index.xml')).toContain('https://website-generator.nl/sitemap-0.xml');
     const locs = [...read('sitemap-0.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const expected = allRoutes()
-      .filter((r) => r !== '/404.html' && r !== '/docs/' && r !== '/nl/docs/')
+      .filter((r) => r !== '/404.html')
       .map((r) => `https://website-generator.nl${r}`);
     expect([...locs].sort()).toEqual([...expected].sort());
     expect(locs.some((l) => l.includes('/404'))).toBe(false);
-    expect(locs).not.toContain('https://website-generator.nl/docs/');
-    expect(locs).not.toContain('https://website-generator.nl/nl/docs/');
+    expect(locs).toContain('https://website-generator.nl/docs/');
+    expect(locs).toContain('https://website-generator.nl/nl/docs/');
   });
 });
 

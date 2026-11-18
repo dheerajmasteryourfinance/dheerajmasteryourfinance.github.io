@@ -3,8 +3,8 @@ import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { validHeadingIds } from './src/lib/heading-id.mjs';
 
-// /docs/ and /nl/docs/ are only redirect pages and /404/ is noindex, so none belong in the sitemap.
-const EXCLUDED = new Set(['https://website-generator.nl/404/', 'https://website-generator.nl/docs/', 'https://website-generator.nl/nl/docs/']);
+// /404/ is noindex, so it does not belong in the sitemap. The docs landing pages do.
+const EXCLUDED = new Set(['https://website-generator.nl/404/']);
 
 export default defineConfig({
   output: 'static',

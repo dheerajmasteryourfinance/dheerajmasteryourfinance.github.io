@@ -7,8 +7,13 @@ import LangSwitch from './LangSwitch.astro';
 import { APP_LOGIN, APP_PLACEHOLDER, EARLY_ACCESS } from '../lib/links.js';
 import { getLocale, localize } from '../i18n/index.ts';
 import { UI } from '../i18n/ui.ts';
-interface Props { current: string; switchPath: string }
-const { current, switchPath } = Astro.props;
+interface Props {
+  current: string;
+  switchPath: string;
+  guides?: { label: string; items: { title: string; href: string; current: boolean }[] }[];
+  guidesLabel?: string;
+}
+const { current, switchPath, guides, guidesLabel } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = UI[locale];
 const links = [
@@ -32,6 +37,18 @@ const isCurrent = (href: string) => current === href || current.startsWith(href)
       <nav class="navlinks" aria-label={t.nav.label}>
         {links.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
       </nav>
+      {guides && guides.length > 0 && (
+        <nav class="navguides" aria-label={guidesLabel}>
+          {guides.map((g) => (
+            <div class="navguide-group">
+              <p class="navguide-title">{g.label}</p>
+              <ul>
+                {g.items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.title}</a></li>)}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      )}
       <div class="navactions">
         <LangSwitch path={switchPath} />
         <a class="nav-signin" href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a>
