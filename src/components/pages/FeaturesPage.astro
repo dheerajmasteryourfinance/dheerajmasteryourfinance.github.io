@@ -7,23 +7,33 @@ import { FEATURES } from '../../i18n/features.ts';
 import newWebsiteBrief from '../../assets/screens/new-website-brief.png';
 import editorEdit from '../../assets/screens/editor-edit.png';
 import editorMobile from '../../assets/screens/editor-mobile.png';
+import langTranslate from '../../assets/examples/lang-translate.png';
+import Route from '../Route.astro';
+import Blobs from '../motion/Blobs.astro';
+import FloatingChips from '../motion/FloatingChips.astro';
+import Marquee from '../motion/Marquee.astro';
 
 const locale = getLocale(Astro.currentLocale);
 const t = FEATURES[locale];
 const l = (p: string) => localize(p, locale);
-const chips = (['build', 'leads', 'email', 'search', 'domains'] as const).map((id) => ({ id, label: t.chips[id] }));
+const chips = (['build', 'leads', 'email', 'search', 'domains', 'languages'] as const).map((id) => ({ id, label: t.chips[id] }));
 ---
 <Base title={t.title} description={t.description} path="/features/">
-  <section data-section="hero" class="f-hero">
+  <section data-section="hero" class="f-hero has-blobs">
+    <Blobs variant="hero" />
+    <FloatingChips locale={locale} placement="right" />
     <div class="container">
       <p class="eyebrow">{t.eyebrow}</p>
       <h1>{t.h1}</h1>
       <p class="lede">{t.lede}</p>
+      <Route stops={chips.map((c) => ({ label: c.label, href: `#${c.id}` }))} mode="load" ariaLabel={t.routeLabel} />
       <nav aria-label={t.chipsLabel} class="chip-nav">
         {chips.map((c) => <a href={`#${c.id}`}>{c.label}</a>)}
       </nav>
     </div>
   </section>
+
+  <section data-section="marquee" class="marq-sec" aria-hidden="true"><Marquee items={t.marquee} /></section>
 
   <section id="build" data-section="build" class="row">
     <div class="container split">
@@ -141,6 +151,32 @@ const chips = (['build', 'leads', 'email', 'search', 'domains'] as const).map((i
     </div>
   </section>
 
+  <section id="languages" data-section="languages" class="row">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">{t.languages.eyebrow}</p>
+        <h2>{t.languages.title}</h2>
+        <p class="copy">{t.languages.copy}</p>
+        <ul class="lang-list">
+          {t.languages.list.map(([code, native, name]) => (
+            <li><span class="code" aria-hidden="true">{code}</span><span class="native" lang={code.toLowerCase()}>{native}</span><span class="lname">{name}</span></li>
+          ))}
+        </ul>
+        <p><a class="more" href={l('/docs/')}>{t.languages.more}</a></p>
+      </div>
+      <Picture
+        src={langTranslate}
+        formats={['avif']}
+        fallbackFormat="webp"
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 760px) 520px, 90vw"
+        alt={t.languages.alt}
+        loading="lazy"
+        class="shot shot-lang"
+      />
+    </div>
+  </section>
+
   <section data-section="cta" class="final">
     <div class="container">
       <h2>{t.cta.title}</h2>
@@ -213,4 +249,16 @@ const chips = (['build', 'leads', 'email', 'search', 'domains'] as const).map((i
   .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
   .btn-ondark { background: transparent; color: var(--white); border-color: var(--on-dark); }
   .btn-ondark:hover { border-color: var(--white); color: var(--white); }
+
+  .lang-list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+  .lang-list li { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; background: var(--white); min-width: 0; }
+  .lang-list .code { width: 32px; height: 32px; flex: none; border-radius: 8px; background: var(--accent); color: var(--ink); font: 700 .75rem/32px var(--font-body); text-align: center; }
+  .lang-list .native { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+  .lang-list .lname { margin-left: auto; font-size: .8125rem; color: var(--muted); }
+  .shot-lang { width: 100%; }
+  .f-hero { position: relative; }
+  :global(main) > section.marq-sec { margin-top: 40px; }
+  /* On phones the route is hidden; the chip nav takes over. */
+  .chip-nav { display: none; }
+  @media (max-width: 760px) { .chip-nav { display: flex; } }
 </style>

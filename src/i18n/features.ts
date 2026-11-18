@@ -7,7 +7,9 @@ const en = {
   h1: 'One tool to build the site and grow the business behind it.',
   lede: 'Here is everything WebGen does, from the first draft of your site to the hundredth email.',
   chipsLabel: 'Feature sections',
-  chips: { build: 'Build', leads: 'Forms and audience', email: 'Email', search: 'Search and analytics', domains: 'Domains and senders' },
+  chips: { build: 'Build', leads: 'Forms and audience', email: 'Email', search: 'Search and analytics', domains: 'Domains and senders', languages: 'Languages' },
+  routeLabel: 'Jump to a feature',
+  marquee: ['Website', 'Forms', 'Newsletters', 'Your own domain', 'Follow-up emails', 'Search basics', 'Reports'],
   build: {
     eyebrow: '01 · Build',
     title: 'From a short brief to a full site.',
@@ -56,6 +58,14 @@ const en = {
     more: 'Read the domain guide →',
     status: [['clinic.co.uk', 'Connected'], ['Sender: your own address', 'Verified'], ['HTTPS certificate', 'Active']],
   },
+  languages: {
+    eyebrow: '06 · Languages',
+    title: 'Your site in your customers’ language.',
+    copy: 'Pick a default language and switch on more, up to eight in total. Translate a page in one click, and every language gets its own pages and matching emails.',
+    more: 'Read the guides →',
+    alt: 'The editor’s Translate dialog, with a language to translate the page into selected',
+    list: [['EN', 'English', 'English'], ['NL', 'Nederlands', 'Dutch'], ['FR', 'Français', 'French'], ['DE', 'Deutsch', 'German'], ['ZH', '中文', 'Chinese'], ['JA', '日本語', 'Japanese'], ['ES', 'Español', 'Spanish'], ['RU', 'Русский', 'Russian']],
+  },
   cta: { title: 'Try it on your own business.', primary: 'Request early access', guides: 'Read the guides' },
 };
 
@@ -66,7 +76,9 @@ const nl: typeof en = {
   h1: 'Eén tool om je website te bouwen én het bedrijf erachter te laten groeien.',
   lede: 'Dit is alles wat WebGen doet, van de eerste versie van je website tot de honderdste e-mail.',
   chipsLabel: 'Onderdelen',
-  chips: { build: 'Bouwen', leads: 'Formulieren en doelgroep', email: 'E-mail', search: 'Vindbaarheid en statistieken', domains: 'Domeinen en afzenders' },
+  chips: { build: 'Bouwen', leads: 'Formulieren en doelgroep', email: 'E-mail', search: 'Vindbaarheid en statistieken', domains: 'Domeinen en afzenders', languages: 'Talen' },
+  routeLabel: 'Ga naar een functie',
+  marquee: ['Website', 'Formulieren', 'Nieuwsbrieven', 'Eigen domein', 'Vervolgmails', 'Zoekbasis', 'Statistieken'],
   build: {
     eyebrow: '01 · Bouwen',
     title: 'Van een korte briefing naar een complete website.',
@@ -103,8 +115,8 @@ const nl: typeof en = {
     eyebrow: '04 · Vindbaarheid en statistieken',
     title: 'Word gevonden en zie wat werkt.',
     cards: [
-      { t: 'Sitemap en robots.txt', p: 'Automatisch voor elke site. Bestanden die je zelf uploadt, blijven altijd staan. [CONFIRM: ships with the SEO release]' },
-      { t: 'Tags voor zoekmachines en social media', p: 'Titels, beschrijvingen, linkvoorbeelden en gestructureerde data. [CONFIRM: ships with the SEO release]' },
+      { t: 'Sitemap en robots.txt', p: 'Automatisch voor elke site. Bestanden die je zelf uploadt, blijven altijd staan. [BEVESTIG: komt met de SEO-release]' },
+      { t: 'Tags voor zoekmachines en social media', p: 'Titels, beschrijvingen, linkvoorbeelden en gestructureerde data. [BEVESTIG: komt met de SEO-release]' },
       { t: 'Statistieken', p: 'Bezoeken, aanmeldingen en e-mailresultaten, pas nadat bezoekers toestemming geven.' },
     ],
   },
@@ -114,6 +126,14 @@ const nl: typeof en = {
     copy: 'Koppel je eigen domein, met automatisch HTTPS. Verifieer een afzender zodat e-mails van jouw adres komen. Wij blijven controleren of alles goed ingesteld staat.',
     more: 'Lees de handleiding over domeinen →',
     status: [['jouwpraktijk.nl', 'Gekoppeld'], ['Afzender: je eigen adres', 'Geverifieerd'], ['HTTPS-certificaat', 'Actief']],
+  },
+  languages: {
+    eyebrow: '06 · Talen',
+    title: 'Je site in de taal van je klanten.',
+    copy: 'Kies een standaardtaal en zet er meer aan, tot acht in totaal. Vertaal een pagina in één klik, en elke taal krijgt zijn eigen pagina’s en bijpassende e-mails.',
+    more: 'Lees de handleidingen →',
+    alt: 'Het vertaalvenster van de editor, met een taal gekozen om de pagina naar te vertalen (Engelse weergave)',
+    list: [['EN', 'English', 'Engels'], ['NL', 'Nederlands', 'Nederlands'], ['FR', 'Français', 'Frans'], ['DE', 'Deutsch', 'Duits'], ['ZH', '中文', 'Chinees'], ['JA', '日本語', 'Japans'], ['ES', 'Español', 'Spaans'], ['RU', 'Русский', 'Russisch']],
   },
   cta: { title: 'Probeer het met je eigen bedrijf.', primary: 'Vraag vroege toegang aan', guides: 'Lees de handleidingen' },
 };
