@@ -12,6 +12,7 @@ if (!run('build:preview', 'npm run build:preview')) process.exit(1);
 const results = [
   ['html-validate', run('html-validate', 'npx html-validate "dist/**/*.html"')],
   ['a11y (axe)', run('a11y (axe)', 'node scripts/a11y.mjs dist')],
+  ['overflow', run('overflow', 'node scripts/overflow.mjs dist')],
   ['lhci', run('lhci', 'npx lhci autorun')],
 ];
 

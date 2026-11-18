@@ -4,7 +4,10 @@
       "staticDistDir": "./dist",
       "url": [
         "http://localhost/index.html",
+        "http://localhost/nl/index.html",
+        "http://localhost/examples/index.html",
         "http://localhost/docs/build-your-first-website/index.html",
+        "http://localhost/nl/docs/build-your-first-website/index.html",
         "http://localhost/email/index.html"
       ],
       "numberOfRuns": 1

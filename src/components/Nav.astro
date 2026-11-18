@@ -52,7 +52,7 @@ const isCurrent = (href: string) => current === href || current.startsWith(href)
       <div class="navactions">
         <LangSwitch path={switchPath} />
         <a class="nav-signin" href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a>
-        <a class="btn btn-primary nav-cta" href={localize(EARLY_ACCESS, locale)}><span class="cta-lead">{t.cta.lead}</span><span class="cta-rest">{t.cta.rest}</span><span class="cta-tail">{t.cta.tail}</span></a>
+        <a class="btn btn-primary nav-cta" href={localize(EARLY_ACCESS, locale)}><span><span class="cta-lead">{t.cta.lead}</span><span class="cta-rest">{t.cta.rest}</span><span class="cta-tail">{t.cta.tail}</span></span></a>
       </div>
     </div>
   </div>
