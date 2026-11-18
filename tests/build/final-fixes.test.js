@@ -51,8 +51,9 @@ describe('early access is the primary CTA everywhere', () => {
         expect(a.hasAttribute('rel'), route).toBe(false);
       }
     }
-    // One in the nav of every page, plus Home hero, Home closing CTA, Home sticky bar and Features CTA.
-    expect(seen).toBe(routes.length + 4);
+    // One in the nav of every page, plus at least Home hero, Home closing CTA, Home sticky bar and Features CTA.
+    // Later pages add their own closing CTAs, so this is a floor, not an exact count.
+    expect(seen).toBeGreaterThanOrEqual(routes.length + 4);
   });
 });
 

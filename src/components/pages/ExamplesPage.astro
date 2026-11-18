@@ -1,0 +1,165 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import { EARLY_ACCESS } from '../../lib/links.js';
+import { getLocale, localize } from '../../i18n/index.ts';
+import { UI } from '../../i18n/ui.ts';
+import { EXAMPLES_COPY, SITE_LANGS } from '../../i18n/examples.ts';
+import { EXAMPLES, TRADE_KEYS } from '../../lib/examples.ts';
+import Blobs from '../motion/Blobs.astro';
+import FloatingChips from '../motion/FloatingChips.astro';
+import Marquee from '../motion/Marquee.astro';
+import ExampleCard from '../ExampleCard.astro';
+
+const locale = getLocale(Astro.currentLocale);
+const t = EXAMPLES_COPY[locale].list;
+const ui = UI[locale];
+const l = (p: string) => localize(p, locale);
+const featured = EXAMPLES.find((e) => e.id === 'greenleaf')!;
+const others = EXAMPLES.filter((e) => e.id !== 'greenleaf');
+---
+<Base title={t.title} description={t.description} path="/examples/">
+  <section data-section="hero" class="ex-hero has-blobs">
+    <Blobs variant="hero" />
+    <FloatingChips locale={locale} placement="right" />
+    <div class="container">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1>{t.h1}</h1>
+      <p class="lede">{t.lede}</p>
+      <div class="chips" role="group" aria-label={t.tradeLabel}>
+        <button type="button" data-filter-trade="all" aria-pressed="true">{t.trades.all}</button>
+        {TRADE_KEYS.map((k) => <button type="button" data-filter-trade={k} aria-pressed="false">{t.trades[k]}</button>)}
+      </div>
+    </div>
+  </section>
+
+  <section data-section="marquee" class="marq-sec" aria-hidden="true"><Marquee items={t.marquee} /></section>
+
+  <section data-section="languages" class="ex-langs">
+    <div class="container">
+      <p class="eyebrow">{t.langHeading}</p>
+      <div class="chips" role="group" aria-label={t.langLabel}>
+        <button type="button" data-filter-lang="all" aria-pressed="true">{t.langAll}</button>
+        {SITE_LANGS.map(([code, native]) => <button type="button" data-filter-lang={code} lang={code} aria-pressed="false">{native}</button>)}
+      </div>
+      <p class="note">{t.langNote}</p>
+    </div>
+  </section>
+
+  <section data-section="grid" class="ex-gridsec">
+    <div class="container">
+      <div class="example-grid">
+        <article class="featured lift" data-trade={featured.tradeKey} data-langs={featured.langs.join(' ')}>
+          <div class="feat-text">
+            <span class="badge">{t.featured.label}</span>
+            <h2 class="card-title">{t.featured.name}</h2>
+            <p class="place">{t.featured.place}</p>
+            <dl>
+              <dt>{t.featured.briefLabel}</dt><dd>{t.featured.brief}</dd>
+              <dt>{t.featured.resultLabel}</dt><dd>{t.featured.result}</dd>
+            </dl>
+            <ul class="tags">{t.featured.tags.map((x) => <li>{x}</li>)}</ul>
+            <a class="btn btn-primary" href={l('/examples/greenleaf-bakery/')}>{t.featured.view}</a>
+          </div>
+          <div class="feat-shot zoom">
+            <Picture
+              src={featured.image}
+              formats={['avif']}
+              fallbackFormat="webp"
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 900px) 560px, calc(100vw - 80px)"
+              alt={featured.alt[locale]}
+              loading="lazy"
+            />
+          </div>
+        </article>
+        {others.map((site) => <ExampleCard site={site} locale={locale} size="grid" />)}
+        <div class="more-slot">
+          <span class="tag-lang">{t.more.tag}</span>
+          <h3 class="card-title">{t.more.t}</h3>
+          <p>{t.more.p}</p>
+        </div>
+      </div>
+      <p class="note">{t.note}</p>
+    </div>
+  </section>
+
+  <section data-section="industry" class="band">
+    <div class="container">
+      <p class="eyebrow">{t.industry.eyebrow}</p>
+      <h2>{t.industry.title}</h2>
+      <p class="lede2">{t.industry.text}</p>
+      <div class="ind-grid">
+        {t.industry.cards.map((c) => (
+          <a class="lift ind-card" href={l(EARLY_ACCESS)}>
+            <h3 class="card-title">{c.t}</h3>
+            <p>{c.p}</p>
+            <span class="soon">{t.industry.soon}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section data-section="cta" class="final">
+    <div class="container">
+      <h2>{t.cta.title}</h2>
+      <p>{t.cta.text}</p>
+      <a class="btn btn-accent pulse" href={l(EARLY_ACCESS)}>{ui.cta.lead}{ui.cta.rest}{ui.cta.tail}</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { initExampleFilter } from '../../scripts/example-filter.ts';
+  initExampleFilter();
+</script>
+
+<style>
+  :global(main) > section { margin-top: 72px; }
+  :global(main) > section.ex-hero { margin-top: 48px; position: relative; }
+  :global(main) > section.marq-sec { margin-top: 32px; }
+  :global(main) > section.ex-langs { margin-top: 40px; }
+  :global(main) > section.ex-gridsec { margin-top: 24px; }
+  :global(main) > section.band { background: var(--surface); padding: 64px 0; }
+  :global(main) > section.final { background: var(--ink); color: var(--on-dark-2); padding: 80px 0; text-align: center; margin-bottom: 0; }
+  :global(main) > section.final h2 { color: var(--white); }
+  .final :focus-visible { outline-color: var(--accent); }
+  [hidden] { display: none !important; }
+
+  .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--link); margin: 0 0 12px; display: block; }
+  .ex-hero h1 { max-width: 860px; letter-spacing: -.035em; }
+  .lede { max-width: 640px; font-size: 1.1875rem; color: var(--muted); }
+  .lede2 { max-width: 620px; color: var(--muted); font-size: 1.0625rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .ex-langs .chips { margin-top: 0; }
+  .chips button { min-height: 44px; padding: 0 18px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--white); color: var(--ink); font: 500 .9375rem/1 var(--font-body); cursor: pointer; }
+  .chips button:hover { border-color: var(--ink); }
+  .chips button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--white); font-weight: 600; }
+  .note { margin: 16px 0 0; font-size: .9375rem; color: var(--muted); max-width: 720px; }
+
+  .example-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+  .featured { grid-column: 1 / -1; display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: center; border-radius: 24px; padding: 28px; background: linear-gradient(160deg, #F8FAFF 0%, #E9EFFA 100%); border: 1px solid var(--line); }
+  .featured h2 { margin: 12px 0 0; font-size: 1.75rem; letter-spacing: -.02em; }
+  .place { margin: 2px 0 0; color: var(--muted); font-size: .9375rem; }
+  .badge { display: inline-block; background: var(--accent); color: var(--ink); font-size: .75rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; }
+  .featured dl { margin: 20px 0 0; }
+  .featured dt { font: 700 .75rem/1.2 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--link); margin-top: 12px; }
+  .featured dd { margin: 4px 0 0; }
+  .tags { list-style: none; padding: 0; margin: 18px 0 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags li { background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: .8125rem; }
+  .feat-shot { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--white); box-shadow: var(--shadow-lift); }
+  .feat-shot :global(img) { display: block; width: 100%; height: auto; }
+  .card-title { overflow-wrap: anywhere; min-width: 0; }
+  .more-slot { border: 2px dashed var(--line-strong); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 6px; background: var(--surface); }
+  .more-slot h3 { margin: 6px 0 0; font-size: 1.25rem; }
+  .more-slot p { margin: 0; color: var(--muted); }
+  .tag-lang { font-size: .75rem; font-weight: 600; color: var(--link); background: #EEF3FF; border-radius: 999px; padding: 4px 10px; }
+
+  .ind-grid { display: grid; gap: 16px; margin-top: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .ind-card { display: block; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 22px; color: var(--ink); text-decoration: none; }
+  .ind-card:hover { color: var(--ink); }
+  .ind-card h3 { font-size: 1.125rem; margin: 0 0 6px; }
+  .ind-card p { margin: 0 0 12px; color: var(--muted); font-size: .9375rem; }
+  .soon { font-size: .8125rem; font-weight: 600; color: var(--muted); }
+</style>

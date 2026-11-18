@@ -1,5 +1,5 @@
 ---
-// Header. Desktop: one row. Under 900px the links and actions move into a panel that slides in
+// Header. Desktop: one row. Under 1040px the links and actions move into a panel that slides in
 // from the right. Open state is a checkbox (#navtoggle) so the menu works without JavaScript;
 // the backdrop is a <label> for the same checkbox, so tapping it closes the menu.
 import Logo from './Logo.astro';
@@ -13,6 +13,7 @@ const locale = getLocale(Astro.currentLocale);
 const t = UI[locale];
 const links = [
   { href: localize('/features/', locale), label: t.nav.product },
+  { href: localize('/examples/', locale), label: t.nav.examples },
   { href: localize('/docs/', locale), label: t.nav.docs },
   { href: localize('/company/', locale), label: t.nav.company },
 ];
