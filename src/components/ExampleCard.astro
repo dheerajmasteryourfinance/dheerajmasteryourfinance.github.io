@@ -1,0 +1,66 @@
+---
+// One example site. size="grid" is the Examples page card (filterable: data-trade / data-langs);
+// size="strip" is the small linked card in the "made in WebGen" strips on Home, Early Access, Company.
+import { Image } from 'astro:assets';
+import type { Locale } from '../i18n/index.ts';
+import { langLabel, type ExampleSite } from '../lib/examples.ts';
+
+interface Props { site: ExampleSite; locale: Locale; size?: 'grid' | 'strip'; href?: string }
+const { site, locale, size = 'grid', href } = Astro.props;
+const Tag = size === 'strip' && href ? 'a' : 'div';
+const quote = site.headline ? `“${site.headline}”` : '';
+---
+<Tag
+  class:list={['excard', 'lift', `excard-${size}`]}
+  href={Tag === 'a' ? href : undefined}
+  data-trade={site.tradeKey}
+  data-langs={site.langs.join(' ')}
+>
+  <div class="excard-shot">
+    <Image
+      src={site.image}
+      alt={size === 'strip' ? '' : site.alt[locale]}
+      widths={[480, 960]}
+      sizes={size === 'strip' ? '(max-width: 640px) 100vw, 280px' : '(max-width: 760px) 100vw, 400px'}
+      loading="lazy"
+    />
+  </div>
+  {size === 'grid' ? (
+    <>
+      <div class="excard-tags">
+        <span class="tag-trade">{site.trade[locale]}</span>
+        <span class="tag-lang">{langLabel(site, locale)}</span>
+      </div>
+      <h3 class="card-title">{site.name}</h3>
+      {quote && <p class="excard-quote">{quote}</p>}
+    </>
+  ) : (
+    <>
+      <div class="excard-row">
+        <span class="card-title">{site.name}</span>
+        <span class="tag-lang">{site.trade[locale]}</span>
+      </div>
+      {quote && <p class="excard-quote">{quote}</p>}
+    </>
+  )}
+</Tag>
+
+<style>
+  .excard { display: flex; flex-direction: column; border: 1px solid var(--line); background: var(--white); color: var(--ink); text-decoration: none; box-sizing: border-box; min-width: 0; }
+  .excard-grid { border-radius: 24px; padding: 16px; }
+  .excard-strip { border-radius: 18px; padding: 12px; }
+  a.excard:hover { color: var(--ink); }
+  .excard-shot { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16 / 10; background: var(--surface); }
+  .excard-strip .excard-shot { border-radius: 10px; }
+  .excard-shot :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .excard-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .tag-trade, .tag-lang { font-size: .75rem; border-radius: 999px; padding: 4px 10px; overflow-wrap: anywhere; }
+  .tag-trade { font-weight: 700; color: var(--ink); background: var(--accent); }
+  .tag-lang { font-weight: 600; color: var(--link); background: #EEF3FF; }
+  .card-title { overflow-wrap: anywhere; min-width: 0; }
+  h3.card-title { font-size: 1.25rem; margin: 10px 0 0; letter-spacing: -0.02em; }
+  .excard-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 12px; }
+  .excard-row .card-title { font-weight: 700; font-size: 1rem; }
+  .excard-quote { margin: 4px 0 0; font-size: .875rem; line-height: 1.5; color: var(--muted); }
+  .excard-strip .excard-quote { font-size: .8125rem; line-height: 1.45; }
+</style>

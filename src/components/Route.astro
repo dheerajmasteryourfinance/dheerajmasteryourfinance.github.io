@@ -1,0 +1,98 @@
+---
+// The dotted "launch route" from the canvas: a start pin, numbered stops and a flag.
+// mode="scroll" draws the line as the route scrolls into view (Home);
+// mode="load" draws it once on page load (Features). Stops with an href become links.
+// Hidden under 760px: the caller supplies the small-screen fallback (stop cards or a chip nav).
+type Stop = { label: string; href?: string };
+interface Props { stops: Stop[]; mode?: 'scroll' | 'load'; ariaLabel: string }
+const { stops, mode = 'scroll', ariaLabel } = Astro.props;
+
+const W = 1152;
+const HIGH = 46;
+const LOW = 100;
+const startX = 30;
+const flagX = 1124;
+const n = stops.length;
+// Stops sit evenly between the start pin and the flag, alternating high/low, first one high.
+const span = (flagX - startX) / (n + 0.5);
+const pins = stops.map((s, i) => ({ ...s, n: i + 1, x: Math.round(startX + span * (i + 0.75)), y: i % 2 === 0 ? HIGH : LOW }));
+const endY = (LOW + HIGH) / 2 + 8;
+
+// Smooth S-curves between points: each segment's control points sit at the horizontal midpoint.
+const pts = [{ x: startX, y: LOW }, ...pins, { x: flagX, y: endY }];
+let d = `M${pts[0].x} ${pts[0].y}`;
+for (let i = 1; i < pts.length; i++) {
+  const a = pts[i - 1];
+  const b = pts[i];
+  const mx = Math.round((a.x + b.x) / 2);
+  d += `C${mx} ${a.y} ${mx} ${b.y} ${b.x} ${b.y}`;
+}
+
+const linked = stops.some((s) => s.href);
+const showLabels = mode === 'load';
+const H = showLabels ? 150 : 130;
+---
+{linked ? (
+  <nav class:list={['route', `route-${mode}`]} aria-label={ariaLabel}>
+    <svg viewBox={`0 0 ${W} ${H}`} fill="none">
+      <path class="base" d={d} stroke="#9AA6BD" stroke-width="3" stroke-linecap="round" />
+      <path class="draw" pathLength="1" d={d} stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
+      <circle cx={startX} cy={LOW} r="9" fill="#0F1E3D" />
+      <circle cx={startX} cy={LOW} r="3.5" fill="#40E0F5" />
+      <path d={`M${flagX} ${endY}V${endY - 42}`} stroke="#0F1E3D" stroke-width="3" stroke-linecap="round" />
+      <path d={`M${flagX} ${endY - 42}l22 8-22 8z`} fill="#40E0F5" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round" />
+      {pins.map((p) => (
+        <a class="stoplink" href={p.href} aria-label={p.label}>
+          <circle cx={p.x} cy={p.y} r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5" />
+          <text x={p.x} y={p.y + 6} text-anchor="middle" font-size="16" font-weight="700" fill="#0F1E3D">{p.n}</text>
+          {showLabels && (
+            <text x={p.x} y={p.y === HIGH ? 14 : 138} text-anchor="middle" font-size="14" font-weight="600" fill="#334155">{p.label}</text>
+          )}
+        </a>
+      ))}
+    </svg>
+  </nav>
+) : (
+  <svg class:list={['route', `route-${mode}`]} viewBox={`0 0 ${W} ${H}`} fill="none" aria-hidden="true">
+    <path class="base" d={d} stroke="#9AA6BD" stroke-width="3" stroke-linecap="round" />
+    <path class="draw" pathLength="1" d={d} stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
+    <circle cx={startX} cy={LOW} r="9" fill="#0F1E3D" />
+    <circle cx={startX} cy={LOW} r="3.5" fill="#40E0F5" />
+    {pins.map((p) => (
+      <g class="pin" data-stop={p.label}>
+        <circle cx={p.x} cy={p.y} r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5" />
+        <text x={p.x} y={p.y + 6} text-anchor="middle" font-size="16" font-weight="700" fill="#0F1E3D">{p.n}</text>
+        {showLabels && (
+          <text x={p.x} y={p.y === HIGH ? 14 : 138} text-anchor="middle" font-size="14" font-weight="600" fill="#334155">{p.label}</text>
+        )}
+      </g>
+    ))}
+    <path d={`M${flagX} ${endY}V${endY - 42}`} stroke="#0F1E3D" stroke-width="3" stroke-linecap="round" />
+    <path d={`M${flagX} ${endY - 42}l22 8-22 8z`} fill="#40E0F5" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round" />
+  </svg>
+)}
+
+<style>
+  .route { display: block; width: 100%; height: auto; margin-top: 40px; font-family: var(--font-body); }
+  .route svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .route text { font-family: var(--font-body); }
+  .route .base { stroke-dasharray: 2 9; }
+  .route .draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .route-load .draw { animation: routedraw 1.8s cubic-bezier(.4, .1, .2, 1) both; }
+  .stoplink { cursor: pointer; }
+  .stoplink circle { transition: fill .2s ease, transform .2s ease; transform-box: fill-box; transform-origin: center; }
+  .stoplink:hover circle, .stoplink:focus-visible circle { fill: #90F0FB; transform: scale(1.12); }
+  .stoplink:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+  @keyframes routedraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes stoppop { from { transform: scale(.6); opacity: .4; } to { transform: none; opacity: 1; } }
+  @supports (animation-timeline: view()) {
+    .route-scroll .draw { stroke-dashoffset: 1; animation: routedraw linear both; animation-timeline: view(); animation-range: entry 20% cover 52%; }
+    .route-scroll .pin { transform-box: fill-box; transform-origin: center; animation: stoppop linear both; animation-timeline: view(); animation-range: entry 25% cover 45%; }
+  }
+  @media (max-width: 760px) { .route { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .route .draw { animation: none; stroke-dashoffset: 0; }
+    .route .pin { animation: none; }
+    .stoplink circle { transition: none; }
+  }
+</style>
