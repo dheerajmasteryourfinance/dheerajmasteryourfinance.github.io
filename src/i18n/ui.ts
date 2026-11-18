@@ -19,7 +19,6 @@ const en = {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     language: 'Language',
-    theme: 'Dark mode',
   },
   footer: {
     product: 'Product',
@@ -97,7 +96,6 @@ const nl: Ui = {
     openMenu: 'Menu openen',
     closeMenu: 'Menu sluiten',
     language: 'Taal',
-    theme: 'Donkere modus',
   },
   footer: {
     product: 'Product',

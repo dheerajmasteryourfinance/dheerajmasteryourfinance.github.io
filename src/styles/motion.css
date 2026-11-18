@@ -54,13 +54,13 @@
   box-shadow: 0 18px 40px rgba(15, 30, 61, .16); font-size: .875rem; font-weight: 600; color: var(--ink);
 }
 .fchip-icon { width: 28px; height: 28px; border-radius: 8px; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; }
-.fchip-icon.alt { background: var(--chip-alt); }
+.fchip-icon.alt { background: #DCE7FF; }
 @media (max-width: 900px) { .fchip { display: none; } .blob { opacity: .6; } }
 
 /* ---- Sticky early-access bar ---- */
 .stickycta {
   position: sticky; bottom: 16px; z-index: 6; width: max-content; max-width: calc(100% - 32px); margin: 0 auto 16px;
-  display: flex; align-items: center; gap: 14px; background: var(--fill); color: var(--on-fill);
+  display: flex; align-items: center; gap: 14px; background: var(--ink); color: var(--white);
   border-radius: 999px; padding: 8px 8px 8px 22px; box-shadow: 0 18px 44px rgba(15, 30, 61, .3); font-size: .9375rem; font-weight: 500;
 }
 @keyframes barin { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }

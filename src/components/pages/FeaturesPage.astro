@@ -192,8 +192,8 @@ const chips = (['build', 'leads', 'email', 'search', 'domains', 'languages'] as 
   /* <main> lives in the Base layout, so it needs :global() for these rules to match. */
   :global(main) > section { margin-top: 88px; }
   :global(main) > section.f-hero { margin-top: 56px; }
-  :global(main) > section.final { background: var(--fill); color: var(--on-dark-2); padding: 72px 0; text-align: center; }
-  :global(main) > section.final h2 { color: var(--on-fill); }
+  :global(main) > section.final { background: var(--ink); color: var(--on-dark-2); padding: 72px 0; text-align: center; }
+  :global(main) > section.final h2 { color: var(--white); }
   .final :focus-visible { outline-color: var(--accent); }
   [hidden] { display: none !important; }
 
@@ -212,7 +212,7 @@ const chips = (['build', 'leads', 'email', 'search', 'domains', 'languages'] as 
   .more { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
 
   .mock { background: var(--surface); border-radius: 24px; padding: 24px; }
-  .mock.dark { background: var(--fill); color: var(--on-fill); }
+  .mock.dark { background: var(--ink); color: var(--white); }
   .mock-label { font: 700 .75rem/1.2 var(--font-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
   .dark .mock-label { color: var(--on-dark); }
   .panel { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 20px; font-size: .9375rem; }
@@ -247,12 +247,12 @@ const chips = (['build', 'leads', 'email', 'search', 'domains', 'languages'] as 
   .status p { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
 
   .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
-  .btn-ondark { background: transparent; color: var(--on-fill); border-color: var(--on-dark); }
-  .btn-ondark:hover { border-color: var(--on-fill); color: var(--on-fill); }
+  .btn-ondark { background: transparent; color: var(--white); border-color: var(--on-dark); }
+  .btn-ondark:hover { border-color: var(--white); color: var(--white); }
 
   .lang-list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
   .lang-list li { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; background: var(--white); min-width: 0; }
-  .lang-list .code { width: 32px; height: 32px; flex: none; border-radius: 8px; background: var(--accent); color: var(--on-accent); font: 700 .75rem/32px var(--font-body); text-align: center; }
+  .lang-list .code { width: 32px; height: 32px; flex: none; border-radius: 8px; background: var(--accent); color: var(--ink); font: 700 .75rem/32px var(--font-body); text-align: center; }
   .lang-list .native { font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
   .lang-list .lname { margin-left: auto; font-size: .8125rem; color: var(--muted); }
   .shot-lang { width: 100%; }
