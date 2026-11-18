@@ -5,6 +5,8 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
+/* Component CSS sets display on cards; an element with the hidden attribute must stay hidden (example filter). */
+[hidden] { display: none !important; }
 /* Decorations (blobs, floating cards) may sit past the edge; never let them cause sideways scroll.
    clip, not hidden, so sticky elements keep working. */
 html, body { overflow-x: clip; }

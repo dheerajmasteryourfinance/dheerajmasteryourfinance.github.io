@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { loadPage } from './helpers.js';
 
 const ROOT = process.cwd();
 const tokens = readFileSync(join(ROOT, 'src/styles/tokens.css'), 'utf8');
@@ -83,5 +84,20 @@ describe('built css', () => {
   it('clips sideways overflow and wraps long words in headings', () => {
     expect(flat).toMatch(/html,body\{[^}]*overflow-x:clip/);
     expect(flat).toMatch(/h1,h2,h3\{[^}]*overflow-wrap:(break-word|anywhere)/);
+  });
+});
+
+describe('hidden attribute', () => {
+  // The example filter hides cards with the hidden attribute. Component CSS gives cards display:flex/grid,
+  // which beats the browser's [hidden] rule, so every page that can hide things needs a global
+  // !important rule (found in the final review: the rule only existed in the Home page's CSS).
+  const cssOf = (route) => {
+    const doc = loadPage(route);
+    const sheets = [...doc.querySelectorAll('link[rel="stylesheet"][href^="/"]')].map((l) => readFileSync(join(process.cwd(), 'dist', l.getAttribute('href')), 'utf8'));
+    const inline = [...doc.querySelectorAll('style')].map((st) => st.textContent);
+    return [...sheets, ...inline].join('\n').replace(/\s+/g, '');
+  };
+  it.each(['/examples/', '/nl/examples/'])('%s loads an unscoped [hidden] { display: none !important } rule', (route) => {
+    expect(cssOf(route)).toMatch(/(^|[},])\[hidden\]\{display:none!important\}/);
   });
 });
