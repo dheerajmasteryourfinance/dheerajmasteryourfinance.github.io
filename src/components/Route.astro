@@ -37,16 +37,16 @@ const H = showLabels ? 150 : 130;
     <svg viewBox={`0 0 ${W} ${H}`} fill="none">
       <path class="base" d={d} stroke="#9AA6BD" stroke-width="3" stroke-linecap="round" />
       <path class="draw" pathLength="1" d={d} stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
-      <circle cx={startX} cy={LOW} r="9" fill="#0F1E3D" />
+      <circle cx={startX} cy={LOW} r="9" fill="currentColor" />
       <circle cx={startX} cy={LOW} r="3.5" fill="#40E0F5" />
-      <path d={`M${flagX} ${endY}V${endY - 42}`} stroke="#0F1E3D" stroke-width="3" stroke-linecap="round" />
-      <path d={`M${flagX} ${endY - 42}l22 8-22 8z`} fill="#40E0F5" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round" />
+      <path d={`M${flagX} ${endY}V${endY - 42}`} stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+      <path d={`M${flagX} ${endY - 42}l22 8-22 8z`} fill="#40E0F5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
       {pins.map((p) => (
         <a class="stoplink" href={p.href} aria-label={p.label}>
-          <circle cx={p.x} cy={p.y} r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5" />
+          <circle cx={p.x} cy={p.y} r="17" fill="#40E0F5" stroke="currentColor" stroke-width="2.5" />
           <text x={p.x} y={p.y + 6} text-anchor="middle" font-size="16" font-weight="700" fill="#0F1E3D">{p.n}</text>
           {showLabels && (
-            <text x={p.x} y={p.y === HIGH ? 14 : 138} text-anchor="middle" font-size="14" font-weight="600" fill="#334155">{p.label}</text>
+            <text x={p.x} y={p.y === HIGH ? 14 : 138} text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">{p.label}</text>
           )}
         </a>
       ))}
@@ -56,24 +56,24 @@ const H = showLabels ? 150 : 130;
   <svg class:list={['route', `route-${mode}`]} viewBox={`0 0 ${W} ${H}`} fill="none" aria-hidden="true">
     <path class="base" d={d} stroke="#9AA6BD" stroke-width="3" stroke-linecap="round" />
     <path class="draw" pathLength="1" d={d} stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
-    <circle cx={startX} cy={LOW} r="9" fill="#0F1E3D" />
+    <circle cx={startX} cy={LOW} r="9" fill="currentColor" />
     <circle cx={startX} cy={LOW} r="3.5" fill="#40E0F5" />
     {pins.map((p) => (
       <g class="pin" data-stop={p.label}>
-        <circle cx={p.x} cy={p.y} r="17" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5" />
+        <circle cx={p.x} cy={p.y} r="17" fill="#40E0F5" stroke="currentColor" stroke-width="2.5" />
         <text x={p.x} y={p.y + 6} text-anchor="middle" font-size="16" font-weight="700" fill="#0F1E3D">{p.n}</text>
         {showLabels && (
-          <text x={p.x} y={p.y === HIGH ? 14 : 138} text-anchor="middle" font-size="14" font-weight="600" fill="#334155">{p.label}</text>
+          <text x={p.x} y={p.y === HIGH ? 14 : 138} text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">{p.label}</text>
         )}
       </g>
     ))}
-    <path d={`M${flagX} ${endY}V${endY - 42}`} stroke="#0F1E3D" stroke-width="3" stroke-linecap="round" />
-    <path d={`M${flagX} ${endY - 42}l22 8-22 8z`} fill="#40E0F5" stroke="#0F1E3D" stroke-width="2" stroke-linejoin="round" />
+    <path d={`M${flagX} ${endY}V${endY - 42}`} stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+    <path d={`M${flagX} ${endY - 42}l22 8-22 8z`} fill="#40E0F5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
   </svg>
 )}
 
 <style>
-  .route { display: block; width: 100%; height: auto; margin-top: 40px; font-family: var(--font-body); }
+  .route { color: var(--ink); display: block; width: 100%; height: auto; margin-top: 40px; font-family: var(--font-body); }
   .route svg { display: block; width: 100%; height: auto; overflow: visible; }
   .route text { font-family: var(--font-body); }
   .route .base { stroke-dasharray: 2 9; }
