@@ -1,7 +1,7 @@
 // Scroll-reveal fallback for browsers without scroll-driven animations (Safari, Firefox).
 // Browsers with `animation-timeline: view()` are handled entirely by motion.css.
 
-const TARGETS = '.rv, .lift, .stopcard, .reveal-item';
+const TARGETS = '.rv, main > section:not(:first-child) > .container, .lift, .stopcard, .reveal-item';
 
 /** Reveal targets as they scroll into view. Returns a cleanup function. */
 export function initReveal(root: Document = document): () => void {

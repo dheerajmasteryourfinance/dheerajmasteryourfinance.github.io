@@ -9,7 +9,7 @@
 @keyframes rvcard { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
 
 @supports (animation-timeline: view()) {
-  .rv { animation: rvin cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 0% cover 26%; }
+  .rv, main > section:not(:first-child) > .container { animation: rvin cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 0% cover 26%; }
   .lift, .stopcard, .reveal-item, details, figure, .tsec {
     animation: rvcard cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 0% cover 20%;
   }
@@ -17,11 +17,11 @@
 
 /* Fallback for browsers without scroll-driven animation: src/scripts/reveal.ts adds .js-reveal
    to <html> and .is-visible to each target as it comes into view. Without JS nothing is hidden. */
-.js-reveal .rv, .js-reveal .lift, .js-reveal .stopcard, .js-reveal .reveal-item {
+.js-reveal .rv, .js-reveal main > section:not(:first-child) > .container, .js-reveal .lift, .js-reveal .stopcard, .js-reveal .reveal-item {
   opacity: 0; translate: 0 24px;
   transition: opacity .7s cubic-bezier(.2, .7, .2, 1), translate .7s cubic-bezier(.2, .7, .2, 1);
 }
-.js-reveal .rv.is-visible, .js-reveal .lift.is-visible, .js-reveal .stopcard.is-visible, .js-reveal .reveal-item.is-visible {
+.js-reveal .rv.is-visible, .js-reveal main > section:not(:first-child) > .container.is-visible, .js-reveal .lift.is-visible, .js-reveal .stopcard.is-visible, .js-reveal .reveal-item.is-visible {
   opacity: 1; translate: 0 0;
 }
 
@@ -70,8 +70,8 @@
 @media (max-width: 640px) { .stickycta { font-size: .875rem; gap: 10px; padding: 6px 6px 6px 16px; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .rv, .lift, .stopcard, .reveal-item, details, figure, .tsec, .blob, .marq-track, .pulse, .drift, .drift2, .stickycta { animation: none !important; }
-  .js-reveal .rv, .js-reveal .lift, .js-reveal .stopcard, .js-reveal .reveal-item { opacity: 1; translate: 0 0; transition: none; }
+  .rv, main > section:not(:first-child) > .container, .lift, .stopcard, .reveal-item, details, figure, .tsec, .blob, .marq-track, .pulse, .drift, .drift2, .stickycta { animation: none !important; }
+  .js-reveal .rv, .js-reveal main > section:not(:first-child) > .container, .js-reveal .lift, .js-reveal .stopcard, .js-reveal .reveal-item { opacity: 1; translate: 0 0; transition: none; }
   .lift, .zoom img { transition: none; }
   .lift:hover, .zoom:hover img { transform: none; }
 }
