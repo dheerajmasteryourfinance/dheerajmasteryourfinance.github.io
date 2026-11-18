@@ -89,3 +89,37 @@
 .fchip-around-shot-1 { left: -8px; top: 18%; }
 .fchip-around-shot-2 { right: -8px; top: 34%; }
 .fchip-around-shot-3 { left: 6%; bottom: 12%; }
+
+/* Smooth interactions: page changes fade instead of cutting, controls ease between states, anchors glide. */
+@view-transition { navigation: auto; }
+.site-nav { view-transition-name: site-nav; }
+::view-transition-old(root) { animation: vt-out .22s ease both; }
+::view-transition-new(root) { animation: vt-in .32s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+
+html { scroll-behavior: smooth; }
+:target, [id] { scroll-margin-top: 88px; }
+
+a, button, summary, .btn, .chips button, .switch button, .lang-short a, .navlinks a, .navguides a {
+  transition: color .2s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .2s cubic-bezier(.2, .7, .2, 1), opacity .2s ease;
+}
+.btn:hover, .chips button:hover { transform: translateY(-1px); }
+.btn:active, .chips button:active, .switch button:active { transform: scale(.97); }
+.btn-accent:hover { box-shadow: 0 8px 22px rgba(30, 192, 220, .35); }
+.btn-primary:hover { box-shadow: 0 8px 22px rgba(15, 30, 61, .25); }
+
+/* FAQ and other <details> open and close with a glide where the browser supports it. */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  details::details-content { block-size: 0; overflow: clip; transition: block-size .3s cubic-bezier(.2, .7, .2, 1), content-visibility .3s allow-discrete; }
+  details[open]::details-content { block-size: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  @view-transition { navigation: none; }
+  a, button, summary, .btn, .chips button, .switch button, .lang-short a, .navlinks a, .navguides a { transition: none; }
+  .btn:hover, .chips button:hover, .btn:active, .chips button:active, .switch button:active { transform: none; }
+  details::details-content { transition: none; }
+}
