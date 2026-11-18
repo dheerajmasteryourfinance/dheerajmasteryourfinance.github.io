@@ -23,9 +23,9 @@ describe('app links are gated by a placeholder', () => {
     expect(bad).toEqual([]);
   });
 
-  it('See an example points at the examples section and is no longer gated', () => {
+  it('See an example points at the proof section and is no longer gated', () => {
     const a = [...loadPage('/').querySelectorAll('a')].find((x) => x.textContent.trim() === 'See an example');
-    expect(a.getAttribute('href')).toBe('#examples');
+    expect(a.getAttribute('href')).toBe('#proof');
     expect(a.hasAttribute('data-placeholder')).toBe(false);
   });
 });
@@ -51,8 +51,8 @@ describe('early access is the primary CTA everywhere', () => {
         expect(a.hasAttribute('rel'), route).toBe(false);
       }
     }
-    // One in the nav of every page, plus Home hero, Home closing CTA and Features CTA.
-    expect(seen).toBe(routes.length + 3);
+    // One in the nav of every page, plus Home hero, Home closing CTA, Home sticky bar and Features CTA.
+    expect(seen).toBe(routes.length + 4);
   });
 });
 
@@ -90,21 +90,7 @@ describe('focus ring on dark backgrounds', () => {
     // The footer is light since canvas v84, so its focus ring uses the link blue.
     expect(css).toMatch(/\.site-footer :focus-visible[\s\S]*?outline-color:\s*var\(--link\)/);
     const home = readFileSync(join(process.cwd(), 'src/components/pages/HomePage.astro'), 'utf8');
-    expect(home).toMatch(/section\.dark :focus-visible[\s\S]*?var\(--accent\)/);
     expect(home).toMatch(/section\.final :focus-visible[\s\S]*?var\(--accent\)/);
-  });
-});
-
-describe('home learn cards', () => {
-  it('minutes match the article frontmatter', () => {
-    const cards = [...loadPage('/').querySelectorAll('main > section[data-section="learn"] a.link-card')];
-    expect(cards).toHaveLength(4);
-    for (const c of cards) {
-      const slug = c.getAttribute('href').split('/').filter(Boolean).pop();
-      const fm = readFileSync(join(process.cwd(), 'src/content/docs', `${slug}.md`), 'utf8');
-      const min = fm.match(/^minutes:\s*(\d+)/m)[1];
-      expect(c.querySelector('.eyebrow').textContent).toContain(`${min} min`);
-    }
   });
 });
 

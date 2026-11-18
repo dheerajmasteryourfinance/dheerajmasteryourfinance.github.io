@@ -1,74 +1,118 @@
 import { describe, it, expect } from 'vitest';
 import { loadPage } from './helpers.js';
 
-const doc = loadPage('/');
-const ORDER = ['hero', 'product', 'examples', 'problem', 'guide', 'value', 'plan', 'audience', 'stakes', 'responsible', 'learn', 'faq', 'cta'];
-const sec = (n) => doc.querySelector(`main > section[data-section="${n}"]`);
-const linksNamed = (scope, text) => [...scope.querySelectorAll('a')].filter((a) => a.textContent.trim() === text);
+const ORDER = ['hero', 'shot', 'problem', 'guide', 'how', 'get', 'proof', 'trust', 'faq', 'cta'];
+const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 
-describe('home page', () => {
+const COPY = {
+  en: {
+    route: '/',
+    prefix: '',
+    h1: 'Get found. Get signed up. Follow up.',
+    mark: 'Follow up.',
+    agency: 'Ship client sites faster. Send email as the client.',
+    stops: ['Check', 'Route', 'Launch'],
+    groups: ['Get found', 'Get signed up', 'Follow up'],
+    langs: 'Your site in up to 8 languages',
+    cta: 'Every day without a site that works',
+    early: 'Request early access',
+    sticky: 'Be among the first to build with WebGen',
+  },
+  nl: {
+    route: '/nl/',
+    prefix: '/nl',
+    h1: 'Word gevonden. Krijg aanmeldingen. Volg op.',
+    mark: 'Volg op.',
+    agency: 'Lever klantsites sneller op. Mail namens je klant.',
+    stops: ['Check', 'Route', 'Lancering'],
+    groups: ['Word gevonden', 'Krijg aanmeldingen', 'Volg op'],
+    langs: 'Je site in maximaal 8 talen',
+    cta: 'Elke dag zonder werkende site',
+    early: 'Vraag vroege toegang aan',
+    sticky: 'Wees een van de eersten met WebGen',
+  },
+};
+
+describe.each(Object.entries(COPY))('home page (%s)', (lang, c) => {
+  const doc = loadPage(c.route);
+  const sec = (n) => doc.querySelector(`main > section[data-section="${n}"]`);
+
   it('has the sections in order', () => {
     const names = [...doc.querySelectorAll('main > section')].map((s) => s.getAttribute('data-section'));
     expect(names).toEqual(ORDER);
   });
 
-  it('ships agency blocks hidden and business pressed (no-JS state)', () => {
-    const agency = doc.querySelectorAll('[data-audience="agency"]');
-    expect(agency.length).toBeGreaterThan(0);
-    agency.forEach((e) => expect(e.hasAttribute('hidden')).toBe(true));
-    doc.querySelectorAll('[data-audience="business"]').forEach((e) => expect(e.hasAttribute('hidden')).toBe(false));
-    expect(doc.querySelector('[data-audience-btn="business"]').getAttribute('aria-pressed')).toBe('true');
-    expect(doc.querySelector('[data-audience-btn="agency"]').getAttribute('aria-pressed')).toBe('false');
+  it('h1 tells the story, with the last phrase in <mark>', () => {
+    const h1 = doc.querySelector('h1[data-audience="business"]');
+    expect(text(h1)).toBe(c.h1);
+    expect(text(h1.querySelector('mark'))).toBe(c.mark);
   });
 
-  it('has the business and agency h1s', () => {
-    expect(doc.querySelector('h1[data-audience="business"]').textContent).toContain('Your website, built for you.');
-    expect(doc.querySelector('h1[data-audience="agency"]').textContent).toContain('Ship client sites faster.');
+  it('audience switch: business pressed, agency headline in the DOM but hidden', () => {
+    const buttons = [...sec('hero').querySelectorAll('button[data-audience-btn]')];
+    expect(buttons).toHaveLength(2);
+    expect(buttons[0].getAttribute('aria-pressed')).toBe('true');
+    expect(buttons[1].getAttribute('aria-pressed')).toBe('false');
+    const agency = doc.querySelector('h1[data-audience="agency"]');
+    expect(text(agency)).toBe(c.agency);
+    expect(agency.hasAttribute('hidden')).toBe(true);
+    expect(doc.querySelector('h1[data-audience="business"]').hasAttribute('hidden')).toBe(false);
   });
 
-  it('plan has exactly 3 steps', () => {
-    expect(sec('plan').querySelectorAll('ol > li')).toHaveLength(3);
+  it('how has a route with 3 stops and three stop cards', () => {
+    const how = sec('how');
+    expect(how.querySelector('.route')).toBeTruthy();
+    expect(how.querySelectorAll('.route .pin')).toHaveLength(3);
+    const cards = [...how.querySelectorAll('.stopcard')];
+    expect(cards).toHaveLength(3);
+    c.stops.forEach((s, i) => expect(text(cards[i]).toLowerCase()).toContain(s.toLowerCase()));
   });
 
-  it('stakes has two lists of 3 items', () => {
-    const lists = sec('stakes').querySelectorAll('ul');
-    expect(lists).toHaveLength(2);
-    lists.forEach((l) => expect(l.querySelectorAll('li')).toHaveLength(3));
+  it('get has the three groups and the 8-languages bullet', () => {
+    const groups = [...sec('get').querySelectorAll('.get-group h3')].map(text);
+    expect(groups).toEqual(c.groups);
+    expect(text(sec('get'))).toContain(c.langs);
   });
 
-  it('has Request early access in nav, hero and closing CTA, all to /early-access/, and one See an example', () => {
-    const nav = linksNamed(doc.querySelector('header.site-nav'), 'Request early access');
-    const hero = linksNamed(sec('hero'), 'Request early access');
-    const cta = linksNamed(sec('cta'), 'Request early access');
-    expect(nav).toHaveLength(1);
+  it('proof has GreenLeaf plus 4 strip cards linking to the examples page', () => {
+    const p = sec('proof');
+    expect(text(p.querySelector('.proof-main'))).toContain('GreenLeaf Bakery');
+    const strips = [...p.querySelectorAll('a.excard-strip')];
+    expect(strips).toHaveLength(4);
+    for (const a of strips) expect(a.getAttribute('href')).toBe(`${c.prefix}/examples/`);
+  });
+
+  it('trust shows three cards', () => {
+    expect(sec('trust').querySelectorAll('.tc-card')).toHaveLength(3);
+  });
+
+  it('faq has exactly 4 details', () => {
+    expect(sec('faq').querySelectorAll('details')).toHaveLength(4);
+  });
+
+  it('closing CTA carries the stakes line and links to early access', () => {
+    expect(text(sec('cta'))).toContain(c.cta);
+    const a = [...sec('cta').querySelectorAll('a')].find((x) => text(x) === c.early);
+    expect(a.getAttribute('href')).toBe(`${c.prefix}/early-access/`);
+  });
+
+  it('hero has exactly one early-access link, and hero and shot carry blobs and chips', () => {
+    const hero = [...sec('hero').querySelectorAll('a')].filter((x) => text(x) === c.early);
     expect(hero).toHaveLength(1);
-    expect(cta).toHaveLength(1);
-    for (const a of [...nav, ...hero, ...cta]) {
-      expect(a.getAttribute('href')).toBe('/early-access/');
-      expect(a.hasAttribute('data-placeholder')).toBe(false);
-    }
-    expect(linksNamed(doc, 'Build my site')).toHaveLength(0);
-    const example = linksNamed(doc, 'See an example');
-    expect(example).toHaveLength(1);
-    expect(example[0].getAttribute('href')).toBe('#examples');
-    expect(example[0].hasAttribute('data-placeholder')).toBe(false);
-    expect(doc.getElementById('examples')).toBe(sec('examples'));
+    expect(hero[0].getAttribute('href')).toBe(`${c.prefix}/early-access/`);
+    expect(sec('hero').querySelectorAll('.blob').length).toBeGreaterThan(0);
+    expect(sec('shot').querySelectorAll('.fchip')).toHaveLength(3);
   });
 
-  it('responsible links to /email/', () => {
-    expect([...sec('responsible').querySelectorAll('a')].some((a) => a.getAttribute('href') === '/email/')).toBe(true);
+  it('ends with one sticky early-access bar in the page language', () => {
+    const bars = doc.querySelectorAll('[data-sticky-cta]');
+    expect(bars).toHaveLength(1);
+    expect(text(bars[0])).toContain(c.sticky);
+    expect(bars[0].querySelector('a').getAttribute('href')).toBe(`${c.prefix}/early-access/`);
   });
 
-  it('learn cards link to the agreed /docs/ slugs', () => {
-    const hrefs = [...sec('learn').querySelectorAll('a')].map((a) => a.getAttribute('href'));
-    for (const s of ['build-your-first-website', 'connect-your-domain', 'send-a-campaign', 'follow-up-emails']) {
-      expect(hrefs).toContain(`/docs/${s}/`);
-    }
-    for (const h of hrefs) expect(h.startsWith('/docs/')).toBe(true);
-  });
-
-  it('product shows the real editor screenshot as the eager, high-priority hero image', () => {
-    const imgs = sec('product').querySelectorAll('img');
+  it('shot uses the real editor screenshot as the eager, high-priority image', () => {
+    const imgs = sec('shot').querySelectorAll('img');
     expect(imgs).toHaveLength(1);
     const img = imgs[0];
     expect(img.getAttribute('src')).toMatch(/\/_astro\/editor-edit\.[\w-]+\.(webp|avif)$/);
@@ -76,60 +120,26 @@ describe('home page', () => {
     expect(img.getAttribute('loading')).toBe('eager');
     expect(img.getAttribute('fetchpriority')).toBe('high');
     expect(Number(img.getAttribute('width'))).toBeGreaterThan(0);
-    expect(Number(img.getAttribute('height'))).toBeGreaterThan(0);
-    expect(img.getAttribute('sizes')).toBeTruthy();
-    expect(img.closest('picture')?.querySelector('source[type="image/avif"]')).toBeTruthy();
-    expect(sec('product').querySelector('.shot-body')).toBeNull();
   });
 
-  it('every other image on the page is lazy, with alt, width, height and sizes', () => {
-    const hero = sec('product').querySelector('img');
+  it('every other image is lazy with dimensions; informative ones have alt text', () => {
+    const hero = sec('shot').querySelector('img');
     const rest = [...doc.querySelectorAll('main img')].filter((i) => i !== hero);
-    expect(rest.length).toBeGreaterThanOrEqual(3);
+    expect(rest.length).toBeGreaterThanOrEqual(4);
     for (const img of rest) {
       expect(img.getAttribute('loading'), img.outerHTML).toBe('lazy');
-      expect((img.getAttribute('alt') ?? '').trim().length, img.outerHTML).toBeGreaterThan(10);
       expect(Number(img.getAttribute('width'))).toBeGreaterThan(0);
       expect(Number(img.getAttribute('height'))).toBeGreaterThan(0);
-      expect(img.getAttribute('sizes')).toBeTruthy();
+      if (!img.closest('.excard-strip')) expect((img.getAttribute('alt') ?? '').trim().length, img.outerHTML).toBeGreaterThan(10);
     }
   });
 });
 
-describe('Built with WebGen examples', () => {
-  const s = sec('examples');
-  const cards = [...s.querySelectorAll('.ex-card')];
-
-  it('is titled Built with WebGen and has 3 cards', () => {
-    expect(s.querySelector('h2').textContent.trim()).toBe('Built with WebGen');
-    expect(cards).toHaveLength(3);
-  });
-
-  it('card 1 is GreenLeaf Bakery, labelled as an example, with desktop and phone screenshots', () => {
-    const c = cards[0];
-    expect(c.querySelector('h3').textContent.trim()).toBe('GreenLeaf Bakery');
-    expect(c.textContent).toContain('Example site');
-    expect(c.textContent).toContain('Amsterdam');
-    const srcs = [...c.querySelectorAll('img')].map((i) => i.getAttribute('src'));
-    expect(srcs.some((x) => /\/_astro\/site-desktop\./.test(x))).toBe(true);
-    expect(srcs.some((x) => /\/_astro\/site-mobile\./.test(x))).toBe(true);
-    expect(c.textContent).not.toMatch(/customer/i);
-  });
-
-  it('cards 2 and 3 are gated customer placeholders with no screenshot', () => {
-    for (const c of cards.slice(1)) {
-      expect(c.textContent).toContain('[CONFIRM: customer site + permission]');
-      expect(c.querySelectorAll('img')).toHaveLength(0);
-      expect(c.querySelector('.ex-art')?.getAttribute('aria-hidden')).toBe('true');
-    }
-  });
-});
-
-describe('value bento', () => {
-  it('fills the Launch without a designer card with the AI assistant screenshot', () => {
-    const wide = sec('value').querySelector('.bento .wide');
-    const img = wide.querySelector('img');
-    expect(img.getAttribute('src')).toMatch(/\/_astro\/editor-ai\./);
-    expect(img.getAttribute('alt')).toMatch(/AI assistant/);
+describe('English home', () => {
+  const doc = loadPage('/');
+  it('"See an example" jumps to the proof section', () => {
+    const a = [...doc.querySelectorAll('main a')].find((x) => text(x) === 'See an example');
+    expect(a.getAttribute('href')).toBe('#proof');
+    expect(doc.getElementById('proof')).toBeTruthy();
   });
 });

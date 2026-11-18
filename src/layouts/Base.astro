@@ -45,9 +45,11 @@ const alts = alternates(path);
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skip}</a>
+    <slot name="top" />
     <Nav current={self} switchPath={switchPath} />
     <main id="main"><slot /></main>
     <Footer switchPath={switchPath} />
+    <slot name="after" />
     <script>
       import { initReveal } from '../scripts/reveal.ts';
       initReveal();

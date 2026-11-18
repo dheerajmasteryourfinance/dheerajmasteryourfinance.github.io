@@ -50,7 +50,7 @@ describe('docs mobile menu', () => {
 
 describe('home product shot', () => {
   const doc = loadPage('/');
-  const shot = doc.querySelector('main > section[data-section="product"] .shot');
+  const shot = doc.querySelector('main > section[data-section="shot"] .shot');
 
   it('frames the editor screenshot in the browser-window chrome', () => {
     expect(shot.querySelector('.shot-bar')?.getAttribute('aria-hidden')).toBe('true');
@@ -59,23 +59,7 @@ describe('home product shot', () => {
 
   it('uses the shadow token on the frame', () => {
     const css = pageCss(doc);
-    expect(css).toMatch(/\.product\.shot\{[^}]*box-shadow:var\(--shadow-lift\)/);
-  });
-});
-
-describe('home value bento', () => {
-  const doc = loadPage('/');
-  const bento = doc.querySelector('main > section[data-section="value"] .bento');
-  const cards = [...bento.children];
-
-  it('is one wide light card, the dark sequence card, then 3 small cards', () => {
-    expect(cards).toHaveLength(5);
-    expect(cards[0].classList.contains('wide')).toBe(true);
-    expect(text(cards[0].querySelector('h3'))).toBe('Launch without a designer');
-    expect(cards[1].classList.contains('card-dark')).toBe(true);
-    expect(text(cards[1].querySelector('h3'))).toBe('Stay in touch with every lead');
-    expect(cards[1].querySelectorAll('.seq li')).toHaveLength(3);
-    expect(bento.querySelectorAll('.wide')).toHaveLength(1);
+    expect(css).toMatch(/\.shot\{[^}]*box-shadow:var\(--shadow-lift\)/);
   });
 });
 
