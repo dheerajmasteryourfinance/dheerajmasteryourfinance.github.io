@@ -4,7 +4,7 @@
 export const LOCALES = ['en', 'nl'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'en';
-export const SITE = 'https://website-generator.nl';
+export const SITE = 'https://webgnr.com';
 
 /** The page's locale, from Astro.currentLocale (set by the i18n routing config). */
 export function getLocale(current: string | undefined): Locale {

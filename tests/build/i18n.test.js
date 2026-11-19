@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { loadPage, allRoutes } from './helpers.js';
 
 const DIST = join(process.cwd(), 'dist');
-const SITE = 'https://website-generator.nl';
+const SITE = 'https://webgnr.com';
 const routes = allRoutes();
 const routeSet = new Set(routes);
 const isNl = (r) => r.startsWith('/nl/');
@@ -303,7 +303,7 @@ describe('sitemap and JSON-LD', () => {
   it('lists Dutch pages with hreflang alternates', () => {
     expect(xml).toContain(`<loc>${SITE}/nl/</loc>`);
     expect(xml).toContain(`<loc>${SITE}/nl/docs/connect-your-domain/</loc>`);
-    expect(xml).toMatch(/hreflang="nl" href="https:\/\/website-generator\.nl\/nl\/features\/"/);
+    expect(xml).toMatch(/hreflang="nl" href="https:\/\/webgnr\.com\/nl\/features\/"/);
     expect(xml).toContain(`<loc>${SITE}/nl/docs/</loc>`);
   });
 

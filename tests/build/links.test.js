@@ -6,9 +6,9 @@ import { loadPage, allRoutes } from './helpers.js';
 const DIST = join(process.cwd(), 'dist');
 
 function resolveTarget(pageRoute, href) {
-  const base = new URL(pageRoute, 'https://website-generator.nl');
+  const base = new URL(pageRoute, 'https://webgnr.com');
   const url = new URL(href, base);
-  if (url.host !== 'website-generator.nl') return null; // external
+  if (url.host !== 'webgnr.com') return null; // external
   return url;
 }
 

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { loadPage, allRoutes } from './helpers.js';
 
 const routes = allRoutes();
-const SITE = 'website-generator.nl';
+const SITE = 'webgnr.com';
 const APP = 'app.website-generator.nl';
 
 describe('layout', () => {
@@ -28,7 +28,7 @@ describe('layout', () => {
       expect(doc.documentElement.getAttribute('lang')).toBe(route.startsWith('/nl/') ? 'nl' : 'en');
     });
 
-    it('has canonical = https://website-generator.nl + route', () => {
+    it('has canonical = https://webgnr.com + route', () => {
       const c = doc.querySelector('link[rel="canonical"]');
       if (route === '/404.html') {
         expect(c).toBeNull(); // the 404 page has no canonical; it is noindex

@@ -69,22 +69,22 @@ describe('robots.txt', () => {
     const t = read('robots.txt');
     expect(t).toMatch(/User-agent:\s*\*/);
     expect(t).toMatch(/Allow:\s*\//);
-    expect(t).toContain('Sitemap: https://website-generator.nl/sitemap-index.xml');
+    expect(t).toContain('Sitemap: https://webgnr.com/sitemap-index.xml');
   });
 });
 
 describe('sitemap', () => {
   it('lists every route except /404/', () => {
     expect(existsSync(join(DIST, 'sitemap-index.xml'))).toBe(true);
-    expect(read('sitemap-index.xml')).toContain('https://website-generator.nl/sitemap-0.xml');
+    expect(read('sitemap-index.xml')).toContain('https://webgnr.com/sitemap-0.xml');
     const locs = [...read('sitemap-0.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const expected = allRoutes()
       .filter((r) => r !== '/404.html')
-      .map((r) => `https://website-generator.nl${r}`);
+      .map((r) => `https://webgnr.com${r}`);
     expect([...locs].sort()).toEqual([...expected].sort());
     expect(locs.some((l) => l.includes('/404'))).toBe(false);
-    expect(locs).toContain('https://website-generator.nl/docs/');
-    expect(locs).toContain('https://website-generator.nl/nl/docs/');
+    expect(locs).toContain('https://webgnr.com/docs/');
+    expect(locs).toContain('https://webgnr.com/nl/docs/');
   });
 });
 
@@ -96,7 +96,7 @@ describe('Organization JSON-LD', () => {
     const data = JSON.parse(blocks[0].textContent);
     expect(data['@type']).toBe('Organization');
     expect(data.name).toBe('WebGen');
-    expect(data.url).toBe('https://website-generator.nl/');
+    expect(data.url).toBe('https://webgnr.com/');
     expect(data.email).toBe('[SUPPORT EMAIL]');
   });
 
