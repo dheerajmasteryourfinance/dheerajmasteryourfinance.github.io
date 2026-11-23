@@ -46,14 +46,13 @@ const l = (p: string) => localize(p, locale);
       <div class="grid">
         {t.rules.cards.map((r) => <div class="card lift"><h3>{r.t}</h3><p>{r.p}</p></div>)}
       </div>
-      <p class="muted">{t.rules.policy}</p>
     </div>
   </section>
 
   <section data-section="spam">
     <div class="container narrow">
       <h2>{t.spam.title}</h2>
-      <p>{t.spam.lead}<strong>{t.spam.abuse}</strong>{t.spam.tail}</p>
+      <p>{t.spam.lead}<a href={l('/company/#contact')}>{t.spam.abuse}</a>{t.spam.tail}</p>
     </div>
   </section>
 

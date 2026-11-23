@@ -32,8 +32,6 @@ De briefing vraagt naar je bedrijf zoals een copywriter dat zou doen. Je antwoor
 
 Upload je eigen foto's of beschrijf welke je wilt. WebGen zet ze op de juiste pagina's.
 
-<div class="shot">[SCREENSHOT: stap Voeg foto's toe]</div>
-
 ## 4. Bekijk en bewerk
 
 Je site opent in de editor. Vanaf hier kun je:
@@ -48,8 +46,6 @@ Klik op **Opslaan** als je tevreden bent met je wijzigingen.
 ## 5. Publiceren
 
 Klik op **Publiceren**. Je site gaat online op een gratis adres en je kunt daarna je eigen domein toevoegen.
-
-<div class="callout callout-note"><strong>Let op:</strong> [BEVESTIG: publiceren vereist een actief abonnement; controleer de tekst aan de hand van de betaalregels]</div>
 
 ## Volgende stappen
 

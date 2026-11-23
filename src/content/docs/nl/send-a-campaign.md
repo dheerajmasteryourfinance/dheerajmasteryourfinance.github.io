@@ -70,7 +70,7 @@ Ingeplande campagnes en concepten staan onder **Gepland en concepten**. Daar kun
 
 Verstuurde campagnes gaan naar **Verzendgeschiedenis**. Klik op **Statistieken bekijken** om te zien hoeveel er zijn bezorgd, geopend en aangeklikt. Openpercentages zijn bij benadering, omdat sommige mailapps afbeeldingen automatisch openen.
 
-<div class="callout callout-note"><strong>Let op:</strong> grote verzendingen gaan geleidelijk uit en het versturen kan voor je site worden gepauzeerd als te veel e-mails bouncen of als spam worden gemarkeerd. [BEVESTIG: verzendsnelheid en limieten om te noemen]</div>
+<div class="callout callout-note"><strong>Let op:</strong> grote verzendingen gaan geleidelijk uit en het versturen kan voor je site worden gepauzeerd als te veel e-mails bouncen of als spam worden gemarkeerd.</div>
 
 ## Volgende stappen
 

@@ -45,8 +45,8 @@ describe('docs article', () => {
     expect(doc.querySelector('article').textContent).toContain('free address');
   });
 
-  it('keeps the subscription note as a CONFIRM placeholder', () => {
-    expect(doc.querySelector('article').textContent).toMatch(/\[CONFIRM: [^\]]*subscription[^\]]*\]/);
+  it('has no placeholders left in the article', () => {
+    expect(doc.querySelector('article').textContent).not.toMatch(/\[(CONFIRM|BEVESTIG|SCREENSHOT)/);
   });
 
   it('has a static helpful link to the contact section and a search field', () => {

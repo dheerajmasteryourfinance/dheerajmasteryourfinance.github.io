@@ -30,10 +30,9 @@ const en = {
       { t: 'An easy way out', p: 'An unsubscribe link in every email, honoured straight away.' },
       { t: 'No repeat mail', p: 'Unsubscribes, bounces and complaints are blocked from future sends.' },
     ],
-    policy: '[CONFIRM: link to the acceptable use policy once written]',
   },
-  spam: { title: 'Think it is spam?', lead: 'If you never signed up, tell us. Forward the email to ', abuse: '[ABUSE EMAIL]', tail: ' as an attachment if you can, so we can see where it came from. We look into every report and stop senders who break our rules.' },
-  help: { title: 'Still need help?', text: 'A person will reply within [RESPONSE TIME].', link: 'Contact us' },
+  spam: { title: 'Think it is spam?', lead: 'If you never signed up, tell us. Use our ', abuse: 'contact form', tail: ' and choose “An email I received”. If you can, include the email so we can see where it came from. We look into every report and stop senders who break our rules.' },
+  help: { title: 'Still need help?', text: 'A person will read your message and reply.', link: 'Contact us' },
   marquee: ['Website', 'Forms', 'Newsletters', 'Your own domain', 'Follow-up emails', 'Search basics', 'Reports'],
 };
 
@@ -65,10 +64,9 @@ const nl: typeof en = {
       { t: 'Makkelijk uitschrijven', p: 'Een uitschrijflink in elke e-mail, direct verwerkt.' },
       { t: 'Geen herhaling', p: 'Uitschrijvingen, bounces en klachten worden geblokkeerd voor toekomstige verzendingen.' },
     ],
-    policy: '[BEVESTIG: link naar het gebruiksbeleid zodra dat er is]',
   },
-  spam: { title: 'Denk je dat het spam is?', lead: 'Heb je je nooit aangemeld? Laat het ons weten. Stuur de e-mail door naar ', abuse: '[ABUSE EMAIL]', tail: ', het liefst als bijlage, zodat we zien waar hij vandaan komt. We onderzoeken elke melding en stoppen afzenders die onze regels overtreden.' },
-  help: { title: 'Nog hulp nodig?', text: 'Een mens antwoordt binnen [REACTIETIJD].', link: 'Neem contact op' },
+  spam: { title: 'Denk je dat het spam is?', lead: 'Heb je je nooit aangemeld? Laat het ons weten. Gebruik ons ', abuse: 'contactformulier', tail: ' en kies “Een e-mail die ik ontving”. Voeg de e-mail toe als dat kan, zodat we zien waar hij vandaan komt. We onderzoeken elke melding en stoppen afzenders die onze regels overtreden.' },
+  help: { title: 'Nog hulp nodig?', text: 'Een mens leest je bericht en antwoordt.', link: 'Neem contact op' },
   marquee: ['Website', 'Formulieren', 'Nieuwsbrieven', 'Eigen domein', 'Vervolgmails', 'Zoekbasis', 'Statistieken'],
 };
 

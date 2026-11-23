@@ -171,8 +171,9 @@ describe('Dutch email page keeps the corrected facts', () => {
   it('double opt-in depends on the business', () => {
     expect(t).toMatch(/Als het bedrijf nieuwe inschrijvers vraagt om te bevestigen/);
   });
-  it('still names the abuse placeholder', () => {
-    expect(t).toContain('[ABUSE EMAIL]');
+  it('sends spam reports through the Dutch contact form', () => {
+    expect(t).toMatch(/Een e-mail die ik ontving/);
+    expect(loadPage('/nl/email/').querySelector('main a[href="/nl/company/#contact"]')).toBeTruthy();
   });
 });
 

@@ -33,8 +33,6 @@ Gebruik de filters bovenaan om te wisselen tussen **Echt**, **Spam** en **Alles*
 
 Is er nog niets binnengekomen, dan staat er **Nog geen inzendingen.**
 
-<div class="shot">[SCREENSHOT: tabblad Inzendingen met een contactbericht]</div>
-
 ## 4. Krijg een melding
 
 Je kunt een e-mail krijgen zodra er een lead binnenkomt. Open **Beheren** en dan het tabblad **E-mails**.
@@ -62,7 +60,7 @@ Iedereen die een formulier invult of zich aanmeldt voor je nieuwsbrief, staat oo
 
 Klik op **Verwijderen** bij een lead om hem te verwijderen. Dit kan niet ongedaan worden gemaakt.
 
-<div class="callout callout-note"><strong>Let op:</strong> je kunt nieuwe nieuwsbriefabonnees vragen eerst hun e-mailadres te bevestigen. Zet onder <strong>Campagnes</strong> <strong>Nieuwe inschrijvers vragen hun e-mailadres te bevestigen</strong> aan. [BEVESTIG: tekst van de bevestigingsmail die bezoekers krijgen]</div>
+<div class="callout callout-note"><strong>Let op:</strong> je kunt nieuwe nieuwsbriefabonnees vragen eerst hun e-mailadres te bevestigen. Zet onder <strong>Campagnes</strong> <strong>Nieuwe inschrijvers vragen hun e-mailadres te bevestigen</strong> aan.</div>
 
 ## Volgende stappen
 

@@ -46,8 +46,6 @@ const en = {
     eyebrow: '04 · Search and analytics',
     title: 'Be found, then see what works.',
     cards: [
-      { t: 'Sitemap and robots', p: 'Generated for every site. Your own uploaded files are always kept. [CONFIRM: ships with the SEO release]' },
-      { t: 'Search and social tags', p: 'Titles, descriptions, link previews and structured data. [CONFIRM: ships with the SEO release]' },
       { t: 'Analytics', p: 'Visits, sign-ups and email results, only after visitors consent.' },
     ],
   },
@@ -115,8 +113,6 @@ const nl: typeof en = {
     eyebrow: '04 · Vindbaarheid en statistieken',
     title: 'Word gevonden en zie wat werkt.',
     cards: [
-      { t: 'Sitemap en robots.txt', p: 'Automatisch voor elke site. Bestanden die je zelf uploadt, blijven altijd staan. [BEVESTIG: komt met de SEO-release]' },
-      { t: 'Tags voor zoekmachines en social media', p: 'Titels, beschrijvingen, linkvoorbeelden en gestructureerde data. [BEVESTIG: komt met de SEO-release]' },
       { t: 'Statistieken', p: 'Bezoeken, aanmeldingen en e-mailresultaten, pas nadat bezoekers toestemming geven.' },
     ],
   },

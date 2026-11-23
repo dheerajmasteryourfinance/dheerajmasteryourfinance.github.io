@@ -64,8 +64,8 @@ describe.each(Object.entries(L))('GreenLeaf detail page (%s)', (lang, c) => {
   const doc = loadPage(c.detail);
   const names = [...doc.querySelectorAll('main > section')].map((s) => s.getAttribute('data-section'));
 
-  it('has the seven sections in order', () => {
-    expect(names).toEqual(['hero', 'preview', 'made', 'languages', 'mobile', 'result', 'cta']);
+  it('has the six sections in order', () => {
+    expect(names).toEqual(['hero', 'preview', 'made', 'languages', 'mobile', 'cta']);
   });
 
   it('languages shows 3 language cards and the 2 how-it-works screenshots, every image with alt', () => {
@@ -85,8 +85,8 @@ describe.each(Object.entries(L))('GreenLeaf detail page (%s)', (lang, c) => {
     expect(link.getAttribute('aria-current')).toBe('page');
   });
 
-  it('links back to all examples and keeps unconfirmed facts as placeholders', () => {
+  it('links back to all examples and has no placeholders', () => {
     expect([...doc.querySelectorAll('main a')].some((a) => a.getAttribute('href') === c.list)).toBe(true);
-    expect(text(doc.querySelector('main'))).toMatch(/\[(CONFIRM|BEVESTIG): /);
+    expect(text(doc.querySelector('main'))).not.toMatch(/\[(CONFIRM|BEVESTIG)/);
   });
 });

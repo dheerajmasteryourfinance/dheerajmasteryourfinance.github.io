@@ -29,15 +29,10 @@ WebGen toont één record om toe te voegen op de plek waar je de DNS van je dome
 
 - Het record heeft bij je provider drie velden: **Type**, **Naam / host** en **Waarde / inhoud**. Vul ze apart in en gebruik **Kopiëren** naast elk veld.
 - Wil je provider alleen het deel vóór je domeinnaam, vul dan alleen het eerste deel van de getoonde naam in.
-- Type: [BEVESTIG: recordtype dat voor domeinverificatie wordt getoond]
-- Naam: [BEVESTIG: exacte recordnaam die voor domeinverificatie wordt getoond]
-- Waarde: [BEVESTIG: waarde wordt per domein gemaakt; bevestig hoe die aan de gebruiker wordt omschreven]
 
 Werkt het, dan verandert de status en zie je **Klaar: we hebben bevestigd dat dit domein van jou is.** Laat het record staan, want WebGen controleert het af en toe opnieuw.
 
-<div class="callout callout-note"><strong>Let op:</strong> DNS-wijzigingen kunnen een paar uur duren voor ze zichtbaar zijn. Kan <strong>DNS controleren</strong> het record nog niet vinden, wacht dan en probeer het opnieuw. [BEVESTIG: gebruikelijke wachttijd voor DNS]</div>
-
-<div class="shot">[SCREENSHOT: tabblad Afzender met het verificatierecord]</div>
+<div class="callout callout-note"><strong>Let op:</strong> DNS-wijzigingen kunnen een paar uur duren voor ze zichtbaar zijn. Kan <strong>DNS controleren</strong> het record nog niet vinden, wacht dan en probeer het opnieuw.</div>
 
 ## 4. Voeg de ondertekeningsrecords toe
 
@@ -45,7 +40,6 @@ Daarna komt **Laatste stap: laat je e-mails ondertekenen**. WebGen toont nog 3 r
 
 - Wil je provider de volledige naam, voeg dan je domein toe achter de getoonde naam.
 - Zijn de records nog niet gevonden, dan zie je een melding. Controleer of ze precies zijn zoals getoond, wacht en klik opnieuw op **Nu controleren**.
-- [BEVESTIG: recordtypes en aantal ondertekeningsrecords, en dat het er voor elk domein 3 blijven]
 
 Staat alles op zijn plek, dan staat de status op **Klaar om te versturen**. Laat al je DNS-records staan.
 

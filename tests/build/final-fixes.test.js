@@ -6,15 +6,15 @@ import { loadPage, allRoutes } from './helpers.js';
 const DIST = join(process.cwd(), 'dist');
 const APP_LABELS = new Set(['Sign in', 'Open the app', 'Inloggen', 'Open de app']);
 
-describe('app links are gated by a placeholder', () => {
-  it('every Sign in / Open the app link carries data-placeholder', () => {
+describe('app links', () => {
+  it('every Sign in / Open the app link goes to the app and carries no placeholder', () => {
     const bad = [];
     let seen = 0;
     for (const route of allRoutes()) {
       for (const a of loadPage(route).querySelectorAll('a')) {
         if (!APP_LABELS.has(a.textContent.trim())) continue;
         seen += 1;
-        if (!a.hasAttribute('data-placeholder') || !/^\[[A-Z]+[\] :]/.test(a.getAttribute('data-placeholder'))) {
+        if (a.hasAttribute('data-placeholder') || !/^https:\/\/app\.website-generator\.nl\//.test(a.getAttribute('href'))) {
           bad.push(`${route} ${a.textContent.trim()}`);
         }
       }
@@ -78,10 +78,11 @@ describe('feature claims', () => {
     expect(feat).not.toMatch(/so every subscriber confirmed/);
     expect(feat).toMatch(/Optional double opt-in/);
   });
-  it('unshipped SEO claims carry a placeholder', () => {
+  it('does not claim unshipped SEO features (sitemap, search tags) until they ship', () => {
     const html = (r) => readFileSync(join(DIST, r, 'index.html'), 'utf8');
-    expect(html('features')).toContain('[CONFIRM: ships with the SEO release]');
-    expect(html('')).toContain('[CONFIRM: ships with the SEO release]');
+    for (const r of ['features', '', 'nl/features', 'nl']) {
+      expect(html(r), r).not.toMatch(/structured data|gestructureerde data|Sitemap and robots/);
+    }
   });
 });
 

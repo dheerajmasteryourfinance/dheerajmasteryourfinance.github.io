@@ -34,8 +34,6 @@ Sleep je zip naar het vak met **Sleep je bestanden of zip hierheen, of klik om t
 
 De bestanden die je koos staan onder **Geselecteerd** met hun grootte.
 
-<div class="shot">[SCREENSHOT: pagina Je website importeren met een zip geselecteerd]</div>
-
 ## 4. Klik op Website importeren
 
 Klik op **Website importeren**. Je ziet een uploadbalk en daarna een kort bericht terwijl je site wordt gecontroleerd en voorbereid.

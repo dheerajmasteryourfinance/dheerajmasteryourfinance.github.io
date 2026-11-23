@@ -7,8 +7,8 @@ const counterpart = (r) => (isNl(r) ? r.slice(3) : `/nl${r}`);
 const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 const CTA = { en: 'Request early access', nl: 'Vraag vroege toegang aan' };
 const TRUST = {
-  en: ['Verified senders', 'Easy unsubscribe', 'Data stored in [EU REGION]'],
-  nl: ['Geverifieerde afzenders', 'Makkelijk uitschrijven', 'Gegevens opgeslagen in [EU-REGIO]'],
+  en: ['Verified senders', 'Easy unsubscribe'],
+  nl: ['Geverifieerde afzenders', 'Makkelijk uitschrijven'],
 };
 
 describe.each(routes)('%s', (route) => {
@@ -58,7 +58,7 @@ describe.each(routes)('%s', (route) => {
     expect(f).toContain('Steijnstraat 18, 2987 AS Ridderkerk');
   });
 
-  it('footer has the three trust points', () => {
+  it('footer has the two trust points', () => {
     const items = [...doc.querySelectorAll('footer .footer-trust li')].map(text);
     expect(items).toEqual(TRUST[lang]);
   });

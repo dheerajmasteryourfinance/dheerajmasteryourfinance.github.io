@@ -15,8 +15,9 @@ describe('/email/', () => {
     expect(doc.querySelectorAll('main > section[data-section="rules"] .card')).toHaveLength(4);
   });
 
-  it('contains [ABUSE EMAIL]', () => {
-    expect(doc.querySelector('main').textContent).toContain('[ABUSE EMAIL]');
+  it('sends spam reports through the contact form', () => {
+    expect(doc.querySelector('main a[href="/company/#contact"]')).toBeTruthy();
+    expect(doc.querySelector('main').textContent).toContain('An email I received');
   });
 
   it('has no form and no email input', () => {
@@ -76,8 +77,8 @@ describe('Dutch email page', () => {
     expect(doc.querySelectorAll('main form')).toHaveLength(0);
   });
 
-  it('keeps the abuse placeholder and links help to the Dutch contact section', () => {
-    expect(doc.querySelector('main').textContent).toContain('[ABUSE EMAIL]');
+  it('links help to the Dutch contact section and has no placeholders', () => {
+    expect(doc.querySelector('main').textContent).not.toMatch(/\[[A-Z]/);
     expect(doc.querySelector('main a[href="/nl/company/#contact"]')).toBeTruthy();
     expect(text(doc.querySelector('h1'))).toContain('WebGen');
   });

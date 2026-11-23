@@ -82,12 +82,12 @@ describe.each(Object.entries(COPY))('home page (%s)', (lang, c) => {
     for (const a of strips) expect(a.getAttribute('href')).toBe(`${c.prefix}/examples/`);
   });
 
-  it('trust shows three cards', () => {
-    expect(sec('trust').querySelectorAll('.tc-card')).toHaveLength(3);
+  it('trust shows two cards', () => {
+    expect(sec('trust').querySelectorAll('.tc-card')).toHaveLength(2);
   });
 
-  it('faq has exactly 4 details', () => {
-    expect(sec('faq').querySelectorAll('details')).toHaveLength(4);
+  it('faq has exactly 3 details', () => {
+    expect(sec('faq').querySelectorAll('details')).toHaveLength(3);
   });
 
   it('closing CTA carries the stakes line and links to early access', () => {

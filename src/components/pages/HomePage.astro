@@ -88,9 +88,11 @@ const check = (
         <h2>{t.guide.title}</h2>
         <p>{t.guide.text}</p>
       </div>
-      <div class="stack">
-        {t.guide.cards.map((c) => <div class="card lift"><h3>{c.t}</h3><p>{c.p}</p></div>)}
-      </div>
+      {t.guide.cards.length > 0 && (
+        <div class="stack">
+          {t.guide.cards.map((c) => <div class="card lift"><h3>{c.t}</h3><p>{c.p}</p></div>)}
+        </div>
+      )}
     </div>
   </section>
 

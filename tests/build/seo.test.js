@@ -97,7 +97,8 @@ describe('Organization JSON-LD', () => {
     expect(data['@type']).toBe('Organization');
     expect(data.name).toBe('WebGen');
     expect(data.url).toBe('https://webgnr.com/');
-    expect(data.email).toBe('[SUPPORT EMAIL]');
+    expect(data.address.streetAddress).toBe('Steijnstraat 18');
+    expect(data.address.addressLocality).toBe('Ridderkerk');
   });
 
   it('no other route has ld+json', () => {

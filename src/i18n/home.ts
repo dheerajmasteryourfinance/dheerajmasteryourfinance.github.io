@@ -35,10 +35,7 @@ const en = {
   guide: {
     title: 'We know your time goes to your business, not to learning web tools.',
     text: 'That is why WebGen asks about your customers, not about code. Your answers are turned into a clear message, a site built around it, and the tools to keep in touch.',
-    cards: [
-      { t: 'Written with a proven story framework', p: '[CONFIRM with Joel: name the StoryBrand framework publicly]' },
-      { t: 'Trusted by real businesses', p: '[PROOF: Master Your Business and Mastercrest Games sites, if Joel agrees]' },
-    ],
+    cards: [] as { t: string; p: string }[],
   },
   how: {
     eyebrow: 'How it works',
@@ -59,7 +56,6 @@ const en = {
         t: 'Get found',
         items: [
           'A complete site, written from your brief',
-          'Search tags, sitemap and structured data [CONFIRM: ships with the SEO release]',
           'Your own domain',
           'Your site in up to 8 languages',
         ],
@@ -95,7 +91,6 @@ const en = {
     items: [
       { q: 'Do I need to know how to code or design?', a: 'No. You describe the business and edit by clicking or asking for changes in plain words.' },
       { q: 'Can I use my own domain?', a: 'Yes. Connect it from your site\'s Domain settings. The docs walk through each step.' },
-      { q: 'Who owns my content and contact list?', a: '[CONFIRM: ownership and export wording]' },
       { q: 'Is it safe to send email through WebGen?', a: 'Every email goes to people who signed up, from a sender that is verified, with an unsubscribe link in every message.' },
     ],
   },
@@ -138,10 +133,7 @@ const nl: typeof en = {
   guide: {
     title: 'Wij weten dat je tijd naar je bedrijf gaat, niet naar het leren van webtools.',
     text: 'Daarom vraagt WebGen naar je klanten, niet naar code. Je antwoorden worden een helder verhaal, een site eromheen en de tools om in contact te blijven.',
-    cards: [
-      { t: 'Geschreven met een beproefd verhaalkader', p: '[BEVESTIG met Joel: StoryBrand publiek noemen]' },
-      { t: 'Gebruikt door echte bedrijven', p: '[BEWIJS: sites van Master Your Business en Mastercrest Games, als Joel akkoord is]' },
-    ],
+    cards: [],
   },
   how: {
     eyebrow: 'Zo werkt het',
@@ -162,7 +154,6 @@ const nl: typeof en = {
         t: 'Word gevonden',
         items: [
           'Een complete site, geschreven vanuit je briefing',
-          'Zoektags, sitemap en gestructureerde data [BEVESTIG: SEO-release]',
           'Je eigen domein',
           'Je site in maximaal 8 talen',
         ],
@@ -198,7 +189,6 @@ const nl: typeof en = {
     items: [
       { q: 'Moet ik kunnen coderen of ontwerpen?', a: 'Nee. Je beschrijft je bedrijf en past aan door te klikken of een wijziging in gewone woorden te vragen.' },
       { q: 'Kan ik mijn eigen domein gebruiken?', a: 'Ja. Koppel het via de domeininstellingen van je site. De handleiding loopt elke stap door.' },
-      { q: 'Van wie zijn mijn content en contactlijst?', a: '[BEVESTIG: tekst over eigendom en export]' },
       { q: 'Is het veilig om e-mail via WebGen te versturen?', a: 'Elke e-mail gaat naar mensen die zich aanmeldden, van een geverifieerde afzender, met een uitschrijflink in elk bericht.' },
     ],
   },

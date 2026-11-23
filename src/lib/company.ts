@@ -1,5 +1,4 @@
 // Company facts, from the Master Your Business contact page (masteryourbusiness.org/en/contact).
-// [CONFIRM: Schenk Rekenmeesters is the entity behind WebGen] — see docs/superpowers/plans/2026-11-17-site-from-canvas.md.
 import type { Locale } from '../i18n/index.ts';
 
 export const COMPANY = {
@@ -10,8 +9,6 @@ export const COMPANY = {
   postcode: '2987 AS',
   city: 'Ridderkerk',
   country: { en: 'the Netherlands', nl: 'Nederland' } as Record<Locale, string>,
-  phone: '[PHONE]',
-  supportEmail: '[SUPPORT EMAIL]',
 };
 
 /** "KvK 55633323" */

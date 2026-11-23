@@ -33,8 +33,6 @@ Click **Add email**, then fill in:
 
 Add more emails the same way. For each one after the first, the timing reads **Send after the previous email**. A series can have up to 20 emails, and each shows how long after the form or the previous email it goes out.
 
-<div class="shot">[SCREENSHOT: Follow-up series with two emails]</div>
-
 ## 5. Preview and test
 
 Click **Preview** to see how an email looks. The unsubscribe link only works in real emails. Click **Send me a test** to receive a copy yourself. Use **Edit** to change an email later, or delete one you no longer want.
@@ -53,7 +51,7 @@ You can see how it is going on the same page, for example how many people are in
 
 Click **Pause** to hold the series. Nothing is lost: emails that are due wait and go out when you turn it back on. People already in the series keep receiving their emails unless you pause or delete it. **Delete follow-up emails** removes the series and its history, but your form submissions are kept.
 
-<div class="callout callout-note"><strong>Note:</strong> every follow-up email includes an unsubscribe link, and anyone who unsubscribes stops getting them. Your business name and postal address from <strong>Campaigns</strong> appear in the footer. [CONFIRM: exact footer wording and unsubscribe behaviour to describe]</div>
+<div class="callout callout-note"><strong>Note:</strong> every follow-up email includes an unsubscribe link, and anyone who unsubscribes stops getting them. Your business name and postal address from <strong>Campaigns</strong> appear in the footer.</div>
 
 ## Next steps
 

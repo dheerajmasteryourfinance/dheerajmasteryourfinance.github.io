@@ -9,8 +9,6 @@ updated: 2026-11-11
 
 <div class="callout"><strong>Before you start:</strong> have your site ready to publish. If you already own a domain, have the login for the place where its DNS is managed, which is often your domain provider.</div>
 
-[CONFIRM: whether a custom domain needs a particular plan or costs extra, and where to say so without showing prices]
-
 ## 1. Open the Domain tab
 
 Open your site, click **Manage**, then the **Domain** tab. At the top you see your **Free web address**. Click **Change** to pick a different one. WebGen tells you if a name is **Available!** or already taken, and suggests alternatives.
@@ -23,8 +21,6 @@ Under **Buy a domain through us**, type a name in **Domain name** and click **Se
 
 The domain registry requires some details for the registration: first and last name, street, house number, postal code, city, phone number and country (as a 2-letter code). They are used only for this registration. Click **Confirm purchase** to finish.
 
-<div class="callout callout-note"><strong>Note:</strong> [CONFIRM: how long a new domain takes to go live after purchase]</div>
-
 ## 2b. Connect a domain you already own
 
 Under **I already own a domain**, type it into **Your own domain**. Whether you type the www prefix does not matter. Click **Attach**.
@@ -33,19 +29,14 @@ WebGen then shows the DNS records to add where you manage your domain. Each reco
 
 - **A records** point your domain at WebGen. With these, your site works on both your domain and the www version.
   - Type: A
-  - Name: [CONFIRM: record name for the root domain and for www]
-  - Value: [CONFIRM: server address shown in the app]
 - **A TXT record** proves the domain is yours. If your provider only asks for the part before your domain name, enter `_wg-verify` as the name. Most providers add the rest for you.
   - Type: TXT
-  - Value: [CONFIRM: the value is generated for each domain]
-
-<div class="shot">[SCREENSHOT: DNS records shown after attaching a domain]</div>
 
 ## 3. Verify
 
 When the records are saved at your provider, click **Verify**. If WebGen cannot find the TXT record yet, you see **Verification failed. Check the TXT record and try again.** Check it is entered exactly as shown, wait, and try again.
 
-DNS changes can take a while to show up. [CONFIRM: typical DNS wait time to quote]
+DNS changes can take a while to show up.
 
 When it works, the page says **Verified and live.** If your site is not published yet, it says it will go live once you publish.
 
@@ -58,7 +49,7 @@ If the page says your domain will go live once you publish, click **Publish** so
 - **Remove custom domain** disconnects it. Your site stays live on its free web address.
 - **Move this domain elsewhere** shows a transfer code you can give to a new registrar.
 
-<div class="callout callout-tip"><strong>Tip:</strong> if a domain is already connected to a different WebGen account, you see a message saying so. Contact us if you think that is a mistake. [CONFIRM: support route to name here]</div>
+<div class="callout callout-tip"><strong>Tip:</strong> if a domain is already connected to a different WebGen account, you see a message saying so. Contact us if you think that is a mistake.</div>
 
 ## Next steps
 

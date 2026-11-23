@@ -52,15 +52,14 @@ describe.each(Object.entries(L))('company page (%s)', (lang, c) => {
     expect(contact.querySelector(`form a[href="${c.prefix}/privacy/"]`)).toBeTruthy();
   });
 
-  it('keeps the unconfirmed contact details as placeholders and shows the real postal address', () => {
-    const t = contact.textContent;
-    for (const p of ['[SUPPORT EMAIL]', '[ABUSE EMAIL]']) expect(t).toContain(p);
+  it('shows the real postal address and no placeholders', () => {
     expect(text(contact)).toContain(c.address);
+    expect(contact.textContent).not.toMatch(/\[[A-Z]/);
   });
 
-  it('abuse card links to the email page of this language', () => {
-    const cards = [...contact.querySelectorAll('.card')].filter((x) => x.textContent.includes('[ABUSE EMAIL]'));
-    expect(cards[0].querySelector(`a[href="${c.prefix}/email/"]`)).toBeTruthy();
+  it('the spam and abuse card links to the email page of this language', () => {
+    const cards = [...contact.querySelectorAll('.card')].filter((x) => x.querySelector(`a[href="${c.prefix}/email/"]`));
+    expect(cards).toHaveLength(1);
   });
 
   it('facts show the legal entity with KvK and the local tax label, and Ridderkerk', () => {
@@ -72,12 +71,6 @@ describe.each(Object.entries(L))('company page (%s)', (lang, c) => {
     expect(text(doc.querySelector('main dl.facts'))).toContain('Ridderkerk');
   });
 
-  it('has a phone contact card with a placeholder', () => {
-    const cards = [...contact.querySelectorAll('.card')].filter((x) => text(x.querySelector('h3')) === c.phone);
-    expect(cards).toHaveLength(1);
-    expect(cards[0].textContent).toMatch(/\[(PHONE|TELEFOONNUMMER)\]/);
-  });
-
   it('shows the examples strip and the trust cards before the contact section', () => {
     const order = [...doc.querySelectorAll('main > section')].map((s) => s.getAttribute('data-section') || s.id);
     expect(order.indexOf('examples')).toBeGreaterThan(-1);
@@ -85,6 +78,6 @@ describe.each(Object.entries(L))('company page (%s)', (lang, c) => {
     expect(order.indexOf('examples')).toBeLessThan(order.indexOf('contact'));
     expect(order.indexOf('trust')).toBeLessThan(order.indexOf('contact'));
     expect(doc.querySelectorAll('main > section[data-section="examples"] a.excard-strip')).toHaveLength(4);
-    expect(doc.querySelectorAll('main > section[data-section="trust"] .tc-card')).toHaveLength(3);
+    expect(doc.querySelectorAll('main > section[data-section="trust"] .tc-card')).toHaveLength(2);
   });
 });

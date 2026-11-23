@@ -12,7 +12,7 @@ const L = {
     labels: { name: 'Name', email: 'Email', company: 'Business name (optional)', type: 'Type', message: 'What would you like to build?' },
     types: ['Business', 'Agency', 'Other'],
     submit: 'Request access',
-    faq: ['Does WebGen work in Dutch?', 'Where is my data stored?'],
+    faq: ['I am an agency. Can I join?', 'Does WebGen work in Dutch?'],
   },
   nl: {
     route: '/nl/early-access/',
@@ -22,7 +22,7 @@ const L = {
     labels: { name: 'Naam', email: 'E-mail', company: 'Bedrijfsnaam (optioneel)', type: 'Type', message: 'Wat wil je bouwen?' },
     types: ['Bedrijf', 'Bureau', 'Anders'],
     submit: 'Aanvraag versturen',
-    faq: ['Werkt WebGen in het Nederlands?', 'Waar worden mijn gegevens opgeslagen?'],
+    faq: ['Ik ben een bureau. Kan ik meedoen?', 'Werkt WebGen in het Nederlands?'],
   },
 };
 
@@ -81,14 +81,14 @@ describe.each(Object.entries(L))('early access page (%s)', (lang, c) => {
     expect(form.querySelector(`a[href="${c.prefix}/privacy/"]`)).toBeTruthy();
   });
 
-  it('shows the four test example sites and the three trust cards', () => {
+  it('shows the four test example sites and the two trust cards', () => {
     expect(sec('examples').querySelectorAll('a.excard-strip')).toHaveLength(4);
-    expect(sec('trust').querySelectorAll('.tc-card')).toHaveLength(3);
+    expect(sec('trust').querySelectorAll('.tc-card')).toHaveLength(2);
   });
 
-  it('faq has 5 questions, including the Dutch and the data-location ones', () => {
+  it('faq has 2 questions, the agency one and the Dutch one', () => {
     const qs = [...sec('faq').querySelectorAll('details > summary')].map(text);
-    expect(qs).toHaveLength(5);
+    expect(qs).toHaveLength(2);
     for (const q of c.faq) expect(qs).toContain(q);
   });
 });

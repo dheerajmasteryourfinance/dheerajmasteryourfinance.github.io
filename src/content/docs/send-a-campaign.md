@@ -70,7 +70,7 @@ Scheduled campaigns and drafts appear under **Upcoming and drafts**. There you c
 
 Sent campaigns move to **Sent history**. Click **View stats** to see how many were delivered, opened and clicked. Open rates are approximate, because some mail apps open images automatically.
 
-<div class="callout callout-note"><strong>Note:</strong> large sends go out gradually, and sending can be paused for your site if too many emails bounce or are marked as spam. [CONFIRM: sending speed and limits to quote]</div>
+<div class="callout callout-note"><strong>Note:</strong> large sends go out gradually, and sending can be paused for your site if too many emails bounce or are marked as spam.</div>
 
 ## Next steps
 

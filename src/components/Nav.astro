@@ -4,7 +4,7 @@
 // the backdrop is a <label> for the same checkbox, so tapping it closes the menu.
 import Logo from './Logo.astro';
 import LangSwitch from './LangSwitch.astro';
-import { APP_LOGIN, APP_PLACEHOLDER, EARLY_ACCESS } from '../lib/links.js';
+import { APP_LOGIN, EARLY_ACCESS } from '../lib/links.js';
 import { getLocale, localize } from '../i18n/index.ts';
 import { UI } from '../i18n/ui.ts';
 interface Props {
@@ -51,7 +51,7 @@ const isCurrent = (href: string) => current === href || current.startsWith(href)
       )}
       <div class="navactions">
         <LangSwitch path={switchPath} />
-        <a class="nav-signin" href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.nav.signIn}</a>
+        <a class="nav-signin" href={APP_LOGIN} rel="noopener noreferrer">{t.nav.signIn}</a>
         <a class="btn btn-primary nav-cta" href={localize(EARLY_ACCESS, locale)}><span><span class="cta-lead">{t.cta.lead}</span><span class="cta-rest">{t.cta.rest}</span><span class="cta-tail">{t.cta.tail}</span></span></a>
       </div>
     </div>

@@ -34,8 +34,6 @@ Drop your zip onto the box that says **Drop your files or zip here, or click to 
 
 The files you picked are listed under **Selected** with their size.
 
-<div class="shot">[SCREENSHOT: Import your website page with a zip selected]</div>
-
 ## 4. Click Import website
 
 Click **Import website**. You see an upload bar, then a short message while your site is checked and prepared.

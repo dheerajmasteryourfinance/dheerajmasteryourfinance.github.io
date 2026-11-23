@@ -29,15 +29,10 @@ WebGen shows one record to add where you manage your domain's DNS. Add it exactl
 
 - The record has three fields at your provider: **Type**, **Name / host** and **Value / content**. Fill them in separately, and use **Copy** next to each one.
 - If your provider only wants the part before your domain name, enter just the first part of the name shown.
-- Type: [CONFIRM: record type shown for domain verification]
-- Name: [CONFIRM: exact record name shown for domain verification]
-- Value: [CONFIRM: value is generated per domain; confirm how it is described to the user]
 
 When it works, the status changes and you see **Done: we've confirmed this domain is yours.** Leave the record in place, because WebGen checks it again from time to time.
 
-<div class="callout callout-note"><strong>Note:</strong> DNS changes can take a few hours to show up. If <strong>Check DNS</strong> cannot find the record yet, wait and try again. [CONFIRM: typical DNS wait time to quote]</div>
-
-<div class="shot">[SCREENSHOT: Sender tab with the verification record]</div>
+<div class="callout callout-note"><strong>Note:</strong> DNS changes can take a few hours to show up. If <strong>Check DNS</strong> cannot find the record yet, wait and try again.</div>
 
 ## 4. Add the signing records
 
@@ -45,7 +40,6 @@ Next comes **Last step: let your emails be signed**. WebGen shows 3 more records
 
 - If your provider wants the full name, add your domain after the name shown.
 - If the records are not found yet, you see a message. Check they are exactly as shown, wait, and click **Check now** again.
-- [CONFIRM: record types and number of signing records, and that they stay at 3 for every domain]
 
 When everything is in place the status reads **Ready to send**. Leave all your DNS records where they are.
 

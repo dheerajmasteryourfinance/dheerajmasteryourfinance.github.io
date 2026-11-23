@@ -1,6 +1,6 @@
 ---
 import LangSwitch from './LangSwitch.astro';
-import { APP_LOGIN, APP_PLACEHOLDER } from '../lib/links.js';
+import { APP_LOGIN } from '../lib/links.js';
 import { COMPANY, kvkLine, vatLine, addressLine } from '../lib/company.ts';
 import { getLocale, localize } from '../i18n/index.ts';
 import { UI } from '../i18n/ui.ts';
@@ -10,7 +10,7 @@ const locale = getLocale(Astro.currentLocale);
 const t = UI[locale].footer;
 const signIn = UI[locale].nav.signIn;
 const l = (p: string) => localize(p, locale);
-const facts = [COMPANY.legalName, kvkLine(), vatLine(locale), addressLine(), COMPANY.phone, COMPANY.supportEmail];
+const facts = [COMPANY.legalName, kvkLine(), vatLine(locale), addressLine()];
 ---
 <footer class="site-footer">
   <div class="container">
@@ -19,7 +19,7 @@ const facts = [COMPANY.legalName, kvkLine(), vatLine(locale), addressLine(), COM
         <h2>{t.product}</h2>
         <ul>
           <li><a href={l('/features/')}>{t.features}</a></li>
-          <li><a href={APP_LOGIN} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{signIn}</a></li>
+          <li><a href={APP_LOGIN} rel="noopener noreferrer">{signIn}</a></li>
         </ul>
       </div>
       <div>

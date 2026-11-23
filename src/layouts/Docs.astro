@@ -1,7 +1,7 @@
 ---
 import Base from './Base.astro';
 import { getCollection } from 'astro:content';
-import { APP_HOME, APP_PLACEHOLDER } from '../lib/links.js';
+import { APP_HOME } from '../lib/links.js';
 import { getLocale, localize } from '../i18n/index.ts';
 import { DOCS_UI } from '../i18n/docs.ts';
 import { docsFor } from '../lib/docs.ts';
@@ -46,7 +46,7 @@ const guides = grouped.map((g) => ({
       <DocsSearch locale={locale} />
       <div class="bar-links">
         <a href={l('/company/#contact')}>{t.support}</a>
-        <a class="btn btn-primary" href={APP_HOME} data-placeholder={APP_PLACEHOLDER} rel="noopener noreferrer">{t.openApp}</a>
+        <a class="btn btn-primary" href={APP_HOME} rel="noopener noreferrer">{t.openApp}</a>
       </div>
     </div>
   </section>

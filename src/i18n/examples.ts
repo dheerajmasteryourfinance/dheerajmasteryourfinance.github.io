@@ -26,7 +26,7 @@ const en = {
       tags: ['Generated in minutes', 'Dutch copy', 'Works on phones', 'Also in French and German'],
       view: 'View the site →',
     },
-    more: { t: 'More examples on the way', p: '[CONFIRM: next example sites and languages]', tag: 'Your site' },
+    more: { t: 'More examples on the way', p: 'Example sites in more trades and languages follow.', tag: 'Your site' },
     note: 'Example sites made in WebGen for testing.',
     industry: {
       eyebrow: 'By industry',
@@ -54,7 +54,6 @@ const en = {
     facts: [
       ['Trade', 'Bakery'],
       ['Language', 'Dutch'],
-      ['Built in', '[CONFIRM: minutes]'],
       ['Features', 'Sign-up form, weekly menu'],
     ],
     altDesktop: 'The GreenLeaf Bakery website on a desktop screen, opening on the problem it solves for its customers',
@@ -83,7 +82,6 @@ const en = {
       altMenu: 'The page menu in the editor, with the option to choose the languages of the site',
       altTranslate: 'The Translate this page dialog in the editor, with a language chosen',
     },
-    result: { eyebrow: 'The result', title: 'What it delivered', placeholder: '[CONFIRM: real results from the owner, or remove this block]' },
     cta: { title: 'Your business is next.', text: 'Describe your business. We will build the first version.' },
   },
 };
@@ -113,7 +111,7 @@ const nl: typeof en = {
       tags: ['Binnen minuten gebouwd', 'Nederlandse tekst', 'Werkt op telefoons', 'Ook in het Frans en Duits'],
       view: 'Bekijk de site →',
     },
-    more: { t: 'Meer voorbeelden volgen', p: '[BEVESTIG: volgende voorbeeldsites en talen]', tag: 'Jouw site' },
+    more: { t: 'Meer voorbeelden volgen', p: 'Voorbeeldsites in meer branches en talen volgen.', tag: 'Jouw site' },
     note: 'Voorbeeldsites gemaakt in WebGen voor testdoeleinden.',
     industry: {
       eyebrow: 'Per branche',
@@ -141,7 +139,6 @@ const nl: typeof en = {
     facts: [
       ['Branche', 'Bakkerij'],
       ['Taal', 'Nederlands'],
-      ['Gebouwd in', '[BEVESTIG: minuten]'],
       ['Functies', 'Aanmeldformulier, weekmenu'],
     ],
     altDesktop: 'De website van GreenLeaf Bakery op een computerscherm, openend met het probleem dat de bakkerij voor klanten oplost',
@@ -170,7 +167,6 @@ const nl: typeof en = {
       altMenu: 'Het paginamenu in de editor, met de keuze voor de talen van de site (Engelse weergave)',
       altTranslate: 'Het venster "Vertaal deze pagina" in de editor, met een taal gekozen (Engelse weergave)',
     },
-    result: { eyebrow: 'Het resultaat', title: 'Wat het opleverde', placeholder: '[BEVESTIG: echte resultaten van de eigenaar, of laat dit blok weg]' },
     cta: { title: 'Jouw bedrijf is de volgende.', text: 'Vertel over je bedrijf. Wij bouwen de eerste versie.' },
   },
 };

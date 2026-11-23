@@ -32,8 +32,6 @@ The brief asks about your business the way a copywriter would. The answers becom
 
 Upload your own photos or describe the ones you want. WebGen places them on the right pages.
 
-<div class="shot">[SCREENSHOT: Add photos step]</div>
-
 ## 4. Review and edit
 
 Your site opens in the editor. From here you can:
@@ -48,8 +46,6 @@ Click **Save** when you are happy with your changes.
 ## 5. Publish
 
 Click **Publish**. Your site goes online at a free address, and you can add your own domain afterwards.
-
-<div class="callout callout-note"><strong>Note:</strong> [CONFIRM: publishing needs an active subscription; check the wording against the billing rules]</div>
 
 ## Next steps
 

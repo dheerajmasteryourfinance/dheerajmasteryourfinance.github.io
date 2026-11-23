@@ -33,8 +33,6 @@ Use the filters at the top to switch between **Real**, **Spam** and **All**. Mes
 
 When nothing has arrived yet, the page says **No submissions yet.**
 
-<div class="shot">[SCREENSHOT: Leads tab with a contact message]</div>
-
 ## 4. Get notified
 
 You can be emailed whenever a lead arrives. Open **Manage**, then the **Emails** tab.
@@ -62,7 +60,7 @@ Everyone who fills in a form, or signs up for your newsletter, also appears unde
 
 Click **Delete** on a lead to remove it. This cannot be undone.
 
-<div class="callout callout-note"><strong>Note:</strong> you can ask new newsletter subscribers to confirm their email first. Under <strong>Campaigns</strong>, turn on <strong>Ask new subscribers to confirm their email</strong>. [CONFIRM: wording of the confirmation email visitors receive]</div>
+<div class="callout callout-note"><strong>Note:</strong> you can ask new newsletter subscribers to confirm their email first. Under <strong>Campaigns</strong>, turn on <strong>Ask new subscribers to confirm their email</strong>.</div>
 
 ## Next steps
 

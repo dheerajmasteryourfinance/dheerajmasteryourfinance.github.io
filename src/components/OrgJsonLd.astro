@@ -1,12 +1,12 @@
 ---
 import { safeJson } from '../lib/json-ld.mjs';
+import { COMPANY } from '../lib/company.ts';
 const data = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'WebGen',
   url: 'https://webgnr.com/',
-  email: '[SUPPORT EMAIL]',
-  address: { '@type': 'PostalAddress', streetAddress: '[ADDRESS]' },
+  address: { '@type': 'PostalAddress', streetAddress: COMPANY.street, postalCode: COMPANY.postcode, addressLocality: COMPANY.city, addressCountry: 'NL' },
 };
 // Escape "<" so no value can ever close the script element early.
 const json = safeJson(data);

@@ -31,7 +31,6 @@ const strip = EXAMPLES.filter((e) => e.id !== 'greenleaf');
           <p>{t.p2}</p>
         </div>
         <dl class="facts">
-          <div><dt>{t.facts.founded}</dt><dd>{t.facts.year}</dd></div>
           <div><dt>{t.facts.based}</dt><dd>{COMPANY.city}</dd></div>
           <div><dt>{t.facts.operated}</dt><dd>{COMPANY.legalName}<br />{kvkLine()} · {vatLine(locale)}</dd></div>
         </dl>
@@ -70,13 +69,11 @@ const strip = EXAMPLES.filter((e) => e.id !== 'greenleaf');
         <h2>{c.title}</h2>
         <p>{c.reply}</p>
         <div class="stack">
-          <div class="card"><h3>{c.support}</h3><p>{c.supportValue}</p></div>
           <div class="card">
             <h3>{c.abuse}</h3>
             <p>{c.abuseValue}</p>
             <p><a class="inline" href={l('/email/')}>{c.abuseLink}</a></p>
           </div>
-          <div class="card"><h3>{c.phone}</h3><p>{c.phoneValue}</p></div>
           <div class="card"><h3>{c.postal}</h3><p>{COMPANY.legalName}<br />{addressLine()}, {COMPANY.country[locale]}</p></div>
         </div>
       </div>

@@ -33,8 +33,6 @@ Klik op **E-mail toevoegen** en vul in:
 
 Voeg op dezelfde manier meer e-mails toe. Bij elke e-mail na de eerste staat de timing als **Versturen na de vorige e-mail**. Een reeks kan maximaal 20 e-mails hebben en bij elke e-mail staat hoe lang na het formulier of de vorige e-mail hij uitgaat.
 
-<div class="shot">[SCREENSHOT: reeks vervolgmails met twee e-mails]</div>
-
 ## 5. Bekijk en test
 
 Klik op **Voorbeeld** om te zien hoe een e-mail eruitziet. De uitschrijflink werkt alleen in echte e-mails. Klik op **Stuur mij een test** om zelf een kopie te ontvangen. Gebruik **Bewerken** om een e-mail later te wijzigen, of verwijder er een die je niet meer wilt.
@@ -53,7 +51,7 @@ Je ziet op dezelfde pagina hoe het gaat, bijvoorbeeld hoeveel mensen bezig zijn,
 
 Klik op **Pauzeren** om de reeks vast te houden. Er gaat niets verloren: e-mails die aan de beurt zijn, wachten en gaan uit zodra je hem weer aanzet. Mensen die al in de reeks zitten, blijven hun e-mails ontvangen, tenzij je hem pauzeert of verwijdert. **Vervolgmails verwijderen** verwijdert de reeks en de geschiedenis ervan, maar je formulierinzendingen blijven bewaard.
 
-<div class="callout callout-note"><strong>Let op:</strong> elke vervolgmail bevat een uitschrijflink en wie zich uitschrijft, krijgt ze niet meer. Je bedrijfsnaam en postadres van <strong>Campagnes</strong> staan onderaan. [BEVESTIG: exacte voettekst en het uitschrijfgedrag om te beschrijven]</div>
+<div class="callout callout-note"><strong>Let op:</strong> elke vervolgmail bevat een uitschrijflink en wie zich uitschrijft, krijgt ze niet meer. Je bedrijfsnaam en postadres van <strong>Campagnes</strong> staan onderaan.</div>
 
 ## Volgende stappen
 
