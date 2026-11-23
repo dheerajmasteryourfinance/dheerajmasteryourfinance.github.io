@@ -21,6 +21,7 @@ const steps = h.steps.map((s) => ({ ...s, minutes: bySlug.get(s.slug)?.data.minu
 const first = bySlug.get('build-your-first-website')!;
 ---
 <Base title={h.title} description={h.description} path="/docs/">
+  <link slot="head" rel="preload" as="fetch" crossorigin="anonymous" href={`/search-index-${locale}.json`} data-search-index />
   <section data-section="hero" class="dh-hero has-blobs">
     <Blobs variant="hero" />
     <div class="container">

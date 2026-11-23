@@ -40,6 +40,7 @@ const guides = grouped.map((g) => ({
 }));
 ---
 <Base title={`${title} | ${t.suffix}`} description={description} path={path} guides={guides} guidesLabel={t.menu}>
+  <link slot="head" rel="preload" as="fetch" crossorigin="anonymous" href={`/search-index-${locale}.json`} data-search-index />
   <section data-section="docs-bar" class="bar">
     <div class="container bar-in">
       <p class="bar-title"><a href={l('/docs/')}>{t.docs}</a></p>

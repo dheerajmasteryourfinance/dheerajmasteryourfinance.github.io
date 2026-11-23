@@ -43,4 +43,18 @@ describe('package-zip', () => {
     expect(names.some((n) => n.includes('\\'))).toBe(false);
     expect(Buffer.from(entries['index.html']).toString()).toBe('<p>clean</p>');
   });
+
+  it('rewrites srcset and imagesrcset to page-relative paths (the app importer leaves them absolute)', () => {
+    const { dist, out } = makeDist('<picture><source srcset="/_astro/a-480.avif 480w, /_astro/a-800.avif 800w"><img src="/_astro/a.webp" srcset="/_astro/a-480.webp 480w"></picture>');
+    writeFileSync(join(dist, 'docs', 'start', 'index.html'), '<img srcset="/_astro/b.webp 1x"><link rel="preload" as="image" imagesrcset="/_astro/c.webp 2x">');
+    expect(run(dist, out).status).toBe(0);
+    const entries = unzipSync(new Uint8Array(readFileSync(join(out, readdirSync(out)[0]))));
+    const root = Buffer.from(entries['index.html']).toString();
+    expect(root).toContain('srcset="_astro/a-480.avif 480w, _astro/a-800.avif 800w"');
+    expect(root).toContain('src="/_astro/a.webp"');
+    const doc = Buffer.from(entries['docs/start/index.html']).toString();
+    // docs/start/index.html is served at /docs/start, so its base is docs/
+    expect(doc).toContain('srcset="../_astro/b.webp 1x"');
+    expect(doc).toContain('imagesrcset="../_astro/c.webp 2x"');
+  });
 });

@@ -85,6 +85,8 @@ describe.each([['en', ''], ['nl', '/nl']])('docs tutorials (%s)', (lang, prefix)
     // search: labelled, in the page language, and the article is tagged for the same language
     expect(d.querySelector('label.docsearch input[data-docs-search]').getAttribute('data-lang')).toBe(lang);
     expect(d.querySelector('article[data-search-body]').getAttribute('data-search-lang')).toBe(lang);
+    // the index is linked from the page (so it still resolves after the app's importer makes links relative)
+    expect(d.querySelector('head link[data-search-index]').getAttribute('href')).toBe(`/search-index-${lang}.json`);
   });
 
   it('sidebar and contents are sticky in the built CSS', () => {

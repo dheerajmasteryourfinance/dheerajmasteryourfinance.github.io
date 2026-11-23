@@ -3,6 +3,7 @@ import { join, relative, resolve, sep, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { zipSync } from 'fflate';
+import { publishedDir, relativizeSrcsets } from './import-paths.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -42,7 +43,13 @@ function main(argv) {
   const files = {};
   for (const file of walk(dist)) {
     // Forward slashes, paths relative to dist so index.html sits at the zip root.
-    files[relative(dist, file).split(sep).join('/')] = new Uint8Array(readFileSync(file));
+    const name = relative(dist, file).split(sep).join('/');
+    let bytes = new Uint8Array(readFileSync(file));
+    if (name.endsWith('.html')) {
+      // The app's importer rewrites href/src but not srcset, so do that part here (responsive images).
+      bytes = new TextEncoder().encode(relativizeSrcsets(new TextDecoder().decode(bytes), publishedDir(name)));
+    }
+    files[name] = bytes;
   }
   if (!files['index.html']) {
     console.error(`package-zip: ${dist} has no index.html; run the build first.`);
