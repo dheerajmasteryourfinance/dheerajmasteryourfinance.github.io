@@ -5,33 +5,17 @@ Status 2026-11-23. The site builds and passes every gate with placeholders allow
 Domain agreed with Joel: **webgnr.com** is the site, Dutch at `webgnr.com/nl/`, **webgnr.nl** forwards to `https://webgnr.com/nl/`.
 The domains are at Strato (nameservers `rzone.de`). Mail for webgnr.com is at Strato (`MX 5 smtp.rzone.de`).
 
-## 1. Fill in the placeholders (398 in the build, about 70 different ones)
+## 1. Placeholders: removed (2026-11-23)
 
-Run `node scripts/check-placeholders.mjs dist` to see the live list. Grouped by who can answer:
+`npm run build` now passes with no placeholders. Unconfirmed claims were removed rather than filled in:
+support, abuse and phone contacts (spam reports go through the contact form), data-region claims,
+founding story and year, ownership promise, SEO claims that have not shipped, example results,
+docs placeholders and screenshots. The privacy, terms and cookie pages are plain-language DRAFTS
+(on-page notice says so) and still need a legal adviser's review.
 
-**Joel (business decisions)**
-- Entity: confirm Schenk Rekenmeesters (KvK 55633323, Steijnstraat 18, Ridderkerk) is the company behind WebGen. Then the legal pages and the site data can use the real name and address (`[LEGAL ENTITY NAME]`, `[POSTAL ADDRESS]`, `[ADDRESS]`).
-- Founding story and year, who is behind WebGen (`[CONFIRM: founding story…]`, `[YEAR]`).
-- May the StoryBrand framework be named publicly? May the Master Your Business and Mastercrest Games sites be shown as proof?
-- Ownership and export promise for a customer's content and contact list.
-- "Made in the Netherlands" wording; reply time (`[RESPONSE TIME]`); early-access terms and invitation rhythm; what the product costs for early access (no prices are shown on the site).
-- GreenLeaf example: build time in minutes, real results from the owner (or remove the block); next example sites and languages.
-
-**Contact details (whoever owns the mailboxes)**
-- Support email (`[SUPPORT EMAIL]`, 43 places), abuse email (`[ABUSE EMAIL]`), privacy email (`[PRIVACY EMAIL]`).
-- Phone number and opening hours (`[PHONE]`, `[TELEFOONNUMMER]`, `[OPENINGSTIJDEN]`).
-
-**Joey (hosting and app)**
-- EU hosting region and provider (`[EU REGION]` / `[EU-REGIO]`, 45 places, and the FAQ answer "Where is my data stored?").
-- The app sign-in and app addresses. The links now carry `[CONFIRM URL]` (94 places) until `https://app.website-generator.nl/login` is confirmed. Then remove `APP_PLACEHOLDER` in `src/lib/links.js`.
-- Production `SITES_BASE_DOMAIN` for the app (needed for step 2).
-
-**Legal adviser**
-- Privacy policy, terms of service and cookie policy text (`[LEGAL TEXT]` / `[JURIDISCHE TEKST]`, plus the summaries and the "last updated" date).
-
-**Dheeraj (check in the real app)**
-- Docs facts: DNS wait time, record names, types and values shown in the app, sender verification records and how many signing records, sending speed and limits, whether publishing or a custom domain needs a plan, wording of the confirmation email and the email footer, the support route to name.
-- Six screenshots (`[SCREENSHOT: …]`): add photos step, DNS records after attaching a domain, follow-up series with two emails, leads tab with a message, import page with a zip selected, sender tab with the verification record.
+Add back when confirmed: support/abuse/privacy mailboxes and phone, EU hosting region, founding story,
+ownership and export promise, early-access terms and reply time, SEO claims once they ship, GreenLeaf results,
+and the docs screenshots and DNS facts.
 
 ## 2. Host it through the WebGen app (ZIP import)
 

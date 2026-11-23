@@ -178,14 +178,15 @@ describe('Dutch email page keeps the corrected facts', () => {
 });
 
 describe('Dutch legal pages', () => {
-  const PH = /^\[[A-Z]+(?:-[A-Z]+)*[\] :]/;
-  it.each(['/nl/privacy/', '/nl/terms/', '/nl/cookies/'])('%s keeps the English ids and placeholder bodies', (r) => {
+  it.each(['/nl/privacy/', '/nl/terms/', '/nl/cookies/'])('%s keeps the English ids and has its own Dutch text', (r) => {
     const doc = loadPage(r);
     const secs = [...doc.querySelectorAll('main article section[id]')];
     const enSecs = [...loadPage(r.slice(3)).querySelectorAll('main article section[id]')];
     expect(secs.map((s) => s.id)).toEqual(enSecs.map((s) => s.id));
     for (const s of secs) {
-      expect(text(s.querySelector('p')), s.id).toMatch(PH);
+      const body = text(s.querySelector('p'));
+      expect(body.length, s.id).toBeGreaterThan(80);
+      expect(body, s.id).not.toBe(text(enSecs.find((e) => e.id === s.id).querySelector('p')));
       expect(text(s.querySelector('h2'))).not.toBe(text(enSecs.find((e) => e.id === s.id).querySelector('h2')));
     }
   });

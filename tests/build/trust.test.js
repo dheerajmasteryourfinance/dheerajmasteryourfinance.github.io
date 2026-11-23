@@ -103,3 +103,27 @@ describe.each(['/privacy/', '/nl/privacy/'])('legal sections list on %s', (route
     expect(css).toMatch(/\.toc\[[^\]]+\]\{[^}]*position:sticky|\.toc\{[^}]*position:sticky/);
   });
 });
+
+describe.each(['/privacy/', '/terms/', '/cookies/', '/nl/privacy/', '/nl/terms/', '/nl/cookies/'])('legal text on %s', (route) => {
+  const doc = loadPage(route);
+  it('has no placeholders and real text in every section', () => {
+    expect(doc.querySelector('main').textContent).not.toMatch(/\[[A-Z]/);
+    for (const s of doc.querySelectorAll('main article section[id]')) {
+      expect(s.querySelector('p').textContent.trim().length, s.id).toBeGreaterThan(80);
+    }
+  });
+  it('names the company and links to the contact form in the closing line', () => {
+    const c = doc.querySelector('main article .contact');
+    expect(c.textContent).toContain('Schenk Rekenmeesters');
+    expect(c.querySelector('a').getAttribute('href')).toMatch(/\/company\/#contact$/);
+  });
+});
+
+describe('cookie claim matches the code', () => {
+  it('the cookie policy says the website sets no cookies, and the source really has no cookie or storage use', () => {
+    expect(loadPage('/cookies/').querySelector('main').textContent).toContain('This website sets no cookies');
+    const dir = join(process.cwd(), 'dist', '_astro');
+    const js = readdirSync(dir).filter((f) => f.endsWith('.js')).map((f) => readFileSync(join(dir, f), 'utf8')).join('\n');
+    expect(js).not.toMatch(/document\.cookie|localStorage|sessionStorage/);
+  });
+});
