@@ -1,7 +1,9 @@
 /**
- * Docs search. Results come from Pagefind's JS API (built into /pagefind/).
+ * Docs search. Results come from a small JSON index per language (/search-index-<lang>.json, built by
+ * scripts/build-search-index.mjs) searched in the browser by search-core.js.
  * Nothing here ever uses innerHTML: titles, excerpts and the query are written as text.
  */
+import { searchEntries } from './search-core.js';
 
 const ENTITIES = { '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&#x27;': "'", '&amp;': '&' };
 const decode = (s) => s.replace(/&(?:lt|gt|quot|#39|#x27|amp);/g, (m) => ENTITIES[m]);
@@ -77,22 +79,21 @@ export function bindShortcut(input, doc = document) {
 
 /**
  * @param {HTMLInputElement} input @param {HTMLElement} container
- * @param {{ lang?: string, load?: () => Promise<any>, delay?: number, empty?: (q: string) => string }} [opts]
- *   lang: only results whose page carries data-pagefind-filter="lang:<lang>"; load: Pagefind loader (tests).
+ * @param {{ lang?: string, load?: (lang: string) => Promise<object[]>, delay?: number, empty?: (q: string) => string }} [opts]
+ *   lang: which language's index to search; load: index loader (tests).
  * @returns {() => Promise<void>} run the search for the current input value
  */
 export function initDocsSearch(input, container, opts = {}) {
-  let pagefind;
+  let index;
   let latest = 0;
   let timer;
   const delay = opts.delay ?? 150;
+  const lang = opts.lang ?? 'en';
 
-  const load = opts.load ?? (async () => {
-    if (!pagefind) {
-      const url = '/pagefind/pagefind.js';
-      pagefind = await import(/* @vite-ignore */ url);
-    }
-    return pagefind;
+  const load = opts.load ?? (async (l) => {
+    const res = await fetch(`/search-index-${l}.json`);
+    if (!res.ok) throw new Error(`search index ${res.status}`);
+    return res.json();
   });
 
   const run = async () => {
@@ -106,11 +107,10 @@ export function initDocsSearch(input, container, opts = {}) {
     container.hidden = false;
     let results = [];
     try {
-      const pf = await load();
-      const found = opts.lang ? await pf.search(query, { filters: { lang: opts.lang } }) : await pf.search(query);
-      const top = await Promise.all(found.results.slice(0, 8).map((r) => r.data()));
-      results = top.map((d) => ({ url: d.url, title: d.meta?.title ?? d.url, excerpt: d.excerpt }));
+      index ??= await load(lang);
+      results = searchEntries(index, query);
     } catch {
+      index = undefined;
       results = [];
     }
     if (ticket !== latest) return;

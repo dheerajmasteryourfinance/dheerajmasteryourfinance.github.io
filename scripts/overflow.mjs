@@ -30,7 +30,6 @@ function chromePath() {
 function routes(dir, base = '') {
   const out = [];
   for (const name of readdirSync(join(dir, base))) {
-    if (name === 'pagefind') continue;
     const rel = join(base, name);
     if (statSync(join(dir, rel)).isDirectory()) out.push(...routes(dir, rel));
     else if (name === 'index.html') out.push('/' + base.split(sep).join('/') + (base ? '/' : ''));

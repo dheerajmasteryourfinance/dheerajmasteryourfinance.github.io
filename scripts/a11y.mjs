@@ -13,7 +13,7 @@ function* walk(dir) {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
     if (statSync(p).isDirectory()) {
-      if (name !== 'pagefind') yield* walk(p);
+      yield* walk(p);
     } else if (name.endsWith('.html')) yield p;
   }
 }

@@ -103,21 +103,31 @@ describe('per-language search', () => {
     expect(box.querySelector('b')).toBeNull();
   });
 
-  it('only searches the current language, via a Pagefind filter', async () => {
+  it('loads and searches only the index of the current language', async () => {
     document.body.innerHTML = '<input id="q"><div id="r" hidden></div>';
     const input = document.getElementById('q');
     const results = document.getElementById('r');
-    const calls = [];
-    const fake = {
-      search: async (query, opts) => {
-        calls.push([query, opts]);
-        return { results: [{ data: async () => ({ url: '/nl/docs/a/', meta: { title: 'A' }, excerpt: 'x' }) }] };
-      },
+    const loaded = [];
+    const load = async (lang) => {
+      loaded.push(lang);
+      return [{ url: '/nl/docs/a/', title: 'Een domein koppelen', headings: [], text: 'Koppel je domein bij je provider.' }];
     };
-    const run = initDocsSearch(input, results, { lang: 'nl', load: async () => fake, delay: 0 });
+    const run = initDocsSearch(input, results, { lang: 'nl', load, delay: 0 });
     input.value = 'domein';
     await run();
-    expect(calls).toEqual([['domein', { filters: { lang: 'nl' } }]]);
+    await run();
+    expect(loaded).toEqual(['nl']);
     expect(results.querySelector('a').getAttribute('href')).toBe('/nl/docs/a/');
+    expect(results.querySelector('mark').textContent.toLowerCase()).toContain('domein');
+  });
+
+  it('shows the empty message when the index cannot be loaded', async () => {
+    document.body.innerHTML = '<input id="q"><div id="r" hidden></div>';
+    const input = document.getElementById('q');
+    const results = document.getElementById('r');
+    const run = initDocsSearch(input, results, { lang: 'en', load: async () => { throw new Error('offline'); }, delay: 0, empty: (q) => `none for ${q}` });
+    input.value = 'forms';
+    await run();
+    expect(results.textContent).toBe('none for forms');
   });
 });

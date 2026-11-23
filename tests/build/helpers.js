@@ -26,5 +26,5 @@ export function allRoutes() {
   };
   walk(DIST);
   if (existsSync(join(DIST, '404.html'))) routes.push('/404.html');
-  return routes.filter((r) => !r.startsWith('/pagefind/')).sort();
+  return routes.sort();
 }

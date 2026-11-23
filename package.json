@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist && node scripts/check-placeholders.mjs dist",
-    "build:preview": "astro build && pagefind --site dist && node scripts/check-placeholders.mjs dist --allow-placeholders",
+    "build": "astro build && node scripts/build-search-index.mjs dist && node scripts/check-placeholders.mjs dist",
+    "build:preview": "astro build && node scripts/build-search-index.mjs dist && node scripts/check-placeholders.mjs dist --allow-placeholders",
     "test": "vitest run",
     "test:build": "npm run build:preview && vitest run tests/build",
     "check": "node scripts/check.mjs",
@@ -27,7 +27,6 @@
     "html-validate": "11.21.0",
     "jsdom": "31.0.0",
     "linkedom": "0.18.15",
-    "pagefind": "1.6.0",
     "puppeteer-core": "25.17.0",
     "vitest": "5.1.0"
   }

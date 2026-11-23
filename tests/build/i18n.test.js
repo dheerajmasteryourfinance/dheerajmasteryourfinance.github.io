@@ -283,20 +283,21 @@ describe('Dutch docs', () => {
 });
 
 describe('search is per language', () => {
-  it.each(pages.filter((r) => /^(\/nl)?\/docs\/[^/]+\/$/.test(r)))('%s tags its body with its language filter', (r) => {
+  it.each(pages.filter((r) => /^(\/nl)?\/docs\/[^/]+\/$/.test(r)))('%s tags its article with its language', (r) => {
     const doc = loadPage(r);
     const lang = doc.documentElement.getAttribute('lang');
-    const body = doc.querySelector('[data-pagefind-body]');
+    const body = doc.querySelector('[data-search-body]');
     expect(body).toBeTruthy();
-    expect(body.getAttribute('data-pagefind-filter')).toBe(`lang:${lang}`);
+    expect(body.getAttribute('data-search-lang')).toBe(lang);
     expect(doc.querySelector('[data-docs-search]').getAttribute('data-lang')).toBe(lang);
   });
 
-  it('pagefind builds one index per language, 8 pages each', () => {
-    const entry = JSON.parse(readFileSync(join(DIST, 'pagefind', 'pagefind-entry.json'), 'utf8'));
-    expect(Object.keys(entry.languages).sort()).toEqual(['en', 'nl']);
-    expect(entry.languages.en.page_count).toBe(8);
-    expect(entry.languages.nl.page_count).toBe(8);
+  it('the JSON indexes hold only their own language', () => {
+    for (const lang of ['en', 'nl']) {
+      const entries = JSON.parse(readFileSync(join(DIST, `search-index-${lang}.json`), 'utf8'));
+      expect(entries.length).toBe(8);
+      for (const e of entries) expect(e.url.startsWith('/nl/')).toBe(lang === 'nl');
+    }
   });
 });
 

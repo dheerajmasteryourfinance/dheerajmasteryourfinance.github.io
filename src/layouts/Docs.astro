@@ -84,7 +84,7 @@ const guides = grouped.map((g) => ({
         </div>
       </nav>
 
-      <article class="article" data-pagefind-body data-pagefind-filter={`lang:${locale}`}>
+      <article class="article" data-search-body data-search-lang={locale}>
         <p class="crumbs"><a href={l('/docs/')}>{t.docs}</a> / {t.groups[group]}</p>
         <h1>{title}</h1>
         <p class="lede">{description}</p>

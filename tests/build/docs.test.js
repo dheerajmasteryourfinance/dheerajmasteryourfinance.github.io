@@ -84,7 +84,7 @@ describe.each([['en', ''], ['nl', '/nl']])('docs tutorials (%s)', (lang, prefix)
     expect(d.querySelectorAll('header.site-nav .navguides a')).toHaveLength(SLUGS.length);
     // search: labelled, in the page language, and the article is tagged for the same language
     expect(d.querySelector('label.docsearch input[data-docs-search]').getAttribute('data-lang')).toBe(lang);
-    expect(d.querySelector('article[data-pagefind-body]').getAttribute('data-pagefind-filter')).toBe(`lang:${lang}`);
+    expect(d.querySelector('article[data-search-body]').getAttribute('data-search-lang')).toBe(lang);
   });
 
   it('sidebar and contents are sticky in the built CSS', () => {
@@ -103,7 +103,16 @@ describe.each([['en', ''], ['nl', '/nl']])('docs tutorials (%s)', (lang, prefix)
 });
 
 describe('search index', () => {
-  it('builds pagefind.js', () => {
-    expect(existsSync(join(process.cwd(), 'dist', 'pagefind', 'pagefind.js'))).toBe(true);
+  it.each(['en', 'nl'])('builds search-index-%s.json with the 8 articles of that language', (lang) => {
+    const file = join(process.cwd(), 'dist', `search-index-${lang}.json`);
+    expect(existsSync(file)).toBe(true);
+    const entries = JSON.parse(readFileSync(file, 'utf8'));
+    expect(entries).toHaveLength(8);
+    for (const e of entries) {
+      expect(e.url.startsWith(lang === 'nl' ? '/nl/docs/' : '/docs/')).toBe(true);
+      expect(e.title.length).toBeGreaterThan(3);
+      expect(e.headings.length).toBeGreaterThan(0);
+      expect(e.text.length).toBeGreaterThan(200);
+    }
   });
 });
