@@ -18,6 +18,12 @@ describe.skipIf(!findBrowser())('render smoke', () => {
     expect(Buffer.compare(fresh, back)).toBe(0);
   }, 30000);
 
+  test('seek back into an earlier, finished scene shows it again', async () => {
+    await stage.seek(50); await stage.seek(5);
+    const opacity = await stage.page.evaluate(() => getComputedStyle(document.querySelector('[data-scene=problem]')).opacity);
+    expect(opacity).toBe('1');
+  }, 30000);
+
   test('only the local server is requested', () => {
     expect(requests.length).toBeGreaterThan(0);
     for (const u of requests) expect(u.startsWith(stage.origin), u).toBe(true);

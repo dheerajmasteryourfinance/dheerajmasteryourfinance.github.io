@@ -16,10 +16,15 @@ export const SCENES = [
 
 // Every animation is a CSS animation whose delay is its absolute time in the film, so
 // setting currentTime to t on each one shows exactly frame t, in any seek order.
+// The list is captured on the first call (main.js seeks to 0 once everything is built, when
+// every animation is still pending): Chrome drops finished, non-filling animations from
+// getAnimations(), so a later lookup would miss them and an earlier scene could never return.
+let all = null;
 export function seek(t) {
   if (typeof document === 'undefined') return;
   const ms = Math.max(0, Math.min(DURATION, t)) * 1000;
-  for (const a of document.getAnimations()) {
+  all ??= document.getAnimations();
+  for (const a of all) {
     a.pause();
     a.currentTime = ms;
   }

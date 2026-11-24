@@ -12,9 +12,34 @@
 </head>
 <body>
 <main id="stage">
-  <section class="scene" data-scene="open" style="--s:0;--e:4"></section>
-  <section class="scene" data-scene="problem" style="--s:4;--e:9"></section>
-  <section class="scene" data-scene="reveal" style="--s:9;--e:13"></section>
+  <section class="scene" data-scene="open" style="--s:0;--e:4">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="exit" style="--out:3.55"><h1 class="open-line" data-copy="open.line" data-words-at="0.4" data-words-step="0.42"></h1></div>
+  </section>
+  <section class="scene light" data-scene="problem" style="--s:4;--e:9">
+    <div class="wire" aria-hidden="true">
+      <div class="wb wb-bar rise" style="--at:4.0;--fall:6.0;--r:-14deg"><i></i><i></i><i></i><b data-copy="problem.placeholders.3"></b></div>
+      <div class="wb wb-head rise" style="--at:4.15;--fall:6.25;--r:9deg"><span data-copy="problem.placeholders.0"></span></div>
+      <div class="wb wb-text rise" style="--at:4.3;--fall:6.4;--r:-6deg"><span data-copy="problem.placeholders.1"></span><i></i><i></i></div>
+      <div class="wb wb-img rise" style="--at:4.45;--fall:6.15;--r:18deg"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 0L100 60M100 0L0 60"/></svg></div>
+      <div class="wb wb-add rise" style="--at:4.6;--fall:6.55;--r:-20deg"><span data-copy="problem.placeholders.2"></span></div>
+      <div class="wb wb-btn rise" style="--at:4.75;--fall:6.7;--r:24deg"><span data-copy="problem.placeholders.4"></span></div>
+    </div>
+    <h2 class="problem-line" data-copy="problem.line" data-words-at="6.6" data-words-step="0.3"></h2>
+  </section>
+  <section class="scene" data-scene="reveal" style="--s:9;--e:13">
+    <svg class="route" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="route-line" pathLength="1" d="M-40 950 C 260 950 360 730 620 780 S 900 990 1120 890 S 1420 710 1700 810 S 1900 910 1980 870"/>
+      <circle class="stop pop" style="--at:9.45" cx="620" cy="780" r="14"/>
+      <circle class="stop pop" style="--at:9.85" cx="1120" cy="890" r="14"/>
+      <circle class="stop pop" style="--at:10.25" cx="1700" cy="810" r="14"/>
+    </svg>
+    <div class="lockup">
+      <div class="mark pop" style="--at:10.3"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5h12M3 9h12M3 13.5h8"/></svg></div>
+      <div class="wordmark rise" style="--at:10.55">Webgnr</div>
+    </div>
+    <p class="reveal-tag rise" style="--at:11.2" data-copy="reveal.tag"></p>
+  </section>
   <section class="scene" data-scene="brief" style="--s:13;--e:22"></section>
   <section class="scene" data-scene="story" style="--s:22;--e:30"></section>
   <section class="scene" data-scene="site" style="--s:30;--e:40"></section>
