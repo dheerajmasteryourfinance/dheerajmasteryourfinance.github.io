@@ -1,0 +1,34 @@
+@import url('../src/styles/tokens.css');
+@import url('../node_modules/@fontsource-variable/bricolage-grotesque/index.css');
+@import url('../node_modules/@fontsource-variable/dm-sans/index.css');
+
+/* Sizes are in vh (type, heights) and vw (widths), so the same scenes fit 1920x1080 and 1080x1080. */
+:root { --ease: cubic-bezier(.2, .8, .2, 1); --snap: cubic-bezier(.7, 0, .2, 1); --bounce: cubic-bezier(.3, 1.4, .5, 1); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--ink); }
+body { font-family: var(--font-body); color: var(--white); -webkit-font-smoothing: antialiased; }
+#stage { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: var(--ink); }
+
+/* A scene is visible from --s to --e (seconds), hard cut either side. */
+.scene { position: absolute; inset: 0; opacity: 0; display: grid; place-items: center;
+  animation: scene-on calc((var(--e) - var(--s)) * 1s) linear calc(var(--s) * 1s) 1 none; }
+@keyframes scene-on { from, to { opacity: 1; } }
+
+h1, h2, .display { font-family: var(--font-heading); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
+.caption { position: absolute; left: 0; right: 0; bottom: 7vh; text-align: center; font-family: var(--font-heading);
+  font-weight: 700; font-size: 5.2vh; letter-spacing: -0.02em; color: var(--white); }
+.caption.on-light { color: var(--ink); }
+
+/* Motion vocabulary. Each element carries --at (absolute seconds in the film). */
+.rise { animation: rise .7s var(--ease) calc(var(--at) * 1s) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(4vh); } to { opacity: 1; transform: none; } }
+.pop { animation: pop .6s var(--bounce) calc(var(--at) * 1s) both; }
+@keyframes pop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+.fade { animation: fade .5s linear calc(var(--at) * 1s) both; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.ch { animation: fade .01s linear calc(var(--at) * 1s) both; }
+.word { display: inline-block; animation: word .55s var(--ease) calc(var(--at) * 1s) both; }
+@keyframes word { from { opacity: 0; transform: translateY(.35em); font-variation-settings: 'wght' 300; filter: blur(6px); }
+  to { opacity: 1; transform: none; font-variation-settings: 'wght' 800; filter: none; } }
+.out { animation-name: out; animation-duration: .45s; animation-timing-function: var(--snap); animation-fill-mode: forwards; }
+@keyframes out { to { opacity: 0; transform: translateY(-3vh) scale(.97); } }

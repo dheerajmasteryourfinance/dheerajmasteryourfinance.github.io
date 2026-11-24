@@ -1,0 +1,52 @@
+{
+  "open": { "line": "Every business has a story." },
+  "problem": {
+    "line": "Most websites don't tell it.",
+    "placeholders": ["Your headline here", "Lorem ipsum dolor sit amet", "Click to add text", "About us", "Button"]
+  },
+  "reveal": { "tag": "Brand story sites." },
+  "brief": {
+    "caption": "Describe your business.",
+    "business": "GreenLeaf Bakery",
+    "fields": [
+      { "label": "Who do you serve?", "answer": "Busy neighbours who want real bread" },
+      { "label": "What gets in their way?", "answer": "Supermarket bread that's stale by noon" },
+      { "label": "How do you help?", "answer": "Sourdough, baked fresh every morning" }
+    ],
+    "upload": "Or upload your brand guide"
+  },
+  "story": {
+    "caption": "Get your brand story.",
+    "parts": [
+      { "label": "Customer", "text": "Busy neighbours" },
+      { "label": "Problem", "text": "Bread that's stale by noon" },
+      { "label": "Plan", "text": "Order tonight, pick up at 7" },
+      { "label": "Success", "text": "Real bread, every morning" }
+    ],
+    "headline": "Real bread, baked before you wake."
+  },
+  "site": {
+    "caption": "A website that tells it.",
+    "domain": "greenleafbakery.example",
+    "nav": ["Bread", "Order", "About"],
+    "heroSub": "Sourdough and rye, fresh from 6 a.m.",
+    "button": "Order for tomorrow",
+    "edited": "Real bread, ready before you wake.",
+    "langFrom": "EN",
+    "langTo": "NL",
+    "flipped": "Echt brood, klaar voordat je wakker bent."
+  },
+  "followup": {
+    "caption": "Forms and email, ready to go.",
+    "formLabel": "Get the weekly bake list",
+    "formEmail": "sam@example.com",
+    "formButton": "Sign me up",
+    "listTitle": "Audience",
+    "contactName": "Sam de Vries",
+    "tag": "Bake list",
+    "emails": ["Welcome to GreenLeaf", "This week's bakes", "Meet our bakers"],
+    "chartLabel": "Visits and sign-ups"
+  },
+  "triad": ["Get found.", "Get signed up.", "Follow up."],
+  "end": { "cta": "Start your free 14-day trial", "url": "website-generator.nl" }
+}
