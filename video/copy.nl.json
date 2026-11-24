@@ -1,40 +1,82 @@
 {
-  "open": { "line": "Elk bedrijf heeft een verhaal." },
+  "open": {
+    "line": "Elk bedrijf heeft een verhaal."
+  },
   "problem": {
     "line": "De meeste websites vertellen het niet.",
-    "placeholders": ["Jouw kop hier", "Lorem ipsum dolor sit amet", "Klik om tekst toe te voegen", "Over ons", "Knop"]
+    "placeholders": [
+      "Jouw kop hier",
+      "Lorem ipsum dolor sit amet",
+      "Klik om tekst toe te voegen",
+      "Over ons",
+      "Knop"
+    ]
   },
-  "reveal": { "tag": "Sites vanuit je merkverhaal." },
+  "reveal": {
+    "tag": "Sites vanuit je merkverhaal."
+  },
   "brief": {
     "caption": "Beschrijf je bedrijf.",
     "business": "GreenLeaf Bakery",
     "fields": [
-      { "label": "Voor wie werk je?", "answer": "Drukke buren die echt brood willen" },
-      { "label": "Waar lopen ze tegenaan?", "answer": "Supermarktbrood dat om twaalf uur al oud is" },
-      { "label": "Hoe help je ze?", "answer": "Zuurdesem, elke ochtend vers gebakken" }
+      {
+        "label": "Voor wie werk je?",
+        "answer": "Drukke buren die echt brood willen"
+      },
+      {
+        "label": "Waar lopen ze tegenaan?",
+        "answer": "Supermarktbrood dat om twaalf uur al oud is"
+      },
+      {
+        "label": "Hoe help je ze?",
+        "answer": "Zuurdesem, elke ochtend vers gebakken"
+      }
     ],
     "upload": "Of upload je merkgids"
   },
   "story": {
     "caption": "Krijg je merkverhaal.",
     "parts": [
-      { "label": "Klant", "text": "Drukke buren" },
-      { "label": "Probleem", "text": "Brood dat om twaalf uur oud is" },
-      { "label": "Plan", "text": "Vanavond bestellen, om 7 uur ophalen" },
-      { "label": "Succes", "text": "Elke ochtend echt brood" }
+      {
+        "label": "Klant",
+        "text": "Drukke buren"
+      },
+      {
+        "label": "Probleem",
+        "text": "Brood dat om twaalf uur oud is"
+      },
+      {
+        "label": "Plan",
+        "text": "Vanavond bestellen, om 7 uur ophalen"
+      },
+      {
+        "label": "Succes",
+        "text": "Elke ochtend echt brood"
+      }
     ],
     "headline": "Echt brood, gebakken voordat je wakker bent."
   },
   "site": {
     "caption": "Een website die het vertelt.",
     "domain": "greenleafbakery.example",
-    "nav": ["Brood", "Bestellen", "Over ons"],
+    "nav": [
+      "Brood",
+      "Bestellen",
+      "Over ons"
+    ],
     "heroSub": "Zuurdesem en rogge, vers vanaf 6 uur.",
     "button": "Bestel voor morgen",
     "edited": "Echt brood, klaar voordat je wakker bent.",
     "langFrom": "NL",
     "langTo": "EN",
-    "flipped": "Real bread, ready before you wake."
+    "flipped": "Real bread, ready before you wake.",
+    "flippedSub": "Sourdough and rye, fresh from 6 a.m.",
+    "flippedButton": "Order for tomorrow",
+    "flippedNav": [
+      "Bread",
+      "Order",
+      "About"
+    ]
   },
   "followup": {
     "caption": "Formulieren en e-mail, klaar voor gebruik.",
@@ -44,9 +86,20 @@
     "listTitle": "Publiek",
     "contactName": "Sam de Vries",
     "tag": "Baklijst",
-    "emails": ["Welkom bij GreenLeaf", "De baksels van deze week", "Maak kennis met onze bakkers"],
+    "emails": [
+      "Welkom bij GreenLeaf",
+      "De baksels van deze week",
+      "Maak kennis met onze bakkers"
+    ],
     "chartLabel": "Bezoeken en aanmeldingen"
   },
-  "triad": ["Word gevonden.", "Krijg aanmeldingen.", "Volg op."],
-  "end": { "cta": "Start je gratis proefperiode van 14 dagen", "url": "website-generator.nl" }
+  "triad": [
+    "Word gevonden.",
+    "Krijg aanmeldingen.",
+    "Volg op."
+  ],
+  "end": {
+    "cta": "Start je gratis proefperiode van 14 dagen",
+    "url": "website-generator.nl"
+  }
 }
