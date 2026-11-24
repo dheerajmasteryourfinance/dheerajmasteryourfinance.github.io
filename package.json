@@ -12,7 +12,8 @@
     "check": "node scripts/check.mjs",
     "package": "npm run build && node scripts/check.mjs && node scripts/package-zip.mjs",
     "video:render": "node video/render.mjs",
-    "video:all": "node video/render.mjs --all"
+    "video:all": "node video/render.mjs --all",
+    "video:music": "node video/audio/mux.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "0.4.8",

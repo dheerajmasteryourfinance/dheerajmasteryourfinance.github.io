@@ -30,10 +30,18 @@ All on-screen text is in `copy.en.json` and `copy.nl.json`. The end-card CTA and
 match the site's Home copy (`src/i18n/home.ts`); `tests/video/copy.test.js` checks that.
 Timing is in `timeline.js` (scenes) and in each element's `--at` (seconds into the film).
 
-## Add music
+## Music
 
-Cuts sit on a 0.5 s grid (120 BPM). To add a royalty-free track:
+`audio/compose.mjs` synthesises an original 60 s music bed in code (120 BPM, F major, no samples,
+so there are no licensing issues). It follows the storyboard: a quiet open, a hit on the logo,
+a groove from 13 s, three hits on the triad cuts, and a fade to silence for the loop.
 
-    ffmpeg -i video/out/webgnr-intro-en-1080p.mp4 -i track.mp3 -c:v copy -c:a aac -b:a 160k -shortest -af "afade=t=out:st=58:d=2" webgnr-intro-en-music.mp4
+    npm run video:music          # writes *-music.mp4 next to each rendered silent MP4
+    node video/audio/mux.mjs track.wav   # use your own track instead (keep it 60 s)
 
-Keep the silent version for the Home page autoplay.
+Keep the silent versions for the Home page autoplay. Use the `-music` versions for YouTube,
+social posts and sales calls.
+
+## Voiceover
+
+`voiceover.md` has a timed English and Dutch script, plus the ffmpeg line for mixing in a recorded voice.

@@ -31,6 +31,15 @@ describe.skipIf(!rendered)('rendered files', () => {
       expect([v.width, v.height]).toEqual([1080, 1080]);
       expect(Math.abs(Number(p.format.duration) - 60)).toBeLessThan(0.05);
     });
+    for (const kind of ['1080p', 'square']) test(`${lang} ${kind} music version: same picture plus one AAC stereo track, 60 s`, () => {
+      const p = probe(`${OUT}/webgnr-intro-${lang}-${kind}-music.mp4`);
+      const a = p.streams.filter(s => s.codec_type === 'audio');
+      expect(a.length).toBe(1);
+      expect(a[0].codec_name).toBe('aac');
+      expect(a[0].channels).toBe(2);
+      expect(Math.abs(Number(p.format.duration) - 60)).toBeLessThan(0.06);
+      expect(p.streams.find(s => s.codec_type === 'video').codec_name).toBe('h264');
+    });
     test(`${lang} poster exists`, () => expect(statSync(`${OUT}/webgnr-intro-${lang}-poster.webp`).size).toBeGreaterThan(1000));
   }
 });
