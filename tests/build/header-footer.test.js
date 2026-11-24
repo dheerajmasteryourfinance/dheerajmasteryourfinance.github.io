@@ -52,9 +52,9 @@ describe.each(routes)('%s', (route) => {
 
   it('footer shows the company facts with the local tax label', () => {
     const f = text(doc.querySelector('footer.site-footer'));
-    expect(f).toContain('Schenk Rekenmeesters');
-    expect(f).toContain('KvK 55633323');
-    expect(f).toContain(lang === 'nl' ? 'BTW NL001579296B13' : 'VAT NL001579296B13');
+    expect(f).toContain('Master Your Business');
+    expect(f).toContain('KvK 99530856');
+    expect(f).toContain(lang === 'nl' ? 'BTW NL869028662B01' : 'VAT NL869028662B01');
     expect(f).toContain('Steijnstraat 18, 2987 AS Ridderkerk');
   });
 

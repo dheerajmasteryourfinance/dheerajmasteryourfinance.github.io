@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { loadPage, allRoutes } from './helpers.js';
 
-const FACTS = (lang) => ['Schenk Rekenmeesters', 'KvK 55633323', `${lang === 'nl' ? 'BTW' : 'VAT'} NL001579296B13`, 'Steijnstraat 18, 2987 AS Ridderkerk'];
+const FACTS = (lang) => ['Master Your Business', 'KvK 99530856', `${lang === 'nl' ? 'BTW' : 'VAT'} NL869028662B01`, 'Steijnstraat 18, 2987 AS Ridderkerk'];
 const MADE_IN = { en: 'Made in the Netherlands', nl: 'Gemaakt in Nederland' };
 
 describe.each(allRoutes())('%s footer', (route) => {

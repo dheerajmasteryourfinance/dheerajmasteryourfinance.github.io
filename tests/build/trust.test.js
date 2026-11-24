@@ -114,7 +114,7 @@ describe.each(['/privacy/', '/terms/', '/cookies/', '/nl/privacy/', '/nl/terms/'
   });
   it('names the company and links to the contact form in the closing line', () => {
     const c = doc.querySelector('main article .contact');
-    expect(c.textContent).toContain('Schenk Rekenmeesters');
+    expect(c.textContent).toContain('Master Your Business');
     expect(c.querySelector('a').getAttribute('href')).toMatch(/\/company\/#contact$/);
   });
 });

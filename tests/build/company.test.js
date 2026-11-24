@@ -5,11 +5,11 @@ const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 
 const L = {
   en: {
-    route: '/company/', prefix: '', operated: 'Operated by', ids: 'KvK 55633323 · VAT NL001579296B13',
+    route: '/company/', prefix: '', operated: 'Operated by', ids: 'KvK 99530856 · VAT NL869028662B01',
     send: 'Send message', phone: 'Phone', topics: 4, address: 'Steijnstraat 18, 2987 AS Ridderkerk',
   },
   nl: {
-    route: '/nl/company/', prefix: '/nl', operated: 'Een product van', ids: 'KvK 55633323 · BTW NL001579296B13',
+    route: '/nl/company/', prefix: '/nl', operated: 'Een product van', ids: 'KvK 99530856 · BTW NL869028662B01',
     send: 'Bericht versturen', phone: 'Telefoon', topics: 4, address: 'Steijnstraat 18, 2987 AS Ridderkerk',
   },
 };
@@ -66,7 +66,7 @@ describe.each(Object.entries(L))('company page (%s)', (lang, c) => {
     const facts = [...doc.querySelectorAll('main dl.facts > div')];
     const op = facts.find((d) => text(d.querySelector('dt')) === c.operated);
     const t = text(op.querySelector('dd'));
-    expect(t).toContain('Schenk Rekenmeesters');
+    expect(t).toContain('Master Your Business');
     expect(t).toContain(c.ids);
     expect(text(doc.querySelector('main dl.facts'))).toContain('Ridderkerk');
   });
