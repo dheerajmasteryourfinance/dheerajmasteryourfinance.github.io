@@ -9,7 +9,9 @@ const early = {
     eyebrow: 'Early access',
     h1: 'Be among the first to build with Webgnr.',
     lede: 'We are opening Webgnr to a limited number of businesses, in small groups, so every new site gets our attention. Tell us about yours and we will send you an invitation.',
-    points: ['A complete website from a short brief', 'Forms, newsletters and follow-up emails built in', 'Personal help getting your first site live'],
+    trialLine: 'Want to start right away?',
+    trialLink: 'Start your free 14-day trial →',
+    points: ['Your brand story and a complete website from a short brief', 'Forms, newsletters and follow-up emails built in', 'Personal help getting your first site live'],
     form: {
       title: 'Request early access',
       sub: 'It takes about a minute. We reply by email.',
@@ -49,7 +51,9 @@ const early = {
     eyebrow: 'Vroege toegang',
     h1: 'Wees een van de eersten die met Webgnr bouwt.',
     lede: 'We openen Webgnr voor een beperkt aantal bedrijven, in kleine groepen, zodat elke nieuwe site onze aandacht krijgt. Vertel over jouw bedrijf en we sturen je een uitnodiging.',
-    points: ['Een complete website vanuit een korte briefing', 'Formulieren, nieuwsbrieven en follow-upmails ingebouwd', 'Persoonlijke hulp om je eerste site live te krijgen'],
+    trialLine: 'Wil je meteen beginnen?',
+    trialLink: 'Start je gratis proefperiode van 14 dagen →',
+    points: ['Je merkverhaal en een complete website vanuit een korte briefing', 'Formulieren, nieuwsbrieven en follow-upmails ingebouwd', 'Persoonlijke hulp om je eerste site live te krijgen'],
     form: {
       title: 'Vraag vroege toegang aan',
       sub: 'Het kost ongeveer een minuut. We antwoorden per e-mail.',

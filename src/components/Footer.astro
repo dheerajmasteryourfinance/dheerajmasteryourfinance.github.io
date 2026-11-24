@@ -1,6 +1,6 @@
 ---
 import LangSwitch from './LangSwitch.astro';
-import { APP_LOGIN } from '../lib/links.js';
+import { APP_LOGIN, APP_REGISTER, EARLY_ACCESS } from '../lib/links.js';
 import { COMPANY, kvkLine, vatLine, addressLine } from '../lib/company.ts';
 import { getLocale, localize } from '../i18n/index.ts';
 import { UI } from '../i18n/ui.ts';
@@ -8,7 +8,8 @@ interface Props { switchPath: string }
 const { switchPath } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = UI[locale].footer;
-const signIn = UI[locale].nav.signIn;
+const ui = UI[locale];
+const signIn = ui.nav.signIn;
 const l = (p: string) => localize(p, locale);
 const facts = [COMPANY.legalName, kvkLine(), vatLine(locale), addressLine()];
 ---
@@ -19,6 +20,8 @@ const facts = [COMPANY.legalName, kvkLine(), vatLine(locale), addressLine()];
         <h2>{t.product}</h2>
         <ul>
           <li><a href={l('/features/')}>{t.features}</a></li>
+          <li><a href={APP_REGISTER} rel="noopener noreferrer">{ui.trial}</a></li>
+          <li><a href={l(EARLY_ACCESS)}>{ui.cta.lead}{ui.cta.rest}{ui.cta.tail}</a></li>
           <li><a href={APP_LOGIN} rel="noopener noreferrer">{signIn}</a></li>
         </ul>
       </div>

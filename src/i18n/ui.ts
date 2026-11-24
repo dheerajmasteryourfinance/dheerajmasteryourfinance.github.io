@@ -8,6 +8,8 @@ const en = {
   // The nav CTA hides its lead (and tail) under 420px so it fits beside the logo
   // and the menu button; the full label stays the link's text and accessible name.
   cta: { lead: 'Request ', rest: 'early access', tail: '' },
+  trial: 'Start free trial',
+  trialLong: 'Start your free 14-day trial',
   nav: {
     label: 'Main',
     home: 'Webgnr home',
@@ -85,6 +87,8 @@ const nl: Ui = {
   skip: 'Naar de inhoud',
   ogLocale: 'nl_NL',
   cta: { lead: 'Vraag ', rest: 'vroege toegang', tail: ' aan' },
+  trial: 'Start gratis proefperiode',
+  trialLong: 'Start je gratis proefperiode van 14 dagen',
   nav: {
     label: 'Hoofdmenu',
     home: 'Webgnr home',

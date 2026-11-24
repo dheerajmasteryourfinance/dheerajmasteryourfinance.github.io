@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { Picture } from 'astro:assets';
-import { EARLY_ACCESS } from '../../lib/links.js';
+import { APP_REGISTER } from '../../lib/links.js';
 import { getLocale, localize } from '../../i18n/index.ts';
 import { FEATURES } from '../../i18n/features.ts';
 import newWebsiteBrief from '../../assets/screens/new-website-brief.png';
@@ -181,7 +181,7 @@ const chips = (['build', 'leads', 'email', 'search', 'domains', 'languages'] as 
     <div class="container">
       <h2>{t.cta.title}</h2>
       <div class="cta-row">
-        <a class="btn btn-accent" href={l(EARLY_ACCESS)}>{t.cta.primary}</a>
+        <a class="btn btn-accent" href={APP_REGISTER} rel="noopener noreferrer">{t.cta.primary}</a>
         <a class="btn btn-ondark" href={l('/docs/')}>{t.cta.guides}</a>
       </div>
     </div>

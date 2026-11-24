@@ -109,14 +109,12 @@ describe('Dutch copy', () => {
     expect(hits).toEqual([]);
   });
 
-  it('every Dutch page has the Dutch CTA in the nav, linking to /nl/early-access/', () => {
+  it('every Dutch page has the Dutch free-trial CTA in the nav, linking to the app sign-up', () => {
     for (const r of nl) {
       const nav = loadPage(r).querySelector('header.site-nav');
-      const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === 'Vraag vroege toegang aan');
+      const ctas = [...nav.querySelectorAll('a')].filter((a) => text(a) === 'Start gratis proefperiode');
       expect(ctas, r).toHaveLength(1);
-      expect(ctas[0].getAttribute('href')).toBe('/nl/early-access/');
-      // The CTA text is split in lead / rest / tail spans (the panel shows all three).
-      expect(ctas[0].querySelector('.cta-rest')?.textContent.trim()).toBe('vroege toegang');
+      expect(ctas[0].getAttribute('href')).toBe('https://app.website-generator.nl/register');
     }
   });
 

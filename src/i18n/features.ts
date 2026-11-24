@@ -13,8 +13,8 @@ const en = {
   build: {
     eyebrow: '01 · Build',
     title: 'From a short brief to a full site.',
-    copy: 'Describe what you do and who you serve. Webgnr writes the pages, picks a layout and applies your brand colours and fonts.',
-    ticks: ['Click any text or image to change it', 'Ask for bigger changes in a sentence', 'Import an existing site from a ZIP file'],
+    copy: 'Describe what you do and who you serve. Webgnr turns your answers into your brand story, then writes the pages around it, picks a layout and applies your brand colours and fonts.',
+    ticks: ['A brand story built from your answers, followed on every page', 'Click any text or image to change it', 'Ask for bigger changes in a sentence', 'Import an existing site from a ZIP file'],
     altBrief: 'The New website brief, first step About your business, asking for the business name and the ideal customer',
     altEditor: 'The finished site open in the editor, with its headline selected for editing',
     phoneTitle: 'Looks right on every phone',
@@ -64,7 +64,7 @@ const en = {
     alt: 'The editor’s Translate dialog, with a language to translate the page into selected',
     list: [['EN', 'English', 'English'], ['NL', 'Nederlands', 'Dutch'], ['FR', 'Français', 'French'], ['DE', 'Deutsch', 'German'], ['ZH', '中文', 'Chinese'], ['JA', '日本語', 'Japanese'], ['ES', 'Español', 'Spanish'], ['RU', 'Русский', 'Russian']],
   },
-  cta: { title: 'Try it on your own business.', primary: 'Request early access', guides: 'Read the guides' },
+  cta: { title: 'Try it on your own business.', primary: 'Start your free 14-day trial', guides: 'Read the guides' },
 };
 
 const nl: typeof en = {
@@ -80,8 +80,8 @@ const nl: typeof en = {
   build: {
     eyebrow: '01 · Bouwen',
     title: 'Van een korte briefing naar een complete website.',
-    copy: 'Vertel wat je doet en voor wie. Webgnr schrijft de pagina’s, kiest een opmaak en gebruikt de kleuren en lettertypes van je huisstijl.',
-    ticks: ['Klik op een tekst of afbeelding om die aan te passen', 'Vraag grotere wijzigingen in één zin', 'Importeer een bestaande site uit een ZIP-bestand'],
+    copy: 'Vertel wat je doet en voor wie. Webgnr maakt van je antwoorden je merkverhaal, schrijft daaromheen de pagina’s, kiest een opmaak en gebruikt de kleuren en lettertypes van je huisstijl.',
+    ticks: ['Een merkverhaal uit je antwoorden, dat elke pagina volgt', 'Klik op een tekst of afbeelding om die aan te passen', 'Vraag grotere wijzigingen in één zin', 'Importeer een bestaande site uit een ZIP-bestand'],
     altBrief: 'De briefing voor een nieuwe website, eerste stap Over je bedrijf, met vragen naar de bedrijfsnaam en de ideale klant (Engelse weergave)',
     altEditor: 'De kant-en-klare site geopend in de editor, met de kop geselecteerd om te bewerken (Engelse weergave)',
     phoneTitle: 'Ziet er op elke telefoon goed uit',
@@ -131,7 +131,7 @@ const nl: typeof en = {
     alt: 'Het vertaalvenster van de editor, met een taal gekozen om de pagina naar te vertalen (Engelse weergave)',
     list: [['EN', 'English', 'Engels'], ['NL', 'Nederlands', 'Nederlands'], ['FR', 'Français', 'Frans'], ['DE', 'Deutsch', 'Duits'], ['ZH', '中文', 'Chinees'], ['JA', '日本語', 'Japans'], ['ES', 'Español', 'Spaans'], ['RU', 'Русский', 'Russisch']],
   },
-  cta: { title: 'Probeer het met je eigen bedrijf.', primary: 'Vraag vroege toegang aan', guides: 'Lees de handleidingen' },
+  cta: { title: 'Probeer het met je eigen bedrijf.', primary: 'Start je gratis proefperiode van 14 dagen', guides: 'Lees de handleidingen' },
 };
 
 export const FEATURES = { en, nl };

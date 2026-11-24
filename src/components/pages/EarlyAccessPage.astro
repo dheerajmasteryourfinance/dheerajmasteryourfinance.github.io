@@ -2,6 +2,7 @@
 import '../../styles/forms.css';
 import Base from '../../layouts/Base.astro';
 import { getLocale, localize } from '../../i18n/index.ts';
+import { APP_REGISTER } from '../../lib/links.js';
 import { EARLY } from '../../i18n/early.ts';
 import { EXAMPLES } from '../../lib/examples.ts';
 import Blobs from '../motion/Blobs.astro';
@@ -25,6 +26,7 @@ const check = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24
       <p class="eyebrow">{t.eyebrow}</p>
       <h1>{t.h1}</h1>
       <p class="lede">{t.lede}</p>
+      <p class="trialline">{t.trialLine} <a href={APP_REGISTER} rel="noopener noreferrer">{t.trialLink}</a></p>
       <ul class="points">
         {t.points.map((p) => <li><span set:html={check} />{p}</li>)}
       </ul>
@@ -112,6 +114,8 @@ const check = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24
   .eyebrow { font: 700 .8125rem/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--link); margin: 0 0 12px; display: block; }
   .ea-pitch h1 { max-width: 820px; letter-spacing: -.035em; }
   .lede { font-size: 1.1875rem; color: var(--muted); max-width: 680px; margin: 0; }
+  .trialline { margin: 16px 0 0; font-weight: 500; }
+  .trialline a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
   .points { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 10px; }
   .points li { display: flex; align-items: flex-start; gap: 10px; font-weight: 500; color: var(--ink); }
   .points svg { flex: none; margin-top: 5px; color: var(--link); }

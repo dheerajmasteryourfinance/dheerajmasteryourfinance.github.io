@@ -16,7 +16,7 @@ const COPY = {
     langs: 'Your site in up to 8 languages',
     cta: 'Every day without a site that works',
     early: 'Request early access',
-    sticky: 'Be among the first to build with Webgnr',
+    sticky: 'Try Webgnr free for 14 days',
   },
   nl: {
     route: '/nl/',
@@ -29,7 +29,7 @@ const COPY = {
     langs: 'Je site in maximaal 8 talen',
     cta: 'Elke dag zonder werkende site',
     early: 'Vraag vroege toegang aan',
-    sticky: 'Wees een van de eersten met Webgnr',
+    sticky: 'Probeer Webgnr 14 dagen gratis',
   },
 };
 
@@ -104,11 +104,11 @@ describe.each(Object.entries(COPY))('home page (%s)', (lang, c) => {
     expect(sec('shot').querySelectorAll('.fchip')).toHaveLength(3);
   });
 
-  it('ends with one sticky early-access bar in the page language', () => {
+  it('ends with one sticky free-trial bar in the page language', () => {
     const bars = doc.querySelectorAll('[data-sticky-cta]');
     expect(bars).toHaveLength(1);
     expect(text(bars[0])).toContain(c.sticky);
-    expect(bars[0].querySelector('a').getAttribute('href')).toBe(`${c.prefix}/early-access/`);
+    expect(bars[0].querySelector('a').getAttribute('href')).toBe('https://app.website-generator.nl/register');
   });
 
   it('shot uses the real editor screenshot as the eager, high-priority image', () => {

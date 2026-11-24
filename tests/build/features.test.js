@@ -6,8 +6,8 @@ const NATIVE = ['English', 'Nederlands', 'Français', 'Deutsch', '中文', '日�
 const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 
 const LANGS = {
-  en: { route: '/features/', prefix: '', early: 'Request early access', guides: 'Read the guides', phone: 'Looks right on every phone' },
-  nl: { route: '/nl/features/', prefix: '/nl', early: 'Vraag vroege toegang aan', guides: 'Lees de handleidingen', phone: 'Ziet er op elke telefoon goed uit' },
+  en: { route: '/features/', prefix: '', trial: 'Start your free 14-day trial', guides: 'Read the guides', phone: 'Looks right on every phone' },
+  nl: { route: '/nl/features/', prefix: '/nl', trial: 'Start je gratis proefperiode van 14 dagen', guides: 'Lees de handleidingen', phone: 'Ziet er op elke telefoon goed uit' },
 };
 
 describe.each(Object.entries(LANGS))('features page (%s)', (lang, c) => {
@@ -39,10 +39,10 @@ describe.each(Object.entries(LANGS))('features page (%s)', (lang, c) => {
     expect((img.getAttribute('alt') ?? '').trim().length).toBeGreaterThan(10);
   });
 
-  it('has a closing CTA with early access and the guides', () => {
+  it('has a closing CTA with the free trial and the guides', () => {
     const cta = doc.querySelector('main > section[data-section="cta"]');
     const links = [...cta.querySelectorAll('a')];
-    expect(links.find((a) => text(a) === c.early).getAttribute('href')).toBe(`${c.prefix}/early-access/`);
+    expect(links.find((a) => text(a) === c.trial).getAttribute('href')).toBe('https://app.website-generator.nl/register');
     expect(links.find((a) => text(a) === c.guides).getAttribute('href')).toBe(`${c.prefix}/docs/`);
   });
 

@@ -5,7 +5,7 @@ const routes = allRoutes();
 const isNl = (r) => r.startsWith('/nl/');
 const counterpart = (r) => (isNl(r) ? r.slice(3) : `/nl${r}`);
 const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
-const CTA = { en: 'Request early access', nl: 'Vraag vroege toegang aan' };
+const CTA = { en: 'Start free trial', nl: 'Start gratis proefperiode' };
 const TRUST = {
   en: ['Verified senders', 'Easy unsubscribe'],
   nl: ['Geverifieerde afzenders', 'Makkelijk uitschrijven'],
@@ -30,11 +30,11 @@ describe.each(routes)('%s', (route) => {
     for (const p of ['/features/', '/docs/', '/company/']) expect(hrefs).toContain(loc(p));
   });
 
-  it('has exactly one early-access CTA in the header, in the actions', () => {
+  it('has exactly one free-trial CTA in the header, in the actions, linking to the app sign-up', () => {
     const ctas = [...header.querySelectorAll('a')].filter((a) => text(a) === CTA[lang]);
     expect(ctas).toHaveLength(1);
     expect(ctas[0].closest('.navactions')).toBeTruthy();
-    expect(ctas[0].getAttribute('href')).toBe(loc('/early-access/'));
+    expect(ctas[0].getAttribute('href')).toBe('https://app.website-generator.nl/register');
   });
 
   it('language switch points at this page in the other language', () => {

@@ -1,13 +1,13 @@
 ---
 // The early-access bar that appears once the visitor scrolls past the hero.
-import { localize, type Locale } from '../i18n/index.ts';
+import type { Locale } from '../i18n/index.ts';
 import { MOTION } from '../i18n/motion.ts';
-import { EARLY_ACCESS } from '../lib/links.js';
+import { APP_REGISTER } from '../lib/links.js';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = MOTION[locale];
 ---
 <div class="stickycta" data-sticky-cta>
   <span>{t.sticky}</span>
-  <a class="btn btn-accent" href={localize(EARLY_ACCESS, locale)}>{t.stickyCta}</a>
+  <a class="btn btn-accent" href={APP_REGISTER} rel="noopener noreferrer">{t.stickyCta}</a>
 </div>

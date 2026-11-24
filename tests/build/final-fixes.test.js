@@ -30,7 +30,7 @@ describe('app links', () => {
   });
 });
 
-describe('early access is the primary CTA everywhere', () => {
+describe('request-access links', () => {
   it('no page says Build my site', () => {
     const hits = allRoutes().filter((r) => /Build my site/.test(loadPage(r).body.textContent));
     expect(hits).toEqual([]);
@@ -51,9 +51,8 @@ describe('early access is the primary CTA everywhere', () => {
         expect(a.hasAttribute('rel'), route).toBe(false);
       }
     }
-    // One in the nav of every page, plus at least Home hero, Home closing CTA, Home sticky bar and Features CTA.
-    // Later pages add their own closing CTAs, so this is a floor, not an exact count.
-    expect(seen).toBeGreaterThanOrEqual(routes.length + 4);
+    // One in the footer of every page, plus Home hero and Home closing section. A floor, not an exact count.
+    expect(seen).toBeGreaterThanOrEqual(routes.length + 2);
   });
 });
 

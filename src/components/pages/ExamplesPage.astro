@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { Picture } from 'astro:assets';
-import { EARLY_ACCESS } from '../../lib/links.js';
+import { EARLY_ACCESS, APP_REGISTER } from '../../lib/links.js';
 import { getLocale, localize } from '../../i18n/index.ts';
 import { UI } from '../../i18n/ui.ts';
 import { EXAMPLES_COPY, SITE_LANGS } from '../../i18n/examples.ts';
@@ -105,7 +105,7 @@ const others = EXAMPLES.filter((e) => e.id !== 'greenleaf');
     <div class="container">
       <h2>{t.cta.title}</h2>
       <p>{t.cta.text}</p>
-      <a class="btn btn-accent pulse" href={l(EARLY_ACCESS)}>{ui.cta.lead}{ui.cta.rest}{ui.cta.tail}</a>
+      <a class="btn btn-accent pulse" href={APP_REGISTER} rel="noopener noreferrer">{ui.trialLong}</a>
     </div>
   </section>
 </Base>

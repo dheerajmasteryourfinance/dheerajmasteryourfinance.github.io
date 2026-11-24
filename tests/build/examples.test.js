@@ -7,8 +7,8 @@ const text = (el) => el.textContent.replace(/\s+/g, ' ').trim();
 const NATIVE = ['English', 'Nederlands', 'Français', 'Deutsch', '中文', '日本語', 'Español', 'Русский'];
 
 const L = {
-  en: { list: '/examples/', detail: '/examples/greenleaf-bakery/', prefix: '', early: 'Request early access', more: 'More examples on the way', navLabel: 'Examples' },
-  nl: { list: '/nl/examples/', detail: '/nl/examples/greenleaf-bakery/', prefix: '/nl', early: 'Vraag vroege toegang aan', more: 'Meer voorbeelden volgen', navLabel: 'Voorbeelden' },
+  en: { list: '/examples/', detail: '/examples/greenleaf-bakery/', prefix: '', trial: 'Start your free 14-day trial', more: 'More examples on the way', navLabel: 'Examples' },
+  nl: { list: '/nl/examples/', detail: '/nl/examples/greenleaf-bakery/', prefix: '/nl', trial: 'Start je gratis proefperiode van 14 dagen', more: 'Meer voorbeelden volgen', navLabel: 'Voorbeelden' },
 };
 
 const builtCss = () => {
@@ -54,9 +54,9 @@ describe.each(Object.entries(L))('examples page (%s)', (lang, c) => {
     for (const a of cards) expect(a.getAttribute('href')).toBe(`${c.prefix}/early-access/`);
   });
 
-  it('has a closing CTA to early access', () => {
-    const a = [...doc.querySelectorAll('main > section[data-section="cta"] a')].find((x) => text(x) === c.early);
-    expect(a.getAttribute('href')).toBe(`${c.prefix}/early-access/`);
+  it('has a closing CTA that starts the free trial in the app', () => {
+    const a = [...doc.querySelectorAll('main > section[data-section="cta"] a')].find((x) => text(x) === c.trial);
+    expect(a.getAttribute('href')).toBe('https://app.website-generator.nl/register');
   });
 });
 

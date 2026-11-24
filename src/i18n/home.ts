@@ -4,7 +4,7 @@
 
 const en = {
   title: 'Webgnr: get found, get signed up, follow up',
-  description: 'Describe your business and Webgnr builds a site with forms, newsletters and search basics ready to go. In English and Dutch.',
+  description: 'Describe your business and Webgnr builds your brand story, a website that tells it, and forms and email to follow up. Start free for 14 days.',
   announce: { text: 'New: automated email sequences for every site.', link: 'Read the guide' },
   hero: {
     switchLabel: 'Who are you building for',
@@ -12,11 +12,13 @@ const en = {
     agency: 'For agencies',
     h1Business: ['Get found. Get signed up.', 'Follow up.'],
     h1Agency: ['Ship client sites faster.', 'Send email as the client.'],
-    ledeBusiness: 'Describe your business and get a site with forms and email ready to go. No designer, no developer, no extra tools.',
+    ledeBusiness: 'Describe your business and get your brand story, a website that tells it, and forms and email ready to go. No designer, no developer, no extra tools.',
     ledeAgency: 'Generate, edit and publish for every client from one account. Each client keeps their own domain, sender identity, audience and reports.',
-    cta: 'Request early access',
+    cta: 'Start your free 14-day trial',
+    requestLead: 'Not ready yet?',
+    requestLink: 'Request early access',
     example: 'See an example',
-    chips: ['Optional double opt-in', 'Easy unsubscribe', 'Your own domain'],
+    chips: ['Free for 14 days', 'Optional double opt-in', 'Easy unsubscribe', 'Your own domain'],
   },
   shot: {
     label: 'Product preview',
@@ -34,7 +36,7 @@ const en = {
   },
   guide: {
     title: 'We know your time goes to your business, not to learning web tools.',
-    text: 'That is why Webgnr asks about your customers, not about code. Your answers are turned into a clear message, a site built around it, and the tools to keep in touch.',
+    text: 'That is why Webgnr asks about your customers, not about code. Your answers become your brand story: a clear message, a site built around it, and the tools to keep in touch.',
     cards: [] as { t: string; p: string }[],
   },
   how: {
@@ -55,7 +57,7 @@ const en = {
       {
         t: 'Get found',
         items: [
-          'A complete site, written from your brief',
+          'Your brand story and a complete site, written from your brief',
           'Your own domain',
           'Your site in up to 8 languages',
         ],
@@ -102,7 +104,7 @@ const en = {
 
 const nl: typeof en = {
   title: 'Webgnr: word gevonden, krijg aanmeldingen, volg op',
-  description: 'Beschrijf je bedrijf en Webgnr bouwt een site met formulieren, nieuwsbrieven en zoekbasis die klaarstaat. In het Nederlands en Engels.',
+  description: 'Beschrijf je bedrijf en Webgnr bouwt je merkverhaal, een website die het vertelt en formulieren en e-mail om op te volgen. Start 14 dagen gratis.',
   announce: { text: 'Nieuw: automatische follow-upmails voor elke site.', link: 'Lees de handleiding' },
   hero: {
     switchLabel: 'Voor wie bouw je',
@@ -110,11 +112,13 @@ const nl: typeof en = {
     agency: 'Voor bureaus',
     h1Business: ['Word gevonden. Krijg aanmeldingen.', 'Volg op.'],
     h1Agency: ['Lever klantsites sneller op.', 'Mail namens je klant.'],
-    ledeBusiness: 'Beschrijf je bedrijf en krijg een site met formulieren en e-mail die klaarstaat. Geen ontwerper, geen ontwikkelaar, geen gedoe.',
+    ledeBusiness: 'Beschrijf je bedrijf en krijg je merkverhaal, een website die het vertelt en formulieren en e-mail die klaarstaan. Geen ontwerper, geen ontwikkelaar, geen gedoe.',
     ledeAgency: 'Maak, bewerk en publiceer voor al je klanten vanuit één account. Elke klant houdt een eigen domein, afzender, publiek en rapportage.',
-    cta: 'Vraag vroege toegang aan',
+    cta: 'Start je gratis proefperiode van 14 dagen',
+    requestLead: 'Nog niet zover?',
+    requestLink: 'Vraag vroege toegang aan',
     example: 'Bekijk een voorbeeld',
-    chips: ['Optionele double opt-in', 'Makkelijk uitschrijven', 'Je eigen domein'],
+    chips: ['14 dagen gratis', 'Optionele double opt-in', 'Makkelijk uitschrijven', 'Je eigen domein'],
   },
   shot: {
     label: 'Productvoorbeeld',
@@ -132,7 +136,7 @@ const nl: typeof en = {
   },
   guide: {
     title: 'Wij weten dat je tijd naar je bedrijf gaat, niet naar het leren van webtools.',
-    text: 'Daarom vraagt Webgnr naar je klanten, niet naar code. Je antwoorden worden een helder verhaal, een site eromheen en de tools om in contact te blijven.',
+    text: 'Daarom vraagt Webgnr naar je klanten, niet naar code. Je antwoorden worden je merkverhaal: een helder verhaal, een site eromheen en de tools om in contact te blijven.',
     cards: [],
   },
   how: {
@@ -153,7 +157,7 @@ const nl: typeof en = {
       {
         t: 'Word gevonden',
         items: [
-          'Een complete site, geschreven vanuit je briefing',
+          'Je merkverhaal en een complete site, geschreven vanuit je briefing',
           'Je eigen domein',
           'Je site in maximaal 8 talen',
         ],
