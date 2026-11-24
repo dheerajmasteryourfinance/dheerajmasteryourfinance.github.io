@@ -14,7 +14,7 @@ body { font-family: var(--font-body); color: var(--white); -webkit-font-smoothin
   animation: scene-on calc((var(--e) - var(--s)) * 1s) linear calc(var(--s) * 1s) 1 none; }
 @keyframes scene-on { from, to { opacity: 1; } }
 
-h1, h2, .display { font-family: var(--font-heading); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
+h1, h2, .display { text-wrap: balance; font-family: var(--font-heading); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
 .caption { position: absolute; left: 0; right: 0; bottom: 7vh; text-align: center; font-family: var(--font-heading);
   font-weight: 700; font-size: 5.2vh; letter-spacing: -0.02em; color: var(--white); }
 .caption.on-light { color: var(--ink); }

@@ -1,0 +1,25 @@
+/* brief: 13-22 s. The intake form fills itself in. */
+.brief-card { position: relative; width: min(62vw, 112vh); margin-top: -8vh; background: var(--white); border-radius: 2.4vh;
+  box-shadow: 0 3vh 8vh rgba(15, 30, 61, .14); padding: 4.5vh 5vh; display: grid; gap: 2.8vh; color: var(--ink); }
+[data-format="square"] .brief-card { width: 88vw; }
+.brief-head { display: flex; align-items: center; gap: 1.6vh; font-family: var(--font-heading); font-size: 3.6vh; }
+.brief-head .step { margin-left: auto; font-family: var(--font-body); font-size: 2.2vh; color: var(--muted); }
+.leaf { width: 4.4vh; height: 4.4vh; border-radius: 50% 0 50% 0; background: #2F9E5B; }
+.field { display: grid; gap: 1vh; }
+.field label { font-size: 2.3vh; font-weight: 600; color: var(--muted); }
+.input { min-height: 6.6vh; border: 2px solid var(--line); border-radius: 1.4vh; padding: 1.5vh 2vh; font-size: 3vh; display: flex; align-items: center; }
+.upload { position: absolute; right: -4vh; top: -3.5vh; display: flex; align-items: center; gap: 1.2vh; background: var(--accent);
+  color: var(--ink); font-weight: 700; font-size: 2.6vh; padding: 1.6vh 2.6vh; border-radius: 99vh; box-shadow: 0 1.5vh 4vh rgba(15, 30, 61, .2);
+  rotate: 4deg; }
+[data-format="square"] .upload { right: -1vh; }
+.clip { display: grid; place-items: center; width: 3.4vh; height: 3.4vh; border-radius: 50%; background: var(--ink); color: var(--accent); font-size: 2vh; }
+
+/* story: 22-30 s. Answers become a four-part brand story, then a headline. */
+.parts { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4vh; width: min(70vw, 120vh); margin-top: -8vh; }
+[data-format="square"] .parts { width: 88vw; }
+.part { background: var(--ink-raised); border: 1px solid var(--on-dark-line); border-radius: 2vh; padding: 3vh 3.4vh; display: grid; gap: 1vh; }
+.part small { font-size: 2.1vh; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.part span { font-family: var(--font-heading); font-weight: 700; font-size: 3.8vh; letter-spacing: -0.02em; }
+.story-headline { font-size: 10vh; max-width: 80vw; text-align: center; margin-top: -6vh; }
+[data-format="square"] .story-headline { font-size: 8.4vh; max-width: 90vw; }
+.scene[data-scene="story"] .caption { color: var(--accent); }
