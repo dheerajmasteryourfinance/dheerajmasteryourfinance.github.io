@@ -7,22 +7,22 @@ const L = {
   en: {
     route: '/early-access/',
     prefix: '',
-    lede: 'We are opening WebGen to a limited number of businesses',
+    lede: 'We are opening Webgnr to a limited number of businesses',
     steps: [/read/i, /invitation/i, /build/i],
     labels: { name: 'Name', email: 'Email', company: 'Business name (optional)', type: 'Type', message: 'What would you like to build?' },
     types: ['Business', 'Agency', 'Other'],
     submit: 'Request access',
-    faq: ['I am an agency. Can I join?', 'Does WebGen work in Dutch?'],
+    faq: ['I am an agency. Can I join?', 'Does Webgnr work in Dutch?'],
   },
   nl: {
     route: '/nl/early-access/',
     prefix: '/nl',
-    lede: 'We openen WebGen voor een beperkt aantal bedrijven',
+    lede: 'We openen Webgnr voor een beperkt aantal bedrijven',
     steps: [/lezen/i, /uitnodiging/i, /bouwt/i],
     labels: { name: 'Naam', email: 'E-mail', company: 'Bedrijfsnaam (optioneel)', type: 'Type', message: 'Wat wil je bouwen?' },
     types: ['Bedrijf', 'Bureau', 'Anders'],
     submit: 'Aanvraag versturen',
-    faq: ['Ik ben een bureau. Kan ik meedoen?', 'Werkt WebGen in het Nederlands?'],
+    faq: ['Ik ben een bureau. Kan ik meedoen?', 'Werkt Webgnr in het Nederlands?'],
   },
 };
 

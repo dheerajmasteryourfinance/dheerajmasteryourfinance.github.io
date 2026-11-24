@@ -1,6 +1,6 @@
 ---
 title: Import an existing site
-description: Already have a website as files? Upload it as a zip, check it in the editor, then publish it with WebGen.
+description: Already have a website as files? Upload it as a zip, check it in the editor, then publish it with Webgnr.
 group: getting-started
 order: 2
 minutes: 8
@@ -11,12 +11,12 @@ updated: 2026-11-11
 
 ## 1. Prepare your files
 
-WebGen needs two small things from your pages so it can make them editable and connect your forms.
+Webgnr needs two small things from your pages so it can make them editable and connect your forms.
 
 - **Put each top-level block in a section.** Inside your page's main area, use one `section` element per block, such as the hero, services and contact. This is what lets you click a block in the editor to change its text, swap an image or restyle it. Blocks that are not sections still publish, but they stay uneditable as blocks.
 - **Name your form fields in the usual way.** A contact form needs an email field and a message field. A newsletter form needs just an email field. Use the standard email field type, which is the most reliable.
 
-Forms WebGen cannot place with confidence are left exactly as they are. You can connect those by hand in the editor afterwards.
+Forms Webgnr cannot place with confidence are left exactly as they are. You can connect those by hand in the editor afterwards.
 
 <div class="callout callout-note"><strong>Note:</strong> forms with a password field, search boxes and forms with no email field are skipped on purpose, because they are not lead forms.</div>
 
@@ -30,7 +30,7 @@ Drop your zip onto the box that says **Drop your files or zip here, or click to 
 
 - Use one zip to keep your folders intact. You can also add several loose files (HTML, CSS, JS, images and videos).
 - The upload can be up to 50 MB, with at most 25 MB per file and 400 files in total.
-- If your zip has a single wrapping folder, WebGen removes it for you.
+- If your zip has a single wrapping folder, Webgnr removes it for you.
 
 The files you picked are listed under **Selected** with their size.
 
@@ -52,7 +52,7 @@ Click **Publish** when you are happy. Your site goes online at a free address, a
 
 ## Update the site later
 
-Changed your site outside WebGen? You do not need to import it again.
+Changed your site outside Webgnr? You do not need to import it again.
 
 - Open your site, click **Manage**, then the **Website** tab.
 - Drop the new zip into the box and click **Replace website**, then confirm with **Yes, replace**.

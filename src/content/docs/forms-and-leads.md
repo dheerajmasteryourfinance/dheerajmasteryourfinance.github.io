@@ -7,11 +7,11 @@ minutes: 7
 updated: 2026-11-11
 ---
 
-<div class="callout"><strong>Before you start:</strong> your site needs a form. WebGen sites usually include a contact section. You can add more, or a download or newsletter button, in the editor.</div>
+<div class="callout"><strong>Before you start:</strong> your site needs a form. Webgnr sites usually include a contact section. You can add more, or a download or newsletter button, in the editor.</div>
 
 ## 1. Know the three kinds of form
 
-WebGen sorts what visitors send into three kinds, and labels each one in your list.
+Webgnr sorts what visitors send into three kinds, and labels each one in your list.
 
 - **Contact**: a message from your contact form.
 - **Download**: a request for a file you offer, such as a brochure.
@@ -29,7 +29,7 @@ Click **Publish**, open your live site and send yourself a message through the f
 
 Click **Manage**, then the **Leads** tab. The page is titled **Form submissions**, and every new message appears here. Each row shows its kind. For a download request you also see the **Requested file**.
 
-Use the filters at the top to switch between **Real**, **Spam** and **All**. Messages WebGen recognises as spam carry a **Spam** badge, and people who opted out carry an **Unsubscribed** badge.
+Use the filters at the top to switch between **Real**, **Spam** and **All**. Messages Webgnr recognises as spam carry a **Spam** badge, and people who opted out carry an **Unsubscribed** badge.
 
 When nothing has arrived yet, the page says **No submissions yet.**
 

@@ -80,7 +80,7 @@ describe('Dutch email page', () => {
   it('links help to the Dutch contact section and has no placeholders', () => {
     expect(doc.querySelector('main').textContent).not.toMatch(/\[[A-Z]/);
     expect(doc.querySelector('main a[href="/nl/company/#contact"]')).toBeTruthy();
-    expect(text(doc.querySelector('h1'))).toContain('WebGen');
+    expect(text(doc.querySelector('h1'))).toContain('Webgnr');
   });
 });
 

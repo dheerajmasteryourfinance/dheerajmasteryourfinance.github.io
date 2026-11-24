@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { publishedDir, relativize, relativizeSrcsets } from '../../scripts/import-paths.mjs';
 
-// Mirrors the WebGen app's importer (backend/app/services/site_import.py + site_paths.py), which rewrites
+// Mirrors the Webgnr app's importer (backend/app/services/site_import.py + site_paths.py), which rewrites
 // href/src but not srcset/imagesrcset, so those are rewritten here before the ZIP is built.
 
 describe('publishedDir', () => {

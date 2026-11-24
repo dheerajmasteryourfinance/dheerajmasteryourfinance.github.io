@@ -3,17 +3,17 @@
 
 const en = {
   list: {
-    title: 'Examples: websites built with WebGen',
-    description: 'See how a short brief becomes a complete site, trade by trade. Example sites made in WebGen.',
+    title: 'Examples: websites built with Webgnr',
+    description: 'See how a short brief becomes a complete site, trade by trade. Example sites made in Webgnr.',
     eyebrow: 'Examples',
-    h1: 'Websites built with WebGen.',
+    h1: 'Websites built with Webgnr.',
     lede: 'See how a short brief becomes a complete site, trade by trade.',
     tradeLabel: 'Filter by trade',
     trades: { all: 'All', bakery: 'Bakeries and cafés', restaurant: 'Restaurants', coach: 'Coaches', agency: 'Agencies', local: 'Local services' },
     langLabel: 'Filter by language',
     langHeading: 'Language',
     langAll: 'All',
-    langNote: 'All eight languages WebGen supports. Example sites in more languages are on the way: each site is built and checked in its own language.',
+    langNote: 'All eight languages Webgnr supports. Example sites in more languages are on the way: each site is built and checked in its own language.',
     marquee: ['Website', 'Forms', 'Newsletters', 'Your own domain', 'Follow-up emails', 'Search basics', 'Reports'],
     featured: {
       label: 'Example site',
@@ -27,7 +27,7 @@ const en = {
       view: 'View the site →',
     },
     more: { t: 'More examples on the way', p: 'Example sites in more trades and languages follow.', tag: 'Your site' },
-    note: 'Example sites made in WebGen for testing.',
+    note: 'Example sites made in Webgnr for testing.',
     industry: {
       eyebrow: 'By industry',
       title: 'Is it for a business like yours?',
@@ -44,7 +44,7 @@ const en = {
     cta: { title: 'Your site here next?', text: 'Describe your business. We will build the first version.' },
   },
   detail: {
-    title: 'GreenLeaf Bakery: an example site made with WebGen',
+    title: 'GreenLeaf Bakery: an example site made with Webgnr',
     description: 'A small bakery that sells fresh bread and emails a weekly menu, built from one short brief.',
     back: '← All examples',
     label: 'Example site',
@@ -63,7 +63,7 @@ const en = {
       title: 'From brief to live site.',
       steps: [
         { t: 'The brief', p: 'Four short questions about the bakery, its audience and tone.' },
-        { t: 'The first draft', p: 'WebGen writes the copy and builds every section.' },
+        { t: 'The first draft', p: 'Webgnr writes the copy and builds every section.' },
         { t: 'Polish and publish', p: 'Edit by clicking or ask for changes in plain words.' },
       ],
     },
@@ -88,17 +88,17 @@ const en = {
 
 const nl: typeof en = {
   list: {
-    title: 'Voorbeelden: websites gebouwd met WebGen',
-    description: 'Bekijk hoe een korte briefing een complete site wordt, per branche. Voorbeeldsites gemaakt in WebGen.',
+    title: 'Voorbeelden: websites gebouwd met Webgnr',
+    description: 'Bekijk hoe een korte briefing een complete site wordt, per branche. Voorbeeldsites gemaakt in Webgnr.',
     eyebrow: 'Voorbeelden',
-    h1: 'Websites gebouwd met WebGen.',
+    h1: 'Websites gebouwd met Webgnr.',
     lede: 'Bekijk hoe een korte briefing een complete site wordt, per branche.',
     tradeLabel: 'Filter op branche',
     trades: { all: 'Alle', bakery: 'Bakkers en cafés', restaurant: 'Restaurants', coach: 'Coaches', agency: 'Bureaus', local: 'Lokale diensten' },
     langLabel: 'Filter op taal',
     langHeading: 'Taal',
     langAll: 'Alle',
-    langNote: 'Alle acht talen van WebGen. Voorbeeldsites in meer talen volgen: elke site wordt gebouwd en gecontroleerd in de eigen taal.',
+    langNote: 'Alle acht talen van Webgnr. Voorbeeldsites in meer talen volgen: elke site wordt gebouwd en gecontroleerd in de eigen taal.',
     marquee: ['Website', 'Formulieren', 'Nieuwsbrieven', 'Eigen domein', 'Vervolgmails', 'Zoekbasis', 'Statistieken'],
     featured: {
       label: 'Voorbeeldsite',
@@ -112,7 +112,7 @@ const nl: typeof en = {
       view: 'Bekijk de site →',
     },
     more: { t: 'Meer voorbeelden volgen', p: 'Voorbeeldsites in meer branches en talen volgen.', tag: 'Jouw site' },
-    note: 'Voorbeeldsites gemaakt in WebGen voor testdoeleinden.',
+    note: 'Voorbeeldsites gemaakt in Webgnr voor testdoeleinden.',
     industry: {
       eyebrow: 'Per branche',
       title: 'Is het iets voor een bedrijf als het jouwe?',
@@ -129,7 +129,7 @@ const nl: typeof en = {
     cta: { title: 'Jouw site hier?', text: 'Vertel over je bedrijf. Wij bouwen de eerste versie.' },
   },
   detail: {
-    title: 'GreenLeaf Bakery: een voorbeeldsite gemaakt met WebGen',
+    title: 'GreenLeaf Bakery: een voorbeeldsite gemaakt met Webgnr',
     description: 'Een kleine bakkerij die vers brood verkoopt en een weekmenu mailt, gebouwd uit één korte briefing.',
     back: '← Alle voorbeelden',
     label: 'Voorbeeldsite',
@@ -148,7 +148,7 @@ const nl: typeof en = {
       title: 'Van briefing tot live site.',
       steps: [
         { t: 'De briefing', p: 'Vier korte vragen over de bakkerij, het publiek en de toon.' },
-        { t: 'De eerste versie', p: 'WebGen schrijft de tekst en bouwt alle secties.' },
+        { t: 'De eerste versie', p: 'Webgnr schrijft de tekst en bouwt alle secties.' },
         { t: 'Bijwerken en publiceren', p: 'Pas aan door te klikken of in gewone woorden te vragen.' },
       ],
     },

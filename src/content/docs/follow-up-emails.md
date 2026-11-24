@@ -39,7 +39,7 @@ Click **Preview** to see how an email looks. The unsubscribe link only works in 
 
 ## 6. Choose the sender
 
-Under **Send as**, pick the address the emails come from. It shows the site's sending address, or WebGen's own address until you set one up. Replies go to you. See [Set up your sender](/docs/set-up-your-sender/).
+Under **Send as**, pick the address the emails come from. It shows the site's sending address, or Webgnr's own address until you set one up. Replies go to you. See [Set up your sender](/docs/set-up-your-sender/).
 
 ## 7. Turn it on
 

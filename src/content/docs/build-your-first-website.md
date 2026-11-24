@@ -1,6 +1,6 @@
 ---
 title: Build your first website
-description: Go from a blank account to a published site. Answer a short brief, let WebGen build it, then polish it in the editor.
+description: Go from a blank account to a published site. Answer a short brief, let Webgnr build it, then polish it in the editor.
 group: getting-started
 order: 1
 minutes: 10
@@ -30,7 +30,7 @@ The brief asks about your business the way a copywriter would. The answers becom
 
 ## 3. Add photos
 
-Upload your own photos or describe the ones you want. WebGen places them on the right pages.
+Upload your own photos or describe the ones you want. Webgnr places them on the right pages.
 
 ## 4. Review and edit
 

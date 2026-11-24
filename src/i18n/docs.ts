@@ -3,7 +3,7 @@
 import type { Locale } from './index.ts';
 
 const en = {
-  suffix: 'WebGen Docs',
+  suffix: 'Webgnr Docs',
   docs: 'Docs',
   navLabel: 'Docs',
   menu: 'Docs menu',
@@ -28,10 +28,10 @@ const en = {
     domains: 'Domains and account',
   } as Record<string, string>,
   home: {
-    title: 'WebGen Docs: learn to build, publish and grow',
+    title: 'Webgnr Docs: learn to build, publish and grow',
     description: 'Step-by-step guides written for business owners. No jargon, no code.',
     eyebrow: 'Docs',
-    h1: 'Learn how to build, publish and grow with WebGen.',
+    h1: 'Learn how to build, publish and grow with Webgnr.',
     lede: 'Step-by-step guides written for business owners. No jargon, no code.',
     try: 'Try:',
     chips: [
@@ -41,10 +41,10 @@ const en = {
       { label: 'Forms', to: '/docs/forms-and-leads/' },
     ],
     marquee: ['Getting started', 'Your own domain', 'Forms and leads', 'Sender setup', 'Campaigns', 'Follow-up emails'],
-    newHere: { eyebrow: 'New here?', title: 'Start with your first website.', text: 'Answer a short brief, let WebGen build the site, then polish and publish it. It takes about 10 minutes.', cta: 'Start the tutorial' },
+    newHere: { eyebrow: 'New here?', title: 'Start with your first website.', text: 'Answer a short brief, let Webgnr build the site, then polish and publish it. It takes about 10 minutes.', cta: 'Start the tutorial' },
     stepsTitle: 'Start in 3 steps',
     steps: [
-      { slug: 'build-your-first-website', t: 'Build your site', p: 'Answer a short brief and let WebGen write the first version.' },
+      { slug: 'build-your-first-website', t: 'Build your site', p: 'Answer a short brief and let Webgnr write the first version.' },
       { slug: 'connect-your-domain', t: 'Connect your domain', p: 'Use your own web address.' },
       { slug: 'send-a-campaign', t: 'Send your first email', p: 'Reach everyone who said yes.' },
     ],
@@ -58,12 +58,12 @@ const en = {
     } as Record<string, string>,
     min: (m: number) => `${m} min`,
     stuck: { t: 'Still stuck?', p: 'A person is happy to help.', link: 'Contact us' },
-    email: { t: 'Got an email from a WebGen site?', p: 'See why you received it and how to unsubscribe.', link: 'Read why' },
+    email: { t: 'Got an email from a Webgnr site?', p: 'See why you received it and how to unsubscribe.', link: 'Read why' },
   },
 };
 
 const nl: typeof en = {
-  suffix: 'WebGen Handleidingen',
+  suffix: 'Webgnr Handleidingen',
   docs: 'Handleidingen',
   navLabel: 'Handleidingen',
   menu: 'Handleidingenmenu',
@@ -88,10 +88,10 @@ const nl: typeof en = {
     domains: 'Domeinen en account',
   },
   home: {
-    title: 'WebGen Handleidingen: leer bouwen, publiceren en groeien',
+    title: 'Webgnr Handleidingen: leer bouwen, publiceren en groeien',
     description: 'Stap-voor-stap handleidingen voor ondernemers. Geen jargon, geen code.',
     eyebrow: 'Handleidingen',
-    h1: 'Leer WebGen bouwen, publiceren en laten groeien.',
+    h1: 'Leer Webgnr bouwen, publiceren en laten groeien.',
     lede: 'Stap-voor-stap handleidingen voor ondernemers. Geen jargon, geen code.',
     try: 'Probeer:',
     chips: [
@@ -101,10 +101,10 @@ const nl: typeof en = {
       { label: 'Formulieren', to: '/docs/forms-and-leads/' },
     ],
     marquee: ['Aan de slag', 'Eigen domein', 'Formulieren en leads', 'Afzender instellen', 'Campagnes', 'Vervolgmails'],
-    newHere: { eyebrow: 'Nieuw hier?', title: 'Begin met je eerste website.', text: 'Beantwoord een korte briefing, laat WebGen de site bouwen en werk hem daarna bij en publiceer hem. Het kost ongeveer 10 minuten.', cta: 'Start de handleiding' },
+    newHere: { eyebrow: 'Nieuw hier?', title: 'Begin met je eerste website.', text: 'Beantwoord een korte briefing, laat Webgnr de site bouwen en werk hem daarna bij en publiceer hem. Het kost ongeveer 10 minuten.', cta: 'Start de handleiding' },
     stepsTitle: 'Begin in 3 stappen',
     steps: [
-      { slug: 'build-your-first-website', t: 'Bouw je site', p: 'Beantwoord een korte briefing en laat WebGen de eerste versie schrijven.' },
+      { slug: 'build-your-first-website', t: 'Bouw je site', p: 'Beantwoord een korte briefing en laat Webgnr de eerste versie schrijven.' },
       { slug: 'connect-your-domain', t: 'Koppel je domein', p: 'Gebruik je eigen webadres.' },
       { slug: 'send-a-campaign', t: 'Verstuur je eerste e-mail', p: 'Bereik iedereen die ja zei.' },
     ],
@@ -118,7 +118,7 @@ const nl: typeof en = {
     },
     min: (m: number) => `${m} min`,
     stuck: { t: 'Kom je er niet uit?', p: 'Een mens helpt je graag verder.', link: 'Neem contact op' },
-    email: { t: 'E-mail ontvangen van een WebGen-site?', p: 'Lees waarom je hem kreeg en hoe je je uitschrijft.', link: 'Lees waarom' },
+    email: { t: 'E-mail ontvangen van een Webgnr-site?', p: 'Lees waarom je hem kreeg en hoe je je uitschrijft.', link: 'Lees waarom' },
   },
 };
 

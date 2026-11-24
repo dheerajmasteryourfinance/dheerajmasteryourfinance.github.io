@@ -1,4 +1,4 @@
-// App destinations (the WebGen app).
+// App destinations (the Webgnr app).
 export const APP_LOGIN = 'https://app.website-generator.nl/login';
 export const APP_HOME = 'https://app.website-generator.nl/';
 

@@ -3,7 +3,7 @@ import { searchEntries } from '../../src/scripts/search-core.js';
 
 const E = (url, title, headings, text) => ({ url, title, headings, text });
 const entries = [
-  E('/docs/forms/', 'Forms and leads', ['1. Know the three kinds of form', '3. See your leads'], 'WebGen sorts what visitors send into three kinds. Click Manage, then the Leads tab to see every message.'),
+  E('/docs/forms/', 'Forms and leads', ['1. Know the three kinds of form', '3. See your leads'], 'Webgnr sorts what visitors send into three kinds. Click Manage, then the Leads tab to see every message.'),
   E('/docs/domain/', 'Connect your domain', ['1. Attach the domain'], 'Add the records at your provider. Forms are not needed for this step.'),
   E('/docs/campaign/', 'Send a campaign', ['2. Write the email'], 'Pick your audience and send. Leads who unsubscribed are skipped.'),
 ];

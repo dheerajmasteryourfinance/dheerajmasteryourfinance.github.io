@@ -1,12 +1,12 @@
-// "Got an email sent with WebGen?" page copy (canvas EmailInfo*.dc.html).
+// "Got an email sent with Webgnr?" page copy (canvas EmailInfo*.dc.html).
 // The corrected facts (unsubscribe needs a confirmation click but no sign-in; double opt-in depends on
 // the business) are kept from the earlier review, in both languages.
 
 const en = {
-  title: 'Got an email sent with WebGen?',
+  title: 'Got an email sent with Webgnr?',
   description: 'Who sent it, why it reached you, and how to stop it.',
   eyebrow: 'For email recipients',
-  h1: 'Got an email sent with WebGen?',
+  h1: 'Got an email sent with Webgnr?',
   lede: 'Here is who sent it, why it reached you, and how to stop it.',
   stop: {
     title: 'Want to stop these emails?',
@@ -20,7 +20,7 @@ const en = {
     mockUnsub: 'Unsubscribe',
     mockLine2: ' · Sunrise Bakery, 12 High St',
   },
-  who: { title: 'Who sent it', text: 'WebGen is a website and email platform. Businesses use it to run their website and to email the people who signed up there. The email came from that business, not from WebGen itself. Their name and address are in the email\'s footer.' },
+  who: { title: 'Who sent it', text: 'Webgnr is a website and email platform. Businesses use it to run their website and to email the people who signed up there. The email came from that business, not from Webgnr itself. Their name and address are in the email\'s footer.' },
   why: { title: 'Why it reached you', text: 'Most likely you filled in a form on that business\'s website, such as a newsletter sign-up, a contact form or a free download. If the business asks new subscribers to confirm, you would also have clicked a confirmation link first.' },
   rules: {
     title: 'What we require of every sender',
@@ -37,10 +37,10 @@ const en = {
 };
 
 const nl: typeof en = {
-  title: 'E-mail ontvangen die met WebGen is verstuurd?',
+  title: 'E-mail ontvangen die met Webgnr is verstuurd?',
   description: 'Wie hem stuurde, waarom je hem kreeg en hoe je hem stopt.',
   eyebrow: 'Voor ontvangers van e-mail',
-  h1: 'E-mail ontvangen die met WebGen is verstuurd?',
+  h1: 'E-mail ontvangen die met Webgnr is verstuurd?',
   lede: 'Hier lees je wie hem stuurde, waarom je hem kreeg en hoe je ze stopt.',
   stop: {
     title: 'Wil je deze e-mails stoppen?',
@@ -54,7 +54,7 @@ const nl: typeof en = {
     mockUnsub: 'Uitschrijven',
     mockLine2: ' · Bakkerij Zonnestraal, Hoofdstraat 12',
   },
-  who: { title: 'Wie het verstuurde', text: 'WebGen is een platform voor websites en e-mail. Bedrijven gebruiken het om hun website te runnen en de mensen te mailen die zich daar aanmeldden. De e-mail kwam van dat bedrijf, niet van WebGen zelf. Hun naam en adres staan onderaan de e-mail.' },
+  who: { title: 'Wie het verstuurde', text: 'Webgnr is een platform voor websites en e-mail. Bedrijven gebruiken het om hun website te runnen en de mensen te mailen die zich daar aanmeldden. De e-mail kwam van dat bedrijf, niet van Webgnr zelf. Hun naam en adres staan onderaan de e-mail.' },
   why: { title: 'Waarom je hem kreeg', text: 'Waarschijnlijk vulde je een formulier in op de website van dat bedrijf, zoals een nieuwsbriefaanmelding, een contactformulier of een gratis download. Als het bedrijf nieuwe inschrijvers vraagt om te bevestigen, klikte je ook eerst op een bevestigingslink.' },
   rules: {
     title: 'Wat we van elke afzender eisen',

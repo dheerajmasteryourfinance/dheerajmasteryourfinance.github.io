@@ -1,5 +1,5 @@
 /**
- * Docs search over a small JSON index (no server, no WebAssembly, only file types the WebGen import accepts).
+ * Docs search over a small JSON index (no server, no WebAssembly, only file types the Webgnr import accepts).
  * Entry: { url, title, headings: string[], text }. A query matches when EVERY word starts a word in the
  * entry; a title hit counts most, then headings, then body text. Case and accents are ignored.
  */

@@ -9,7 +9,7 @@ updated: 2026-11-11
 
 <div class="callout"><strong>Before you start:</strong> you need a domain you own and access to where its DNS is managed, which is often your domain provider. Free email services such as Gmail or Outlook cannot be used, because you cannot change their DNS.</div>
 
-Until your own sender is set up, your emails go out from WebGen's address and replies still come to you. Nothing breaks if you skip this, but emails from your own address look more trustworthy and are more likely to reach the inbox.
+Until your own sender is set up, your emails go out from Webgnr's address and replies still come to you. Nothing breaks if you skip this, but emails from your own address look more trustworthy and are more likely to reach the inbox.
 
 ## 1. Open the Sender tab
 
@@ -25,18 +25,18 @@ Under **Add a domain you own**, type the part of your email address after the @,
 
 ## 3. Prove the domain is yours
 
-WebGen shows one record to add where you manage your domain's DNS. Add it exactly as shown, then click **Check DNS**.
+Webgnr shows one record to add where you manage your domain's DNS. Add it exactly as shown, then click **Check DNS**.
 
 - The record has three fields at your provider: **Type**, **Name / host** and **Value / content**. Fill them in separately, and use **Copy** next to each one.
 - If your provider only wants the part before your domain name, enter just the first part of the name shown.
 
-When it works, the status changes and you see **Done: we've confirmed this domain is yours.** Leave the record in place, because WebGen checks it again from time to time.
+When it works, the status changes and you see **Done: we've confirmed this domain is yours.** Leave the record in place, because Webgnr checks it again from time to time.
 
 <div class="callout callout-note"><strong>Note:</strong> DNS changes can take a few hours to show up. If <strong>Check DNS</strong> cannot find the record yet, wait and try again.</div>
 
 ## 4. Add the signing records
 
-Next comes **Last step: let your emails be signed**. WebGen shows 3 more records, each marked **Record 1 of 3** and so on. Add all three where you manage your domain's DNS, then click **Check now**. These records let the email service sign mail from your domain so it reaches inboxes instead of spam.
+Next comes **Last step: let your emails be signed**. Webgnr shows 3 more records, each marked **Record 1 of 3** and so on. Add all three where you manage your domain's DNS, then click **Check now**. These records let the email service sign mail from your domain so it reaches inboxes instead of spam.
 
 - If your provider wants the full name, add your domain after the name shown.
 - If the records are not found yet, you see a message. Check they are exactly as shown, wait, and click **Check now** again.
@@ -53,7 +53,7 @@ Under **Sending addresses**, fill in the **New sending address** form.
 
 Click **Add address**. You can add up to 20 addresses. The one in use carries an **In use** badge. To switch, click **Use this one** on another address, or **Rename** to change its display name.
 
-An address is only used once its domain is ready. Until then it says that emails still go out from WebGen's address.
+An address is only used once its domain is ready. Until then it says that emails still go out from Webgnr's address.
 
 ## 6. Check where your emails come from
 
@@ -63,7 +63,7 @@ Open **Follow-up emails** and look under **Send as**. It shows the address your 
 
 ## If a domain stops working
 
-WebGen re-checks your records every day. If a record has gone missing several checks in a row, the domain shows **No longer verified** and your emails go back to WebGen's address. Put the record back as shown and click **Check DNS**. To remove a domain and its addresses, use **Remove this domain**.
+Webgnr re-checks your records every day. If a record has gone missing several checks in a row, the domain shows **No longer verified** and your emails go back to Webgnr's address. Put the record back as shown and click **Check DNS**. To remove a domain and its addresses, use **Remove this domain**.
 
 ## Next steps
 

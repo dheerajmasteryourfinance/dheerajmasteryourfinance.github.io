@@ -16,7 +16,7 @@ const COPY = {
     langs: 'Your site in up to 8 languages',
     cta: 'Every day without a site that works',
     early: 'Request early access',
-    sticky: 'Be among the first to build with WebGen',
+    sticky: 'Be among the first to build with Webgnr',
   },
   nl: {
     route: '/nl/',
@@ -29,7 +29,7 @@ const COPY = {
     langs: 'Je site in maximaal 8 talen',
     cta: 'Elke dag zonder werkende site',
     early: 'Vraag vroege toegang aan',
-    sticky: 'Wees een van de eersten met WebGen',
+    sticky: 'Wees een van de eersten met Webgnr',
   },
 };
 

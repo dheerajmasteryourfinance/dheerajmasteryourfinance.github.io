@@ -1,6 +1,6 @@
 ---
 title: A tour of the editor
-description: Find your way around the WebGen editor, from pages and sections to the AI assistant, history and publishing.
+description: Find your way around the Webgnr editor, from pages and sections to the AI assistant, history and publishing.
 group: getting-started
 order: 3
 minutes: 6
@@ -65,7 +65,7 @@ When you are happy, click **Publish**. After your first publish the button reads
 
 **Manage** holds everything that is not part of the site itself: **Leads**, **Audience**, **Campaigns**, **Follow-up emails**, **Sender**, **Brand**, **Domain**, **Website** and **Stats**. Use **Back to editor** to return.
 
-<div class="callout callout-note"><strong>Note:</strong> on a phone, WebGen shows quick actions (publish, ask the AI, earlier versions, manage) instead of the full editor. The full editor works best on a tablet or computer.</div>
+<div class="callout callout-note"><strong>Note:</strong> on a phone, Webgnr shows quick actions (publish, ask the AI, earlier versions, manage) instead of the full editor. The full editor works best on a tablet or computer.</div>
 
 ## Next steps
 

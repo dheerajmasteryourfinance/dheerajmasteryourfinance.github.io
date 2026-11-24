@@ -1,11 +1,11 @@
 // Features page copy.
 
 const en = {
-  title: 'WebGen features: build, grow and send',
-  description: 'Everything WebGen does, from the first draft of your site to the hundredth email.',
+  title: 'Webgnr features: build, grow and send',
+  description: 'Everything Webgnr does, from the first draft of your site to the hundredth email.',
   eyebrow: 'Product',
   h1: 'One tool to build the site and grow the business behind it.',
-  lede: 'Here is everything WebGen does, from the first draft of your site to the hundredth email.',
+  lede: 'Here is everything Webgnr does, from the first draft of your site to the hundredth email.',
   chipsLabel: 'Feature sections',
   chips: { build: 'Build', leads: 'Forms and audience', email: 'Email', search: 'Search and analytics', domains: 'Domains and senders', languages: 'Languages' },
   routeLabel: 'Jump to a feature',
@@ -13,7 +13,7 @@ const en = {
   build: {
     eyebrow: '01 · Build',
     title: 'From a short brief to a full site.',
-    copy: 'Describe what you do and who you serve. WebGen writes the pages, picks a layout and applies your brand colours and fonts.',
+    copy: 'Describe what you do and who you serve. Webgnr writes the pages, picks a layout and applies your brand colours and fonts.',
     ticks: ['Click any text or image to change it', 'Ask for bigger changes in a sentence', 'Import an existing site from a ZIP file'],
     altBrief: 'The New website brief, first step About your business, asking for the business name and the ideal customer',
     altEditor: 'The finished site open in the editor, with its headline selected for editing',
@@ -68,11 +68,11 @@ const en = {
 };
 
 const nl: typeof en = {
-  title: 'Functies van WebGen: bouwen, groeien en mailen',
-  description: 'Alles wat WebGen doet, van de eerste versie van je website tot de honderdste e-mail.',
+  title: 'Functies van Webgnr: bouwen, groeien en mailen',
+  description: 'Alles wat Webgnr doet, van de eerste versie van je website tot de honderdste e-mail.',
   eyebrow: 'Product',
   h1: 'Eén tool om je website te bouwen én het bedrijf erachter te laten groeien.',
-  lede: 'Dit is alles wat WebGen doet, van de eerste versie van je website tot de honderdste e-mail.',
+  lede: 'Dit is alles wat Webgnr doet, van de eerste versie van je website tot de honderdste e-mail.',
   chipsLabel: 'Onderdelen',
   chips: { build: 'Bouwen', leads: 'Formulieren en doelgroep', email: 'E-mail', search: 'Vindbaarheid en statistieken', domains: 'Domeinen en afzenders', languages: 'Talen' },
   routeLabel: 'Ga naar een functie',
@@ -80,7 +80,7 @@ const nl: typeof en = {
   build: {
     eyebrow: '01 · Bouwen',
     title: 'Van een korte briefing naar een complete website.',
-    copy: 'Vertel wat je doet en voor wie. WebGen schrijft de pagina’s, kiest een opmaak en gebruikt de kleuren en lettertypes van je huisstijl.',
+    copy: 'Vertel wat je doet en voor wie. Webgnr schrijft de pagina’s, kiest een opmaak en gebruikt de kleuren en lettertypes van je huisstijl.',
     ticks: ['Klik op een tekst of afbeelding om die aan te passen', 'Vraag grotere wijzigingen in één zin', 'Importeer een bestaande site uit een ZIP-bestand'],
     altBrief: 'De briefing voor een nieuwe website, eerste stap Over je bedrijf, met vragen naar de bedrijfsnaam en de ideale klant (Engelse weergave)',
     altEditor: 'De kant-en-klare site geopend in de editor, met de kop geselecteerd om te bewerken (Engelse weergave)',

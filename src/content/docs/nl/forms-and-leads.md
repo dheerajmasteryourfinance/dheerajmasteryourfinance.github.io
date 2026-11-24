@@ -7,11 +7,11 @@ minutes: 7
 updated: 2026-11-11
 ---
 
-<div class="callout"><strong>Voor je begint:</strong> je site heeft een formulier nodig. WebGen-sites bevatten meestal een contactsectie. Je kunt er meer toevoegen, of een download- of nieuwsbriefknop, in de editor.</div>
+<div class="callout"><strong>Voor je begint:</strong> je site heeft een formulier nodig. Webgnr-sites bevatten meestal een contactsectie. Je kunt er meer toevoegen, of een download- of nieuwsbriefknop, in de editor.</div>
 
 ## 1. Ken de drie soorten formulieren
 
-WebGen sorteert wat bezoekers sturen in drie soorten en zet bij elke inzending het soort.
+Webgnr sorteert wat bezoekers sturen in drie soorten en zet bij elke inzending het soort.
 
 - **Contact**: een bericht uit je contactformulier.
 - **Download**: een verzoek om een bestand dat je aanbiedt, zoals een brochure.
@@ -29,7 +29,7 @@ Klik op **Publiceren**, open je live site en stuur jezelf een bericht via het fo
 
 Klik op **Beheren** en dan op het tabblad **Inzendingen**. De pagina heet **Formulierinzendingen** en elk nieuw bericht verschijnt hier. Bij elke rij staat het soort. Bij een downloadverzoek zie je ook het **Opgevraagd bestand**.
 
-Gebruik de filters bovenaan om te wisselen tussen **Echt**, **Spam** en **Alles**. Berichten die WebGen als spam herkent, krijgen een **Spam**-label en mensen die zich hebben afgemeld krijgen een label **Uitgeschreven**.
+Gebruik de filters bovenaan om te wisselen tussen **Echt**, **Spam** en **Alles**. Berichten die Webgnr als spam herkent, krijgen een **Spam**-label en mensen die zich hebben afgemeld krijgen een label **Uitgeschreven**.
 
 Is er nog niets binnengekomen, dan staat er **Nog geen inzendingen.**
 

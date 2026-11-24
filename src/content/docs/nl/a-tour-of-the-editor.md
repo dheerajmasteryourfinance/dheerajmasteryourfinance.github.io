@@ -1,6 +1,6 @@
 ---
 title: "Rondleiding door de editor"
-description: "Vind je weg in de WebGen-editor, van pagina's en secties tot de AI-assistent, geschiedenis en publiceren."
+description: "Vind je weg in de Webgnr-editor, van pagina's en secties tot de AI-assistent, geschiedenis en publiceren."
 group: getting-started
 order: 3
 minutes: 6
@@ -65,7 +65,7 @@ Klik op **Publiceren** als je tevreden bent. Na je eerste keer publiceren staat 
 
 **Beheren** bevat alles wat niet bij de site zelf hoort: **Inzendingen**, **Doelgroep**, **Campagnes**, **Vervolgmails**, **Afzender**, **Huisstijl**, **Domein**, **Website** en **Statistieken**. Gebruik **Terug naar editor** om terug te gaan.
 
-<div class="callout callout-note"><strong>Let op:</strong> op een telefoon toont WebGen snelle acties (publiceren, de AI vragen, eerdere versies, beheren) in plaats van de volledige editor. De volledige editor werkt het best op een tablet of computer.</div>
+<div class="callout callout-note"><strong>Let op:</strong> op een telefoon toont Webgnr snelle acties (publiceren, de AI vragen, eerdere versies, beheren) in plaats van de volledige editor. De volledige editor werkt het best op een tablet of computer.</div>
 
 ## Volgende stappen
 

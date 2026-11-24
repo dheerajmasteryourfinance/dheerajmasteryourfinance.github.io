@@ -38,7 +38,7 @@ const alts = alternates(path);
     {!noCanonical && alts.map((a) => <link rel="alternate" hreflang={a.locale} href={`${SITE}${a.href}`} />)}
     {!noCanonical && <link rel="alternate" hreflang="x-default" href={`${SITE}${localize(path, 'en')}`} />}
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="WebGen" />
+    <meta property="og:site_name" content="Webgnr" />
     <meta property="og:locale" content={t.ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

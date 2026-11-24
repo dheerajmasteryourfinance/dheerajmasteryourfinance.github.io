@@ -1,4 +1,4 @@
-// Example sites made in WebGen. Only test sites the team generated, plus GreenLeaf Bakery;
+// Example sites made in Webgnr. Only test sites the team generated, plus GreenLeaf Bakery;
 // never a real client's site without written permission.
 import type { ImageMetadata } from 'astro';
 import type { Locale } from '../i18n/index.ts';

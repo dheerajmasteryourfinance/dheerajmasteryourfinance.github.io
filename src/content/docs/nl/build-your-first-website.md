@@ -1,6 +1,6 @@
 ---
 title: "Bouw je eerste website"
-description: "Ga van een leeg account naar een gepubliceerde site. Je beantwoordt een paar vragen over je bedrijf, WebGen bouwt de site en jij werkt hem bij in de editor."
+description: "Ga van een leeg account naar een gepubliceerde site. Je beantwoordt een paar vragen over je bedrijf, Webgnr bouwt de site en jij werkt hem bij in de editor."
 group: getting-started
 order: 1
 minutes: 10
@@ -30,7 +30,7 @@ De briefing vraagt naar je bedrijf zoals een copywriter dat zou doen. Je antwoor
 
 ## 3. Voeg foto's toe
 
-Upload je eigen foto's of beschrijf welke je wilt. WebGen zet ze op de juiste pagina's.
+Upload je eigen foto's of beschrijf welke je wilt. Webgnr zet ze op de juiste pagina's.
 
 ## 4. Bekijk en bewerk
 

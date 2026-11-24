@@ -39,7 +39,7 @@ Klik op **Voorbeeld** om te zien hoe een e-mail eruitziet. De uitschrijflink wer
 
 ## 6. Kies de afzender
 
-Kies onder **Versturen als** het adres waarvan de e-mails komen. Je ziet het afzenderadres van de site, of het eigen adres van WebGen totdat je er een hebt ingesteld. Antwoorden gaan naar jou. Zie [Stel je afzender in](/nl/docs/set-up-your-sender/).
+Kies onder **Versturen als** het adres waarvan de e-mails komen. Je ziet het afzenderadres van de site, of het eigen adres van Webgnr totdat je er een hebt ingesteld. Antwoorden gaan naar jou. Zie [Stel je afzender in](/nl/docs/set-up-your-sender/).
 
 ## 7. Zet hem aan
 

@@ -1,6 +1,6 @@
 ---
 title: "Een bestaande site importeren"
-description: "Heb je al een website als bestanden? Upload hem als zip, controleer hem in de editor en publiceer hem daarna met WebGen."
+description: "Heb je al een website als bestanden? Upload hem als zip, controleer hem in de editor en publiceer hem daarna met Webgnr."
 group: getting-started
 order: 2
 minutes: 8
@@ -11,12 +11,12 @@ updated: 2026-11-11
 
 ## 1. Bereid je bestanden voor
 
-WebGen heeft twee kleine dingen nodig van je pagina's om ze bewerkbaar te maken en je formulieren te koppelen.
+Webgnr heeft twee kleine dingen nodig van je pagina's om ze bewerkbaar te maken en je formulieren te koppelen.
 
 - **Zet elk blok op het hoogste niveau in een section.** Gebruik binnen het hoofdgedeelte van je pagina één `section`-element per blok, zoals de hero, diensten en contact. Hierdoor kun je in de editor op een blok klikken om de tekst te wijzigen, een afbeelding te vervangen of de stijl aan te passen. Blokken die geen sectie zijn, worden wel gepubliceerd, maar blijven als blok niet bewerkbaar.
 - **Geef je formuliervelden de gebruikelijke namen.** Een contactformulier heeft een e-mailveld en een berichtveld nodig. Een nieuwsbriefformulier heeft alleen een e-mailveld nodig. Gebruik het standaard e-mailveldtype, dat is het betrouwbaarst.
 
-Formulieren die WebGen niet met zekerheid kan plaatsen, blijven precies zoals ze zijn. Die kun je daarna met de hand in de editor koppelen.
+Formulieren die Webgnr niet met zekerheid kan plaatsen, blijven precies zoals ze zijn. Die kun je daarna met de hand in de editor koppelen.
 
 <div class="callout callout-note"><strong>Let op:</strong> formulieren met een wachtwoordveld, zoekvelden en formulieren zonder e-mailveld worden bewust overgeslagen, omdat het geen leadformulieren zijn.</div>
 
@@ -30,7 +30,7 @@ Sleep je zip naar het vak met **Sleep je bestanden of zip hierheen, of klik om t
 
 - Gebruik één zip om je mappen intact te houden. Je kunt ook meerdere losse bestanden toevoegen (HTML, CSS, JS, afbeeldingen en video's).
 - De upload mag maximaal 50 MB zijn, met hoogstens 25 MB per bestand en 400 bestanden in totaal.
-- Zit er in je zip één omhullende map, dan haalt WebGen die voor je weg.
+- Zit er in je zip één omhullende map, dan haalt Webgnr die voor je weg.
 
 De bestanden die je koos staan onder **Geselecteerd** met hun grootte.
 
@@ -52,7 +52,7 @@ Klik op **Publiceren** als je tevreden bent. Je site gaat online op een gratis a
 
 ## Later de site bijwerken
 
-Heb je je site buiten WebGen aangepast? Dan hoef je hem niet opnieuw te importeren.
+Heb je je site buiten Webgnr aangepast? Dan hoef je hem niet opnieuw te importeren.
 
 - Open je site, klik op **Beheren** en dan op het tabblad **Website**.
 - Sleep de nieuwe zip naar het vak en klik op **Website vervangen**. Bevestig daarna met **Ja, vervangen**.

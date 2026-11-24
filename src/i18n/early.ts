@@ -4,11 +4,11 @@
 
 const early = {
   en: {
-    title: 'Request early access to WebGen',
-    description: 'WebGen is opening to a limited number of businesses. Request early access and we will email you an invite.',
+    title: 'Request early access to Webgnr',
+    description: 'Webgnr is opening to a limited number of businesses. Request early access and we will email you an invite.',
     eyebrow: 'Early access',
-    h1: 'Be among the first to build with WebGen.',
-    lede: 'We are opening WebGen to a limited number of businesses, in small groups, so every new site gets our attention. Tell us about yours and we will send you an invitation.',
+    h1: 'Be among the first to build with Webgnr.',
+    lede: 'We are opening Webgnr to a limited number of businesses, in small groups, so every new site gets our attention. Tell us about yours and we will send you an invitation.',
     points: ['A complete website from a short brief', 'Forms, newsletters and follow-up emails built in', 'Personal help getting your first site live'],
     form: {
       title: 'Request early access',
@@ -25,7 +25,7 @@ const early = {
       submit: 'Request access',
     },
     marquee: ['Website', 'Forms', 'Newsletters', 'Your own domain', 'Follow-up emails', 'Search basics', 'Reports'],
-    examples: { eyebrow: 'Examples', title: 'What other owners build.', text: 'Example sites for small businesses, made in WebGen from a short brief.' },
+    examples: { eyebrow: 'Examples', title: 'What other owners build.', text: 'Example sites for small businesses, made in Webgnr from a short brief.' },
     next: {
       eyebrow: 'What happens next',
       title: 'Three steps to your first site.',
@@ -39,16 +39,16 @@ const early = {
       title: 'Early access questions',
       items: [
         { q: 'I am an agency. Can I join?', a: 'Yes. Choose "Agency" in the form and tell us how many clients you build for.' },
-        { q: 'Does WebGen work in Dutch?', a: 'Yes. The app is in Dutch and English, and your site can be in up to eight languages.' },
+        { q: 'Does Webgnr work in Dutch?', a: 'Yes. The app is in Dutch and English, and your site can be in up to eight languages.' },
       ],
     },
   },
   nl: {
-    title: 'Vraag vroege toegang aan voor WebGen',
-    description: 'WebGen opent voor een beperkt aantal bedrijven. Vraag vroege toegang aan en we mailen je een uitnodiging.',
+    title: 'Vraag vroege toegang aan voor Webgnr',
+    description: 'Webgnr opent voor een beperkt aantal bedrijven. Vraag vroege toegang aan en we mailen je een uitnodiging.',
     eyebrow: 'Vroege toegang',
-    h1: 'Wees een van de eersten die met WebGen bouwt.',
-    lede: 'We openen WebGen voor een beperkt aantal bedrijven, in kleine groepen, zodat elke nieuwe site onze aandacht krijgt. Vertel over jouw bedrijf en we sturen je een uitnodiging.',
+    h1: 'Wees een van de eersten die met Webgnr bouwt.',
+    lede: 'We openen Webgnr voor een beperkt aantal bedrijven, in kleine groepen, zodat elke nieuwe site onze aandacht krijgt. Vertel over jouw bedrijf en we sturen je een uitnodiging.',
     points: ['Een complete website vanuit een korte briefing', 'Formulieren, nieuwsbrieven en follow-upmails ingebouwd', 'Persoonlijke hulp om je eerste site live te krijgen'],
     form: {
       title: 'Vraag vroege toegang aan',
@@ -65,7 +65,7 @@ const early = {
       submit: 'Aanvraag versturen',
     },
     marquee: ['Website', 'Formulieren', 'Nieuwsbrieven', 'Eigen domein', 'Vervolgmails', 'Zoekbasis', 'Statistieken'],
-    examples: { eyebrow: 'Voorbeelden', title: 'Dit bouwen andere ondernemers.', text: 'Voorbeeldsites uit het mkb, gemaakt in WebGen vanuit een korte briefing.' },
+    examples: { eyebrow: 'Voorbeelden', title: 'Dit bouwen andere ondernemers.', text: 'Voorbeeldsites uit het mkb, gemaakt in Webgnr vanuit een korte briefing.' },
     next: {
       eyebrow: 'Wat er daarna gebeurt',
       title: 'Drie stappen naar je eerste site.',
@@ -79,7 +79,7 @@ const early = {
       title: 'Vragen over vroege toegang',
       items: [
         { q: 'Ik ben een bureau. Kan ik meedoen?', a: 'Ja. Kies "Bureau" in het formulier en vertel voor hoeveel klanten je bouwt.' },
-        { q: 'Werkt WebGen in het Nederlands?', a: 'Ja. De app is in het Nederlands en het Engels, en je site kan in maximaal acht talen staan.' },
+        { q: 'Werkt Webgnr in het Nederlands?', a: 'Ja. De app is in het Nederlands en het Engels, en je site kan in maximaal acht talen staan.' },
       ],
     },
   },
@@ -87,12 +87,12 @@ const early = {
 
 const company = {
   en: {
-    title: 'About WebGen and contact',
-    description: 'Who is behind WebGen, what we stand for, and how to reach a person.',
+    title: 'About Webgnr and contact',
+    description: 'Who is behind Webgnr, what we stand for, and how to reach a person.',
     eyebrow: 'About us',
     h1: 'We think every small business deserves a website that works for it.',
     p1: 'Getting online used to mean hiring a designer, a developer and a marketing tool, then making them talk to each other. Most small businesses never got past the first step.',
-    p2: 'WebGen puts the website, the sign-up forms and the email in one place, and writes the first version for you.',
+    p2: 'Webgnr puts the website, the sign-up forms and the email in one place, and writes the first version for you.',
     facts: { based: 'Based in', operated: 'Operated by' },
     marquee: ['Website', 'Forms', 'Newsletters', 'Your own domain', 'Follow-up emails', 'Search basics', 'Reports'],
     values: {
@@ -102,7 +102,7 @@ const company = {
         { t: 'Consent first', p: 'People only get email they asked for, and can leave in one click.' },
       ],
     },
-    examples: { eyebrow: 'Examples', title: 'What other owners build.', text: 'Example sites for small businesses, made in WebGen from a short brief.' },
+    examples: { eyebrow: 'Examples', title: 'What other owners build.', text: 'Example sites for small businesses, made in Webgnr from a short brief.' },
     contact: {
       eyebrow: 'Contact',
       title: 'Talk to a person.',
@@ -115,7 +115,7 @@ const company = {
         name: 'Name',
         email: 'Email',
         topic: 'Topic',
-        topics: ['A question about WebGen', 'Help with my account', 'Agency or partnership', 'An email I received'],
+        topics: ['A question about Webgnr', 'Help with my account', 'Agency or partnership', 'An email I received'],
         message: 'Message',
         consentLead: 'We use your details only to reply. See our ',
         consentLink: 'privacy policy',
@@ -125,12 +125,12 @@ const company = {
     },
   },
   nl: {
-    title: 'Over WebGen en contact',
-    description: 'Wie achter WebGen zit, waar we voor staan en hoe je een mens bereikt.',
+    title: 'Over Webgnr en contact',
+    description: 'Wie achter Webgnr zit, waar we voor staan en hoe je een mens bereikt.',
     eyebrow: 'Over ons',
     h1: 'Wij vinden dat elk klein bedrijf een website verdient die voor hem werkt.',
     p1: 'Online komen betekende vroeger: een ontwerper, een developer en een marketingtool inhuren en ze met elkaar laten praten. De meeste kleine bedrijven kwamen nooit voorbij de eerste stap.',
-    p2: 'WebGen brengt de website, de aanmeldformulieren en de e-mail samen op één plek en schrijft de eerste versie voor je.',
+    p2: 'Webgnr brengt de website, de aanmeldformulieren en de e-mail samen op één plek en schrijft de eerste versie voor je.',
     facts: { based: 'Gevestigd in', operated: 'Een product van' },
     marquee: ['Website', 'Formulieren', 'Nieuwsbrieven', 'Eigen domein', 'Vervolgmails', 'Zoekbasis', 'Statistieken'],
     values: {
@@ -140,7 +140,7 @@ const company = {
         { t: 'Toestemming eerst', p: 'Mensen krijgen alleen e-mail waar ze om vroegen en kunnen zich altijd uitschrijven.' },
       ],
     },
-    examples: { eyebrow: 'Voorbeelden', title: 'Dit bouwen andere ondernemers.', text: 'Voorbeeldsites uit het mkb, gemaakt in WebGen vanuit een korte briefing.' },
+    examples: { eyebrow: 'Voorbeelden', title: 'Dit bouwen andere ondernemers.', text: 'Voorbeeldsites uit het mkb, gemaakt in Webgnr vanuit een korte briefing.' },
     contact: {
       eyebrow: 'Contact',
       title: 'Praat met een mens.',
@@ -153,7 +153,7 @@ const company = {
         name: 'Naam',
         email: 'E-mail',
         topic: 'Onderwerp',
-        topics: ['Een vraag over WebGen', 'Hulp bij mijn account', 'Bureau of samenwerking', 'Een e-mail die ik ontving'],
+        topics: ['Een vraag over Webgnr', 'Hulp bij mijn account', 'Bureau of samenwerking', 'Een e-mail die ik ontving'],
         message: 'Bericht',
         consentLead: 'We gebruiken je gegevens alleen om te antwoorden. Zie ons ',
         consentLink: 'privacybeleid',

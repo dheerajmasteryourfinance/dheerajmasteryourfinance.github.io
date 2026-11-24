@@ -89,13 +89,13 @@ describe('sitemap', () => {
 });
 
 describe('Organization JSON-LD', () => {
-  it.each(['/', '/nl/'])('%s has exactly one ld+json block, an Organization named WebGen', (home) => {
+  it.each(['/', '/nl/'])('%s has exactly one ld+json block, an Organization named Webgnr', (home) => {
     const doc = loadPage(home);
     const blocks = doc.querySelectorAll('script[type="application/ld+json"]');
     expect(blocks).toHaveLength(1);
     const data = JSON.parse(blocks[0].textContent);
     expect(data['@type']).toBe('Organization');
-    expect(data.name).toBe('WebGen');
+    expect(data.name).toBe('Webgnr');
     expect(data.url).toBe('https://webgnr.com/');
     expect(data.address.streetAddress).toBe('Steijnstraat 18');
     expect(data.address.addressLocality).toBe('Ridderkerk');

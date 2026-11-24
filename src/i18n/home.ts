@@ -3,8 +3,8 @@
 // Anything unconfirmed stays a bracketed placeholder so the placeholder gate blocks a release build.
 
 const en = {
-  title: 'WebGen: get found, get signed up, follow up',
-  description: 'Describe your business and WebGen builds a site with forms, newsletters and search basics ready to go. In English and Dutch.',
+  title: 'Webgnr: get found, get signed up, follow up',
+  description: 'Describe your business and Webgnr builds a site with forms, newsletters and search basics ready to go. In English and Dutch.',
   announce: { text: 'New: automated email sequences for every site.', link: 'Read the guide' },
   hero: {
     switchLabel: 'Who are you building for',
@@ -20,8 +20,8 @@ const en = {
   },
   shot: {
     label: 'Product preview',
-    alt: 'The WebGen editor in Edit mode, showing the GreenLeaf Bakery homepage with its headline selected and the text toolbar above it',
-    caption: 'The real WebGen editor: click any text on your site to change it.',
+    alt: 'The Webgnr editor in Edit mode, showing the GreenLeaf Bakery homepage with its headline selected and the text toolbar above it',
+    caption: 'The real Webgnr editor: click any text on your site to change it.',
   },
   problem: {
     eyebrow: 'Sound familiar?',
@@ -34,7 +34,7 @@ const en = {
   },
   guide: {
     title: 'We know your time goes to your business, not to learning web tools.',
-    text: 'That is why WebGen asks about your customers, not about code. Your answers are turned into a clear message, a site built around it, and the tools to keep in touch.',
+    text: 'That is why Webgnr asks about your customers, not about code. Your answers are turned into a clear message, a site built around it, and the tools to keep in touch.',
     cards: [] as { t: string; p: string }[],
   },
   how: {
@@ -74,7 +74,7 @@ const en = {
   },
   proof: {
     eyebrow: 'Proof',
-    title: 'Built with WebGen.',
+    title: 'Built with Webgnr.',
     text: 'Real websites, written from a short brief and edited in the same editor you just saw.',
     all: 'See all examples →',
     label: 'Example site',
@@ -83,7 +83,7 @@ const en = {
     tags: ['Generated in minutes', 'Dutch copy', 'Works on phones'],
     altDesktop: 'The GreenLeaf Bakery website on a desktop screen, opening on the problem it solves for its customers',
     altPhone: 'The GreenLeaf Bakery website on a phone, with its headline and order button',
-    stripTitle: 'Examples from small businesses, made in WebGen',
+    stripTitle: 'Examples from small businesses, made in Webgnr',
     inbox: { t: 'Built to respect the inbox.', link: 'Got an email from us? Here is why →', chips: ['Double opt-in (optional)', 'Easy unsubscribe', 'Verified senders', 'Suppression lists'] },
   },
   faq: {
@@ -91,7 +91,7 @@ const en = {
     items: [
       { q: 'Do I need to know how to code or design?', a: 'No. You describe the business and edit by clicking or asking for changes in plain words.' },
       { q: 'Can I use my own domain?', a: 'Yes. Connect it from your site\'s Domain settings. The docs walk through each step.' },
-      { q: 'Is it safe to send email through WebGen?', a: 'Every email goes to people who signed up, from a sender that is verified, with an unsubscribe link in every message.' },
+      { q: 'Is it safe to send email through Webgnr?', a: 'Every email goes to people who signed up, from a sender that is verified, with an unsubscribe link in every message.' },
     ],
   },
   cta: {
@@ -101,8 +101,8 @@ const en = {
 };
 
 const nl: typeof en = {
-  title: 'WebGen: word gevonden, krijg aanmeldingen, volg op',
-  description: 'Beschrijf je bedrijf en WebGen bouwt een site met formulieren, nieuwsbrieven en zoekbasis die klaarstaat. In het Nederlands en Engels.',
+  title: 'Webgnr: word gevonden, krijg aanmeldingen, volg op',
+  description: 'Beschrijf je bedrijf en Webgnr bouwt een site met formulieren, nieuwsbrieven en zoekbasis die klaarstaat. In het Nederlands en Engels.',
   announce: { text: 'Nieuw: automatische follow-upmails voor elke site.', link: 'Lees de handleiding' },
   hero: {
     switchLabel: 'Voor wie bouw je',
@@ -118,8 +118,8 @@ const nl: typeof en = {
   },
   shot: {
     label: 'Productvoorbeeld',
-    alt: 'De WebGen-editor in bewerkmodus met de homepage van GreenLeaf Bakery, de kop geselecteerd en de tekstbalk erboven',
-    caption: 'De echte WebGen-editor: klik op een tekst op je site om die aan te passen.',
+    alt: 'De Webgnr-editor in bewerkmodus met de homepage van GreenLeaf Bakery, de kop geselecteerd en de tekstbalk erboven',
+    caption: 'De echte Webgnr-editor: klik op een tekst op je site om die aan te passen.',
   },
   problem: {
     eyebrow: 'Herkenbaar?',
@@ -132,7 +132,7 @@ const nl: typeof en = {
   },
   guide: {
     title: 'Wij weten dat je tijd naar je bedrijf gaat, niet naar het leren van webtools.',
-    text: 'Daarom vraagt WebGen naar je klanten, niet naar code. Je antwoorden worden een helder verhaal, een site eromheen en de tools om in contact te blijven.',
+    text: 'Daarom vraagt Webgnr naar je klanten, niet naar code. Je antwoorden worden een helder verhaal, een site eromheen en de tools om in contact te blijven.',
     cards: [],
   },
   how: {
@@ -172,7 +172,7 @@ const nl: typeof en = {
   },
   proof: {
     eyebrow: 'Bewijs',
-    title: 'Gemaakt met WebGen.',
+    title: 'Gemaakt met Webgnr.',
     text: 'Echte websites, geschreven vanuit een korte briefing en bewerkt in dezelfde editor die je net zag.',
     all: 'Bekijk alle voorbeelden →',
     label: 'Voorbeeldsite',
@@ -181,7 +181,7 @@ const nl: typeof en = {
     tags: ['In minuten gemaakt', 'Nederlandse tekst', 'Werkt op telefoons'],
     altDesktop: 'De website van GreenLeaf Bakery op een computerscherm, openend met het probleem dat de bakkerij voor klanten oplost',
     altPhone: 'De website van GreenLeaf Bakery op een telefoon, met de kop en de bestelknop',
-    stripTitle: 'Voorbeelden uit het mkb, gemaakt in WebGen',
+    stripTitle: 'Voorbeelden uit het mkb, gemaakt in Webgnr',
     inbox: { t: 'Gebouwd met respect voor de inbox.', link: 'E-mail van ons ontvangen? Zo zit het →', chips: ['Double opt-in (optioneel)', 'Makkelijk uitschrijven', 'Geverifieerde afzenders', 'Blokkadelijsten'] },
   },
   faq: {
@@ -189,7 +189,7 @@ const nl: typeof en = {
     items: [
       { q: 'Moet ik kunnen coderen of ontwerpen?', a: 'Nee. Je beschrijft je bedrijf en past aan door te klikken of een wijziging in gewone woorden te vragen.' },
       { q: 'Kan ik mijn eigen domein gebruiken?', a: 'Ja. Koppel het via de domeininstellingen van je site. De handleiding loopt elke stap door.' },
-      { q: 'Is het veilig om e-mail via WebGen te versturen?', a: 'Elke e-mail gaat naar mensen die zich aanmeldden, van een geverifieerde afzender, met een uitschrijflink in elk bericht.' },
+      { q: 'Is het veilig om e-mail via Webgnr te versturen?', a: 'Elke e-mail gaat naar mensen die zich aanmeldden, van een geverifieerde afzender, met een uitschrijflink in elk bericht.' },
     ],
   },
   cta: {

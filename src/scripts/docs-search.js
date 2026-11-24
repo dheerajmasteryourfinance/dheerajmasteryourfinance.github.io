@@ -91,7 +91,7 @@ export function initDocsSearch(input, container, opts = {}) {
   const lang = opts.lang ?? 'en';
 
   const load = opts.load ?? (async (l) => {
-    // The page links its index (rel=preload, data-search-index). The WebGen importer makes that href
+    // The page links its index (rel=preload, data-search-index). The Webgnr importer makes that href
     // page-relative, so reading the resolved .href works wherever the site is served from.
     const link = document.querySelector('link[data-search-index]');
     const res = await fetch(link ? link.href : `/search-index-${l}.json`);
