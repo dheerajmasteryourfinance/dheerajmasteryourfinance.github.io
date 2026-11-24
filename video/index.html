@@ -97,9 +97,51 @@
     </div>
     <p class="caption on-light rise" style="--at:30.6" data-copy="site.caption"></p>
   </section>
-  <section class="scene" data-scene="followup" style="--s:40;--e:50"></section>
-  <section class="scene" data-scene="triad" style="--s:50;--e:55"></section>
-  <section class="scene" data-scene="end" style="--s:55;--e:60"></section>
+  <section class="scene" data-scene="followup" style="--s:40;--e:50">
+    <div class="glow" aria-hidden="true" style="animation-delay:40s"></div>
+    <div class="fu-grid">
+      <div class="fu-card fu-form rise" style="--at:40.1">
+        <strong data-copy="followup.formLabel"></strong>
+        <div class="input"><span data-copy="followup.formEmail" data-type-at="40.7" data-type-step="0.05"></span></div>
+        <span class="fu-btn"><span data-copy="followup.formButton"></span><i class="tick pop" style="--at:41.95" aria-hidden="true">&#10003;</i></span>
+      </div>
+      <div class="fu-card fu-list rise" style="--at:40.3">
+        <strong data-copy="followup.listTitle"></strong>
+        <div class="row new"><span class="avatar" aria-hidden="true">S</span><span data-copy="followup.contactName"></span><span class="tag" data-copy="followup.tag"></span></div>
+        <div class="row ghost"><span class="avatar" aria-hidden="true"></span><i></i></div>
+        <div class="row ghost"><span class="avatar" aria-hidden="true"></span><i></i></div>
+      </div>
+      <div class="fu-card fu-seq rise" style="--at:43.6">
+        <div class="mail pop" style="--at:44.0"><b>1</b><span data-copy="followup.emails.0"></span></div>
+        <div class="mail pop" style="--at:44.5"><b>2</b><span data-copy="followup.emails.1"></span></div>
+        <div class="mail pop" style="--at:45.0"><b>3</b><span data-copy="followup.emails.2"></span></div>
+      </div>
+      <div class="fu-card fu-chart rise" style="--at:45.8">
+        <strong data-copy="followup.chartLabel"></strong>
+        <svg viewBox="0 0 400 140" preserveAspectRatio="none" aria-hidden="true">
+          <path class="ln l1" pathLength="1" d="M0 120 C 60 112 90 96 140 92 S 230 66 280 54 S 360 30 400 20"/>
+          <path class="ln l2" pathLength="1" d="M0 132 C 70 128 110 122 160 116 S 250 100 300 90 S 370 74 400 66"/>
+        </svg>
+      </div>
+    </div>
+    <p class="caption rise" style="--at:40.4" data-copy="followup.caption"></p>
+  </section>
+  <section class="scene" data-scene="triad" style="--s:50;--e:55">
+    <div class="panel" style="--s:50;--e:51.5"><h2 class="triad-line" data-copy="triad.0" data-words-at="50.05" data-words-step="0.18"></h2></div>
+    <div class="panel aqua" style="--s:51.5;--e:53"><h2 class="triad-line" data-copy="triad.1" data-words-at="51.55" data-words-step="0.18"></h2></div>
+    <div class="panel" style="--s:53;--e:55"><h2 class="triad-line underline" data-copy="triad.2" data-words-at="53.05" data-words-step="0.18"></h2></div>
+  </section>
+  <section class="scene" data-scene="end" style="--s:55;--e:60">
+    <div class="glow" aria-hidden="true" style="animation-delay:55s;animation-duration:5s"></div>
+    <div class="end-stack">
+      <div class="lockup end-lockup">
+        <div class="mark pop" style="--at:55.1"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4.5h12M3 9h12M3 13.5h8"/></svg></div>
+        <div class="wordmark rise" style="--at:55.3">Webgnr</div>
+      </div>
+      <span class="end-cta rise" style="--at:55.8" data-copy="end.cta"></span>
+      <span class="end-url rise" style="--at:56.1" data-copy="end.url"></span>
+    </div>
+  </section>
 </main>
 </body>
 </html>

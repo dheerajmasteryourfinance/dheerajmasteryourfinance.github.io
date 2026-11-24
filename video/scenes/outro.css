@@ -1,0 +1,45 @@
+/* followup: 40-50 s. Sign-up, audience, email sequence, results. */
+.fu-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2.4vh; width: min(78vw, 134vh); height: 62vh; margin-top: -9vh; }
+[data-format="square"] .fu-grid { width: 92vw; height: 62vh; }
+.fu-card { background: var(--white); color: var(--ink); border-radius: 2vh; padding: 2.8vh 3.2vh; display: flex; flex-direction: column; gap: 1.6vh;
+  box-shadow: 0 2vh 6vh rgba(0, 0, 0, .25); overflow: hidden; }
+.fu-card strong { font-family: var(--font-heading); font-size: 2.9vh; letter-spacing: -0.01em; }
+.fu-form .input { font-size: 2.4vh; min-height: 5.6vh; }
+.fu-btn { align-self: flex-start; display: inline-flex; align-items: center; gap: 1.2vh; background: #2F9E5B; color: var(--white); font-weight: 700;
+  font-size: 2.2vh; padding: 1.3vh 2.4vh; border-radius: 1vh; animation: press .3s var(--ease) 41.75s both; }
+@keyframes press { 50% { transform: scale(.92); } }
+.tick { display: grid; place-items: center; width: 2.8vh; height: 2.8vh; border-radius: 50%; background: var(--white); color: #2F9E5B; font-size: 1.8vh; font-style: normal; }
+.row { display: flex; align-items: center; gap: 1.4vh; font-size: 2.3vh; font-weight: 600; padding: 1vh 0; border-bottom: 1px solid var(--line); }
+.row.new { animation: drop .6s var(--bounce) 42.3s both; }
+@keyframes drop { from { opacity: 0; transform: translateY(-4vh); } to { opacity: 1; transform: none; } }
+.row.ghost i { height: 1.4vh; width: 40%; border-radius: 1vh; background: var(--line); }
+.avatar { flex: none; width: 4.2vh; height: 4.2vh; border-radius: 50%; background: var(--tint); color: var(--link); display: grid; place-items: center; font-weight: 800; }
+.row.ghost .avatar { background: var(--surface); }
+.tag { margin-left: auto; background: var(--accent); color: var(--ink); font-size: 1.8vh; font-weight: 700; padding: .5vh 1.3vh; border-radius: 99vh; white-space: nowrap; }
+.fu-seq { justify-content: center; position: relative; }
+.fu-seq::before { content: ""; position: absolute; left: 5.2vh; top: 4vh; bottom: 4vh; width: 2px; background: var(--line-strong); }
+.mail { position: relative; display: flex; align-items: center; gap: 1.6vh; font-size: 2.4vh; font-weight: 600; }
+.mail b { flex: none; width: 4vh; height: 4vh; border-radius: 50%; background: var(--ink); color: var(--accent); display: grid; place-items: center; font-size: 2vh; }
+.fu-chart svg { flex: 1; width: 100%; min-height: 0; }
+.ln { fill: none; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; vector-effect: non-scaling-stroke; }
+.l1 { stroke: var(--link); animation: draw 1.6s var(--ease) 46.2s forwards; }
+.l2 { stroke: var(--accent-deep); animation: draw 1.6s var(--ease) 46.5s forwards; }
+.scene[data-scene="followup"] .caption { color: var(--white); }
+
+/* triad: 50-55 s. Three hard cuts. */
+.panel { position: absolute; inset: 0; display: grid; place-items: center; background: var(--ink); opacity: 0;
+  animation: scene-on calc((var(--e) - var(--s)) * 1s) linear calc(var(--s) * 1s) 1 none; }
+.panel.aqua { background: var(--accent); color: var(--ink); }
+.triad-line { font-size: 16vh; text-align: center; max-width: 90vw; }
+[data-format="square"] .triad-line { font-size: 12vh; }
+.triad-line.underline { padding-bottom: 2vh; background: linear-gradient(var(--accent), var(--accent)) no-repeat 50% 100% / 0 1.4vh;
+  animation: underline .6s var(--ease) 53.6s forwards; }
+@keyframes underline { to { background-size: 100% 1.4vh; } }
+
+/* end: 55-60 s. Holds still from about 56.6 s so the loop restarts cleanly. */
+.end-stack { display: grid; justify-items: center; gap: 4.5vh; }
+.end-lockup { margin-top: 0; }
+.end-cta { background: var(--accent); color: var(--ink); font-family: var(--font-heading); font-weight: 700; font-size: 4.6vh;
+  padding: 2.4vh 5vh; border-radius: 99vh; box-shadow: 0 2vh 6vh rgba(64, 224, 245, .25); text-align: center; }
+.end-url { font-size: 3.2vh; color: var(--on-dark); letter-spacing: .02em; }
+[data-format="square"] .end-cta { font-size: 3.8vh; max-width: 90vw; }

@@ -36,3 +36,4 @@ h1, h2, .display { text-wrap: balance; font-family: var(--font-heading); font-we
 .scene > * { grid-area: 1 / 1; }
 .scene.light { background: var(--surface); color: var(--ink); }
 .exit { animation: out .45s var(--snap) calc(var(--out) * 1s) forwards; }
+[data-format="square"] .caption { font-size: 4.4vh; bottom: 5vh; padding: 0 5vw; }
