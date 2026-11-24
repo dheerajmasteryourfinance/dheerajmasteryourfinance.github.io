@@ -56,3 +56,6 @@
 .swap > * { grid-area: 1 / 1; }
 .sw-a { animation: gone .2s linear 36.45s forwards; }
 .sw-b { animation: fade .3s linear 36.6s both; }
+/* Each language's menu is its own row, so the gaps stay even after the flip. */
+.navset { display: grid; }
+.navgroup { grid-area: 1 / 1; justify-self: end; display: flex; gap: 3vh; }

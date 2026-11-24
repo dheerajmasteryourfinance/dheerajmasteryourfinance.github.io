@@ -20,7 +20,12 @@ describe.skipIf(!findBrowser())('layout', () => {
             if (!r.width) continue;
             if (r.left < -1 || r.top < -1 || r.right > W + 1 || r.bottom > H + 1) out.push(`${el.dataset.copy} outside frame`);
             const cs = getComputedStyle(el);
-            if (cs.display !== 'inline' && (el.scrollWidth > el.clientWidth + 1)) out.push(`${el.dataset.copy} clipped`);
+            if (cs.display !== 'inline' && cs.overflow !== 'visible' && (el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1)) out.push(`${el.dataset.copy} clipped`);
+            for (let p = el.parentElement; p && p.id !== 'stage'; p = p.parentElement) {
+              if (getComputedStyle(p).overflow === 'visible') continue;
+              const q = p.getBoundingClientRect();
+              if (r.left < q.left - 1 || r.top < q.top - 1 || r.right > q.right + 1 || r.bottom > q.bottom + 1) out.push(`${el.dataset.copy} clipped by .${p.className}`);
+            }
           }
           return out;
         });

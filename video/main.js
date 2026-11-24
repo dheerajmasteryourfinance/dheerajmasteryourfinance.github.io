@@ -49,7 +49,8 @@ async function fill() {
 const ready = (async () => {
   await fill();
   await document.fonts.ready;
-  await Promise.all([...document.fonts].filter(f => f.status !== 'loaded').map(f => f.load().catch(() => {})));
+  // No catch: a font file that fails to load must stop the render, not fall back to system-ui.
+  await Promise.all([...document.fonts].filter(f => f.status !== 'loaded').map(f => f.load()));
   seek(0);
 })();
 
