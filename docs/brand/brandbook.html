@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webgnr Brand Book</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: a navy cover that mirrors the intro video, then light chapters on the site's own surface tones,
+   each chapter one job: idea, voice, name and logo, colour, type, components, motion and video, email, materials. */
+:root {
+  --ink: #0F1E3D; --aqua: #40E0F5; --aqua-hover: #90F0FB; --aqua-deep: #1EC0DC;
+  --blue: #1D4ED8; --blue-deep: #1E3A8A; --body: #1E293B; --muted: #55607A;
+  --surface: #F4F7FB; --tint: #E8F0FE; --line: #E3E8F0; --line-strong: #CBD3E1;
+  --white: #FFFFFF; --raised: #1B2B4D; --on-dark: #C8D1E3; --on-dark-2: #DCE3EE; --danger: #B91C1C; --ok: #15803D;
+  --head: 'Bricolage Grotesque', 'Arial Black', Arial, sans-serif;
+  --text: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--white); color: var(--body); font: 400 17px/1.6 var(--text); -webkit-font-smoothing: antialiased;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+h1, h2, h3, h4 { font-family: var(--head); color: var(--ink); line-height: 1.08; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+h1 { font-weight: 800; font-size: clamp(2.6rem, 8vw, 5.4rem); letter-spacing: -0.04em; }
+h2 { font-weight: 800; font-size: clamp(1.9rem, 4.4vw, 2.9rem); }
+h3 { font-weight: 700; font-size: 1.3rem; letter-spacing: -0.02em; }
+p { margin: 0 0 1em; max-width: 68ch; }
+a { color: var(--blue); }
+a:hover { color: var(--blue-deep); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+code, .mono { font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: .88em; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+.eyebrow { font: 700 .8rem/1.2 var(--text); letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin: 0 0 14px; }
+.lead { font-size: 1.2rem; color: var(--muted); }
+
+/* Cover (navy, like the video's open and end cards) */
+.cover { margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px));
+  background: radial-gradient(40rem 40rem at 20% 20%, rgba(64,224,245,.16), transparent 70%), radial-gradient(46rem 46rem at 85% 90%, rgba(29,78,216,.28), transparent 70%), var(--ink);
+  color: var(--white); padding-block: 56px 72px; }
+.cover .wrap { display: grid; gap: 64px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.mark { width: 44px; height: 44px; border-radius: 12px; background: var(--aqua); display: grid; place-items: center; flex: none; }
+.mark svg { width: 24px; height: 24px; }
+.word { font: 800 2rem/1 var(--head); letter-spacing: -0.035em; color: var(--white); }
+.cover h1 { color: var(--white); max-width: 14ch; }
+.cover h1 em { font-style: normal; color: var(--aqua); }
+.cover p { color: var(--on-dark); font-size: 1.2rem; }
+.cover .meta { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: .9rem; color: var(--on-dark); }
+.route { width: 100%; height: auto; display: block; }
+
+/* Chapter nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
+.nav .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.nav a { flex: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: .92rem; border-bottom: 3px solid transparent; }
+.nav a:hover { border-bottom-color: var(--aqua); color: var(--ink); }
+
+section.chapter { padding-block: 88px 8px; scroll-margin-top: 56px; }
+section.chapter > .wrap > header { margin-bottom: 36px; }
+.grid { display: grid; gap: 20px; }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.card { border: 1px solid var(--line); border-radius: 20px; padding: 24px; background: var(--white); min-width: 0; }
+.card.soft { background: var(--surface); border-color: transparent; }
+.card h3 { margin-bottom: 8px; }
+.card p:last-child { margin-bottom: 0; }
+.tag { display: inline-block; font: 700 .72rem/1 var(--text); letter-spacing: .08em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: var(--tint); color: var(--blue); }
+.tag.no { background: #FEE2E2; color: var(--danger); } .tag.yes { background: #DCFCE7; color: var(--ok); }
+
+/* Idea */
+.triad { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 0; border-radius: 24px; overflow: hidden; margin-top: 8px; }
+.triad div { padding: 40px 28px; font: 800 clamp(1.6rem, 3.4vw, 2.3rem)/1.05 var(--head); letter-spacing: -0.035em; }
+.triad div:nth-child(1) { background: var(--ink); color: var(--white); }
+.triad div:nth-child(2) { background: var(--aqua); color: var(--ink); }
+.triad div:nth-child(3) { background: var(--surface); color: var(--ink); }
+.triad small { display: block; font: 500 .95rem/1.5 var(--text); letter-spacing: 0; margin-top: 12px; opacity: .85; }
+.statement { font: 700 clamp(1.4rem, 2.8vw, 2rem)/1.25 var(--head); letter-spacing: -0.025em; color: var(--ink); max-width: 30ch; }
+.statement mark { background: linear-gradient(transparent 62%, var(--aqua) 62%); color: inherit; padding: 0 4px; }
+
+/* Voice */
+.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.vs > div { padding: 18px 20px; min-width: 0; }
+.vs > div:first-child { background: #FEF2F2; } .vs > div:last-child { background: #F0FDF4; }
+.vs q { display: block; font-size: 1.02rem; color: var(--ink); quotes: none; margin-top: 8px; }
+@media (max-width: 560px) { .vs { grid-template-columns: 1fr; } }
+.words { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 12px 0 0; }
+.words li { padding: 6px 12px; border-radius: 999px; font-size: .92rem; font-weight: 600; border: 1px solid var(--line-strong); }
+.words.use li { background: #F0FDF4; border-color: #BBF7D0; color: #14532D; }
+.words.avoid li { background: #FEF2F2; border-color: #FECACA; color: #7F1D1D; text-decoration: line-through; text-decoration-color: rgba(127,29,29,.4); }
+
+/* Logo */
+.logo-tile { border-radius: 20px; min-height: 180px; display: grid; place-items: center; padding: 24px; }
+.logo-tile .brand .word { color: var(--ink); }
+.t-navy { background: var(--ink); } .t-navy .word { color: var(--white) !important; }
+.t-aqua { background: var(--aqua); } .t-aqua .mark { background: var(--ink); } .t-aqua .mark path { stroke: var(--aqua); }
+.t-white { background: var(--white); border: 1px solid var(--line); } .t-surface { background: var(--surface); }
+.clear { position: relative; display: inline-block; padding: 28px; border: 1.5px dashed var(--blue); border-radius: 8px; }
+.clear::before { content: "x"; position: absolute; top: 4px; left: 50%; transform: translateX(-50%); font: 700 .75rem var(--text); color: var(--blue); }
+.clear::after { content: "x"; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font: 700 .75rem var(--text); color: var(--blue); }
+.misuse { position: relative; }
+.misuse .brand { transform-origin: left; }
+.m1 .brand { transform: scaleX(1.35); } .m2 .mark { background: #F59E0B; } .m3 .word { color: var(--aqua) !important; text-shadow: 0 0 0 transparent; } .m4 .brand { transform: rotate(-8deg); }
+.x { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--danger); color: var(--white); display: grid; place-items: center; font-weight: 800; }
+
+/* Colour */
+.sw { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--white); min-width: 0; }
+.sw .chip { height: 110px; display: flex; align-items: flex-end; padding: 12px 14px; font: 700 .85rem var(--text); }
+.sw .info { padding: 14px; font-size: .88rem; line-height: 1.5; }
+.sw .info b { display: block; font: 700 1rem var(--head); color: var(--ink); letter-spacing: -0.01em; }
+.sw .info span { color: var(--muted); display: block; }
+.bar { display: flex; height: 44px; border-radius: 12px; overflow: hidden; margin: 16px 0 6px; border: 1px solid var(--line); }
+.bar i { display: block; }
+.pairs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; }
+.pair { border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); min-width: 0; }
+.pair b { font: 800 1.5rem var(--head); letter-spacing: -0.03em; } .pair small { font-size: .78rem; opacity: .9; }
+.pair .ratio { margin-top: auto; align-self: flex-start; font: 700 .72rem var(--text); padding: 3px 8px; border-radius: 99px; background: rgba(255,255,255,.2); border: 1px solid currentColor; }
+
+/* Type */
+.spec { display: grid; gap: 4px; padding: 22px 0; border-top: 1px solid var(--line); }
+.spec .label { font: 600 .78rem var(--text); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.big-aa { font: 800 clamp(5rem, 14vw, 9rem)/.9 var(--head); letter-spacing: -0.05em; color: var(--ink); }
+.big-aa.dm { font-family: var(--text); font-weight: 600; letter-spacing: -0.02em; }
+
+/* Components */
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 2px solid transparent; font: 700 1rem var(--text); text-decoration: none; cursor: default; }
+.btn.p { background: var(--ink); color: var(--white); } .btn.a { background: var(--aqua); color: var(--ink); } .btn.g { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn.d { background: transparent; color: var(--white); border-color: rgba(200,209,227,.4); }
+.demo { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.chip-s { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--white); font: 500 .92rem var(--text); color: var(--ink); }
+.chip-s.on { background: var(--ink); border-color: var(--ink); color: var(--white); font-weight: 600; }
+.pill { display: inline-flex; padding: 3px; border: 1px solid var(--line-strong); border-radius: 999px; gap: 2px; }
+.pill span { min-width: 44px; padding: 9px 12px; border-radius: 999px; text-align: center; font: 600 .85rem/1 var(--text); letter-spacing: .02em; color: var(--ink); }
+.pill span.on { background: var(--ink); color: var(--white); }
+.hl { background: linear-gradient(transparent 62%, var(--aqua) 62%); padding: 0 6px; }
+.frame { border: 1px solid var(--line-strong); border-radius: 14px; overflow: hidden; background: var(--white); box-shadow: 0 12px 32px rgba(15,30,61,.12); }
+.frame .bar2 { display: flex; gap: 6px; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.frame .bar2 i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); }
+.frame .body { padding: 22px; display: grid; gap: 10px; }
+.frame .body i { display: block; height: 12px; border-radius: 6px; background: var(--line); } .frame .body i.s { width: 60%; } .frame .body .t { height: 22px; width: 70%; background: var(--ink); border-radius: 6px; }
+.glow { border-radius: 24px; min-height: 200px; padding: 28px; color: var(--white); background: radial-gradient(18rem 18rem at 25% 35%, rgba(64,224,245,.22), transparent 70%), radial-gradient(20rem 20rem at 80% 80%, rgba(29,78,216,.34), transparent 70%), var(--ink); display: flex; align-items: flex-end; }
+.glow b { font: 800 1.6rem/1.1 var(--head); letter-spacing: -0.03em; }
+
+/* Motion */
+.curve { display: grid; gap: 6px; }
+.curve code { background: var(--surface); padding: 6px 10px; border-radius: 8px; display: block; overflow-x: auto; }
+.timeline { display: flex; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-width: 0; }
+.timeline div { padding: 12px 6px; text-align: center; font: 700 .7rem/1.25 var(--text); color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+.scroller { overflow-x: auto; }
+.scroller > .timeline { min-width: 640px; }
+
+/* Email */
+.mail-shell { background: var(--surface); border-radius: 20px; padding: 20px; }
+.mail { max-width: 560px; margin: 0 auto; background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+.mail .mh { background: var(--ink); padding: 18px 26px; display: flex; align-items: center; gap: 10px; }
+.mail .mh .mk { width: 30px; height: 30px; border-radius: 8px; background: var(--aqua); display: grid; place-items: center; }
+.mail .mh .wd { font: 800 1.35rem var(--head); letter-spacing: -0.03em; color: var(--white); }
+.mail .mb { padding: 28px 26px 8px; }
+.mail h4 { font: 800 1.7rem/1.15 var(--head); letter-spacing: -0.035em; margin-bottom: 10px; }
+.mail .mf { background: var(--surface); border-top: 1px solid var(--line); padding: 14px 26px; font-size: .75rem; color: var(--muted); }
+.code { position: relative; }
+.code textarea { width: 100%; min-height: 260px; resize: vertical; border: 1px solid var(--line-strong); border-radius: 12px; padding: 14px; font: .8rem/1.5 ui-monospace, Menlo, Consolas, monospace; background: #0B1530; color: #DCE3EE; }
+.copy { margin-top: 10px; }
+.copy button { min-height: 44px; padding: 0 20px; border-radius: 999px; border: 2px solid var(--ink); background: var(--ink); color: var(--white); font: 700 .95rem var(--text); cursor: pointer; }
+.copy button:hover { background: var(--blue); border-color: var(--blue); }
+.copy span { margin-left: 12px; color: var(--ok); font-weight: 600; font-size: .92rem; }
+
+/* Materials */
+.sq { aspect-ratio: 1 / 1; border-radius: 18px; padding: 8%; display: flex; flex-direction: column; justify-content: space-between; background: radial-gradient(60% 60% at 20% 20%, rgba(64,224,245,.2), transparent 70%), var(--ink); color: var(--white); min-width: 0; }
+.sq .h { font: 800 clamp(1.5rem, 4vw, 2.2rem)/1.04 var(--head); letter-spacing: -0.035em; }
+.sq .h em { font-style: normal; color: var(--aqua); }
+.sq .mini { display: flex; align-items: center; gap: 8px; font: 800 1.1rem var(--head); letter-spacing: -0.03em; }
+.sq .mini span { width: 24px; height: 24px; border-radius: 7px; background: var(--aqua); display: inline-block; }
+.slide { aspect-ratio: 16 / 9; border-radius: 14px; padding: 7%; background: var(--surface); display: flex; flex-direction: column; justify-content: center; border: 1px solid var(--line); min-width: 0; }
+.slide .h { font: 800 clamp(1.3rem, 3.2vw, 2rem)/1.08 var(--head); letter-spacing: -0.035em; color: var(--ink); max-width: 14ch; }
+.slide .s { color: var(--muted); font-size: .9rem; margin-top: 8px; }
+.sig { font: 400 14px/1.5 Arial, sans-serif; color: #1E293B; border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--white); }
+.sig b { font-family: var(--head); font-size: 16px; color: var(--ink); }
+.sig .c { color: var(--muted); font-size: 12px; }
+.sig .bar3 { height: 3px; width: 36px; background: var(--aqua); margin: 8px 0; border-radius: 2px; }
+
+ul.plain { margin: 0; padding-left: 1.1em; } ul.plain li { margin-bottom: 6px; }
+table.t { width: 100%; border-collapse: collapse; font-size: .95rem; }
+table.t th, table.t td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.t th { font: 700 .75rem var(--text); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+footer.end { margin-block: 96px 56px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .9rem; }
+</style>
+
+</head>
+<body>
+<header class="cover">
+  <div class="wrap">
+    <div class="brand" aria-label="Webgnr">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></span>
+      <span class="word">Webgnr</span>
+    </div>
+    <div>
+      <p class="eyebrow" style="color:var(--aqua)">Brand Book · version 1.0</p>
+      <h1>Brand story <em>sites.</em></h1>
+      <p style="margin-top:20px;max-width:46ch">How Webgnr looks, sounds and behaves, so every video, email, post and page feels like the same company. Built from the website and the intro video as they stand today.</p>
+    </div>
+    <svg class="route" viewBox="0 0 1152 90" fill="none" aria-hidden="true">
+      <path d="M0 62C90 62 120 20 192 20S400 62 576 62 860 20 960 20 1060 44 1152 44" stroke="#40E0F5" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="192" cy="20" r="9" fill="#0F1E3D" stroke="#40E0F5" stroke-width="3"/><circle cx="576" cy="62" r="9" fill="#0F1E3D" stroke="#40E0F5" stroke-width="3"/><circle cx="960" cy="20" r="9" fill="#0F1E3D" stroke="#40E0F5" stroke-width="3"/>
+    </svg>
+    <div class="meta"><span>webgnr.com · Dutch at webgnr.com/nl</span><span>Master Your Business · KvK 99530856</span><span>For web, video, email and print</span></div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Chapters"><div class="wrap">
+  <a href="#idea">Idea</a><a href="#voice">Voice</a><a href="#logo">Name and logo</a><a href="#colour">Colour</a><a href="#type">Type</a><a href="#components">Components</a><a href="#motion">Motion and video</a><a href="#email">Email</a><a href="#materials">Materials</a><a href="#rules">Checklist</a>
+</div></nav>
+
+<main>
+<section class="chapter" id="idea"><div class="wrap">
+  <header><p class="eyebrow">1 · The idea</p><h2>Every business has a story. Webgnr tells it.</h2></header>
+  <p class="statement">Webgnr turns a few honest answers into your <mark>brand story</mark>, a website that tells it, and the forms and email to follow up.</p>
+  <p class="lead">For owners of small businesses who have no designer, no developer and no time to learn five tools. The product asks about customers, not about code.</p>
+  <h3 style="margin:36px 0 14px">The three words</h3>
+  <div class="triad">
+    <div>Get found.<small>A complete site, written from your brief, in your language, on your own domain.</small></div>
+    <div>Get signed up.<small>Forms on every page, one audience, consent and unsubscribe handled.</small></div>
+    <div>Follow up.<small>Newsletters and automatic emails from your own domain.</small></div>
+  </div>
+  <p style="margin-top:14px;color:var(--muted);font-size:.95rem">Dutch: <b>Word gevonden. Krijg aanmeldingen. Volg op.</b> Always in this order, always three, always full stops. They are the spine of the site, the video and every campaign.</p>
+
+  <div class="grid g3" style="margin-top:32px">
+    <div class="card soft"><h3>1 · Your brand story, written for you</h3><p>Answer a few questions in your own words. Webgnr turns them into your story and builds the site around it.</p></div>
+    <div class="card soft"><h3>2 · AI that designs and writes</h3><p>Change the site, translate it and draft campaigns by asking in plain words.</p></div>
+    <div class="card soft"><h3>3 · Start free, grow at fair rates</h3><p>Try it free for 14 days. Choose a plan when you are ready. No price talk until the plans are final.</p></div>
+  </div>
+  <p style="margin-top:14px;color:var(--muted);font-size:.95rem">These are the three advantages Joel asked for, in short form. Use them in this order wherever space allows.</p>
+</div></section>
+
+<section class="chapter" id="voice"><div class="wrap">
+  <header><p class="eyebrow">2 · Voice and tone</p><h2>Plain, warm, specific, honest.</h2></header>
+  <div class="grid g2">
+    <div class="card"><h3>Plain</h3><p>A baker understands every sentence. Short words, short sentences, one idea at a time.</p></div>
+    <div class="card"><h3>Specific</h3><p>Name the thing: "Sourdough, baked fresh every morning", not "quality products".</p></div>
+    <div class="card"><h3>Warm and direct</h3><p>Talk to one person: you. In Dutch use <i>je</i> and <i>jij</i>, never <i>u</i>.</p></div>
+    <div class="card"><h3>Honest</h3><p>No invented numbers, ratings or quotes. Only claim what the product does today. Unconfirmed means unsaid.</p></div>
+  </div>
+  <h3 style="margin:40px 0 16px">Say it like this</h3>
+  <div class="grid">
+    <div class="vs"><div><span class="tag no">Not this</span><q>Leverage state-of-the-art AI to supercharge your online presence.</q></div><div><span class="tag yes">This</span><q>Describe your business. Get your brand story and a website that tells it.</q></div></div>
+    <div class="vs"><div><span class="tag no">Niet dit</span><q>Maximaliseer uw online aanwezigheid met geavanceerde AI-oplossingen.</q></div><div><span class="tag yes">Dit</span><q>Beschrijf je bedrijf. Krijg je merkverhaal en een site die het vertelt.</q></div></div>
+    <div class="vs"><div><span class="tag no">Not this</span><q>Our seamless, cutting-edge platform empowers businesses.</q></div><div><span class="tag yes">This</span><q>Click any text to change it. Or ask for a bigger change in a sentence.</q></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:28px">
+    <div class="card soft"><h3>Words we use</h3><ul class="words use"><li>brand story</li><li>site</li><li>get found</li><li>get signed up</li><li>follow up</li><li>audience</li><li>your own domain</li><li>merkverhaal</li><li>aanmeldingen</li></ul></div>
+    <div class="card soft"><h3>Words we avoid</h3><ul class="words avoid"><li>leverage</li><li>seamless</li><li>supercharge</li><li>revolutionary</li><li>state-of-the-art</li><li>solution</li><li>synergy</li><li>oplossing</li></ul><p style="margin-top:12px;font-size:.92rem;color:var(--muted)">"State of the art" is allowed only next to something we can show.</p></div>
+  </div>
+  <p style="margin-top:24px">Headlines end with a full stop. Buttons say exactly what happens: <b>Start your free 14-day trial</b>, <b>Request early access</b>, <b>Send message</b>. Dates and numbers are real or left out.</p>
+</div></section>
+
+<section class="chapter" id="logo"><div class="wrap">
+  <header><p class="eyebrow">3 · Name and logo</p><h2>One name, one mark, one way to write it.</h2></header>
+  <div class="grid g2">
+    <div class="card"><h3>The name</h3><ul class="plain"><li>The product is <b>Webgnr</b>. Capital W, the rest lowercase.</li><li>The address is <b>webgnr.com</b>, always lowercase. Dutch pages are at <b>webgnr.com/nl</b>.</li><li>Never <s>WebGen</s>, <s>WebGnr</s> or <s>web-gnr</s>.</li><li>The company behind it is <b>Master Your Business</b> (KvK 99530856, Steijnstraat 18, 2987 AS Ridderkerk).</li></ul></div>
+    <div class="card"><h3>The mark</h3><p>A rounded square in aqua with three lines inside: a page being written. The lines are navy, 2 px at 18 px, with round ends. The word is Bricolage Grotesque ExtraBold, tracked tight (-3.5%).</p></div>
+  </div>
+  <div class="grid g4" style="margin-top:20px">
+    <div class="logo-tile t-white"><div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></span><span class="word">Webgnr</span></div></div>
+    <div class="logo-tile t-navy"><div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></span><span class="word">Webgnr</span></div></div>
+    <div class="logo-tile t-aqua"><div class="brand"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#40E0F5" stroke-width="2.4" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></span><span class="word">Webgnr</span></div></div>
+    <div class="logo-tile t-surface"><div class="mark" style="width:72px;height:72px;border-radius:20px"><svg viewBox="0 0 24 24" style="width:40px;height:40px" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></div></div>
+  </div>
+  <p style="margin-top:12px;color:var(--muted);font-size:.92rem">Light, navy, aqua and mark-only versions. On aqua the mark flips to navy with aqua lines.</p>
+  <div class="grid g2" style="margin-top:28px">
+    <div class="card"><h3>Space and size</h3><div style="margin:14px 0"><span class="clear"><span class="brand"><span class="mark" style="width:34px;height:34px;border-radius:9px"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="#0F1E3D" stroke-width="2.4" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></span><span class="word" style="color:var(--ink);font-size:1.6rem">Webgnr</span></span></span></div><p>Keep clear space of one mark-height (x) on every side. Smallest size: 24 px high on screen, 8 mm in print. Under 24 px use the mark alone.</p></div>
+    <div class="card"><h3>Never</h3><div class="grid" style="grid-template-columns:repeat(2,1fr);gap:12px">
+      <div class="logo-tile t-surface misuse m1" style="min-height:96px;padding:10px"><span class="x">×</span><div class="brand"><span class="mark" style="width:28px;height:28px;border-radius:8px"></span><span class="word" style="color:var(--ink);font-size:1.2rem">Webgnr</span></div></div>
+      <div class="logo-tile t-surface misuse m2" style="min-height:96px;padding:10px"><span class="x">×</span><div class="brand"><span class="mark" style="width:28px;height:28px;border-radius:8px"></span><span class="word" style="color:var(--ink);font-size:1.2rem">Webgnr</span></div></div>
+      <div class="logo-tile t-white misuse m3" style="min-height:96px;padding:10px"><span class="x">×</span><div class="brand"><span class="mark" style="width:28px;height:28px;border-radius:8px"></span><span class="word" style="font-size:1.2rem">Webgnr</span></div></div>
+      <div class="logo-tile t-surface misuse m4" style="min-height:96px;padding:10px"><span class="x">×</span><div class="brand"><span class="mark" style="width:28px;height:28px;border-radius:8px"></span><span class="word" style="color:var(--ink);font-size:1.2rem">Webgnr</span></div></div>
+    </div><p style="margin-top:10px;font-size:.92rem">Do not stretch, recolour the mark, set the word in aqua on white (1.6:1), or tilt it.</p></div>
+  </div>
+  <p style="margin-top:20px;color:var(--muted);font-size:.95rem">Files: <code>logo-mark.svg</code>, <code>logo-lockup-dark.svg</code>, <code>logo-lockup-light.svg</code> in the <code>docs/brand</code> folder. The lockups hold the word as live text; outline it in a design tool before print.</p>
+</div></section>
+
+<section class="chapter" id="colour"><div class="wrap">
+  <header><p class="eyebrow">4 · Colour</p><h2>Navy leads, aqua points the way.</h2></header>
+  <p class="lead">Aqua is the one accent. It marks the next action and the word that matters, and it never carries small text on white.</p>
+  <div class="bar" role="img" aria-label="Proportions: 60 percent white and surface, 25 percent navy, 10 percent aqua, 5 percent blue"><i style="width:60%;background:var(--surface)"></i><i style="width:25%;background:var(--ink)"></i><i style="width:10%;background:var(--aqua)"></i><i style="width:5%;background:var(--blue)"></i></div>
+  <p style="font-size:.9rem;color:var(--muted)">Rough proportions: 60% white and surface · 25% navy · 10% aqua · 5% blue.</p>
+  <div class="grid g4" style="margin-top:20px">
+    <div class="sw"><div class="chip" style="background:#0F1E3D;color:#fff">Navy</div><div class="info"><b>#0F1E3D</b><span>RGB 15 · 30 · 61</span><span>Text, dark backgrounds, video base</span></div></div>
+    <div class="sw"><div class="chip" style="background:#40E0F5;color:#0F1E3D">Aqua</div><div class="info"><b>#40E0F5</b><span>RGB 64 · 224 · 245</span><span>The accent: buttons, marks, highlights</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1D4ED8;color:#fff">Blue</div><div class="info"><b>#1D4ED8</b><span>RGB 29 · 78 · 216</span><span>Links and small labels on light</span></div></div>
+    <div class="sw"><div class="chip" style="background:#F4F7FB;color:#0F1E3D;border-bottom:1px solid #E3E8F0">Surface</div><div class="info"><b>#F4F7FB</b><span>RGB 244 · 247 · 251</span><span>Calm panels and page bands</span></div></div>
+    <div class="sw"><div class="chip" style="background:#90F0FB;color:#0F1E3D">Aqua light</div><div class="info"><b>#90F0FB</b><span>Hover and highlights</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1EC0DC;color:#0F1E3D">Aqua deep</div><div class="info"><b>#1EC0DC</b><span>Gradient end, charts</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1E3A8A;color:#fff">Blue deep</div><div class="info"><b>#1E3A8A</b><span>Link hover</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1B2B4D;color:#fff">Navy raised</div><div class="info"><b>#1B2B4D</b><span>Cards on navy</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1E293B;color:#fff">Body</div><div class="info"><b>#1E293B</b><span>Running text</span></div></div>
+    <div class="sw"><div class="chip" style="background:#55607A;color:#fff">Muted</div><div class="info"><b>#55607A</b><span>Captions, secondary text</span></div></div>
+    <div class="sw"><div class="chip" style="background:#E3E8F0;color:#0F1E3D">Line</div><div class="info"><b>#E3E8F0</b><span>Borders; #CBD3E1 for stronger ones</span></div></div>
+    <div class="sw"><div class="chip" style="background:#C8D1E3;color:#0F1E3D">On navy</div><div class="info"><b>#C8D1E3</b><span>Text on navy; #DCE3EE for headings</span></div></div>
+  </div>
+  <h3 style="margin:36px 0 14px">Pairs that work (contrast checked)</h3>
+  <div class="pairs">
+    <div class="pair" style="background:#fff;color:#0F1E3D"><b>Navy on white</b><small>Headlines, body</small><span class="ratio">16.5 : 1</span></div>
+    <div class="pair" style="background:#0F1E3D;color:#fff"><b>White on navy</b><small>Video, hero bands</small><span class="ratio">16.5 : 1</span></div>
+    <div class="pair" style="background:#40E0F5;color:#0F1E3D"><b>Navy on aqua</b><small>Buttons, triad card</small><span class="ratio">10.4 : 1</span></div>
+    <div class="pair" style="background:#0F1E3D;color:#40E0F5"><b>Aqua on navy</b><small>Taglines, links on dark</small><span class="ratio">10.4 : 1</span></div>
+    <div class="pair" style="background:#fff;color:#1D4ED8"><b>Blue on white</b><small>Links, eyebrows</small><span class="ratio">6.7 : 1</span></div>
+    <div class="pair" style="background:#F4F7FB;color:#55607A"><b>Muted on surface</b><small>Captions</small><span class="ratio">5.9 : 1</span></div>
+  </div>
+  <p style="margin-top:14px;font-size:.95rem;color:var(--muted)">Do not use: aqua text on white (1.6 : 1). Product screenshots keep their own colours; the brand frames them, it never tints them.</p>
+</div></section>
+
+<section class="chapter" id="type"><div class="wrap">
+  <header><p class="eyebrow">5 · Type</p><h2>Two typefaces, both free.</h2></header>
+  <div class="grid g2">
+    <div class="card"><div class="big-aa">Aa</div><h3 style="margin-top:12px">Bricolage Grotesque</h3><p>Headlines, numbers, button words and the logo. ExtraBold (800) for display, Bold (700) for sub-heads. Tracking -3.5% at large sizes, line-height 1.05–1.15. Free on Google Fonts.</p></div>
+    <div class="card"><div class="big-aa dm">Aa</div><h3 style="margin-top:12px">DM Sans</h3><p>Everything you read: body, captions, forms, buttons. Regular (400), Medium (500), Semibold (600), Bold (700). Line-height 1.6. Free on Google Fonts.</p></div>
+  </div>
+  <div style="margin-top:28px">
+    <div class="spec"><span class="label">Display · Bricolage 800 · 56 px web, 11% of frame height in video</span><div style="font:800 clamp(2rem,6vw,3.5rem)/1.05 var(--head);letter-spacing:-0.035em;color:var(--ink)">Get found. Get signed up. <span class="hl">Follow up.</span></div></div>
+    <div class="spec"><span class="label">Heading · Bricolage 800 · 40 px</span><div style="font:800 2.2rem/1.1 var(--head);letter-spacing:-0.03em;color:var(--ink)">Three stops to a site that works.</div></div>
+    <div class="spec"><span class="label">Sub-heading · Bricolage 700 · 20 px</span><div style="font:700 1.25rem/1.2 var(--head);letter-spacing:-0.02em;color:var(--ink)">Tell us about your business</div></div>
+    <div class="spec"><span class="label">Body · DM Sans 400 · 17 px / 1.6</span><div>Describe your business and get your brand story, a website that tells it, and forms and email ready to go. No designer, no developer, no extra tools.</div></div>
+    <div class="spec"><span class="label">Label · DM Sans 700 · 13 px, uppercase, +8% tracking</span><div style="font:700 .8rem var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--blue)">How it works</div></div>
+  </div>
+  <p style="color:var(--muted);font-size:.95rem">Fallbacks: Arial Black / Arial for headings, system sans for text. In email use the stacks in the template, since many clients ignore web fonts.</p>
+</div></section>
+
+<section class="chapter" id="components"><div class="wrap">
+  <header><p class="eyebrow">6 · Components and look</p><h2>Round, calm, one thing to click.</h2></header>
+  <div class="grid g2">
+    <div class="card"><h3>Buttons</h3><p>Pills, 48 px tall. Aqua for the main action, navy for the quiet one, outline for the third. One main button per view.</p><div class="demo"><span class="btn a">Start your free 14-day trial</span><span class="btn p">Sign in</span><span class="btn g">See an example</span></div><div class="demo" style="margin-top:12px;background:var(--ink);padding:14px;border-radius:14px"><span class="btn a">Start free trial</span><span class="btn d">Request early access</span></div></div>
+    <div class="card"><h3>Chips, pills and the highlight</h3><p>Chips filter and tag. The language pill is a small segmented control. The aqua underline marks the one phrase that matters in a headline.</p><div class="demo"><span class="chip-s on">All</span><span class="chip-s">Bakeries</span><span class="chip-s">Local services</span></div><div class="demo" style="margin-top:12px"><span class="pill"><span class="on">EN</span><span>NL</span></span><span style="font:800 1.4rem var(--head);letter-spacing:-0.03em;color:var(--ink)">Follow <span class="hl">up.</span></span></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:20px">
+    <div><h3 style="margin-bottom:10px">Browser frame</h3><div class="frame"><div class="bar2"><i></i><i></i><i></i></div><div class="body"><span class="t"></span><i></i><i class="s"></i></div></div><p style="margin-top:10px;font-size:.92rem;color:var(--muted)">Screenshots sit in a light window with three dots, a 1 px line and a soft navy shadow.</p></div>
+    <div><h3 style="margin-bottom:10px">Glow</h3><div class="glow"><b>Brand story sites.</b></div><p style="margin-top:10px;font-size:.92rem;color:var(--muted)">Navy with two soft radial glows (aqua top left, blue bottom right). Used for covers, the closing band and video.</p></div>
+    <div><h3 style="margin-bottom:10px">The route</h3><div class="card soft" style="padding:12px"><svg viewBox="0 0 400 90" style="width:100%;height:auto" fill="none"><path d="M10 64C50 64 60 26 100 26S190 64 240 64 330 28 390 40" stroke="#CBD3E1" stroke-width="2.5" stroke-dasharray="2 8" stroke-linecap="round"/><path d="M10 64C50 64 60 26 100 26S190 64 240 64" stroke="#1D4ED8" stroke-width="3.5" stroke-linecap="round"/><circle cx="100" cy="26" r="13" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="100" y="31" text-anchor="middle" font-family="DM Sans, Arial" font-weight="700" font-size="13" fill="#0F1E3D">1</text><circle cx="240" cy="64" r="13" fill="#40E0F5" stroke="#0F1E3D" stroke-width="2.5"/><text x="240" y="69" text-anchor="middle" font-family="DM Sans, Arial" font-weight="700" font-size="13" fill="#0F1E3D">2</text></svg></div><p style="margin-top:10px;font-size:.92rem;color:var(--muted)">A dotted line with numbered stops: the journey from brief to launch. Use it to connect steps, never as decoration alone.</p></div>
+  </div>
+  <p style="margin-top:20px;color:var(--muted);font-size:.95rem">Shape: 20–24 px radius on cards, full pills on buttons, 1 px lines (#E3E8F0), generous space, no heavy shadows. Icons: a plain tick or arrow, 2.4 px stroke, round ends. Photos: real, warm and local; no stock handshakes.</p>
+</div></section>
+
+<section class="chapter" id="motion"><div class="wrap">
+  <header><p class="eyebrow">7 · Motion and video</p><h2>Quick to start, soft to land.</h2></header>
+  <div class="grid g2">
+    <div class="card"><h3>Easing and timing</h3><div class="curve"><span>Entrances and scroll reveals</span><code>cubic-bezier(.2, .7, .2, 1) · 0.3–0.7 s · rise 22–28 px, fade in</code><span>Bounce, for a thing that lands</span><code>cubic-bezier(.3, 1.4, .5, 1) · 0.6 s</code><span>Exits</span><code>cubic-bezier(.7, 0, .2, 1) · 0.45 s · up 3% and fade</code></div></div>
+    <div class="card"><h3>Rules</h3><ul class="plain"><li>Move things with opacity and position, never with blur on large areas.</li><li>Text appears word by word; the weight grows from 300 to 800 as it lands.</li><li>Scenes change with hard cuts, not fades.</li><li>Everything stops for people who ask for reduced motion.</li><li>One moment of delight per screen, not five.</li></ul></div>
+  </div>
+  <h3 style="margin:36px 0 14px">The 60-second intro video</h3>
+  <div class="scroller"><div class="timeline" role="img" aria-label="Video scenes: open 0 to 4 seconds, problem 4 to 9, reveal 9 to 13, brief 13 to 22, story 22 to 30, site 30 to 40, follow-up 40 to 50, three words 50 to 55, end card 55 to 60">
+    <div style="flex:4;background:#0F1E3D;color:#fff">Open<br>0–4</div><div style="flex:5;background:#1B2B4D;color:#fff">Problem<br>4–9</div><div style="flex:4;background:#0F1E3D;color:#40E0F5">Reveal<br>9–13</div><div style="flex:9;background:#F4F7FB">Brief<br>13–22</div><div style="flex:8;background:#E8F0FE">Story<br>22–30</div><div style="flex:10;background:#F4F7FB">Site<br>30–40</div><div style="flex:10;background:#0F1E3D;color:#fff">Follow-up<br>40–50</div><div style="flex:5;background:#40E0F5">Three words<br>50–55</div><div style="flex:5;background:#0F1E3D;color:#40E0F5">End<br>55–60</div>
+  </div></div>
+  <div class="grid g3" style="margin-top:20px">
+    <div class="card soft"><h3>Look</h3><p>Navy and aqua for the story beats, light surface for the product scenes. Headlines in Bricolage 800, captions in Bricolage 700 at the bottom of the frame. Products shown in the browser frame.</p></div>
+    <div class="card soft"><h3>Structure</h3><p>Every business has a story. Most websites don't tell it. Meet Webgnr, brand story sites. Describe, get the story, get the site, forms and email. Then the three words and the call to action.</p></div>
+    <div class="card soft"><h3>End card</h3><p>Logo, the aqua button "Start your free 14-day trial", and the address in muted text. The address in the video must be <b>webgnr.com</b> (the current file still shows website-generator.nl and should be re-rendered).</p></div>
+  </div>
+  <p style="margin-top:20px;color:var(--muted);font-size:.95rem">Music: calm, original, 120 BPM, a hit on the logo, three hits on the three words, fades out for the loop. Voice, when added: warm, unhurried, about 120 words a minute, music ducked 8 dB. Formats: 16:9 for the site and YouTube, 1:1 for social, silent for autoplay on the site.</p>
+</div></section>
+
+<section class="chapter" id="email"><div class="wrap">
+  <header><p class="eyebrow">8 · Email</p><h2>Webgnr's own email, and the template for the app.</h2></header>
+  <div class="grid g2">
+    <div class="mail-shell"><div class="mail">
+      <div class="mh"><span class="mk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#0F1E3D" stroke-width="2.6" stroke-linecap="round"><path d="M5 7h14M5 12h14M5 17h9"/></svg></span><span class="wd">Webgnr</span></div>
+      <div class="mb"><h4>Hi Sam, your site is ready to review.</h4><p>Your brand story and first pages are waiting. Click any text to change it, or ask for a bigger change in a sentence.</p><p><span class="btn a" style="min-height:44px">Open my site</span></p><p style="font-size:.85rem;color:var(--muted)">Questions? Reply to this email.</p></div>
+      <div class="mf">Webgnr · Master Your Business · KvK 99530856 · Steijnstraat 18, 2987 AS Ridderkerk</div>
+    </div></div>
+    <div class="card">
+      <h3>Email rules</h3>
+      <ul class="plain">
+        <li><b>Width</b> 600 px, white card on surface, 16 px radius.</li>
+        <li><b>Header</b> navy band with the mark and word. No banner images.</li>
+        <li><b>Headline</b> Bricolage 800, 30 px. Greet with {{first_name}} when known.</li>
+        <li><b>Body</b> DM Sans 16 px / 1.6, navy-slate text. One idea per email.</li>
+        <li><b>Button</b> one, aqua with navy text, pill. Links in text use blue, never aqua.</li>
+        <li><b>Footer</b> company line in muted 12 px. The app adds the sender details and the unsubscribe link to every email.</li>
+        <li><b>Subject</b> under 45 characters, plain, benefit first: "Your site is ready to review". No capitals shouting, no emoji strings.</li>
+        <li><b>Preheader</b> 60–90 characters that finish the subject.</li>
+        <li><b>Sender</b> a person at Webgnr, for example "Anna at Webgnr", from webgnr.com.</li>
+      </ul>
+    </div>
+  </div>
+  <h3 style="margin:32px 0 12px">Email template (HTML)</h3>
+  <p style="color:var(--muted)">Copy this into the app's own-HTML email, or send it from any email tool. Also saved as <code>docs/brand/email-template.html</code>.</p>
+  <div class="code"><label for="tpl" class="visually-hidden" style="position:absolute;left:-9999px">Email template HTML</label><textarea id="tpl" readonly spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;meta name="color-scheme" content="light"&gt;
+&lt;title&gt;Webgnr email&lt;/title&gt;
+&lt;!--
+  Webgnr email template. 600px, table layout, inline styles (email clients ignore most CSS).
+  Replace the text; keep the structure. {{first_name}} is the app's personalisation field.
+  The unsubscribe link and the sender's name and postal address are added by the app to every email,
+  so the footer below only repeats the company line.
+--&gt;
+&lt;/head&gt;
+&lt;body style="margin:0;padding:0;background:#F4F7FB;"&gt;
+  &lt;!-- Preheader: 60-90 characters, shown next to the subject in the inbox. --&gt;
+  &lt;div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F4F7FB;"&gt;One short line that finishes the subject, in plain words.&lt;/div&gt;
+  &lt;table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F4F7FB;"&gt;
+    &lt;tr&gt;&lt;td align="center" style="padding:24px 12px;"&gt;
+      &lt;table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#FFFFFF;border-radius:16px;overflow:hidden;"&gt;
+
+        &lt;!-- Header --&gt;
+        &lt;tr&gt;&lt;td style="background:#0F1E3D;padding:22px 32px;"&gt;
+          &lt;table role="presentation" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;
+            &lt;td style="width:34px;height:34px;background:#40E0F5;border-radius:9px;text-align:center;vertical-align:middle;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:34px;color:#0F1E3D;font-weight:700;"&gt;&amp;#8801;&lt;/td&gt;
+            &lt;td style="padding-left:12px;font-family:'Bricolage Grotesque','Arial Black',Arial,sans-serif;font-size:24px;font-weight:800;letter-spacing:-0.5px;color:#FFFFFF;"&gt;Webgnr&lt;/td&gt;
+          &lt;/tr&gt;&lt;/table&gt;
+        &lt;/td&gt;&lt;/tr&gt;
+
+        &lt;!-- Headline and body --&gt;
+        &lt;tr&gt;&lt;td style="padding:36px 32px 8px 32px;font-family:'Bricolage Grotesque','Arial Black',Arial,sans-serif;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-0.8px;color:#0F1E3D;"&gt;
+          Hi {{first_name}}, here is your headline.
+        &lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td style="padding:8px 32px 8px 32px;font-family:'DM Sans',Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#1E293B;"&gt;
+          Write like you talk to one customer. Short sentences, plain words, one idea per email.
+        &lt;/td&gt;&lt;/tr&gt;
+
+        &lt;!-- Button: aqua with navy text (10:1 contrast). One per email. --&gt;
+        &lt;tr&gt;&lt;td style="padding:20px 32px 12px 32px;"&gt;
+          &lt;table role="presentation" cellpadding="0" cellspacing="0"&gt;&lt;tr&gt;
+            &lt;td style="background:#40E0F5;border-radius:999px;"&gt;
+              &lt;a href="https://webgnr.com/" style="display:inline-block;padding:14px 26px;font-family:'DM Sans',Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;color:#0F1E3D;text-decoration:none;"&gt;Start your free 14-day trial&lt;/a&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;&lt;/table&gt;
+        &lt;/td&gt;&lt;/tr&gt;
+
+        &lt;!-- Secondary line: links use the blue, never the aqua, on white. --&gt;
+        &lt;tr&gt;&lt;td style="padding:8px 32px 32px 32px;font-family:'DM Sans',Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#55607A;"&gt;
+          Questions? Reply to this email, or read the &lt;a href="https://webgnr.com/docs/" style="color:#1D4ED8;"&gt;guides&lt;/a&gt;.
+        &lt;/td&gt;&lt;/tr&gt;
+
+        &lt;!-- Footer --&gt;
+        &lt;tr&gt;&lt;td style="background:#F4F7FB;padding:20px 32px;border-top:1px solid #E3E8F0;font-family:'DM Sans',Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#55607A;"&gt;
+          Webgnr &amp;middot; Master Your Business &amp;middot; KvK 99530856 &amp;middot; Steijnstraat 18, 2987 AS Ridderkerk
+        &lt;/td&gt;&lt;/tr&gt;
+
+      &lt;/table&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</textarea>
+  <div class="copy"><button type="button" id="copybtn">Copy template</button><span id="copied" role="status"></span></div></div>
+</div></section>
+
+<section class="chapter" id="materials"><div class="wrap">
+  <header><p class="eyebrow">9 · Materials</p><h2>Same ingredients, every size.</h2></header>
+  <div class="grid g3">
+    <div><div class="sq"><div class="mini"><span></span>Webgnr</div><div class="h">Every business has a story. <em>Tell yours.</em></div><div class="btn a" style="align-self:flex-start;min-height:40px;font-size:.9rem">Start free for 14 days</div></div><p style="margin-top:10px;font-size:.92rem;color:var(--muted)"><b>Social post, 1:1.</b> Navy and glow, one headline with the key phrase in aqua, one button, mark top left.</p></div>
+    <div><div class="slide"><div class="h">Brand story sites.</div><div class="s">Webgnr · webgnr.com</div></div><p style="margin-top:10px;font-size:.92rem;color:var(--muted)"><b>Slides, 16:9.</b> Surface background for content, navy for title and closing slides. One idea per slide, headline first.</p></div>
+    <div><div class="sig"><b>Your Name</b><div class="c">Webgnr · Master Your Business</div><div class="bar3"></div><div class="c">webgnr.com · KvK 99530856</div></div><p style="margin-top:10px;font-size:.92rem;color:var(--muted)"><b>Email signature.</b> Name in Bricolage, one short aqua rule, company line, address. No images, no quotes.</p></div>
+  </div>
+  <div class="grid g2" style="margin-top:20px">
+    <div class="card soft"><h3>One-pager and print</h3><p>A4, white or surface page, navy header band with the lockup, headline at 40 pt Bricolage 800, body 10.5 pt DM Sans. Company line in the footer with KvK and address. Margins 18 mm. Print the navy as a solid, not a tint.</p></div>
+    <div class="card soft"><h3>Photography and screenshots</h3><p>Real businesses, real light. Product screenshots always in the browser frame, cropped at the top, with the editor's real labels. Example sites are our own test sites only, never a customer's without written permission.</p></div>
+  </div>
+</div></section>
+
+<section class="chapter" id="rules"><div class="wrap">
+  <header><p class="eyebrow">10 · Before you publish</p><h2>Ten-second checklist.</h2></header>
+  <div class="table-wrap"><table class="t"><thead><tr><th>Check</th><th>Yes when</th></tr></thead><tbody>
+    <tr><td>Name</td><td>It says Webgnr, and webgnr.com for the address.</td></tr>
+    <tr><td>Three words</td><td>If it sells the product, it uses Get found. Get signed up. Follow up.</td></tr>
+    <tr><td>One accent</td><td>Aqua marks one action or one phrase, and no small aqua text sits on white.</td></tr>
+    <tr><td>Honest</td><td>No invented numbers, ratings, quotes or prices. Claims match what the product does today.</td></tr>
+    <tr><td>Plain</td><td>A business owner with no tech background understands it on first read.</td></tr>
+    <tr><td>Both languages</td><td>Dutch is written in Dutch (je/jij), not translated word for word.</td></tr>
+    <tr><td>Company line</td><td>Email and print carry Master Your Business, KvK 99530856 and the address.</td></tr>
+    <tr><td>Access</td><td>Text contrast at least 4.5 : 1, buttons at least 44 px, motion has a still alternative.</td></tr>
+  </tbody></table></div>
+  <footer class="end"><span>Webgnr Brand Book · version 1.0 · built from the live site and intro video</span><span>Source files: docs/brand in the webgen-site repository</span></footer>
+</div></section>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById('copybtn'), ta = document.getElementById('tpl'), msg = document.getElementById('copied');
+  if (!btn || !ta) return;
+  btn.addEventListener('click', function () {
+    function done(ok) { msg.textContent = ok ? 'Copied.' : 'Select the text and copy it.'; setTimeout(function () { msg.textContent = ''; }, 2500); }
+    ta.focus(); ta.select();
+    try { navigator.clipboard.writeText(ta.value).then(function () { done(true); }, function () { done(false); }); }
+    catch (e) { done(false); }
+  });
+})();
+</script>
+
+</body>
+</html>

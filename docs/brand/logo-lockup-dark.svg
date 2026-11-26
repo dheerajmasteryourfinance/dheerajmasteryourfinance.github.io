@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="120" viewBox="0 0 420 120" role="img" aria-label="Webgnr">
+  <rect width="420" height="120" fill="#0F1E3D"/>
+  <g transform="translate(30 30) scale(2)">
+    <rect width="30" height="30" rx="8" fill="#40E0F5"/>
+    <path d="M9 10.5h12M9 15h12M9 19.5h8" fill="none" stroke="#0F1E3D" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- Wordmark is live text in Bricolage Grotesque ExtraBold, tracking -0.035em. Convert to outlines in your design tool before print. -->
+  <text x="108" y="78" font-family="'Bricolage Grotesque', 'Arial Black', Arial, sans-serif" font-weight="800" font-size="52" letter-spacing="-1.8" fill="#FFFFFF">Webgnr</text>
+</svg>

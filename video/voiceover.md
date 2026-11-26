@@ -20,7 +20,7 @@ so they aren't used.
 | 30.5–39 | Site assembles, edit, language flip | ...and a website that tells it. Click any text to change it. In your language, on your own domain. |
 | 40.5–49 | Sign-up, audience, emails | Forms and email are ready from day one, so every visitor who signs up hears from you. |
 | 50–54.5 | Triad | Get found. Get signed up. Follow up. |
-| 55.5–59 | End card | Start your free fourteen-day trial at website-generator.nl. |
+| 55.5–59 | End card | Start your free fourteen-day trial at webgnr.com. |
 
 ## Nederlands
 
@@ -34,7 +34,7 @@ so they aren't used.
 | 30.5–39 | Site, bewerken, taal | ...en een website die het vertelt. Klik op een tekst om hem aan te passen. In jouw taal, op je eigen domein. |
 | 40.5–49 | Aanmelding, publiek, e-mails | Formulieren en e-mail staan vanaf dag één klaar, zodat elke bezoeker die zich aanmeldt van je hoort. |
 | 50–54.5 | Drieluik | Word gevonden. Krijg aanmeldingen. Volg op. |
-| 55.5–59 | Eindkaart | Start je gratis proefperiode van veertien dagen op website-generator.nl. |
+| 55.5–59 | Eindkaart | Start je gratis proefperiode van veertien dagen op webgnr.com. |
 
 ## Mixing a recorded voice in
 
