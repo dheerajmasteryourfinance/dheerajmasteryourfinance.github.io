@@ -4,6 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { zipSync } from 'fflate';
 import { publishedDir, relativizeSrcsets } from './import-paths.mjs';
+import { flatName, buildRouteMap, rewriteRoutes } from './flatten-pages.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -40,16 +41,20 @@ function main(argv) {
     return 1;
   }
 
+  const built = [...walk(dist)].map((f) => ({ file: f, name: relative(dist, f).split(sep).join('/') }));
+  const routes = buildRouteMap(built.map((b) => b.name));
   const files = {};
-  for (const file of walk(dist)) {
+  for (const { file, name } of built) {
     // Forward slashes, paths relative to dist so index.html sits at the zip root.
-    const name = relative(dist, file).split(sep).join('/');
+    const outName = flatName(name);
     let bytes = new Uint8Array(readFileSync(file));
-    if (name.endsWith('.html')) {
+    if (/\.(html|json|xml)$/.test(name)) {
+      let text = rewriteRoutes(new TextDecoder().decode(bytes), routes);
       // The app's importer rewrites href/src but not srcset, so do that part here (responsive images).
-      bytes = new TextEncoder().encode(relativizeSrcsets(new TextDecoder().decode(bytes), publishedDir(name)));
+      if (name.endsWith('.html')) text = relativizeSrcsets(text, publishedDir(outName));
+      bytes = new TextEncoder().encode(text);
     }
-    files[name] = bytes;
+    files[outName] = bytes;
   }
   if (!files['index.html']) {
     console.error(`package-zip: ${dist} has no index.html; run the build first.`);

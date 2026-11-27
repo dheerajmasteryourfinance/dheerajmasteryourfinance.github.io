@@ -39,7 +39,7 @@ describe('package-zip', () => {
     expect(files[0]).toMatch(/^webgen-site-[0-9a-f]{7,}\.zip$/);
     const entries = unzipSync(new Uint8Array(readFileSync(join(out, files[0]))));
     const names = Object.keys(entries).sort();
-    expect(names).toEqual(['docs/start/index.html', 'index.html']);
+    expect(names).toEqual(['docs-start.html', 'index.html']);
     expect(names.some((n) => n.includes('\\'))).toBe(false);
     expect(Buffer.from(entries['index.html']).toString()).toBe('<p>clean</p>');
   });
@@ -52,9 +52,17 @@ describe('package-zip', () => {
     const root = Buffer.from(entries['index.html']).toString();
     expect(root).toContain('srcset="_astro/a-480.avif 480w, _astro/a-800.avif 800w"');
     expect(root).toContain('src="/_astro/a.webp"');
-    const doc = Buffer.from(entries['docs/start/index.html']).toString();
-    // docs/start/index.html is served at /docs/start, so its base is docs/
-    expect(doc).toContain('srcset="../_astro/b.webp 1x"');
-    expect(doc).toContain('imagesrcset="../_astro/c.webp 2x"');
+    const doc = Buffer.from(entries['docs-start.html']).toString();
+    // flattened to docs-start.html, served at /docs-start, so its base is the root
+    expect(doc).toContain('srcset="_astro/b.webp 1x"');
+    expect(doc).toContain('imagesrcset="_astro/c.webp 2x"');
+  });
+
+  it('flattens folder pages so the editor lists them, and points links at the flat URLs', () => {
+    const { dist, out } = makeDist('<a href="/docs/start/">d</a>');
+    expect(run(dist, out).status).toBe(0);
+    const entries = unzipSync(new Uint8Array(readFileSync(join(out, readdirSync(out)[0]))));
+    expect(Buffer.from(entries['index.html']).toString()).toContain('href="/docs-start"');
+    expect(entries['docs/start/index.html']).toBeUndefined();
   });
 });
