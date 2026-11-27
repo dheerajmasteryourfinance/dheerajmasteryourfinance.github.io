@@ -73,7 +73,8 @@ describe('feature claims', () => {
     const home = loadPage('/').querySelector('main').textContent;
     const feat = loadPage('/features/').querySelector('main').textContent;
     expect(home).not.toMatch(/Subscribers confirm before they get anything/);
-    expect(home).toMatch(/Optional double opt-in/);
+    // The claim moved from the hero chips to the inbox row: "Double opt-in (optional)".
+    expect(home).toMatch(/Double opt-in \(optional\)/);
     expect(feat).not.toMatch(/so every subscriber confirmed/);
     expect(feat).toMatch(/Optional double opt-in/);
   });

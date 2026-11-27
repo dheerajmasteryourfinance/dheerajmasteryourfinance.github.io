@@ -18,7 +18,11 @@ const en = {
     requestLead: 'Not ready yet?',
     requestLink: 'Request early access',
     example: 'See an example',
-    chips: ['Free for 14 days', 'Optional double opt-in', 'Easy unsubscribe', 'Your own domain'],
+    benefits: [
+      { t: 'Your brand story, written for you', p: 'Answer a few questions in your own words. Webgnr turns them into your brand story and a website built around it.' },
+      { t: 'AI that designs and writes', p: 'Change your site, translate it and draft campaigns by asking in plain words.' },
+      { t: 'Start free, grow at fair rates', p: 'Try it free for 14 days. Choose a plan when you are ready.' },
+    ],
   },
   shot: {
     label: 'Product preview',
@@ -118,7 +122,11 @@ const nl: typeof en = {
     requestLead: 'Nog niet zover?',
     requestLink: 'Vraag vroege toegang aan',
     example: 'Bekijk een voorbeeld',
-    chips: ['14 dagen gratis', 'Optionele double opt-in', 'Makkelijk uitschrijven', 'Je eigen domein'],
+    benefits: [
+      { t: 'Je merkverhaal, voor je geschreven', p: 'Beantwoord een paar vragen in je eigen woorden. Webgnr maakt er je merkverhaal van en een website eromheen.' },
+      { t: 'AI die ontwerpt en schrijft', p: 'Pas je site aan, vertaal hem en laat campagnes opstellen door het gewoon te vragen.' },
+      { t: 'Gratis starten, groeien tegen eerlijke tarieven', p: 'Probeer 14 dagen gratis. Kies een abonnement als je eraan toe bent.' },
+    ],
   },
   shot: {
     label: 'Productvoorbeeld',
